@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/08/2021
-//  Modify Date: 09/11/2021
+//  Modify Date: 16/11/2021
 //  Description: Bangla class observation component
 
 import React from "react";
@@ -120,12 +120,89 @@ export default class BanglaClassObservationScreen extends React.Component {
                       fontWeight: "bold",
                     }}
                   >
+                    ফিল্ড অফিস:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={(this.state && this.state.option) || "yes"}
+                    onValueChange={(value) => {
+                      this.setState({ option: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
+                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    প্রোজেক্ট:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={(this.state && this.state.option) || "yes"}
+                    onValueChange={(value) => {
+                      this.setState({ option: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
+                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                  </Picker>
+                </View>
+              </View>
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    জেলা:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={(this.state && this.state.option) || "yes"}
+                    onValueChange={(value) => {
+                      this.setState({ option: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
+                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
                     উপজেলা:
                   </Text>
                   <Picker
                     style={{
                       height: 40,
-                      width: 120,
+                      width: 150,
                     }}
                     selectedValue={(this.state && this.state.option) || "yes"}
                     onValueChange={(value) => {
@@ -344,7 +421,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                     <Picker
                       style={{
                         height: 40,
-                        width: 300,
+                        width: 150,
                       }}
                       selectedValue={(this.state && this.state.option) || "yes"}
                       onValueChange={(value) => {
@@ -372,7 +449,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                   <Picker
                     style={{
                       height: 40,
-                      width: 100,
+                      width: 150,
                     }}
                     selectedValue={(this.state && this.state.option) || "yes"}
                     onValueChange={(value) => {
@@ -641,36 +718,57 @@ export default class BanglaClassObservationScreen extends React.Component {
                 <View style={{ flex: 1 }}>
                   <View style={{ padding: 5 }}>
                     <Text>১.</Text>
-                    <TextInput
+                    <Picker
                       style={{
-                        height: 70,
-                        width: 530,
-                        padding: 5,
-                        borderWidth: 1,
+                        height: 40,
+                        width: 150,
                       }}
-                    />
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                   <View style={{ padding: 5 }}>
                     <Text>২.</Text>
-                    <TextInput
+                    <Picker
                       style={{
-                        height: 70,
-                        width: 530,
-                        padding: 5,
-                        borderWidth: 1,
+                        height: 40,
+                        width: 150,
                       }}
-                    />
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                   <View style={{ padding: 5 }}>
                     <Text>৩.</Text>
-                    <TextInput
+                    <Picker
                       style={{
-                        height: 70,
-                        width: 530,
-                        padding: 5,
-                        borderWidth: 1,
+                        height: 40,
+                        width: 150,
                       }}
-                    />
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                 </View>
               </View>
@@ -1399,22 +1497,58 @@ export default class BanglaClassObservationScreen extends React.Component {
                 </View>
                 <View style={{ flexDirection: "row" }}>
                   <View style={{ flex: 1, padding: 2 }}>
-                    <TextInput
-                      style={{ height: 40, padding: 5, borderWidth: 1 }}
-                      placeholder="১."
-                    ></TextInput>
+                    <Text>১.</Text>
+                    <Picker
+                      style={{
+                        height: 40,
+                        width: 150,
+                      }}
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                   <View style={{ flex: 1, padding: 2 }}>
-                    <TextInput
-                      style={{ height: 40, padding: 5, borderWidth: 1 }}
-                      placeholder="২."
-                    ></TextInput>
+                    <Text>২.</Text>
+                    <Picker
+                      style={{
+                        height: 40,
+                        width: 150,
+                      }}
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                   <View style={{ flex: 1, padding: 2 }}>
-                    <TextInput
-                      style={{ height: 40, padding: 5, borderWidth: 1 }}
-                      placeholder="৩."
-                    ></TextInput>
+                    <Text>৩.</Text>
+                    <Picker
+                      style={{
+                        height: 40,
+                        width: 150,
+                      }}
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                 </View>
                 <View style={{ flexDirection: "row" }}>
@@ -1428,16 +1562,40 @@ export default class BanglaClassObservationScreen extends React.Component {
                 </View>
                 <View style={{ flexDirection: "row" }}>
                   <View style={{ flex: 1, padding: 2 }}>
-                    <TextInput
-                      style={{ height: 40, padding: 5, borderWidth: 1 }}
-                      placeholder="১."
-                    ></TextInput>
+                    <Text>১.</Text>
+                    <Picker
+                      style={{
+                        height: 40,
+                        width: 150,
+                      }}
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                   <View style={{ flex: 1, padding: 2 }}>
-                    <TextInput
-                      style={{ height: 40, padding: 5, borderWidth: 1 }}
-                      placeholder="২."
-                    ></TextInput>
+                    <Text>২.</Text>
+                    <Picker
+                      style={{
+                        height: 40,
+                        width: 150,
+                      }}
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                 </View>
                 <View style={{ flexDirection: "row" }}>
