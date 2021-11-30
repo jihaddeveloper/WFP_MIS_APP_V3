@@ -117,12 +117,89 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                       fontWeight: "bold",
                     }}
                   >
+                    ফিল্ড অফিস:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={(this.state && this.state.option) || "yes"}
+                    onValueChange={(value) => {
+                      this.setState({ option: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
+                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    প্রোজেক্ট:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={(this.state && this.state.option) || "yes"}
+                    onValueChange={(value) => {
+                      this.setState({ option: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
+                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                  </Picker>
+                </View>
+              </View>
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    জেলা:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={(this.state && this.state.option) || "yes"}
+                    onValueChange={(value) => {
+                      this.setState({ option: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
+                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
                     উপজেলা:
                   </Text>
                   <Picker
                     style={{
                       height: 40,
-                      width: 120,
+                      width: 150,
                     }}
                     selectedValue={(this.state && this.state.option) || "yes"}
                     onValueChange={(value) => {
@@ -190,7 +267,6 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                     }}
                     itemStyle={{ color: "white" }}
                   >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"মাসুদুল হাসান"} value={"LF"} />
                     <Picker.Item label={"মুশফিকুর রহমান "} value={"LPO"} />
                   </Picker>
@@ -223,7 +299,6 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                     }}
                     itemStyle={{ color: "white" }}
                   >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"এলএফ"} value={"LF"} />
                     <Picker.Item label={"এলপিও "} value={"LPO"} />
                   </Picker>
@@ -250,7 +325,6 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                     }}
                     itemStyle={{ color: "white" }}
                   >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"মাসুদুল হাসান"} value={"LF"} />
                     <Picker.Item label={"মুশফিকুর রহমান "} value={"LPO"} />
                   </Picker>
@@ -275,13 +349,11 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                     }}
                     itemStyle={{ color: "white" }}
                   >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"মাসুদুল হাসান"} value={"LF"} />
                     <Picker.Item label={"মুশফিকুর রহমান "} value={"LPO"} />
                   </Picker>
                 </View>
               </View>
-
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
                   <Text

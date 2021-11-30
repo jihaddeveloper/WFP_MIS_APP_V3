@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 07/08/2021
-//  Modify Date: 09/11/2021
+//  Modify Date: 30/11/2021
 //  Description: Login component
 
 import React from "react";
@@ -19,6 +19,8 @@ export default class LoginScreen extends React.Component {
     password: "",
   };
   render() {
+    const { navigate } = this.props.navigation;
+
     return (
       <View style={styles.container}>
         <View style={{ flexShrink: 1 }}>
@@ -90,7 +92,9 @@ export default class LoginScreen extends React.Component {
           <Text style={styles.forgot}>Forgot Password?</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>LOGIN</Text>
+          <Text style={styles.loginText} onPress={() => navigate("Home2")}>
+            Login
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity style={{ marginBottom: 200 }}>
           <Text style={styles.forgot}>Signup</Text>

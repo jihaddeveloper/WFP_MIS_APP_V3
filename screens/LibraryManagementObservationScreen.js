@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/08/2021
-//  Modify Date: 09/11/2021
+//  Modify Date: 30/11/2021
 //  Description: Library management observation screen component
 
 import React from "react";
@@ -100,6 +100,155 @@ export default class LibraryManagementObservationScreen extends React.Component 
             <Text style={styles.bigRedText}>সাধারণ তথ্য:</Text>
 
             <Card style={{ padding: 10, margin: 10, flex: 1 }}>
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    তারিখ:
+                  </Text>
+                  <Button onPress={this.datepicker} title="Show date picker!" />
+                  {show && (
+                    <DateTimePicker
+                      value={date}
+                      mode={mode}
+                      is24Hour={true}
+                      display="default"
+                      onChange={this.setDate}
+                    />
+                  )}
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    ফিল্ড অফিস:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={(this.state && this.state.option) || "yes"}
+                    onValueChange={(value) => {
+                      this.setState({ option: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
+                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    প্রোজেক্ট:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={(this.state && this.state.option) || "yes"}
+                    onValueChange={(value) => {
+                      this.setState({ option: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
+                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                  </Picker>
+                </View>
+              </View>
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    জেলা:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={(this.state && this.state.option) || "yes"}
+                    onValueChange={(value) => {
+                      this.setState({ option: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
+                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    উপজেলা:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={(this.state && this.state.option) || "yes"}
+                    onValueChange={(value) => {
+                      this.setState({ option: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
+                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    বিদ্যালয়ের নাম:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={(this.state && this.state.option) || "yes"}
+                    onValueChange={(value) => {
+                      this.setState({ option: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"অ আ স্কুল"} value={"LF"} />
+                    <Picker.Item label={"ক খ  স্কুল"} value={"LPO"} />
+                  </Picker>
+                </View>
+              </View>
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
                   <View style={{ flexDirection: "row" }}>
@@ -216,107 +365,6 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   </Picker>
                 </View>
               </View>
-
-              <View style={{ flexDirection: "row", padding: 10 }}>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    বিদ্যালয়ের নাম:
-                  </Text>
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
-                    onValueChange={(value) => {
-                      this.setState({ option: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"অ আ স্কুল"} value={"LF"} />
-                    <Picker.Item label={"ক খ  স্কুল"} value={"LPO"} />
-                  </Picker>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    উপজেলা:
-                  </Text>
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 120,
-                    }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
-                    onValueChange={(value) => {
-                      this.setState({ option: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
-                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
-                  </Picker>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    তারিখ:
-                  </Text>
-
-                  <Button onPress={this.datepicker} title="Show date picker!" />
-
-                  {/* <Button onPress={this.timepicker} title="Show time picker!" /> */}
-                  {show && (
-                    <DateTimePicker
-                      value={date}
-                      mode={mode}
-                      is24Hour={true}
-                      display="default"
-                      onChange={this.setDate}
-                    />
-                  )}
-
-                  {/* <DatePicker
-                    style={{ width: 150 }}
-                    date={this.state.date}
-                    mode="date"
-                    placeholder="select date"
-                    format="YYYY-MM-DD"
-                    minDate="2016-05-01"
-                    maxDate="2016-06-01"
-                    confirmBtnText="Confirm"
-                    cancelBtnText="Cancel"
-                    customStyles={{
-                      dateIcon: {
-                        position: "absolute",
-                        left: 0,
-                        top: 4,
-                        marginLeft: 0,
-                      },
-                      dateInput: {
-                        marginLeft: 0,
-                      },
-                      // ... You can check the source to find the other keys.
-                    }}
-                    onDateChange={(date) => {
-                      this.setState({ date: date });
-                    }}
-                  /> */}
-                </View>
-              </View>
             </Card>
           </View>
 
@@ -351,36 +399,57 @@ export default class LibraryManagementObservationScreen extends React.Component 
                 <View style={{ flex: 1 }}>
                   <View style={{ padding: 5 }}>
                     <Text>১.</Text>
-                    <TextInput
+                    <Picker
                       style={{
-                        height: 70,
-                        width: 530,
-                        padding: 5,
-                        borderWidth: 1,
+                        height: 40,
+                        width: 150,
                       }}
-                    />
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                   <View style={{ padding: 5 }}>
                     <Text>২.</Text>
-                    <TextInput
+                    <Picker
                       style={{
-                        height: 70,
-                        width: 530,
-                        padding: 5,
-                        borderWidth: 1,
+                        height: 40,
+                        width: 150,
                       }}
-                    />
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                   <View style={{ padding: 5 }}>
                     <Text>৩.</Text>
-                    <TextInput
+                    <Picker
                       style={{
-                        height: 70,
-                        width: 530,
-                        padding: 5,
-                        borderWidth: 1,
+                        height: 40,
+                        width: 150,
                       }}
-                    />
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                 </View>
               </View>
@@ -2202,22 +2271,58 @@ export default class LibraryManagementObservationScreen extends React.Component 
                 </View>
                 <View style={{ flexDirection: "row" }}>
                   <View style={{ flex: 1, padding: 2 }}>
-                    <TextInput
-                      style={{ height: 40, padding: 5, borderWidth: 1 }}
-                      placeholder="১."
-                    ></TextInput>
+                    <Text>১.</Text>
+                    <Picker
+                      style={{
+                        height: 40,
+                        width: 150,
+                      }}
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                   <View style={{ flex: 1, padding: 2 }}>
-                    <TextInput
-                      style={{ height: 40, padding: 5, borderWidth: 1 }}
-                      placeholder="২."
-                    ></TextInput>
+                    <Text>২.</Text>
+                    <Picker
+                      style={{
+                        height: 40,
+                        width: 150,
+                      }}
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                   <View style={{ flex: 1, padding: 2 }}>
-                    <TextInput
-                      style={{ height: 40, padding: 5, borderWidth: 1 }}
-                      placeholder="৩."
-                    ></TextInput>
+                    <Text>৩.</Text>
+                    <Picker
+                      style={{
+                        height: 40,
+                        width: 150,
+                      }}
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                 </View>
                 <View style={{ flexDirection: "row" }}>
@@ -2232,16 +2337,40 @@ export default class LibraryManagementObservationScreen extends React.Component 
                 </View>
                 <View style={{ flexDirection: "row" }}>
                   <View style={{ flex: 1, padding: 2 }}>
-                    <TextInput
-                      style={{ height: 40, padding: 5, borderWidth: 1 }}
-                      placeholder="১."
-                    ></TextInput>
+                    <Text>১.</Text>
+                    <Picker
+                      style={{
+                        height: 40,
+                        width: 150,
+                      }}
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                   <View style={{ flex: 1, padding: 2 }}>
-                    <TextInput
-                      style={{ height: 40, padding: 5, borderWidth: 1 }}
-                      placeholder="২."
-                    ></TextInput>
+                    <Text>২.</Text>
+                    <Picker
+                      style={{
+                        height: 40,
+                        width: 150,
+                      }}
+                      selectedValue={(this.state && this.state.option) || "yes"}
+                      onValueChange={(value) => {
+                        this.setState({ option: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      <Picker.Item label={"হ্যাঁ"} value={""} />
+                      <Picker.Item label={"না"} value={"male"} />
+                    </Picker>
                   </View>
                 </View>
                 <View style={{ flexDirection: "row" }}>

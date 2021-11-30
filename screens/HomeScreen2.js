@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/08/2021
-//  Modify Date: 10/11/2021
+//  Modify Date: 30/11/2021
 //  Description: Home screen component
 
 import React from "react";

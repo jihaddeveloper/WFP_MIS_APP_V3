@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 07/08/2021
-//  Modify Date: 09/11/2021
+//  Modify Date: 30/11/2021
 //  Description: Register component
 
 import React from "react";
@@ -20,6 +20,8 @@ export default class RegistrationScreen extends React.Component {
     password: "",
   };
   render() {
+    const { navigate } = this.props.navigation;
+
     return (
       <View style={styles.container}>
         <View style={{ flexShrink: 1 }}>
@@ -123,7 +125,9 @@ export default class RegistrationScreen extends React.Component {
           <Text></Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>Register</Text>
+          <Text style={styles.loginText} onPress={() => navigate("Login2")}>
+            Register
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity>
           <Text style={(styles.forgot, { marginBottom: 30 })}>Login</Text>

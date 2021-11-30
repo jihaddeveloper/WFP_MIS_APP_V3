@@ -28,7 +28,7 @@ import LoginScreen2 from "./screens/LoginScreen2";
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home2">
+      <Stack.Navigator initialRouteName="Register">
         <Stack.Screen name="Home2" component={HomeScreen2} />
         <Stack.Screen
           name="BanglaClass"
