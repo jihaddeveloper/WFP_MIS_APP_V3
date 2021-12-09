@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/08/2021
-//  Modify Date: 30/11/2021
+//  Modify Date: 08/12/2021
 //  Description: Library management observation screen component
 
 import React from "react";
@@ -15,6 +15,7 @@ import {
   TextInput,
   Picker,
   Button,
+  TouchableOpacity,
 } from "react-native";
 
 import { Card } from "react-native-shadow-cards";
@@ -24,14 +25,30 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 export default class LibraryManagementObservationScreen extends React.Component {
   state = {
     checked: false,
-
     option: "yes",
-
     choosenIndex: 0,
 
+    // Picker value
+    pickerFieldOffice: "",
+    pickerProject: "",
+    pickerDistrict: "",
+    pickerUpzila: "",
+    pickerSchool: "",
+    pickerVisitor: "",
+    pickerDesignation: "",
+    pickerLF: "",
+    pickerLPO: "",
+
+    pickerFollowup1: "",
+    pickerFollowup2: "",
+    pickerFollowup3: "",
+    // Picker value
+
+    // Date picker property
     date: new Date(),
     mode: "date",
     show: false,
+    // Date picker property
   };
 
   // For Datepicker
@@ -110,7 +127,14 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   >
                     তারিখ:
                   </Text>
-                  <Button onPress={this.datepicker} title="Show date picker!" />
+                  <Button
+                    style={{
+                      height: 40,
+                      width: 30,
+                    }}
+                    onPress={this.datepicker}
+                    title="Select Date"
+                  />
                   {show && (
                     <DateTimePicker
                       value={date}
@@ -131,15 +155,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     ফিল্ড অফিস:
                   </Text>
                   <Picker
+                    selectedValue={this.state && this.state.pickerFieldOffice}
+                    onValueChange={(value) => {
+                      this.setState({ pickerFieldOffice: value });
+                    }}
+                    itemStyle={{ color: "white" }}
                     style={{
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
-                    onValueChange={(value) => {
-                      this.setState({ option: value });
-                    }}
-                    itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
@@ -156,19 +180,19 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     প্রোজেক্ট:
                   </Text>
                   <Picker
+                    selectedValue={this.state && this.state.pickerProject}
+                    onValueChange={(value) => {
+                      this.setState({ pickerProject: value });
+                    }}
                     style={{
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
-                    onValueChange={(value) => {
-                      this.setState({ option: value });
-                    }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
-                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                    <Picker.Item label={"WFP"} value={"WFP"} />
+                    <Picker.Item label={"UN"} value={"UN"} />
                   </Picker>
                 </View>
               </View>
@@ -183,19 +207,19 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     জেলা:
                   </Text>
                   <Picker
+                    selectedValue={this.state && this.state.pickerDistrict}
+                    onValueChange={(value) => {
+                      this.setState({ pickerDistrict: value });
+                    }}
+                    itemStyle={{ color: "white" }}
                     style={{
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
-                    onValueChange={(value) => {
-                      this.setState({ option: value });
-                    }}
-                    itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
-                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                    <Picker.Item label={"ঢাকা"} value={"Dhaka"} />
+                    <Picker.Item label={"কক্সবাজার"} value={"Coxsbazar"} />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -208,15 +232,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     উপজেলা:
                   </Text>
                   <Picker
+                    selectedValue={this.state && this.state.pickerUpzila}
+                    onValueChange={(value) => {
+                      this.setState({ pickerUpzila: value });
+                    }}
+                    itemStyle={{ color: "white" }}
                     style={{
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
-                    onValueChange={(value) => {
-                      this.setState({ option: value });
-                    }}
-                    itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
@@ -233,19 +257,19 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     বিদ্যালয়ের নাম:
                   </Text>
                   <Picker
+                    selectedValue={this.state && this.state.pickerSchool}
+                    onValueChange={(value) => {
+                      this.setState({ pickerSchool: value });
+                    }}
+                    itemStyle={{ color: "white" }}
                     style={{
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
-                    onValueChange={(value) => {
-                      this.setState({ option: value });
-                    }}
-                    itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"অ আ স্কুল"} value={"LF"} />
-                    <Picker.Item label={"ক খ  স্কুল"} value={"LPO"} />
+                    <Picker.Item label={"অ আ স্কুল"} value={"A School"} />
+                    <Picker.Item label={"ক খ  স্কুল"} value={"B School"} />
                   </Picker>
                 </View>
               </View>
@@ -272,12 +296,13 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       height: 40,
                       width: 200,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state && this.state.pickerVisitor}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerVisitor: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"মাসুদুল হাসান"} value={"LF"} />
                     <Picker.Item label={"মুশফিকুর রহমান "} value={"LPO"} />
                   </Picker>
@@ -304,12 +329,13 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       height: 40,
                       width: 200,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state && this.state.pickerDesignation}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerDesignation: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"এলএফ"} value={"LF"} />
                     <Picker.Item label={"এলপিও "} value={"LPO"} />
                   </Picker>
@@ -330,12 +356,13 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       height: 40,
                       width: 200,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state && this.state.pickerLF}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerLF: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"মাসুদুল হাসান"} value={"LF"} />
                     <Picker.Item label={"মুশফিকুর রহমান "} value={"LPO"} />
                   </Picker>
@@ -354,12 +381,13 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       height: 40,
                       width: 200,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state && this.state.pickerLPO}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerLPO: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"মাসুদুল হাসান"} value={"LF"} />
                     <Picker.Item label={"মুশফিকুর রহমান "} value={"LPO"} />
                   </Picker>
@@ -404,15 +432,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         height: 40,
                         width: 150,
                       }}
-                      selectedValue={(this.state && this.state.option) || "yes"}
+                      selectedValue={this.state && this.state.pickerFollowup1}
                       onValueChange={(value) => {
-                        this.setState({ option: value });
+                        this.setState({ pickerFollowup1: value });
                       }}
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"হ্যাঁ"} value={""} />
-                      <Picker.Item label={"না"} value={"male"} />
+                      <Picker.Item label={"Indicator 1"} value={"abc"} />
+                      <Picker.Item label={"Indicator 2"} value={"male"} />
                     </Picker>
                   </View>
                   <View style={{ padding: 5 }}>
@@ -422,15 +450,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         height: 40,
                         width: 150,
                       }}
-                      selectedValue={(this.state && this.state.option) || "yes"}
+                      selectedValue={this.state && this.state.pickerFollowup2}
                       onValueChange={(value) => {
-                        this.setState({ option: value });
+                        this.setState({ pickerFollowup2: value });
                       }}
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"হ্যাঁ"} value={""} />
-                      <Picker.Item label={"না"} value={"male"} />
+                      <Picker.Item label={"Indicator 1"} value={"abc"} />
+                      <Picker.Item label={"Indicator 2"} value={"male"} />
                     </Picker>
                   </View>
                   <View style={{ padding: 5 }}>
@@ -440,15 +468,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         height: 40,
                         width: 150,
                       }}
-                      selectedValue={(this.state && this.state.option) || "yes"}
+                      selectedValue={this.state && this.state.pickerFollowup3}
                       onValueChange={(value) => {
-                        this.setState({ option: value });
+                        this.setState({ pickerFollowup3: value });
                       }}
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"হ্যাঁ"} value={""} />
-                      <Picker.Item label={"না"} value={"male"} />
+                      <Picker.Item label={"Indicator 1"} value={"abc"} />
+                      <Picker.Item label={"Indicator 2"} value={"male"} />
                     </Picker>
                   </View>
                 </View>
@@ -481,78 +509,6 @@ export default class LibraryManagementObservationScreen extends React.Component 
             </View>
 
             <View style={{ padding: 5 }}>
-              <Card
-                style={{
-                  padding: 10,
-                  margin: 10,
-                  flex: 1,
-                  alignSelf: "center",
-                }}
-              >
-                <Card
-                  style={{
-                    padding: 5,
-                    margin: 5,
-                    flex: 1,
-                    alignSelf: "center",
-                  }}
-                >
-                  <Text style={{ fontWeight: "bold" }}>
-                    ১. বিদ্যালয়ের সংশ্লিষ্ট শিক্ষক পাঠাগার ব্যবস্থাপনা বিষয়ে
-                    প্রশিক্ষণে অংশগ্রহণ করেছেন
-                  </Text>
-                  <Text>
-                    ১.১ পাঠাগার বাবস্থাপনার জন্য পর্যবেক্ষণকৃত শ্রেণিতে একজন
-                    প্রশিক্ষণ প্রাপ্ত লাইব্রেরি শিক্ষক দায়িত্ব প্রাপ্ত আছেন
-                  </Text>
-                  <Text>
-                    ১.২ বিদ্যালয়ের প্রধান শিক্ষক রুম টু রিড পরিচালিত পাঠাগার
-                    ব্যবস্থাপনা প্রশিক্ষণে অংশগ্রহণ করেছেন
-                  </Text>
-                  <Text style={{ fontWeight: "bold" }}>
-                    অগ্রাধিকার এরিয়া: ১
-                  </Text>
-                </Card>
-                <Card
-                  style={{
-                    padding: 5,
-                    margin: 5,
-                    flex: 1,
-                    alignSelf: "center",
-                  }}
-                >
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>পর্যবেক্ষণ: </Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 100,
-                        }}
-                        selectedValue={
-                          (this.state && this.state.option) || "yes"
-                        }
-                        onValueChange={(value) => {
-                          this.setState({ option: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
-                      <Text>
-                        এলপিও-কে অবহিত করুন এবং রুম টু রিডের সহায়তা প্রয়োজন হলে
-                        মাসিক প্রতিবেদনে উল্লেখ করুন
-                      </Text>
-                    </View>
-                  </View>
-                </Card>
-              </Card>
-
               <Card
                 style={{
                   padding: 10,
@@ -2420,6 +2376,26 @@ export default class LibraryManagementObservationScreen extends React.Component 
                 </View>
               </View>
             </Card>
+          </View>
+
+          <View style={{ padding: 10 }}>
+            <TouchableOpacity
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                width: "60%",
+                backgroundColor: "#fb5b5a",
+                borderRadius: 25,
+                height: 50,
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: 40,
+                marginLeft: 100,
+                marginBottom: 20,
+              }}
+            >
+              <Text>Submit</Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
         <View>

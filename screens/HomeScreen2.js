@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/08/2021
-//  Modify Date: 30/11/2021
+//  Modify Date: 08/12/2021
 //  Description: Home screen component
 
 import React from "react";
@@ -14,12 +14,16 @@ import {
   Button,
   Linking,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
-// Navigation
-import { useNavigation } from "@react-navigation/core";
-
 function HomeScreen({ navigation }) {
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      //Alert.alert("Refreshed");
+    });
+    return unsubscribe;
+  }, [navigation]);
   return (
     <View style={styles.container}>
       <View style={{ flexShrink: 1 }}>

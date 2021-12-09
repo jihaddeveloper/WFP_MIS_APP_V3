@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 29/08/2021
-//  Modify Date: 10/11/2021
+//  Modify Date: 08/12/2021
 //  Description: Overall school observation screen component
 
 import React from "react";
@@ -15,6 +15,7 @@ import {
   TextInput,
   Picker,
   Button,
+  TouchableOpacity,
 } from "react-native";
 import { Checkbox } from "react-native-paper";
 import { Card } from "react-native-shadow-cards";
@@ -2791,6 +2792,25 @@ export default class OverallSchoolObservationScreen extends React.Component {
                 </View>
               </View>
             </Card>
+          </View>
+          <View style={{ padding: 10 }}>
+            <TouchableOpacity
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                width: "60%",
+                backgroundColor: "#fb5b5a",
+                borderRadius: 25,
+                height: 50,
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: 40,
+                marginLeft: 100,
+                marginBottom: 20,
+              }}
+            >
+              <Text>Submit</Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
         <View>

@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/04/2021
-//  Modify Date: 10/11/2021
+//  Modify Date: 09/12/2021
 //  Description: Application index file
 
 // Library import
@@ -29,14 +29,62 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Register">
-        <Stack.Screen name="Home2" component={HomeScreen2} />
+        <Stack.Screen
+          name="Register"
+          component={RegistrationScreen}
+          options={{
+            title: "Register Page", //Set Header Title
+            headerShown: false,
+            headerStyle: {
+              backgroundColor: "#f4511e", //Set Header color
+            },
+            headerTintColor: "#fff", //Set Header text color
+            headerTitleStyle: {
+              fontWeight: "bold", //Set Header text style
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Login2"
+          component={LoginScreen2}
+          options={{
+            title: "Login Page", //Set Header Title
+            headerStyle: {
+              backgroundColor: "#f4511e", //Set Header color
+            },
+            headerTintColor: "#fff", //Set Header text color
+            headerTitleStyle: {
+              fontWeight: "bold", //Set Header text style
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Home2"
+          component={HomeScreen2}
+          options={{
+            title: "Home Page", //Set Header Title
+            headerStyle: {
+              backgroundColor: "#f4511e", //Set Header color
+            },
+            headerTintColor: "#fff", //Set Header text color
+            headerTitleStyle: {
+              fontWeight: "bold", //Set Header text style
+            },
+          }}
+        />
         <Stack.Screen
           name="BanglaClass"
           component={BanglaClassObservationScreen}
+          options={{
+            title: "Bangla Class Observation Form", //Set Header Title
+          }}
         />
         <Stack.Screen
           name="LibraryManagement"
           component={LibraryManagementObservationScreen}
+          options={{
+            title: "Library Management Observation Form", //Set Header Title
+          }}
         />
         <Stack.Screen
           options={{ headerShown: false }}
@@ -45,22 +93,26 @@ export default function App() {
         />
         <Stack.Screen name="Home" component={HomeScreen} />
 
-        {/* custom edit */}
-
-        <Stack.Screen name="Register" component={RegistrationScreen} />
-        <Stack.Screen name="Login2" component={LoginScreen2} />
-
         <Stack.Screen
           name="LibraryReading"
           component={LibraryReadingActivitiesObservationScreen}
+          options={{
+            title: "Library Reading Observation Form", //Set Header Title
+          }}
         />
         <Stack.Screen
           name="BookCheckout"
           component={MonthlyBookCheckoutScreen}
+          options={{
+            title: "Book Checkout Observation Form", //Set Header Title
+          }}
         />
         <Stack.Screen
           name="OverallSchool"
           component={OverallSchoolObservationScreen}
+          options={{
+            title: "Overall School Observation Form", //Set Header Title
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

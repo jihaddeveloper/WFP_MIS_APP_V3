@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 07/08/2021
-//  Modify Date: 30/11/2021
+//  Modify Date: 08/12/2021
 //  Description: Login component
 
 import React from "react";
@@ -11,16 +11,27 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
+import { Button } from "react-native-paper";
 
 export default class LoginScreen extends React.Component {
   state = {
     email: "",
     password: "",
   };
-  render() {
-    const { navigate } = this.props.navigation;
 
+  componentDidMount() {
+    this._unsubscribe = this.props.navigation.addListener("focus", () => {
+      //Alert.alert("Refreshed");
+    });
+  }
+
+  componentWillUnmount() {
+    this._unsubscribe();
+  }
+
+  render() {
     return (
       <View style={styles.container}>
         <View style={{ flexShrink: 1 }}>
@@ -91,10 +102,11 @@ export default class LoginScreen extends React.Component {
         <TouchableOpacity>
           <Text style={styles.forgot}>Forgot Password?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText} onPress={() => navigate("Home2")}>
-            Login
-          </Text>
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() => this.props.navigation.navigate("Home2")}
+        >
+          <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity style={{ marginBottom: 200 }}>
           <Text style={styles.forgot}>Signup</Text>
