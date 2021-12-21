@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/08/2021
-//  Modify Date: 08/12/2021
+//  Modify Date: 20/12/2021
 //  Description: Library management observation screen component
 
 import React from "react";
@@ -16,6 +16,7 @@ import {
   Picker,
   Button,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 import { Card } from "react-native-shadow-cards";
@@ -28,27 +29,117 @@ export default class LibraryManagementObservationScreen extends React.Component 
     option: "yes",
     choosenIndex: 0,
 
-    // Picker value
-    pickerFieldOffice: "",
-    pickerProject: "",
-    pickerDistrict: "",
-    pickerUpzila: "",
-    pickerSchool: "",
-    pickerVisitor: "",
-    pickerDesignation: "",
-    pickerLF: "",
-    pickerLPO: "",
-
-    pickerFollowup1: "",
-    pickerFollowup2: "",
-    pickerFollowup3: "",
-    // Picker value
+    // Input value
 
     // Date picker property
     date: new Date(),
     mode: "date",
     show: false,
     // Date picker property
+
+    // General data
+    visitNo: "",
+    pickerFieldOffice: "",
+    pickerProject: "",
+    pickerDistrict: "",
+    pickerUpazila: "",
+    pickerSchool: "",
+    pickerVisitor: "",
+    pickerDesignation: "",
+    pickerLF: "",
+    pickerLPO: "",
+    // General data
+
+    // Last visit topic
+    pickerFollowup1: "",
+    pickerFollowup2: "",
+    pickerFollowup3: "",
+    // Last visit topic
+
+    // Indicator 1
+    pickerIsTrainedAllTeacher: "",
+    pickerIsTrainedSRMTeacher: "",
+    pickerIsTrainedHeadTeacher: "",
+    // Indicator 1
+
+    // Indicator 2
+    pickerClassroomSuitableSRM: "",
+    pickerClassroomDoorWindowLock: "",
+    pickerClassroomSafeClean: "",
+    // Indicator 2
+
+    // Indicator 3
+    pickerBookselfUseable: "",
+    pickerBookselfAccessable: "",
+    pickerBookselfEnvironmentProtected: "",
+    pickerBookselfTableCondition: "",
+    // Indicator 3
+
+    // Indicator 4
+    pickerBookRegisterUpdated: "",
+    // Indicator 4
+
+    // Indicator 5
+    pickerBookselfOrganized: "",
+    pickerBookselfBookOrganizedOpen: "",
+    pickerBookselfBookLevelViewable: "",
+    pickerBookselfBookAccessible: "",
+    // Indicator 5
+
+    // Indicator 6
+    pickerPrintRichDisplayed: "",
+    // Indicator 6
+
+    // Indicator 7
+    pickerBookCheckoutFunctional: "",
+    pickerBookCheckoutProcedureDisplayed: "",
+    pickerBookCheckoutRegisterUseable: "",
+    pickerBookCheckoutRegisterUpdated: "",
+    pickerBookCheckoutPendingBooklist: "",
+    // Indicator 7
+
+    // Indicator 8
+    pickerSRMClassRoutine: "",
+    pickerSRMClassWeekly: "",
+    pickerDailyBookCheckoutOpportunity: "",
+    // Indicator 8
+
+    // Indicator 9
+    pickerSRMRegisterUpdated: "",
+    // Indicator 9
+
+    // Indicator 10
+    pickerParentsMeeting: "",
+    // Indicator 10
+
+    // Indicator 11
+    pickerReadFestival: "",
+    // Indicator 11
+
+    // Indicator 12
+    pickerSustainabilityPlan: "",
+    pickerCollectivePlan: "",
+    pickerResponsibilityPlan: "",
+    // Indicator 12
+
+    // Discussion topic
+    pickerBestPracticeIndicator1: "",
+    bestPracticeIndicator1Details: "",
+    pickerBestPracticeIndicator2: "",
+    bestPracticeIndicator2Details: "",
+    pickerBestPracticeIndicator3: "",
+    bestPracticeIndicator3Details: "",
+
+    pickerCoachingSupportIndicator1: "",
+    coachingSupportIndicator1Details: "",
+    pickerCoachingSupportIndicator2: "",
+    coachingSupportIndicator1Details: "",
+
+    agreedStatement1: "",
+    agreedStatement2: "",
+    // Discussion topic
+
+    // Input value
   };
 
   // For Datepicker
@@ -232,9 +323,9 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     উপজেলা:
                   </Text>
                   <Picker
-                    selectedValue={this.state && this.state.pickerUpzila}
+                    selectedValue={this.state && this.state.pickerUpazila}
                     onValueChange={(value) => {
-                      this.setState({ pickerUpzila: value });
+                      this.setState({ pickerUpazila: value });
                     }}
                     itemStyle={{ color: "white" }}
                     style={{
@@ -420,8 +511,8 @@ export default class LibraryManagementObservationScreen extends React.Component 
             </Card>
             <Card style={{ padding: 10, margin: 10 }}>
               <Text style={{ justifyContent: "flex-end" }}>
-                ফলো-আপ করার জন্য গত পরিদর্শন থেকে প্রাপ্ত ১-২ টি বিষয় উল্লেখ
-                করুন যেখানে উন্নতি প্রয়োজন ছিল ঃ
+                ফলো-আপ করার জন্য গত পরিদর্শন থেকে প্রাপ্ত ২-৩ টি বিষয় উল্লেখ
+                করুন যেখানে উন্নতি প্রয়োজন ছিল:
               </Text>
               <View style={{ flexDirection: "row" }}>
                 <View style={{ flex: 1 }}>
@@ -443,6 +534,8 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker.Item label={"Indicator 2"} value={"male"} />
                     </Picker>
                   </View>
+                </View>
+                <View style={{ flex: 1 }}>
                   <View style={{ padding: 5 }}>
                     <Text>২.</Text>
                     <Picker
@@ -461,6 +554,8 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker.Item label={"Indicator 2"} value={"male"} />
                     </Picker>
                   </View>
+                </View>
+                <View style={{ flex: 1 }}>
                   <View style={{ padding: 5 }}>
                     <Text>৩.</Text>
                     <Picker
@@ -500,11 +595,25 @@ export default class LibraryManagementObservationScreen extends React.Component 
               </Text>
             </View>
 
-            <View style={{ padding: 5, flexDirection: "row" }}>
-              <Text style={{ backgroundColor: "#ADD8E6", fontWeight: "bold" }}>
-                প্রাইওরিটি এরিয়া -১ঃ উন্নয়নশীল (১-৭ পর্যন্ত সবগুলো প্রধান সূচক
-                "হ্যাঁ" না হওয়া পর্যন্ত বিদ্যালয়ের শ্রেণি পাঠাগারগুলো
-                "উন্নয়নশীল" হিসেবে গণ্য হবে)
+            <View style={{ padding: 5 }}>
+              <Text
+                style={{
+                  backgroundColor: "#ADD8E6",
+                  fontWeight: "bold",
+                  fontSize: 16,
+                }}
+              >
+                প্রাইওরিটি এরিয়া -১ঃ উন্নয়নশীল
+              </Text>
+              <Text
+                style={{
+                  backgroundColor: "#ADD8E6",
+                  fontWeight: "bold",
+                  fontSize: 14,
+                }}
+              >
+                (১-৭ পর্যন্ত সবগুলো প্রধান সূচক "হ্যাঁ" না হওয়া পর্যন্ত
+                বিদ্যালয়ের শ্রেণি পাঠাগারগুলো "উন্নয়নশীল" হিসেবে গণ্য হবে)
               </Text>
             </View>
 
@@ -541,25 +650,16 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 1, padding: 2 }}>
                       <Text>পর্যবেক্ষণ: </Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 100,
-                        }}
-                        selectedValue={
-                          (this.state && this.state.option) || "yes"
-                        }
-                        onValueChange={(value) => {
-                          this.setState({ option: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
-                      </Picker>
+                      <TextInput
+                        style={styles.inputs}
+                        placeholder=""
+                        value={this.state.pickerIsTrainedAllTeacher}
+                        underlineColorAndroid="transparent"
+                        editable={false}
+                        selectTextOnFocus={false}
+                      />
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         এলপিও-কে অবহিত করুন এবং রুম টু রিডের সহায়তা প্রয়োজন হলে
@@ -595,22 +695,39 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state && this.state.pickerIsTrainedSRMTeacher
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerIsTrainedSRMTeacher: value,
+                            pickerIsTrainedAllTeacher: value,
+                          });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerIsTrainedSRMTeacher === "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerIsTrainedAllTeacher: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerIsTrainedAllTeacher: "না",
+                            });
+                          }
+                          //Alert.alert(this.state.pickerIsTrainedAllTeacher);
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         এলপিও-কে অবহিত করুন এবং রুম টু রিডের সহায়তা প্রয়োজন হলে
@@ -646,22 +763,38 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state && this.state.pickerIsTrainedHeadTeacher
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerIsTrainedHeadTeacher: value,
+                          });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerIsTrainedSRMTeacher === "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerIsTrainedAllTeacher: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerIsTrainedAllTeacher: "না",
+                            });
+                          }
+                          //Alert.alert(this.state.pickerIsTrainedAllTeacher);
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         এলপিও-কে অবহিত করুন এবং রুম টু রিডের সহায়তা প্রয়োজন হলে
@@ -703,25 +836,16 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 1, padding: 2 }}>
                       <Text>পর্যবেক্ষণ: </Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 100,
-                        }}
-                        selectedValue={
-                          (this.state && this.state.option) || "yes"
-                        }
-                        onValueChange={(value) => {
-                          this.setState({ option: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
-                      </Picker>
+                      <TextInput
+                        style={styles.inputs}
+                        placeholder=""
+                        value={this.state.pickerClassroomSuitableSRM}
+                        underlineColorAndroid="transparent"
+                        editable={false}
+                        selectTextOnFocus={false}
+                      />
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         প্রধান শিক্ষকের সাথে আলোচনা এবং LPO-কে অবহিত করুন ।
@@ -757,22 +881,38 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state && this.state.pickerClassroomDoorWindowLock
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerClassroomDoorWindowLock: value,
+                            pickerClassroomSuitableSRM: value,
+                          });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerClassroomSafeClean === "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerClassroomSuitableSRM: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerClassroomSuitableSRM: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         প্রধান শিক্ষকের সাথে আলোচনা এবং LPO-কে অবহিত করুন ।
@@ -808,22 +948,35 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state && this.state.pickerClassroomSafeClean
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({ pickerClassroomSafeClean: value });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerClassroomDoorWindowLock === "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerClassroomSuitableSRM: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerClassroomSuitableSRM: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         প্রধান শিক্ষকের সাথে আলোচনা এবং LPO-কে অবহিত করুন ।
@@ -866,25 +1019,16 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 1, padding: 2 }}>
                       <Text>পর্যবেক্ষণ: </Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 100,
-                        }}
-                        selectedValue={
-                          (this.state && this.state.option) || "yes"
-                        }
-                        onValueChange={(value) => {
-                          this.setState({ option: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
-                      </Picker>
+                      <TextInput
+                        style={styles.inputs}
+                        placeholder=""
+                        value={this.state.pickerBookselfUseable}
+                        underlineColorAndroid="transparent"
+                        editable={false}
+                        selectTextOnFocus={false}
+                      />
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে আরও ভালো কোনো
@@ -923,22 +1067,40 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state && this.state.pickerBookselfAccessable
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerBookselfAccessable: value,
+                            pickerBookselfUseable: value,
+                          });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerBookselfEnvironmentProtected ===
+                              "হ্যাঁ" &&
+                            this.state.pickerBookselfTableCondition === "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerBookselfUseable: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerBookselfUseable: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে আরও ভালো কোনো
@@ -977,22 +1139,39 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state &&
+                          this.state.pickerBookselfEnvironmentProtected
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerBookselfEnvironmentProtected: value,
+                          });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerBookselfAccessable === "হ্যাঁ" &&
+                            this.state.pickerBookselfTableCondition
+                          ) {
+                            this.setState({
+                              pickerBookselfUseable: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerBookselfUseable: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে আরও ভালো কোনো
@@ -1030,22 +1209,39 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state && this.state.pickerBookselfTableCondition
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerBookselfTableCondition: value,
+                          });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerBookselfAccessable === "হ্যাঁ" &&
+                            this.state.pickerBookselfEnvironmentProtected ===
+                              "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerBookselfUseable: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerBookselfUseable: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে আরও ভালো কোনো
@@ -1093,22 +1289,22 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state && this.state.pickerBookRegisterUpdated
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({ pickerBookRegisterUpdated: value });
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         বুক রেজিস্টার যাচাই করুন এবং হালনাগাদ করুন । পাঠাগারের
@@ -1151,25 +1347,16 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 1, padding: 2 }}>
                       <Text>পর্যবেক্ষণ: </Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 100,
-                        }}
-                        selectedValue={
-                          (this.state && this.state.option) || "yes"
-                        }
-                        onValueChange={(value) => {
-                          this.setState({ option: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
-                      </Picker>
+                      <TextInput
+                        style={styles.inputs}
+                        placeholder=""
+                        value={this.state.pickerBookselfOrganized}
+                        underlineColorAndroid="transparent"
+                        editable={false}
+                        selectTextOnFocus={false}
+                      />
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে বই কিভাবে সাজাতে হয়
@@ -1206,22 +1393,41 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state &&
+                          this.state.pickerBookselfBookOrganizedOpen
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerBookselfBookOrganizedOpen: value,
+                            pickerBookselfOrganized: value,
+                          });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerBookselfBookLevelViewable ===
+                              "হ্যাঁ" &&
+                            this.state.pickerBookselfBookAccessible === "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerBookselfOrganized: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerBookselfOrganized: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে বই কিভাবে সাজাতে হয়
@@ -1258,22 +1464,40 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state &&
+                          this.state.pickerBookselfBookLevelViewable
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerBookselfBookLevelViewable: value,
+                          });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerBookselfBookOrganizedOpen ===
+                              "হ্যাঁ" &&
+                            this.state.pickerBookselfBookAccessible === "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerBookselfOrganized: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerBookselfOrganized: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে বই কিভাবে সাজাতে হয়
@@ -1310,22 +1534,40 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state && this.state.pickerBookselfBookAccessible
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerBookselfBookAccessible: value,
+                          });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerBookselfBookOrganizedOpen ===
+                              "হ্যাঁ" &&
+                            this.state.pickerBookselfBookLevelViewable ===
+                              "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerBookselfOrganized: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerBookselfOrganized: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে বই কিভাবে সাজাতে হয়
@@ -1372,22 +1614,22 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state && this.state.pickerPrintRichDisplayed
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({ pickerPrintRichDisplayed: value });
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যানুয়ালএর আলোকে শ্রেণীকক্ষ
@@ -1430,25 +1672,16 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 1, padding: 2 }}>
                       <Text>পর্যবেক্ষণ: </Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 100,
-                        }}
-                        selectedValue={
-                          (this.state && this.state.option) || "yes"
-                        }
-                        onValueChange={(value) => {
-                          this.setState({ option: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
-                      </Picker>
+                      <TextInput
+                        style={styles.inputs}
+                        placeholder=""
+                        value={this.state.pickerBookCheckoutFunctional}
+                        underlineColorAndroid="transparent"
+                        editable={false}
+                        selectTextOnFocus={false}
+                      />
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যানুয়ালএর আলোকে বই গ্রহণ ও জমা
@@ -1487,22 +1720,44 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state &&
+                          this.state.pickerBookCheckoutProcedureDisplayed
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerBookCheckoutProcedureDisplayed: value,
+                            pickerBookCheckoutFunctional: value,
+                          });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerBookCheckoutRegisterUseable ===
+                              "হ্যাঁ" &&
+                            this.state.pickerBookCheckoutRegisterUpdated ===
+                              "হ্যাঁ" &&
+                            this.state.pickerBookCheckoutPendingBooklist ===
+                              "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerBookCheckoutFunctional: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerBookCheckoutFunctional: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যানুয়ালএর আলোকে বই গ্রহণ ও জমা
@@ -1540,22 +1795,42 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state &&
+                          this.state.pickerBookCheckoutRegisterUseable
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerBookCheckoutRegisterUseable: value,
+                          });
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerBookCheckoutProcedureDisplayed ===
+                              "হ্যাঁ" &&
+                            this.state.pickerBookCheckoutRegisterUpdated ===
+                              "হ্যাঁ" &&
+                            this.state.pickerBookCheckoutPendingBooklist ===
+                              "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerBookCheckoutFunctional: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerBookCheckoutFunctional: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যানুয়ালএর আলোকে বই গ্রহণ ও জমা
@@ -1594,22 +1869,43 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state &&
+                          this.state.pickerBookCheckoutRegisterUpdated
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerBookCheckoutRegisterUpdated: value,
+                          });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerBookCheckoutProcedureDisplayed ===
+                              "হ্যাঁ" &&
+                            this.state.pickerBookCheckoutRegisterUseable ===
+                              "হ্যাঁ" &&
+                            this.state.pickerBookCheckoutPendingBooklist ===
+                              "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerBookCheckoutFunctional: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerBookCheckoutFunctional: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যানুয়ালএর আলোকে বই গ্রহণ ও জমা
@@ -1648,22 +1944,43 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state &&
+                          this.state.pickerBookCheckoutPendingBooklist
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerBookCheckoutPendingBooklist: value,
+                          });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerBookCheckoutProcedureDisplayed ===
+                              "হ্যাঁ" &&
+                            this.state.pickerBookCheckoutRegisterUseable ===
+                              "হ্যাঁ" &&
+                            this.state.pickerBookCheckoutRegisterUpdated ===
+                              "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerBookCheckoutFunctional: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerBookCheckoutFunctional: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যানুয়ালএর আলোকে বই গ্রহণ ও জমা
@@ -1678,11 +1995,25 @@ export default class LibraryManagementObservationScreen extends React.Component 
               </Card>
             </View>
 
-            <View style={{ padding: 5, flexDirection: "row" }}>
-              <Text style={{ backgroundColor: "#ADD8E6", fontWeight: "bold" }}>
-                প্রাইওরিটি এরিয়া -২ঃ কার্যকরী (১-৭ পর্যন্ত সবগুলো প্রধান সূচক
-                "হ্যাঁ" হলে এবং ৮-৯ ইনডিকেটর চলমান থাকলে বিদ্যালয়টি "কার্যকরী"
-                হিসেবে গণ্য হবে) ।
+            <View style={{ padding: 5 }}>
+              <Text
+                style={{
+                  backgroundColor: "#ADD8E6",
+                  fontWeight: "bold",
+                  fontSize: 16,
+                }}
+              >
+                প্রাইওরিটি এরিয়া -২ঃ কার্যকরী
+              </Text>
+              <Text
+                style={{
+                  backgroundColor: "#ADD8E6",
+                  fontWeight: "bold",
+                  fontSize: 14,
+                }}
+              >
+                (১-৭ পর্যন্ত সবগুলো প্রধান সূচক "হ্যাঁ" হলে এবং ৮-৯ ইনডিকেটর
+                চলমান থাকলে বিদ্যালয়টি "কার্যকরী" হিসেবে গণ্য হবে) ।
               </Text>
             </View>
 
@@ -1718,25 +2049,16 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 1, padding: 2 }}>
                       <Text>পর্যবেক্ষণ: </Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 100,
-                        }}
-                        selectedValue={
-                          (this.state && this.state.option) || "yes"
-                        }
-                        onValueChange={(value) => {
-                          this.setState({ option: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
-                      </Picker>
+                      <TextInput
+                        style={styles.inputs}
+                        placeholder=""
+                        value={this.state.pickerSRMClassRoutine}
+                        underlineColorAndroid="transparent"
+                        editable={false}
+                        selectTextOnFocus={false}
+                      />
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         LPO-কে অবহিত করুন এবং রুম টু রিডের সহায়তা প্রয়োজন হলে
@@ -1773,22 +2095,39 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state && this.state.pickerSRMClassWeekly
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerSRMClassWeekly: value,
+                            pickerSRMClassRoutine: value,
+                          });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerDailyBookCheckoutOpportunity ===
+                              "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerSRMClassRoutine: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerSRMClassRoutine: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         LPO-কে অবহিত করুন এবং রুম টু রিডের সহায়তা প্রয়োজন হলে
@@ -1825,22 +2164,38 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state &&
+                          this.state.pickerDailyBookCheckoutOpportunity
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerDailyBookCheckoutOpportunity: value,
+                          });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerSRMClassRoutine === "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerSRMClassRoutine: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerSRMClassRoutine: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         LPO-কে অবহিত করুন এবং রুম টু রিডের সহায়তা প্রয়োজন হলে
@@ -1888,22 +2243,22 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state && this.state.pickerSRMRegisterUpdated
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({ pickerSRMRegisterUpdated: value });
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         LPO-কে অবহিত করুন এবং মাসিক সভায় তা তুলে ধরুন ।
@@ -1914,11 +2269,26 @@ export default class LibraryManagementObservationScreen extends React.Component 
               </Card>
             </View>
 
-            <View style={{ padding: 5, flexDirection: "row" }}>
-              <Text style={{ backgroundColor: "#ADD8E6", fontWeight: "bold" }}>
-                প্রাইওরিটি এরিয়া -৩ঃ অধিকতর কার্যকরী (১-৯ পর্যন্ত সবগুলো প্রধান
-                সূচক "হ্যাঁ" হলে এবং ১০-১২ পর্যন্ত ইনডিকেটর চলমান থাকলে
-                বিদ্যালয়টি "অধিক কার্যকরী" হিসেবে গণ্য হবে) ।
+            <View style={{ padding: 5 }}>
+              <Text
+                style={{
+                  backgroundColor: "#ADD8E6",
+                  fontWeight: "bold",
+                  fontSize: 16,
+                }}
+              >
+                প্রাইওরিটি এরিয়া -৩ঃ অধিকতর কার্যকরী
+              </Text>
+              <Text
+                style={{
+                  backgroundColor: "#ADD8E6",
+                  fontWeight: "bold",
+                  fontSize: 14,
+                }}
+              >
+                (১-৯ পর্যন্ত সবগুলো প্রধান সূচক "হ্যাঁ" হলে এবং ১০-১২ পর্যন্ত
+                ইনডিকেটর চলমান থাকলে বিদ্যালয়টি "অধিক কার্যকরী" হিসেবে গণ্য হবে)
+                ।
               </Text>
             </View>
 
@@ -1959,22 +2329,22 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state && this.state.pickerParentsMeeting
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({ pickerParentsMeeting: value });
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         প্রধান শিক্ষককের জানান এবং LPO-কে অবহিত করুন ।
@@ -2019,22 +2389,22 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state && this.state.pickerReadFestival
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({ pickerReadFestival: value });
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         প্রধান শিক্ষককের সাথে আলোচনা করুন এবং LPO'র ফলোআপের জন্য
@@ -2077,25 +2447,16 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 1, padding: 2 }}>
                       <Text>পর্যবেক্ষণ: </Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 100,
-                        }}
-                        selectedValue={
-                          (this.state && this.state.option) || "yes"
-                        }
-                        onValueChange={(value) => {
-                          this.setState({ option: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
-                      </Picker>
+                      <TextInput
+                        style={styles.inputs}
+                        placeholder=""
+                        value={this.state.pickerSustainabilityPlan}
+                        underlineColorAndroid="transparent"
+                        editable={false}
+                        selectTextOnFocus={false}
+                      />
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         প্রধান শিক্ষককের সাথে আলোচনা করুন এবং LPO'র ফলোআপের জন্য
@@ -2131,22 +2492,38 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state && this.state.pickerCollectivePlan
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({
+                            pickerCollectivePlan: value,
+                            pickerSustainabilityPlan: value,
+                          });
+
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerResponsibilityPlan === "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerSustainabilityPlan: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerSustainabilityPlan: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         প্রধান শিক্ষককের সাথে আলোচনা করুন এবং LPO'র ফলোআপের জন্য
@@ -2182,22 +2559,34 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       <Picker
                         style={{
                           height: 40,
-                          width: 100,
+                          width: 150,
                         }}
                         selectedValue={
-                          (this.state && this.state.option) || "yes"
+                          this.state && this.state.pickerResponsibilityPlan
                         }
                         onValueChange={(value) => {
-                          this.setState({ option: value });
+                          this.setState({ pickerResponsibilityPlan: value });
+                          if (
+                            value === "হ্যাঁ" &&
+                            this.state.pickerCollectivePlan === "হ্যাঁ"
+                          ) {
+                            this.setState({
+                              pickerSustainabilityPlan: "হ্যাঁ",
+                            });
+                          } else {
+                            this.setState({
+                              pickerSustainabilityPlan: "না",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"আংশিক"} value={"partial"} />
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                        <Picker.Item label={"না"} value={"না"} />
                       </Picker>
                     </View>
-                    <View style={{ flex: 1, padding: 2 }}>
+                    <View style={{ flex: 2, padding: 2 }}>
                       <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
                       <Text>
                         প্রধান শিক্ষককের সাথে আলোচনা করুন এবং LPO'র ফলোআপের জন্য
@@ -2233,16 +2622,27 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         height: 40,
                         width: 150,
                       }}
-                      selectedValue={(this.state && this.state.option) || "yes"}
+                      selectedValue={
+                        this.state && this.state.pickerBestPracticeIndicator1
+                      }
                       onValueChange={(value) => {
-                        this.setState({ option: value });
+                        this.setState({ pickerBestPracticeIndicator1: value });
                       }}
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"হ্যাঁ"} value={""} />
-                      <Picker.Item label={"না"} value={"male"} />
+                      <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                      <Picker.Item label={"না"} value={"না"} />
                     </Picker>
+                    <Text>১.</Text>
+                    <TextInput
+                      style={{ height: 80, padding: 5, borderWidth: 1 }}
+                      placeholder=""
+                      onChangeText={(text) =>
+                        this.setState({ bestPracticeIndicator1Details: text })
+                      }
+                      value={this.state.bestPracticeIndicator1Details}
+                    ></TextInput>
                   </View>
                   <View style={{ flex: 1, padding: 2 }}>
                     <Text>২.</Text>
@@ -2251,16 +2651,27 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         height: 40,
                         width: 150,
                       }}
-                      selectedValue={(this.state && this.state.option) || "yes"}
+                      selectedValue={
+                        this.state && this.state.pickerBestPracticeIndicator2
+                      }
                       onValueChange={(value) => {
-                        this.setState({ option: value });
+                        this.setState({ pickerBestPracticeIndicator2: value });
                       }}
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"হ্যাঁ"} value={""} />
-                      <Picker.Item label={"না"} value={"male"} />
+                      <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                      <Picker.Item label={"না"} value={"না"} />
                     </Picker>
+                    <Text>২.</Text>
+                    <TextInput
+                      style={{ height: 80, padding: 5, borderWidth: 1 }}
+                      placeholder=""
+                      onChangeText={(text) =>
+                        this.setState({ bestPracticeIndicator2Details: text })
+                      }
+                      value={this.state.bestPracticeIndicator2Details}
+                    ></TextInput>
                   </View>
                   <View style={{ flex: 1, padding: 2 }}>
                     <Text>৩.</Text>
@@ -2269,16 +2680,27 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         height: 40,
                         width: 150,
                       }}
-                      selectedValue={(this.state && this.state.option) || "yes"}
+                      selectedValue={
+                        this.state && this.state.pickerBestPracticeIndicator3
+                      }
                       onValueChange={(value) => {
-                        this.setState({ option: value });
+                        this.setState({ pickerBestPracticeIndicator3: value });
                       }}
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"হ্যাঁ"} value={""} />
-                      <Picker.Item label={"না"} value={"male"} />
+                      <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                      <Picker.Item label={"না"} value={"না"} />
                     </Picker>
+                    <Text>৩.</Text>
+                    <TextInput
+                      style={{ height: 80, padding: 5, borderWidth: 1 }}
+                      placeholder=""
+                      onChangeText={(text) =>
+                        this.setState({ bestPracticeIndicator3Details: text })
+                      }
+                      value={this.state.bestPracticeIndicator3Details}
+                    ></TextInput>
                   </View>
                 </View>
                 <View style={{ flexDirection: "row" }}>
@@ -2299,15 +2721,19 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         height: 40,
                         width: 150,
                       }}
-                      selectedValue={(this.state && this.state.option) || "yes"}
+                      selectedValue={
+                        this.state && this.state.pickerCoachingSupportIndicator1
+                      }
                       onValueChange={(value) => {
-                        this.setState({ option: value });
+                        this.setState({
+                          pickerCoachingSupportIndicator1: value,
+                        });
                       }}
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"হ্যাঁ"} value={""} />
-                      <Picker.Item label={"না"} value={"male"} />
+                      <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                      <Picker.Item label={"না"} value={"না"} />
                     </Picker>
                   </View>
                   <View style={{ flex: 1, padding: 2 }}>
@@ -2317,15 +2743,19 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         height: 40,
                         width: 150,
                       }}
-                      selectedValue={(this.state && this.state.option) || "yes"}
+                      selectedValue={
+                        this.state && this.state.pickerCoachingSupportIndicator2
+                      }
                       onValueChange={(value) => {
-                        this.setState({ option: value });
+                        this.setState({
+                          pickerCoachingSupportIndicator2: value,
+                        });
                       }}
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"হ্যাঁ"} value={""} />
-                      <Picker.Item label={"না"} value={"male"} />
+                      <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
+                      <Picker.Item label={"না"} value={"না"} />
                     </Picker>
                   </View>
                 </View>
@@ -2339,6 +2769,12 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     <TextInput
                       style={{ height: 80, padding: 5, borderWidth: 1 }}
                       placeholder="১."
+                      onChangeText={(text) =>
+                        this.setState({
+                          coachingSupportIndicator1Details: text,
+                        })
+                      }
+                      value={this.state.coachingSupportIndicator1Details}
                     ></TextInput>
                   </View>
                 </View>
@@ -2347,6 +2783,12 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     <TextInput
                       style={{ height: 80, padding: 5, borderWidth: 1 }}
                       placeholder="২."
+                      onChangeText={(text) =>
+                        this.setState({
+                          coachingSupportIndicator1Details: text,
+                        })
+                      }
+                      value={this.state.coachingSupportIndicator1Details}
                     ></TextInput>
                   </View>
                 </View>
@@ -2363,6 +2805,12 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     <TextInput
                       style={{ height: 80, padding: 5, borderWidth: 1 }}
                       placeholder="১."
+                      onChangeText={(text) =>
+                        this.setState({
+                          agreedStatement1: text,
+                        })
+                      }
+                      value={this.state.agreedStatement1}
                     ></TextInput>
                   </View>
                 </View>
@@ -2371,6 +2819,12 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     <TextInput
                       style={{ height: 80, padding: 5, borderWidth: 1 }}
                       placeholder="২."
+                      onChangeText={(text) =>
+                        this.setState({
+                          agreedStatement2: text,
+                        })
+                      }
+                      value={this.state.agreedStatement2}
                     ></TextInput>
                   </View>
                 </View>
@@ -2419,6 +2873,13 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     flex: 1,
+  },
+  input: {
+    height: 40,
+    width: 100,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
   },
   logoMain: {
     height: 80,
