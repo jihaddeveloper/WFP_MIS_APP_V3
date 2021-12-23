@@ -39,13 +39,14 @@ export default class LibraryManagementObservationScreen extends React.Component 
 
     // General data
     visitNo: "",
-    pickerFieldOffice: "",
+    pickerOffice: "",
     pickerProject: "",
     pickerDistrict: "",
     pickerUpazila: "",
     pickerSchool: "",
     pickerVisitor: "",
     pickerDesignation: "",
+    pickerVisitorOffice: "",
     pickerLF: "",
     pickerLPO: "",
     // General data
@@ -246,9 +247,9 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     ফিল্ড অফিস:
                   </Text>
                   <Picker
-                    selectedValue={this.state && this.state.pickerFieldOffice}
+                    selectedValue={this.state && this.state.pickerOffice}
                     onValueChange={(value) => {
-                      this.setState({ pickerFieldOffice: value });
+                      this.setState({ pickerOffice: value });
                     }}
                     itemStyle={{ color: "white" }}
                     style={{
@@ -385,7 +386,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   <Picker
                     style={{
                       height: 40,
-                      width: 200,
+                      width: 150,
                     }}
                     selectedValue={this.state && this.state.pickerVisitor}
                     onValueChange={(value) => {
@@ -418,7 +419,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   <Picker
                     style={{
                       height: 40,
-                      width: 200,
+                      width: 150,
                     }}
                     selectedValue={this.state && this.state.pickerDesignation}
                     onValueChange={(value) => {
@@ -429,6 +430,31 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"এলএফ"} value={"LF"} />
                     <Picker.Item label={"এলপিও "} value={"LPO"} />
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    পরিদর্শক এর অফিস:
+                  </Text>
+                  <Picker
+                    selectedValue={this.state && this.state.pickerVisitorOffice}
+                    onValueChange={(value) => {
+                      this.setState({ pickerVisitorOffice: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
+                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
                   </Picker>
                 </View>
               </View>
