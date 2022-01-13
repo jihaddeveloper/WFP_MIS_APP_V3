@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 11/10/2021
-//  Modify Date: 08/12/2021
+//  Modify Date: 13/01/2022
 //  Description: Monthly book checkout screen component
 
 import React from "react";
@@ -18,6 +18,9 @@ import {
   Alert,
   TouchableOpacity,
 } from "react-native";
+
+import { divisions, districts, upazillas, unions } from "bd-geojs";
+
 import { Card } from "react-native-shadow-cards";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -33,7 +36,30 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
     date: new Date(),
     mode: "date",
     show: false,
+
+    // General data
+    visitNo: "",
+    pickerOffice: "",
+    pickerProject: "",
+    pickerDistrict: "",
+    pickerUpazila: "",
+    pickerSchool: "",
+    pickerHeadTeacher: "",
+    pickerGender: "",
+    pickerVisitor: "",
+    pickerDesignation: "",
+    pickerVisitorOffice: "",
+    pickerLF: "",
+    pickerLPO: "",
+    // General data
   };
+
+  //Geo values
+  divisions = divisions;
+  districts = districts;
+  upazilas = upazillas;
+  unions = unions;
+  //Geo values
 
   // For Datepicker
   setDate = (event, date) => {
@@ -91,6 +117,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
         <ScrollView>
           <View style={{ padding: 10 }}>
             <Text style={styles.bigRedText}>সাধারণ তথ্য:</Text>
+
             <Card style={{ padding: 10, margin: 10, flex: 1 }}>
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
@@ -102,7 +129,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                   >
                     তারিখ:
                   </Text>
-                  <Button onPress={this.datepicker} title="Show date picker!" />
+                  <Button onPress={this.datepicker} title="Select Date" />
                   {show && (
                     <DateTimePicker
                       value={date}
@@ -127,15 +154,17 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state && this.state.pickerOffice}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerOffice: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
-                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                    <Picker.Item label={"Dhaka"} value={"Dhaka"} />
+                    <Picker.Item label={"Coxsbazar"} value={"Coxsbazar"} />
+                    <Picker.Item label={"Natore"} value={"Natore"} />
+                    <Picker.Item label={"Moulvibazar"} value={"Moulvibazar"} />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -152,15 +181,18 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state && this.state.pickerProject}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerProject: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
-                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                    <Picker.Item label={"CORE"} value={"CORE"} />
+                    <Picker.Item label={"WFP"} value={"WFP"} />
+                    <Picker.Item label={"UN"} value={"UN"} />
+                    <Picker.Item label={"UNICEF"} value={"UNICEF"} />
+                    <Picker.Item label={"WB"} value={"WB"} />
                   </Picker>
                 </View>
               </View>
@@ -179,15 +211,25 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state && this.state.pickerDistrict}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerDistrict: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item key={""} label={"নির্বাচন করুন"} value={""} />
+                    {districts.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
+                    {/* <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
-                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} /> */}
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -204,15 +246,25 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state && this.state.pickerUpazila}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerUpazila: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
-                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                    <Picker.Item
+                      label={"Coxsbazar Sadar"}
+                      value={"Coxsbazar Sadar"}
+                    />
+
+                    <Picker.Item label={"Ukhiya"} value={"Ukhiya"} />
+                    <Picker.Item label={"Kutubdia"} value={"Kutubdia"} />
+                    <Picker.Item label={"Chakaria"} value={"Chakaria"} />
+                    <Picker.Item label={"Ramu"} value={"Ramu"} />
+                    <Picker.Item label={"Teknaf"} value={"Teknaf"} />
+                    <Picker.Item label={"Maheshkhali"} value={"Maheshkhali"} />
+                    <Picker.Item label={"Eidgoan"} value={"Eidgoan"} />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -229,15 +281,25 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state && this.state.pickerSchool}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerSchool: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"অ আ স্কুল"} value={"LF"} />
-                    <Picker.Item label={"ক খ  স্কুল"} value={"LPO"} />
+                    <Picker.Item
+                      label={"Jalal Uddin GPS"}
+                      value={"Jalal Uddin GPS"}
+                    />
+                    <Picker.Item
+                      label={"Kutubdia Model GPS"}
+                      value={"Kutubdia Model GPS"}
+                    />
+                    <Picker.Item
+                      label={"Monohor khali GPS"}
+                      value={"Monohor khali GPS"}
+                    />
                   </Picker>
                 </View>
               </View>
@@ -258,6 +320,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       padding: 5,
                       borderWidth: 1,
                     }}
+                    placeholder=""
+                    onChangeText={(text) =>
+                      this.setState({ pickerHeadTeacher: text })
+                    }
+                    value={this.state.pickerHeadTeacher}
                   />
                 </View>
                 <View style={{ flex: 1 }}>
@@ -274,15 +341,15 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       height: 40,
                       width: 200,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state && this.state.pickerGender}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerGender: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"মহিলা"} value={"female"} />
-                    <Picker.Item label={"পুরুষ"} value={"male"} />
+                    <Picker.Item label={"Female"} value={"Female"} />
+                    <Picker.Item label={"Male"} value={"Male"} />
                   </Picker>
                 </View>
               </View>
@@ -307,17 +374,36 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                   <Picker
                     style={{
                       height: 40,
-                      width: 200,
+                      width: 150,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state && this.state.pickerVisitor}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerVisitor: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"মাসুদুল হাসান"} value={"LF"} />
-                    <Picker.Item label={"মুশফিকুর রহমান "} value={"LPO"} />
+                    <Picker.Item
+                      label={"Rakhi Sarkar"}
+                      value={"Rakhi Sarkar"}
+                    />
+                    <Picker.Item
+                      label={"Badruzzaman Khan"}
+                      value={"Badruzzaman Khan"}
+                    />
+                    <Picker.Item
+                      label={"Zakir Hossain"}
+                      value={"Zakir Hossain"}
+                    />
+
+                    <Picker.Item
+                      label={"Masudul Hasan"}
+                      value={"Masudul Hasan"}
+                    />
+                    <Picker.Item
+                      label={"Mushfiqur Rahman"}
+                      value={"Mushfiqur Rahman"}
+                    />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -340,17 +426,48 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                   <Picker
                     style={{
                       height: 40,
-                      width: 200,
+                      width: 150,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state && this.state.pickerDesignation}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerDesignation: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"এলএফ"} value={"LF"} />
-                    <Picker.Item label={"এলপিও "} value={"LPO"} />
+                    <Picker.Item label={"CD"} value={"CD"} />
+                    <Picker.Item label={"POD"} value={"POD"} />
+                    <Picker.Item label={"Sr.M"} value={"Sr.M"} />
+                    <Picker.Item label={"LF"} value={"LF"} />
+                    <Picker.Item label={"LPO"} value={"LPO"} />
+                    <Picker.Item label={"Officer"} value={"Officer"} />
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    পরিদর্শক এর অফিস:
+                  </Text>
+                  <Picker
+                    selectedValue={this.state && this.state.pickerVisitorOffice}
+                    onValueChange={(value) => {
+                      this.setState({ pickerVisitorOffice: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"CO"} value={"CO"} />
+                    <Picker.Item label={"Dhaka"} value={"Dhaka"} />
+                    <Picker.Item label={"Coxsbazar"} value={"Coxsbazar"} />
+                    <Picker.Item label={"Natore"} value={"Natore"} />
                   </Picker>
                 </View>
               </View>
@@ -369,15 +486,21 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       height: 40,
                       width: 200,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state && this.state.pickerLF}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerLF: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"মাসুদুল হাসান"} value={"LF"} />
-                    <Picker.Item label={"মুশফিকুর রহমান "} value={"LPO"} />
+                    <Picker.Item
+                      label={"Masudul Hasan"}
+                      value={"Masudul Hasan"}
+                    />
+                    <Picker.Item
+                      label={"Mushfiqur Rahman"}
+                      value={"Mushfiqur Rahman"}
+                    />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -394,15 +517,21 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       height: 40,
                       width: 200,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state && this.state.pickerLPO}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerLPO: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"মাসুদুল হাসান"} value={"LF"} />
-                    <Picker.Item label={"মুশফিকুর রহমান "} value={"LPO"} />
+                    <Picker.Item
+                      label={"Masudul Hasan"}
+                      value={"Masudul Hasan"}
+                    />
+                    <Picker.Item
+                      label={"Mushfiqur Rahman"}
+                      value={"Mushfiqur Rahman"}
+                    />
                   </Picker>
                 </View>
               </View>

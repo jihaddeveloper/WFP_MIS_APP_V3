@@ -19,129 +19,141 @@ import {
   Alert,
 } from "react-native";
 
+import { divisions, districts, upazillas, unions } from "bd-geojs";
+
 import { Card } from "react-native-shadow-cards";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default class LibraryManagementObservationScreen extends React.Component {
-  state = {
-    checked: false,
-    option: "yes",
-    choosenIndex: 0,
+  constructor(props) {
+    super(props);
+    this.state = {
+      // checked: false,
+      // option: "yes",
+      // choosenIndex: 0,
 
-    // Input value
+      // Input value
 
-    // Date picker property
-    date: new Date(),
-    mode: "date",
-    show: false,
-    // Date picker property
+      // Date picker property
+      date: new Date(),
+      mode: "date",
+      show: false,
+      // Date picker property
 
-    // General data
-    visitNo: "",
-    pickerOffice: "",
-    pickerProject: "",
-    pickerDistrict: "",
-    pickerUpazila: "",
-    pickerSchool: "",
-    pickerVisitor: "",
-    pickerDesignation: "",
-    pickerVisitorOffice: "",
-    pickerLF: "",
-    pickerLPO: "",
-    // General data
+      // General data
+      visitNo: "",
+      pickerOffice: "",
+      pickerProject: "",
+      pickerDistrict: "",
+      pickerUpazila: "",
+      pickerSchool: "",
+      pickerVisitor: "",
+      pickerDesignation: "",
+      pickerVisitorOffice: "",
+      pickerLF: "",
+      pickerLPO: "",
+      // General data
 
-    // Last visit topic
-    pickerFollowup1: "",
-    pickerFollowup2: "",
-    pickerFollowup3: "",
-    // Last visit topic
+      // Last visit topic
+      pickerFollowup1: "",
+      pickerFollowup2: "",
+      pickerFollowup3: "",
+      // Last visit topic
 
-    // Indicator 1
-    pickerIsTrainedAllTeacher: "",
-    pickerIsTrainedSRMTeacher: "",
-    pickerIsTrainedHeadTeacher: "",
-    // Indicator 1
+      // Indicator 1
+      pickerIsTrainedAllTeacher: "",
+      pickerIsTrainedSRMTeacher: "",
+      pickerIsTrainedHeadTeacher: "",
+      // Indicator 1
 
-    // Indicator 2
-    pickerClassroomSuitableSRM: "",
-    pickerClassroomDoorWindowLock: "",
-    pickerClassroomSafeClean: "",
-    // Indicator 2
+      // Indicator 2
+      pickerClassroomSuitableSRM: "",
+      pickerClassroomDoorWindowLock: "",
+      pickerClassroomSafeClean: "",
+      // Indicator 2
 
-    // Indicator 3
-    pickerBookselfUseable: "",
-    pickerBookselfAccessable: "",
-    pickerBookselfEnvironmentProtected: "",
-    pickerBookselfTableCondition: "",
-    // Indicator 3
+      // Indicator 3
+      pickerBookselfUseable: "",
+      pickerBookselfAccessible: "",
+      pickerBookselfEnvironmentProtected: "",
+      pickerBookselfTableCondition: "",
+      // Indicator 3
 
-    // Indicator 4
-    pickerBookRegisterUpdated: "",
-    // Indicator 4
+      // Indicator 4
+      pickerBookRegisterUpdated: "",
+      // Indicator 4
 
-    // Indicator 5
-    pickerBookselfOrganized: "",
-    pickerBookselfBookOrganizedOpen: "",
-    pickerBookselfBookLevelViewable: "",
-    pickerBookselfBookAccessible: "",
-    // Indicator 5
+      // Indicator 5
+      pickerBookselfOrganized: "",
+      pickerBookselfBookOrganizedOpen: "",
+      pickerBookselfBookLevelViewable: "",
+      pickerBookselfBookAccessible: "",
+      // Indicator 5
 
-    // Indicator 6
-    pickerPrintRichDisplayed: "",
-    // Indicator 6
+      // Indicator 6
+      pickerPrintRichDisplayed: "",
+      // Indicator 6
 
-    // Indicator 7
-    pickerBookCheckoutFunctional: "",
-    pickerBookCheckoutProcedureDisplayed: "",
-    pickerBookCheckoutRegisterUseable: "",
-    pickerBookCheckoutRegisterUpdated: "",
-    pickerBookCheckoutPendingBooklist: "",
-    // Indicator 7
+      // Indicator 7
+      pickerBookCheckoutFunctional: "",
+      pickerBookCheckoutProcedureDisplayed: "",
+      pickerBookCheckoutRegisterUsable: "",
+      pickerBookCheckoutRegisterUpdated: "",
+      pickerBookCheckoutPendingBooklist: "",
+      // Indicator 7
 
-    // Indicator 8
-    pickerSRMClassRoutine: "",
-    pickerSRMClassWeekly: "",
-    pickerDailyBookCheckoutOpportunity: "",
-    // Indicator 8
+      // Indicator 8
+      pickerSRMClassRoutine: "",
+      pickerSRMClassWeekly: "",
+      pickerDailyBookCheckoutOpportunity: "",
+      // Indicator 8
 
-    // Indicator 9
-    pickerSRMRegisterUpdated: "",
-    // Indicator 9
+      // Indicator 9
+      pickerSRMRegisterUpdated: "",
+      // Indicator 9
 
-    // Indicator 10
-    pickerParentsMeeting: "",
-    // Indicator 10
+      // Indicator 10
+      pickerParentsMeeting: "",
+      // Indicator 10
 
-    // Indicator 11
-    pickerReadFestival: "",
-    // Indicator 11
+      // Indicator 11
+      pickerReadFestival: "",
+      // Indicator 11
 
-    // Indicator 12
-    pickerSustainabilityPlan: "",
-    pickerCollectivePlan: "",
-    pickerResponsibilityPlan: "",
-    // Indicator 12
+      // Indicator 12
+      pickerSustainabilityPlan: "",
+      pickerCollectivePlan: "",
+      pickerResponsibilityPlan: "",
+      // Indicator 12
 
-    // Discussion topic
-    pickerBestPracticeIndicator1: "",
-    bestPracticeIndicator1Details: "",
-    pickerBestPracticeIndicator2: "",
-    bestPracticeIndicator2Details: "",
-    pickerBestPracticeIndicator3: "",
-    bestPracticeIndicator3Details: "",
+      // Discussion topic
+      pickerBestPracticeIndicator1: "",
+      bestPracticeIndicator1Details: "",
+      pickerBestPracticeIndicator2: "",
+      bestPracticeIndicator2Details: "",
+      pickerBestPracticeIndicator3: "",
+      bestPracticeIndicator3Details: "",
 
-    pickerCoachingSupportIndicator1: "",
-    coachingSupportIndicator1Details: "",
-    pickerCoachingSupportIndicator2: "",
-    coachingSupportIndicator1Details: "",
+      pickerCoachingSupportIndicator1: "",
+      coachingSupportIndicator1Details: "",
+      pickerCoachingSupportIndicator2: "",
+      coachingSupportIndicator2Details: "",
 
-    agreedStatement1: "",
-    agreedStatement2: "",
-    // Discussion topic
+      agreedStatement1: "",
+      agreedStatement2: "",
+      // Discussion topic
 
-    // Input value
-  };
+      // Input value
+    };
+  }
+
+  //Geo values
+  divisions = divisions;
+  districts = districts;
+  upazilas = upazillas;
+  unions = unions;
+  //Geo values
 
   // For Datepicker
   setDate = (event, date) => {
@@ -169,12 +181,118 @@ export default class LibraryManagementObservationScreen extends React.Component 
   };
   // For Datepicker
 
-  render() {
-    const { checked } = this.state;
+  //Register new library-observation data
+  saveLibraryObservation = async () => {
+    const newLibraryObservation = {
+      date: this.state.date,
+      office: this.state.pickerOffice,
+      project: this.state.pickerProject,
+      district: this.state.pickerDistrict,
+      upazila: this.state.pickerUpazila,
+      school: this.state.pickerSchool,
+      visitor: this.state.pickerVisitor,
+      visitorDesignation: this.state.pickerDesignation,
+      visitorOffice: this.state.pickerVisitorOffice,
+      lf: this.state.pickerLF,
+      lpo: this.state.pickerLPO,
 
-    // For Datepicker
+      lastFollowupIndicator1: this.state.pickerFollowup1,
+      lastFollowupIndicator2: this.state.pickerFollowup2,
+      lastFollowupIndicator3: this.state.pickerFollowup3,
+
+      ind1IsTrainedAllTeacher: this.state.pickerIsTrainedAllTeacher,
+      ind11IsTrainedSRMTeacherIncharge: this.state.pickerIsTrainedSRMTeacher,
+      ind12IsTrainedHeadTeacher: this.state.pickerIsTrainedHeadTeacher,
+
+      ind2ClassroomSuitableSRM: this.state.pickerClassroomSuitableSRM,
+      ind21ClassroomDoorWindowLock: this.state.pickerClassroomDoorWindowLock,
+      ind22ClassroomSafeClean: this.state.pickerClassroomSafeClean,
+
+      ind3BookselfUseable: this.state.pickerBookselfUseable,
+      ind31BookselfAccessible: this.state.pickerBookselfAccessible,
+      ind32BookselfEnvironmentProtected:
+        this.state.pickerBookselfEnvironmentProtected,
+      ind33BookselfTableCondition: this.state.pickerBookselfTableCondition,
+
+      ind4BookRegisterUpdated: this.state.pickerBookRegisterUpdated,
+
+      ind5BookselfOrganized: this.state.pickerBookselfOrganized,
+      ind51BookselfBookOrganizedOpen:
+        this.state.pickerBookselfBookOrganizedOpen,
+      ind52BookselfBookLevelViewable:
+        this.state.pickerBookselfBookLevelViewable,
+      ind53BookselfBookAccessible: this.state.pickerBookselfBookAccessible,
+
+      ind6PrintRichDisplayed: this.state.pickerPrintRichDisplayed,
+
+      ind7BookCheckoutFunctional: this.state.pickerBookCheckoutFunctional,
+      ind71BookCheckoutProcedureDisplayed:
+        this.state.pickerBookCheckoutProcedureDisplayed,
+      ind72BookCheckoutRegisterUsable:
+        this.state.pickerBookCheckoutRegisterUsable,
+      ind73BookCheckoutRegisterUpdated:
+        this.state.pickerBookCheckoutRegisterUpdated,
+      ind74BookCheckoutPendingBooklist:
+        this.state.pickerBookCheckoutPendingBooklist,
+
+      ind8SRMClassRoutine: this.state.pickerSRMClassRoutine,
+      ind81SRMClassWeekly: this.state.pickerSRMClassWeekly,
+      ind82DailyBookCheckoutOpportunity:
+        this.state.pickerDailyBookCheckoutOpportunity,
+
+      ind9SRMRegisterUpdated: this.state.pickerSRMRegisterUpdated,
+
+      ind10ParentsMeeting: this.state.pickerParentsMeeting,
+
+      ind11ReadFestival: this.state.pickerReadFestival,
+
+      ind12SustainabilityPlan: this.state.pickerSustainabilityPlan,
+      ind121CollectivePlan: this.state.pickerCollectivePlan,
+      ind122ResponsibilityPlan: this.state.pickerResponsibilityPlan,
+
+      bestPracticeIndicator1: this.state.pickerBestPracticeIndicator1,
+      bestPracticeIndicator1Details: this.state.bestPracticeIndicator1Details,
+      bestPracticeIndicator2: this.state.pickerBestPracticeIndicator2,
+      bestPracticeIndicator2Details: this.state.bestPracticeIndicator2Details,
+      bestPracticeIndicator3: this.state.pickerBestPracticeIndicator3,
+      bestPracticeIndicator3Details: this.state.bestPracticeIndicator3Details,
+
+      coachingSupportIndicator1: this.state.pickerCoachingSupportIndicator1,
+      coachingSupportIndicator1Details:
+        this.state.coachingSupportIndicator1Details,
+      coachingSupportIndicator2: this.state.pickerCoachingSupportIndicator2,
+      coachingSupportIndicator2Details:
+        this.state.coachingSupportIndicator2Details,
+
+      agreedStatement1: this.state.agreedStatement1,
+      agreedStatement2: this.state.agreedStatement2,
+    };
+    try {
+      let response = await fetch(
+        "http://10.9.0.93:8080/api/v1/library-observations",
+        {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newLibraryObservation),
+        }
+      );
+      if (response.status >= 200 && response.status < 300) {
+        alert("Library observation data saved successfully!!!");
+      }
+    } catch (errors) {
+      alert(errors);
+    }
+  };
+  //Register new library-observation data
+
+  render() {
+    // All data to save
     const { show, date, mode } = this.state;
-    // For Datepicker
+    // All data to save
 
     return (
       <View style={styles.container}>
@@ -183,7 +301,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
             style={{
               fontSize: 24,
               fontWeight: "bold",
-              marginTop: 100,
+              marginTop: 50,
               alignContent: "center",
               textAlign: "center",
               alignSelf: "center",
@@ -258,8 +376,10 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
-                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                    <Picker.Item label={"Dhaka"} value={"Dhaka"} />
+                    <Picker.Item label={"Coxsbazar"} value={"Coxsbazar"} />
+                    <Picker.Item label={"Natore"} value={"Natore"} />
+                    <Picker.Item label={"Moulvibazar"} value={"Moulvibazar"} />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -283,8 +403,11 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"CORE"} value={"CORE"} />
                     <Picker.Item label={"WFP"} value={"WFP"} />
                     <Picker.Item label={"UN"} value={"UN"} />
+                    <Picker.Item label={"UNICEF"} value={"UNICEF"} />
+                    <Picker.Item label={"WB"} value={"WB"} />
                   </Picker>
                 </View>
               </View>
@@ -309,9 +432,20 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       width: 150,
                     }}
                   >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"ঢাকা"} value={"Dhaka"} />
-                    <Picker.Item label={"কক্সবাজার"} value={"Coxsbazar"} />
+                    <Picker.Item key={""} label={"নির্বাচন করুন"} value={""} />
+                    {districts.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
+                    {/* <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"Dhaka"} value={"Dhaka"} />
+                    <Picker.Item label={"Coxsbazar"} value={"Coxsbazar"} />
+                    <Picker.Item label={"Natore"} value={"Natore"} /> */}
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -335,8 +469,18 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
-                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                    <Picker.Item
+                      label={"Coxsbazar Sadar"}
+                      value={"Coxsbazar Sadar"}
+                    />
+
+                    <Picker.Item label={"Ukhiya"} value={"Ukhiya"} />
+                    <Picker.Item label={"Kutubdia"} value={"Kutubdia"} />
+                    <Picker.Item label={"Chakaria"} value={"Chakaria"} />
+                    <Picker.Item label={"Ramu"} value={"Ramu"} />
+                    <Picker.Item label={"Teknaf"} value={"Teknaf"} />
+                    <Picker.Item label={"Maheshkhali"} value={"Maheshkhali"} />
+                    <Picker.Item label={"Eidgoan"} value={"Eidgoan"} />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -360,8 +504,18 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"অ আ স্কুল"} value={"A School"} />
-                    <Picker.Item label={"ক খ  স্কুল"} value={"B School"} />
+                    <Picker.Item
+                      label={"Jalal Uddin GPS"}
+                      value={"Jalal Uddin GPS"}
+                    />
+                    <Picker.Item
+                      label={"Kutubdia Model GPS"}
+                      value={"Kutubdia Model GPS"}
+                    />
+                    <Picker.Item
+                      label={"Monohor khali GPS"}
+                      value={"Monohor khali GPS"}
+                    />
                   </Picker>
                 </View>
               </View>
@@ -395,8 +549,27 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"মাসুদুল হাসান"} value={"LF"} />
-                    <Picker.Item label={"মুশফিকুর রহমান "} value={"LPO"} />
+                    <Picker.Item
+                      label={"Rakhi Sarkar"}
+                      value={"Rakhi Sarkar"}
+                    />
+                    <Picker.Item
+                      label={"Badruzzaman Khan"}
+                      value={"Badruzzaman Khan"}
+                    />
+                    <Picker.Item
+                      label={"Zakir Hossain"}
+                      value={"Zakir Hossain"}
+                    />
+
+                    <Picker.Item
+                      label={"Masudul Hasan"}
+                      value={"Masudul Hasan"}
+                    />
+                    <Picker.Item
+                      label={"Mushfiqur Rahman"}
+                      value={"Mushfiqur Rahman"}
+                    />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -428,8 +601,12 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"এলএফ"} value={"LF"} />
-                    <Picker.Item label={"এলপিও "} value={"LPO"} />
+                    <Picker.Item label={"CD"} value={"CD"} />
+                    <Picker.Item label={"POD"} value={"POD"} />
+                    <Picker.Item label={"Sr.M"} value={"Sr.M"} />
+                    <Picker.Item label={"LF"} value={"LF"} />
+                    <Picker.Item label={"LPO"} value={"LPO"} />
+                    <Picker.Item label={"Officer"} value={"Officer"} />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -453,8 +630,10 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
-                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
+                    <Picker.Item label={"CO"} value={"CO"} />
+                    <Picker.Item label={"Dhaka"} value={"Dhaka"} />
+                    <Picker.Item label={"Coxsbazar"} value={"Coxsbazar"} />
+                    <Picker.Item label={"Natore"} value={"Natore"} />
                   </Picker>
                 </View>
               </View>
@@ -480,8 +659,14 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"মাসুদুল হাসান"} value={"LF"} />
-                    <Picker.Item label={"মুশফিকুর রহমান "} value={"LPO"} />
+                    <Picker.Item
+                      label={"Masudul Hasan"}
+                      value={"Masudul Hasan"}
+                    />
+                    <Picker.Item
+                      label={"Mushfiqur Rahman"}
+                      value={"Mushfiqur Rahman"}
+                    />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -505,8 +690,14 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"মাসুদুল হাসান"} value={"LF"} />
-                    <Picker.Item label={"মুশফিকুর রহমান "} value={"LPO"} />
+                    <Picker.Item
+                      label={"Masudul Hasan"}
+                      value={"Masudul Hasan"}
+                    />
+                    <Picker.Item
+                      label={"Mushfiqur Rahman"}
+                      value={"Mushfiqur Rahman"}
+                    />
                   </Picker>
                 </View>
               </View>
@@ -556,8 +747,22 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"Indicator 1"} value={"abc"} />
-                      <Picker.Item label={"Indicator 2"} value={"male"} />
+                      <Picker.Item
+                        label={"Indicator 1"}
+                        value={"Indicator 1"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 2"}
+                        value={"Indicator 2"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 3"}
+                        value={"Indicator 3"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 4"}
+                        value={"Indicator 4"}
+                      />
                     </Picker>
                   </View>
                 </View>
@@ -576,8 +781,22 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"Indicator 1"} value={"abc"} />
-                      <Picker.Item label={"Indicator 2"} value={"male"} />
+                      <Picker.Item
+                        label={"Indicator 1"}
+                        value={"Indicator 1"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 2"}
+                        value={"Indicator 2"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 3"}
+                        value={"Indicator 3"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 4"}
+                        value={"Indicator 4"}
+                      />
                     </Picker>
                   </View>
                 </View>
@@ -596,8 +815,22 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"Indicator 1"} value={"abc"} />
-                      <Picker.Item label={"Indicator 2"} value={"male"} />
+                      <Picker.Item
+                        label={"Indicator 1"}
+                        value={"Indicator 1"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 2"}
+                        value={"Indicator 2"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 3"}
+                        value={"Indicator 3"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 4"}
+                        value={"Indicator 4"}
+                      />
                     </Picker>
                   </View>
                 </View>
@@ -1096,11 +1329,11 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           width: 150,
                         }}
                         selectedValue={
-                          this.state && this.state.pickerBookselfAccessable
+                          this.state && this.state.pickerBookselfAccessible
                         }
                         onValueChange={(value) => {
                           this.setState({
-                            pickerBookselfAccessable: value,
+                            pickerBookselfAccessible: value,
                             pickerBookselfUseable: value,
                           });
 
@@ -1178,7 +1411,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
 
                           if (
                             value === "হ্যাঁ" &&
-                            this.state.pickerBookselfAccessable === "হ্যাঁ" &&
+                            this.state.pickerBookselfAccessible === "হ্যাঁ" &&
                             this.state.pickerBookselfTableCondition
                           ) {
                             this.setState({
@@ -1247,7 +1480,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
 
                           if (
                             value === "হ্যাঁ" &&
-                            this.state.pickerBookselfAccessable === "হ্যাঁ" &&
+                            this.state.pickerBookselfAccessible === "হ্যাঁ" &&
                             this.state.pickerBookselfEnvironmentProtected ===
                               "হ্যাঁ"
                           ) {
@@ -1760,7 +1993,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
 
                           if (
                             value === "হ্যাঁ" &&
-                            this.state.pickerBookCheckoutRegisterUseable ===
+                            this.state.pickerBookCheckoutRegisterUsable ===
                               "হ্যাঁ" &&
                             this.state.pickerBookCheckoutRegisterUpdated ===
                               "হ্যাঁ" &&
@@ -1825,11 +2058,11 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         }}
                         selectedValue={
                           this.state &&
-                          this.state.pickerBookCheckoutRegisterUseable
+                          this.state.pickerBookCheckoutRegisterUsable
                         }
                         onValueChange={(value) => {
                           this.setState({
-                            pickerBookCheckoutRegisterUseable: value,
+                            pickerBookCheckoutRegisterUsable: value,
                           });
                           if (
                             value === "হ্যাঁ" &&
@@ -1910,7 +2143,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                             value === "হ্যাঁ" &&
                             this.state.pickerBookCheckoutProcedureDisplayed ===
                               "হ্যাঁ" &&
-                            this.state.pickerBookCheckoutRegisterUseable ===
+                            this.state.pickerBookCheckoutRegisterUsable ===
                               "হ্যাঁ" &&
                             this.state.pickerBookCheckoutPendingBooklist ===
                               "হ্যাঁ"
@@ -1985,7 +2218,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                             value === "হ্যাঁ" &&
                             this.state.pickerBookCheckoutProcedureDisplayed ===
                               "হ্যাঁ" &&
-                            this.state.pickerBookCheckoutRegisterUseable ===
+                            this.state.pickerBookCheckoutRegisterUsable ===
                               "হ্যাঁ" &&
                             this.state.pickerBookCheckoutRegisterUpdated ===
                               "হ্যাঁ"
@@ -2657,8 +2890,22 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                      <Picker.Item label={"না"} value={"না"} />
+                      <Picker.Item
+                        label={"Indicator 1"}
+                        value={"Indicator 1"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 2"}
+                        value={"Indicator 2"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 3"}
+                        value={"Indicator 3"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 4"}
+                        value={"Indicator 4"}
+                      />
                     </Picker>
                     <Text>১.</Text>
                     <TextInput
@@ -2686,8 +2933,22 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                      <Picker.Item label={"না"} value={"না"} />
+                      <Picker.Item
+                        label={"Indicator 1"}
+                        value={"Indicator 1"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 2"}
+                        value={"Indicator 2"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 3"}
+                        value={"Indicator 3"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 4"}
+                        value={"Indicator 4"}
+                      />
                     </Picker>
                     <Text>২.</Text>
                     <TextInput
@@ -2715,8 +2976,22 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                      <Picker.Item label={"না"} value={"না"} />
+                      <Picker.Item
+                        label={"Indicator 1"}
+                        value={"Indicator 1"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 2"}
+                        value={"Indicator 2"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 3"}
+                        value={"Indicator 3"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 4"}
+                        value={"Indicator 4"}
+                      />
                     </Picker>
                     <Text>৩.</Text>
                     <TextInput
@@ -2758,8 +3033,22 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                      <Picker.Item label={"না"} value={"না"} />
+                      <Picker.Item
+                        label={"Indicator 1"}
+                        value={"Indicator 1"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 2"}
+                        value={"Indicator 2"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 3"}
+                        value={"Indicator 3"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 4"}
+                        value={"Indicator 4"}
+                      />
                     </Picker>
                   </View>
                   <View style={{ flex: 1, padding: 2 }}>
@@ -2780,8 +3069,22 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                      <Picker.Item label={"না"} value={"না"} />
+                      <Picker.Item
+                        label={"Indicator 1"}
+                        value={"Indicator 1"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 2"}
+                        value={"Indicator 2"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 3"}
+                        value={"Indicator 3"}
+                      />
+                      <Picker.Item
+                        label={"Indicator 4"}
+                        value={"Indicator 4"}
+                      />
                     </Picker>
                   </View>
                 </View>
@@ -2811,10 +3114,10 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       placeholder="২."
                       onChangeText={(text) =>
                         this.setState({
-                          coachingSupportIndicator1Details: text,
+                          coachingSupportIndicator2Details: text,
                         })
                       }
-                      value={this.state.coachingSupportIndicator1Details}
+                      value={this.state.coachingSupportIndicator2Details}
                     ></TextInput>
                   </View>
                 </View>
@@ -2873,6 +3176,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                 marginLeft: 100,
                 marginBottom: 20,
               }}
+              onPress={this.saveLibraryObservation.bind(this)}
             >
               <Text>Submit</Text>
             </TouchableOpacity>
