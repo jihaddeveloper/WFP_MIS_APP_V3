@@ -52,6 +52,117 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
     pickerLF: "",
     pickerLPO: "",
     // General data
+
+    //Book checkout data
+    priPrimaryBoy: "",
+    priPrimaryGirl: "",
+    priPrimaryTotal: "",
+    priPrimaryNoBoyBC: "",
+    priPrimaryNoGirlBC: "",
+    priPrimaryNoTotalBC: "",
+    priPrimaryNoBookBoyBC: "",
+    priPrimaryNoBookGirlBC: "",
+    priPrimaryNoBookTotalBC: "",
+    priPrimarySpBoy: "",
+    priPrimarySpGirl: "",
+    priPrimarySpTotal: "",
+    priPrimaryNoSpBoyBC: "",
+    priPrimaryNoSpGirlBC: "",
+    priPrimaryNoSpTotalBC: "",
+    priPrimaryNoBookSpBoyBC: "",
+    priPrimaryNoBookSpGirlBC: "",
+    priPrimaryNoBookSpTotalBC: "",
+    classOneBoy: "",
+    classOneGirl: 0,
+    classOneTotal: 0,
+    classOneNoBoyBC: 0,
+    classOneNoGirlBC: 0,
+    classOneNoTotalBC: 0,
+    classOneNoBookBoyBC: 0,
+    classOneNoBookGirlBC: 0,
+    classOneNoBookTotalBC: 0,
+    classOneSpBoy: 0,
+    classOneSpGirl: 0,
+    classOneSpTotal: 0,
+    classOneNoSpBoyBC: 0,
+    classOneNoSpGirlBC: 0,
+    classOneNoSpTotalBC: 0,
+    classOneNoBookSpBoyBC: 0,
+    classOneNoBookSpGirlBC: 0,
+    classOneNoBookSpTotalBC: 0,
+    classTwoBoy: 0,
+    classTwoGirl: 0,
+    classTwoTotal: 0,
+    classTwoNoBoyBC: 0,
+    classTwoNoGirlBC: 0,
+    classTwoNoTotalBC: 0,
+    classTwoNoBookBoyBC: 0,
+    classTwoNoBookGirlBC: 0,
+    classTwoNoBookTotalBC: 0,
+    classTwoSpBoy: 0,
+    classTwoSpGirl: 0,
+    classTwoSpTotal: 0,
+    classTwoNoSpBoyBC: 0,
+    classTwoNoSpGirlBC: 0,
+    classTwoNoSpTotalBC: 0,
+    classTwoNoBookSpBoyBC: 0,
+    classTwoNoBookSpGirlBC: 0,
+    classTwoNoBookSpTotalBC: 0,
+    classThreeBoy: 0,
+    classThreeGirl: 0,
+    classThreeTotal: 0,
+    classThreeNoBoyBC: 0,
+    classThreeNoGirlBC: 0,
+    classThreeNoTotalBC: 0,
+    classThreeNoBookBoyBC: 0,
+    classThreeNoBookGirlBC: 0,
+    classThreeNoBookTotalBC: 0,
+    classThreeSpBoy: 0,
+    classThreeSpGirl: 0,
+    classThreeSpTotal: 0,
+    classThreeNoSpBoyBC: 0,
+    classThreeNoSpGirlBC: 0,
+    classThreeNoSpTotalBC: 0,
+    classThreeNoBookSpBoyBC: 0,
+    classThreeNoBookSpGirlBC: 0,
+    classThreeNoBookSpTotalBC: 0,
+    classFourBoy: 0,
+    classFourGirl: 0,
+    classFourTotal: 0,
+    classFourNoBoyBC: 0,
+    classFourNoGirlBC: 0,
+    classFourNoTotalBC: 0,
+    classFourNoBookBoyBC: 0,
+    classFourNoBookGirlBC: 0,
+    classFourNoBookTotalBC: 0,
+    classFourSpBoy: 0,
+    classFourSpGirl: 0,
+    classFourSpTotal: 0,
+    classFourNoSpBoyBC: 0,
+    classFourNoSpGirlBC: 0,
+    classFourNoSpTotalBC: 0,
+    classFourNoBookSpBoyBC: 0,
+    classFourNoBookSpGirlBC: 0,
+    classFourNoBookSpTotalBC: 0,
+    classFiveBoy: 0,
+    classFiveGirl: 0,
+    classFiveTotal: 0,
+    classFiveNoBoyBC: 0,
+    classFiveNoGirlBC: 0,
+    classFiveNoTotalBC: 0,
+    classFiveNoBookBoyBC: 0,
+    classFiveNoBookGirlBC: 0,
+    classFiveNoBookTotalBC: 0,
+    classFiveSpBoy: 0,
+    classFiveSpGirl: 0,
+    classFiveSpTotal: 0,
+    classFiveNoSpBoyBC: 0,
+    classFiveNoSpGirlBC: 0,
+    classFiveNoSpTotalBC: 0,
+    classFiveNoBookSpBoyBC: 0,
+    classFiveNoBookSpGirlBC: 0,
+    classFiveNoBookSpTotalBC: 0,
+    //Book checkout data
   };
 
   //Geo values
@@ -86,6 +197,154 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
     this.show("time");
   };
   // For Datepicker
+
+  // Register new book-checkout data
+  saveLibraryObservation = async () => {
+    const newBookCheckout = {
+      date: this.state.date,
+      office: this.state.pickerOffice,
+      project: this.state.pickerProject,
+      district: this.state.pickerDistrict,
+      upazila: this.state.pickerUpazila,
+      school: this.state.pickerSchool,
+      headTeacher: this.state.pickerHeadTeacher,
+      gender: this.state.pickerGender,
+      visitor: this.state.pickerVisitor,
+      visitorDesignation: this.state.pickerDesignation,
+      visitorOffice: this.state.pickerVisitorOffice,
+      lf: this.state.pickerLF,
+      lpo: this.state.pickerLPO,
+
+      priPrimaryBoy: this.state.priPrimaryBoy,
+      priPrimaryGirl: this.state.priPrimaryGirl,
+      priPrimaryTotal: this.state.priPrimaryTotal,
+      priPrimaryNoBoyBC: this.state.priPrimaryNoBoyBC,
+      priPrimaryNoGirlBC: this.state.priPrimaryNoGirlBC,
+      priPrimaryNoTotalBC: this.state.priPrimaryNoTotalBC,
+      priPrimaryNoBookBoyBC: this.state.priPrimaryNoBookBoyBC,
+      priPrimaryNoBookGirlBC: this.state.priPrimaryNoBookGirlBC,
+      priPrimaryNoBookTotalBC: this.state.priPrimaryNoBookTotalBC,
+      priPrimarySpBoy: this.state.priPrimarySpBoy,
+      priPrimarySpGirl: this.state.priPrimarySpGirl,
+      priPrimarySpTotal: this.state.priPrimarySpTotal,
+      priPrimaryNoSpBoyBC: this.state.priPrimaryNoSpBoyBC,
+      priPrimaryNoSpGirlBC: this.state.priPrimaryNoSpGirlBC,
+      priPrimaryNoSpTotalBC: this.state.priPrimaryNoSpTotalBC,
+      priPrimaryNoBookSpBoyBC: this.state.priPrimaryNoBookSpBoyBC,
+      priPrimaryNoBookSpGirlBC: this.state.priPrimaryNoBookSpGirlBC,
+      priPrimaryNoBookSpTotalBC: this.state.priPrimaryNoBookSpTotalBC,
+      classOneBoy: this.state.classOneBoy,
+      classOneGirl: this.state.classOneGirl,
+      classOneTotal: this.state.classOneTotal,
+      classOneNoBoyBC: this.state.classOneNoBoyBC,
+      classOneNoGirlBC: this.state.classOneNoGirlBC,
+      classOneNoTotalBC: this.state.classOneNoTotalBC,
+      classOneNoBookBoyBC: this.state.classOneNoBookBoyBC,
+      classOneNoBookGirlBC: this.state.classOneNoBookGirlBC,
+      classOneNoBookTotalBC: this.state.classOneNoBookTotalBC,
+      classOneSpBoy: this.state.classOneSpBoy,
+      classOneSpGirl: this.state.classOneSpGirl,
+      classOneSpTotal: this.state.classOneSpTotal,
+      classOneNoSpBoyBC: this.state.classOneNoSpBoyBC,
+      classOneNoSpGirlBC: this.state.classOneNoSpGirlBC,
+      classOneNoSpTotalBC: this.state.classOneNoSpTotalBC,
+      classOneNoBookSpBoyBC: this.state.classOneNoBookSpBoyBC,
+      classOneNoBookSpGirlBC: this.state.classOneNoBookSpGirlBC,
+      classOneNoBookSpTotalBC: this.state.classOneNoBookSpTotalBC,
+      classTwoBoy: this.state.classTwoBoy,
+      classTwoGirl: this.state.classTwoGirl,
+      classTwoTotal: this.state.classTwoTotal,
+      classTwoNoBoyBC: this.state.classTwoNoBoyBC,
+      classTwoNoGirlBC: this.state.classTwoNoGirlBC,
+      classTwoNoTotalBC: this.state.classTwoNoTotalBC,
+      classTwoNoBookBoyBC: this.state.classTwoNoBookBoyBC,
+      classTwoNoBookGirlBC: this.state.classTwoNoBookGirlBC,
+      classTwoNoBookTotalBC: this.state.classTwoNoBookTotalBC,
+      classTwoSpBoy: this.state.classTwoSpBoy,
+      classTwoSpGirl: this.state.classTwoSpGirl,
+      classTwoSpTotal: this.state.classTwoSpTotal,
+      classTwoNoSpBoyBC: this.state.classTwoNoSpBoyBC,
+      classTwoNoSpGirlBC: this.state.classTwoNoSpGirlBC,
+      classTwoNoSpTotalBC: this.state.classTwoNoSpTotalBC,
+      classTwoNoBookSpBoyBC: this.state.classTwoNoBookSpBoyBC,
+      classTwoNoBookSpGirlBC: this.state.classTwoNoBookSpGirlBC,
+      classTwoNoBookSpTotalBC: this.state.classTwoNoBookSpTotalBC,
+      classThreeBoy: this.state.classThreeBoy,
+      classThreeGirl: this.state.classThreeGirl,
+      classThreeTotal: this.state.classThreeTotal,
+      classThreeNoBoyBC: this.state.classThreeNoBoyBC,
+      classThreeNoGirlBC: this.state.classThreeNoGirlBC,
+      classThreeNoTotalBC: this.state.classThreeNoTotalBC,
+      classThreeNoBookBoyBC: this.state.classThreeNoBookBoyBC,
+      classThreeNoBookGirlBC: this.state.classThreeNoBookGirlBC,
+      classThreeNoBookTotalBC: this.state.classThreeNoBookTotalBC,
+      classThreeSpBoy: this.state.classThreeSpBoy,
+      classThreeSpGirl: this.state.classThreeSpGirl,
+      classThreeSpTotal: this.state.classThreeSpTotal,
+      classThreeNoSpBoyBC: this.state.classThreeNoSpBoyBC,
+      classThreeNoSpGirlBC: this.state.classThreeNoSpGirlBC,
+      classThreeNoSpTotalBC: this.state.classThreeNoSpTotalBC,
+      classThreeNoBookSpBoyBC: this.state.classThreeNoBookSpBoyBC,
+      classThreeNoBookSpGirlBC: this.state.classThreeNoBookSpGirlBC,
+      classThreeNoBookSpTotalBC: this.state.classThreeNoBookSpTotalBC,
+      classFourBoy: this.state.classFourBoy,
+      classFourGirl: this.state.classFourGirl,
+      classFourTotal: this.state.classFourTotal,
+      classFourNoBoyBC: this.state.classFourNoBoyBC,
+      classFourNoGirlBC: this.state.classFourNoGirlBC,
+      classFourNoTotalBC: this.state.classFourNoTotalBC,
+      classFourNoBookBoyBC: this.state.classFourNoBookBoyBC,
+      classFourNoBookGirlBC: this.state.classFourNoBookGirlBC,
+      classFourNoBookTotalBC: this.state.classFourNoBookTotalBC,
+      classFourSpBoy: this.state.classFourSpBoy,
+      classFourSpGirl: this.state.classFourSpGirl,
+      classFourSpTotal: this.state.classFourSpTotal,
+      classFourNoSpBoyBC: this.state.classFourNoSpBoyBC,
+      classFourNoSpGirlBC: this.state.classFourNoSpGirlBC,
+      classFourNoSpTotalBC: this.state.classFourNoSpTotalBC,
+      classFourNoBookSpBoyBC: this.state.classFourNoBookSpBoyBC,
+      classFourNoBookSpGirlBC: this.state.classFourNoBookSpGirlBC,
+      classFourNoBookSpTotalBC: this.state.classFourNoBookSpTotalBC,
+      classFiveBoy: this.state.classFiveBoy,
+      classFiveGirl: this.state.classFiveGirl,
+      classFiveTotal: this.state.classFiveTotal,
+      classFiveNoBoyBC: this.state.classFiveNoBoyBC,
+      classFiveNoGirlBC: this.state.classFiveNoGirlBC,
+      classFiveNoTotalBC: this.state.classFiveNoTotalBC,
+      classFiveNoBookBoyBC: this.state.classFiveNoBookBoyBC,
+      classFiveNoBookGirlBC: this.state.classFiveNoBookGirlBC,
+      classFiveNoBookTotalBC: this.state.classFiveNoBookTotalBC,
+      classFiveSpBoy: this.state.classFiveSpBoy,
+      classFiveSpGirl: this.state.classFiveSpGirl,
+      classFiveSpTotal: this.state.classFiveSpTotal,
+      classFiveNoSpBoyBC: this.state.classFiveNoSpBoyBC,
+      classFiveNoSpGirlBC: this.state.classFiveNoSpGirlBC,
+      classFiveNoSpTotalBC: this.state.classFiveNoSpTotalBC,
+      classFiveNoBookSpBoyBC: this.state.classFiveNoBookSpBoyBC,
+      classFiveNoBookSpGirlBC: this.state.classFiveNoBookSpGirlBC,
+      classFiveNoBookSpTotalBC: this.state.classFiveNoBookSpTotalBC,
+    };
+    try {
+      let response = await fetch(
+        "http://10.9.0.93:8080/api/v1/book-checkouts",
+        {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newBookCheckout),
+        }
+      );
+      if (response.status >= 200 && response.status < 300) {
+        alert("Book checkout data saved successfully!!!");
+      }
+    } catch (errors) {
+      alert(errors);
+    }
+  };
+  // Register new book-checkout data
 
   render() {
     const { checked } = this.state;
@@ -541,10 +800,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
           <View style={{ padding: 10 }}>
             <Text style={styles.bigRedText}>নির্দেশনা </Text>
             <Card style={{ padding: 10, margin: 10 }}>
-              <Text style={{ padding: 5, fontWeight: "bold" }}>
+              <Text style={{ padding: 5, fontWeight: "bold", fontSize: 18 }}>
                 পূর্ববর্তী মাসে বই চেক-আউট হয়েছে (নিচের টেবিল অনুযায়ী প্রতিটি
                 বিদ্যালয় থেকে তথ্য সংগ্রহ করুন এবং এবং প্রতি মাসের তথ্য পরের
-                মাসের ২৫ তারিখের মধ্যে বিদ্যলয়ের বই চেক-আউট সংক্রান্ত তথ্য
+                মাসের ২৫ তারিখের মধ্যে বিদ্যালয়ের বই চেক-আউট সংক্রান্ত তথ্য
                 একত্রিত করে এলপিও এবং আরএমঅ্যান্ডই এসোসিয়েটির কাছে প্রেরণ করুন)
                 ।
               </Text>
@@ -599,33 +858,64 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy}
+                          onChangeText={(text) =>
+                            this.setState({
+                              priPrimaryBoy: text,
+                              priPrimaryTotal: toString(
+                                parseInt(text) +
+                                  parseInt(this.state.priPrimaryTotal)
+                              ),
+                            })
+                          }
+                        />
+                        <Text>{this.state.priPrimaryBoy}</Text>
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryGirl}
+                          onChangeText={(text) =>
+                            this.setState({
+                              priPrimaryGirl: text,
+                              priPrimaryTotal: toString(
+                                parseInt(text) +
+                                  parseInt(this.state.priPrimaryTotal)
+                              ),
+                            })
+                          }
+                        />
+                        <Text>{this.state.priPrimaryGirl}</Text>
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          placeholder=""
+                          value={this.state.priPrimaryTotal}
+                          editable={false}
+                          selectTextOnFocus={false}
+                        />
+                        <Text>{toString(this.state.priPrimaryTotal)}</Text>
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -634,7 +924,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
@@ -729,6 +1019,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       }}
                     >
                       বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য
+                      (প্রাক-প্রাথমিক শ্রেণি)
                     </Text>
                   </Card>
                   <Card
