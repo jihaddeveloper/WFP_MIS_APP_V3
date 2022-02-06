@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 11/10/2021
-//  Modify Date: 13/01/2022
+//  Modify Date: 06/02/2022
 //  Description: Monthly book checkout screen component
 
 import React from "react";
@@ -26,144 +26,182 @@ import { Card } from "react-native-shadow-cards";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default class MonthlyBookCheckoutScreen extends React.Component {
-  state = {
-    checked: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      checked: false,
 
-    option: "yes",
+      option: "yes",
 
-    choosenIndex: 0,
+      choosenIndex: 0,
 
-    date: new Date(),
-    mode: "date",
-    show: false,
+      date: new Date(),
+      mode: "date",
+      show: false,
 
-    // General data
-    visitNo: "",
-    pickerOffice: "",
-    pickerProject: "",
-    pickerDistrict: "",
-    pickerUpazila: "",
-    pickerSchool: "",
-    pickerHeadTeacher: "",
-    pickerGender: "",
-    pickerVisitor: "",
-    pickerDesignation: "",
-    pickerVisitorOffice: "",
-    pickerLF: "",
-    pickerLPO: "",
-    // General data
+      // General data
+      visitNo: "",
+      pickerOffice: "",
+      pickerProject: "",
+      pickerDistrict: "",
+      pickerUpazila: "",
+      pickerSchool: "",
+      pickerHeadTeacher: "",
+      pickerGender: "",
+      pickerVisitor: "",
+      pickerDesignation: "",
+      pickerVisitorOffice: "",
+      pickerLF: "",
+      pickerLPO: "",
+      // General data
 
-    //Book checkout data
-    priPrimaryBoy: "",
-    priPrimaryGirl: "",
-    priPrimaryTotal: "",
-    priPrimaryNoBoyBC: "",
-    priPrimaryNoGirlBC: "",
-    priPrimaryNoTotalBC: "",
-    priPrimaryNoBookBoyBC: "",
-    priPrimaryNoBookGirlBC: "",
-    priPrimaryNoBookTotalBC: "",
-    priPrimarySpBoy: "",
-    priPrimarySpGirl: "",
-    priPrimarySpTotal: "",
-    priPrimaryNoSpBoyBC: "",
-    priPrimaryNoSpGirlBC: "",
-    priPrimaryNoSpTotalBC: "",
-    priPrimaryNoBookSpBoyBC: "",
-    priPrimaryNoBookSpGirlBC: "",
-    priPrimaryNoBookSpTotalBC: "",
-    classOneBoy: "",
-    classOneGirl: 0,
-    classOneTotal: 0,
-    classOneNoBoyBC: 0,
-    classOneNoGirlBC: 0,
-    classOneNoTotalBC: 0,
-    classOneNoBookBoyBC: 0,
-    classOneNoBookGirlBC: 0,
-    classOneNoBookTotalBC: 0,
-    classOneSpBoy: 0,
-    classOneSpGirl: 0,
-    classOneSpTotal: 0,
-    classOneNoSpBoyBC: 0,
-    classOneNoSpGirlBC: 0,
-    classOneNoSpTotalBC: 0,
-    classOneNoBookSpBoyBC: 0,
-    classOneNoBookSpGirlBC: 0,
-    classOneNoBookSpTotalBC: 0,
-    classTwoBoy: 0,
-    classTwoGirl: 0,
-    classTwoTotal: 0,
-    classTwoNoBoyBC: 0,
-    classTwoNoGirlBC: 0,
-    classTwoNoTotalBC: 0,
-    classTwoNoBookBoyBC: 0,
-    classTwoNoBookGirlBC: 0,
-    classTwoNoBookTotalBC: 0,
-    classTwoSpBoy: 0,
-    classTwoSpGirl: 0,
-    classTwoSpTotal: 0,
-    classTwoNoSpBoyBC: 0,
-    classTwoNoSpGirlBC: 0,
-    classTwoNoSpTotalBC: 0,
-    classTwoNoBookSpBoyBC: 0,
-    classTwoNoBookSpGirlBC: 0,
-    classTwoNoBookSpTotalBC: 0,
-    classThreeBoy: 0,
-    classThreeGirl: 0,
-    classThreeTotal: 0,
-    classThreeNoBoyBC: 0,
-    classThreeNoGirlBC: 0,
-    classThreeNoTotalBC: 0,
-    classThreeNoBookBoyBC: 0,
-    classThreeNoBookGirlBC: 0,
-    classThreeNoBookTotalBC: 0,
-    classThreeSpBoy: 0,
-    classThreeSpGirl: 0,
-    classThreeSpTotal: 0,
-    classThreeNoSpBoyBC: 0,
-    classThreeNoSpGirlBC: 0,
-    classThreeNoSpTotalBC: 0,
-    classThreeNoBookSpBoyBC: 0,
-    classThreeNoBookSpGirlBC: 0,
-    classThreeNoBookSpTotalBC: 0,
-    classFourBoy: 0,
-    classFourGirl: 0,
-    classFourTotal: 0,
-    classFourNoBoyBC: 0,
-    classFourNoGirlBC: 0,
-    classFourNoTotalBC: 0,
-    classFourNoBookBoyBC: 0,
-    classFourNoBookGirlBC: 0,
-    classFourNoBookTotalBC: 0,
-    classFourSpBoy: 0,
-    classFourSpGirl: 0,
-    classFourSpTotal: 0,
-    classFourNoSpBoyBC: 0,
-    classFourNoSpGirlBC: 0,
-    classFourNoSpTotalBC: 0,
-    classFourNoBookSpBoyBC: 0,
-    classFourNoBookSpGirlBC: 0,
-    classFourNoBookSpTotalBC: 0,
-    classFiveBoy: 0,
-    classFiveGirl: 0,
-    classFiveTotal: 0,
-    classFiveNoBoyBC: 0,
-    classFiveNoGirlBC: 0,
-    classFiveNoTotalBC: 0,
-    classFiveNoBookBoyBC: 0,
-    classFiveNoBookGirlBC: 0,
-    classFiveNoBookTotalBC: 0,
-    classFiveSpBoy: 0,
-    classFiveSpGirl: 0,
-    classFiveSpTotal: 0,
-    classFiveNoSpBoyBC: 0,
-    classFiveNoSpGirlBC: 0,
-    classFiveNoSpTotalBC: 0,
-    classFiveNoBookSpBoyBC: 0,
-    classFiveNoBookSpGirlBC: 0,
-    classFiveNoBookSpTotalBC: 0,
-    //Book checkout data
-  };
+      //Book checkout data
+      priPrimaryBoy: 0,
+      priPrimaryGirl: 0,
+      priPrimaryTotal: 0,
+
+      priPrimaryNoBoyBC: 0,
+      priPrimaryNoGirlBC: 0,
+      priPrimaryNoTotalBC: 0,
+
+      priPrimaryNoBookBoyBC: 0,
+      priPrimaryNoBookGirlBC: 0,
+      priPrimaryNoBookTotalBC: 0,
+
+      priPrimarySpBoy: 0,
+      priPrimarySpGirl: 0,
+      priPrimarySpTotal: 0,
+
+      priPrimaryNoSpBoyBC: 0,
+      priPrimaryNoSpGirlBC: 0,
+      priPrimaryNoSpTotalBC: 0,
+
+      priPrimaryNoBookSpBoyBC: 0,
+      priPrimaryNoBookSpGirlBC: 0,
+      priPrimaryNoBookSpTotalBC: 0,
+
+      classOneBoy: 0,
+      classOneGirl: 0,
+      classOneTotal: 0,
+
+      classOneNoBoyBC: 0,
+      classOneNoGirlBC: 0,
+      classOneNoTotalBC: 0,
+
+      classOneNoBookBoyBC: 0,
+      classOneNoBookGirlBC: 0,
+      classOneNoBookTotalBC: 0,
+
+      classOneSpBoy: 0,
+      classOneSpGirl: 0,
+      classOneSpTotal: 0,
+
+      classOneNoSpBoyBC: 0,
+      classOneNoSpGirlBC: 0,
+      classOneNoSpTotalBC: 0,
+
+      classOneNoBookSpBoyBC: 0,
+      classOneNoBookSpGirlBC: 0,
+      classOneNoBookSpTotalBC: 0,
+
+      classTwoBoy: 0,
+      classTwoGirl: 0,
+      classTwoTotal: 0,
+
+      classTwoNoBoyBC: 0,
+      classTwoNoGirlBC: 0,
+      classTwoNoTotalBC: 0,
+
+      classTwoNoBookBoyBC: 0,
+      classTwoNoBookGirlBC: 0,
+      classTwoNoBookTotalBC: 0,
+
+      classTwoSpBoy: 0,
+      classTwoSpGirl: 0,
+      classTwoSpTotal: 0,
+
+      classTwoNoSpBoyBC: 0,
+      classTwoNoSpGirlBC: 0,
+      classTwoNoSpTotalBC: 0,
+
+      classTwoNoBookSpBoyBC: 0,
+      classTwoNoBookSpGirlBC: 0,
+      classTwoNoBookSpTotalBC: 0,
+
+      classThreeBoy: 0,
+      classThreeGirl: 0,
+      classThreeTotal: 0,
+
+      classThreeNoBoyBC: 0,
+      classThreeNoGirlBC: 0,
+      classThreeNoTotalBC: 0,
+
+      classThreeNoBookBoyBC: 0,
+      classThreeNoBookGirlBC: 0,
+      classThreeNoBookTotalBC: 0,
+
+      classThreeSpBoy: 0,
+      classThreeSpGirl: 0,
+      classThreeSpTotal: 0,
+
+      classThreeNoSpBoyBC: 0,
+      classThreeNoSpGirlBC: 0,
+      classThreeNoSpTotalBC: 0,
+
+      classThreeNoBookSpBoyBC: 0,
+      classThreeNoBookSpGirlBC: 0,
+      classThreeNoBookSpTotalBC: 0,
+
+      classFourBoy: 0,
+      classFourGirl: 0,
+      classFourTotal: 0,
+
+      classFourNoBoyBC: 0,
+      classFourNoGirlBC: 0,
+      classFourNoTotalBC: 0,
+
+      classFourNoBookBoyBC: 0,
+      classFourNoBookGirlBC: 0,
+      classFourNoBookTotalBC: 0,
+
+      classFourSpBoy: 0,
+      classFourSpGirl: 0,
+      classFourSpTotal: 0,
+
+      classFourNoSpBoyBC: 0,
+      classFourNoSpGirlBC: 0,
+      classFourNoSpTotalBC: 0,
+
+      classFourNoBookSpBoyBC: 0,
+      classFourNoBookSpGirlBC: 0,
+      classFourNoBookSpTotalBC: 0,
+
+      classFiveBoy: 0,
+      classFiveGirl: 0,
+      classFiveTotal: 0,
+
+      classFiveNoBoyBC: 0,
+      classFiveNoGirlBC: 0,
+      classFiveNoTotalBC: 0,
+
+      classFiveNoBookBoyBC: 0,
+      classFiveNoBookGirlBC: 0,
+      classFiveNoBookTotalBC: 0,
+
+      classFiveSpBoy: 0,
+      classFiveSpGirl: 0,
+      classFiveSpTotal: 0,
+
+      classFiveNoSpBoyBC: 0,
+      classFiveNoSpGirlBC: 0,
+      classFiveNoSpTotalBC: 0,
+
+      classFiveNoBookSpBoyBC: 0,
+      classFiveNoBookSpGirlBC: 0,
+      classFiveNoBookSpTotalBC: 0,
+      //Book checkout data
+    };
+  }
 
   //Geo values
   divisions = divisions;
@@ -864,14 +902,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           placeholder=""
-                          value={this.state.priPrimaryBoy}
+                          value={this.state.priPrimaryBoy + ""}
                           onChangeText={(text) =>
                             this.setState({
                               priPrimaryBoy: text,
-                              priPrimaryTotal: toString(
-                                parseInt(text) +
-                                  parseInt(this.state.priPrimaryTotal)
-                              ),
+                              priPrimaryTotal:
+                                parseInt(this.state.priPrimaryTotal, 10) +
+                                parseInt(text, 10),
                             })
                           }
                         />
@@ -888,14 +925,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           placeholder=""
-                          value={this.state.priPrimaryGirl}
+                          value={this.state.priPrimaryGirl + ""}
                           onChangeText={(text) =>
                             this.setState({
                               priPrimaryGirl: text,
-                              priPrimaryTotal: toString(
-                                parseInt(text) +
-                                  parseInt(this.state.priPrimaryTotal)
-                              ),
+                              priPrimaryTotal:
+                                parseInt(this.state.priPrimaryTotal, 10) +
+                                parseInt(text, 10),
                             })
                           }
                         />
@@ -910,12 +946,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                             padding: 5,
                             borderWidth: 1,
                           }}
-                          placeholder=""
-                          value={this.state.priPrimaryTotal}
-                          editable={false}
-                          selectTextOnFocus={false}
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryTotal + ""}
+                          editable={true}
                         />
-                        <Text>{toString(this.state.priPrimaryTotal)}</Text>
+                        <Text>{this.state.priPrimaryTotal}</Text>
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -928,29 +963,53 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          editable={true}
+                          value={this.state.priPrimaryNoBoyBC + ""}
+                          onChangeText={(text) =>
+                            this.setState({
+                              priPrimaryNoBoyBC: text,
+                            })
+                          }
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          editable={true}
+                          value={this.state.priPrimaryNoBookGirlBC + ""}
+                          onChangeText={(text) =>
+                            this.setState({
+                              priPrimaryNoBookGirlBC: text,
+                            })
+                          }
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) =>
+                            this.setState({
+                              priPrimaryNoTotalBC: text,
+                            })
+                          }
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -959,33 +1018,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoBookBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              priPrimaryNoBookBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoBookGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              priPrimaryNoBookGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoBookTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              priPrimaryNoBookTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                   </Card>
@@ -1036,33 +1119,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.priPrimarySpBoy + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              priPrimarySpBoy: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.priPrimarySpGirl + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              priPrimarySpGirl: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.priPrimarySpTotal + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              priPrimarySpTotal: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -1071,33 +1178,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoSpBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              priPrimaryNoSpBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoSpGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              priPrimaryNoSpGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoSpTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              priPrimaryNoSpTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -1106,33 +1237,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoBookSpBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              priPrimaryNoBookSpBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoBookSpGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              priPrimaryNoBookSpGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoBookSpTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              priPrimaryNoBookSpTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                   </Card>
@@ -1182,33 +1337,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneBoy + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneBoy: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneGirl + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneGirl: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneTotal + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneTotal: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -1217,33 +1396,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneNoBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneNoBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneNoGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneNoGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneNoTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneNoTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -1252,33 +1455,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneNoBookBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneNoBookBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneNoBookGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneNoBookGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneNoBookTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneNoBookTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                   </Card>
@@ -1311,7 +1538,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         fontWeight: "bold",
                       }}
                     >
-                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য
+                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(রথম
+                      শ্রেণি)
                     </Text>
                   </Card>
                   <Card
@@ -1328,33 +1556,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 105,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneSpBoy + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneSpBoy: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneSpGirl + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneSpGirl: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneSpTotal + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneSpTotal: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -1363,33 +1615,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneNoSpBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneNoSpBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneNoSpGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneNoSpGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneNoSpTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneNoSpTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -1398,33 +1674,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneNoBookSpBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneNoBookSpBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneNoBookSpGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneNoBookSpGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classOneNoBookSpTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classOneNoBookSpTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                   </Card>
@@ -1474,33 +1774,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoBoy + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoBoy: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoGirl + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoGirl: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoTotal + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoTotal: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -1509,33 +1833,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoNoBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoNoGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoNoTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -1544,33 +1892,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoBookBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoNoBookBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoBookGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoNoBookGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoBookTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoNoBookTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                   </Card>
@@ -1603,7 +1975,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         fontWeight: "bold",
                       }}
                     >
-                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য
+                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(দ্বিতীয়
+                      শ্রেণি)
                     </Text>
                   </Card>
                   <Card
@@ -1620,33 +1993,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoSpBoy + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoSpBoy: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoSpGirl + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoSpGirl: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoSpTotal + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoSpTotal: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -1655,33 +2052,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoSpBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoNoSpBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoSpGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoNoSpGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoSpTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoNoSpTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -1690,33 +2111,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoBookSpBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoNoBookSpBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoBookSpGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoNoBookSpGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoBookSpTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoNoBookSpTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                   </Card>
@@ -1766,33 +2211,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeBoy + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeBoy: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeGirl + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeGirl: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeTotal + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeTotal: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -1801,33 +2270,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeNoBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeNoBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeNoGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeNoGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeNoTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeNoTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -1836,33 +2329,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeNoBookBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeNoBookBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeNoBookGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeNoBookGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeNoBookTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeNoBookTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                   </Card>
@@ -1895,7 +2412,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         fontWeight: "bold",
                       }}
                     >
-                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য
+                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(তৃতীয়
+                      শ্রেণি)
                     </Text>
                   </Card>
                   <Card
@@ -1912,33 +2430,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeSpBoy + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeSpBoy: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeSpGirl + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeSpGirl: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeSpTotal + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeSpTotal: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -1947,33 +2489,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeNoSpBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeNoSpBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeNoSpGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeNoSpGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeNoSpTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeNoSpTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -1982,33 +2548,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeNoBookSpBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeNoBookSpBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeNoBookSpGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeNoBookSpGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classThreeNoBookSpTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classThreeNoBookSpTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                   </Card>
@@ -2058,33 +2648,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourBoy + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourBoy: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourGirl + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourGirl: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourTotal + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourTotal: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -2093,33 +2707,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourNoBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourNoBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourNoGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourNoGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourNoTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourNoTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -2128,33 +2766,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourNoBookBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourNoBookBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourNoBookGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourNoBookGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourNoBookTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourNoBookTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                   </Card>
@@ -2187,7 +2849,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         fontWeight: "bold",
                       }}
                     >
-                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য
+                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(চতুর্থ
+                      শ্রেণি)
                     </Text>
                   </Card>
                   <Card
@@ -2204,33 +2867,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourSpBoy + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourSpBoy: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourSpGirl + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourSpGirl: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourSpTotal + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourSpTotal: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -2239,33 +2926,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourNoSpBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourNoBookBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourNoSpGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourNoSpGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourNoSpTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourNoSpTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -2274,33 +2985,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourNoBookSpBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourNoBookSpBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourNoBookSpGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourNoBookSpGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFourNoBookSpTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFourNoBookSpTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                   </Card>
@@ -2350,33 +3085,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveBoy + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveBoy: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveGirl + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveGirl: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveTotal + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveTotal: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -2385,33 +3144,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveNoBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveNoBookBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveNoGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveNoGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveNoTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveNoTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -2420,33 +3203,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveNoBookBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveNoBookBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveNoBookGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveNoBookGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveNoBookTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveNoBookTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                   </Card>
@@ -2479,7 +3286,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         fontWeight: "bold",
                       }}
                     >
-                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য
+                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(পঞ্চম
+                      শ্রেণি)
                     </Text>
                   </Card>
                   <Card
@@ -2496,33 +3304,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveSpBoy + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveSpBoy: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveSpGirl + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveSpGirl: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveSpTotal + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveSpTotal: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -2531,33 +3363,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveNoSpBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveNoSpBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveNoSpGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveNoSpGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveNoSpTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveNoSpTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -2566,33 +3422,57 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveNoBookSpBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveNoBookSpBoyBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, বালিকা: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveNoBookSpGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveNoBookSpGirlBC: text,
+                            });
+                          }}
+                        />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>মোট বই চেক আউট করেছে, মোট: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
-                        ></TextInput>
+                          keyboardType="numeric"
+                          value={this.state.classFiveNoBookSpTotalBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classFiveNoBookSpTotalBC: text,
+                            });
+                          }}
+                        />
                       </View>
                     </View>
                   </Card>
