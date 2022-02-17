@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 11/10/2021
-//  Modify Date: 06/02/2022
+//  Modify Date: 13/02/2022
 //  Description: Monthly book checkout screen component
 
 import React from "react";
@@ -29,6 +29,17 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      //Preloaded Data
+      allProject: [],
+      allSchool: [],
+      allTeacher: [],
+      allEmployee: [],
+      allOffice: [],
+      allDesignation: [],
+      //Preloaded Data
+
+      isLoading: true,
+
       checked: false,
 
       option: "yes",
@@ -44,7 +55,9 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       pickerOffice: "",
       pickerProject: "",
       pickerDistrict: "",
-      pickerUpazila: "",
+      pickerDistrictKey: "",
+      pickerUpazilla: "",
+      pickerUpazillaKey: "",
       pickerSchool: "",
       pickerHeadTeacher: "",
       pickerGender: "",
@@ -206,7 +219,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   //Geo values
   divisions = divisions;
   districts = districts;
-  upazilas = upazillas;
+  upazillas = upazillas;
   unions = unions;
   //Geo values
 
@@ -235,6 +248,92 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
     this.show("time");
   };
   // For Datepicker
+
+  // Get All Project
+  getAllProject = async () => {
+    try {
+      const response = await fetch("http://10.9.0.110:8080/api/v1/projects");
+      const json = await response.json();
+      this.setState({ allProject: json });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+  // Get All Project
+
+  // Get All Office
+  getAllOffice = async () => {
+    try {
+      const response = await fetch("http://10.9.0.110:8080/api/v1/offices");
+      const json = await response.json();
+      this.setState({ allOffice: json });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+  // Get All Office
+
+  // Get All School
+  getAllSchool = async () => {
+    try {
+      const response = await fetch("http://10.9.0.110:8080/api/v1/schools");
+      const json = await response.json();
+      this.setState({ allSchool: json });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+  // Get All School
+
+  // Get All Teacher
+  getAllTeacher = async () => {
+    try {
+      const response = await fetch("http://10.9.0.110:8080/api/v1/teachers");
+      const json = await response.json();
+      this.setState({ allTeacher: json });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+  // Get All Teacher
+
+  // Get All Employee
+  getAllEmployee = async () => {
+    try {
+      const response = await fetch("http://10.9.0.110:8080/api/v1/employees");
+      const json = await response.json();
+      this.setState({ allEmployee: json });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+  // Get All Employee
+
+  // Get All Designation
+  getAllDesignation = async () => {
+    try {
+      const response = await fetch(
+        "http://10.9.0.110:8080/api/v1/designations"
+      );
+      const json = await response.json();
+      this.setState({ allDesignation: json });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+  // Get All Designation
 
   // Register new book-checkout data
   saveLibraryObservation = async () => {
@@ -364,7 +463,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
     };
     try {
       let response = await fetch(
-        "http://10.9.0.93:8080/api/v1/book-checkouts",
+        "http://10.9.0.110:8080/api/v1/book-checkouts",
         {
           method: "POST",
           mode: "no-cors",
@@ -383,6 +482,15 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
     }
   };
   // Register new book-checkout data
+
+  componentDidMount() {
+    this.getAllProject();
+    this.getAllDesignation();
+    this.getAllEmployee();
+    this.getAllOffice();
+    this.getAllSchool();
+    this.getAllTeacher();
+  }
 
   render() {
     const { checked } = this.state;
@@ -509,8 +617,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       width: 150,
                     }}
                     selectedValue={this.state && this.state.pickerDistrict}
-                    onValueChange={(value) => {
-                      this.setState({ pickerDistrict: value });
+                    onValueChange={(value, key) => {
+                      this.setState({
+                        pickerDistrict: value,
+                        pickerDistrictKey: key,
+                      });
                     }}
                     itemStyle={{ color: "white" }}
                   >
@@ -524,10 +635,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         />
                       );
                     })}
-                    {/* <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
-                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} /> */}
                   </Picker>
+                  <Text>{this.state.pickerDistrictKey}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                   <Text
@@ -543,26 +652,55 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={this.state && this.state.pickerUpazila}
-                    onValueChange={(value) => {
-                      this.setState({ pickerUpazila: value });
+                    selectedValue={this.state && this.state.pickerUpazilla}
+                    onValueChange={(value, key) => {
+                      this.setState({
+                        pickerUpazilla: value,
+                        pickerUpazillaKey: key,
+                      });
                     }}
                     itemStyle={{ color: "white" }}
                   >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item
-                      label={"Coxsbazar Sadar"}
-                      value={"Coxsbazar Sadar"}
-                    />
-
-                    <Picker.Item label={"Ukhiya"} value={"Ukhiya"} />
-                    <Picker.Item label={"Kutubdia"} value={"Kutubdia"} />
-                    <Picker.Item label={"Chakaria"} value={"Chakaria"} />
-                    <Picker.Item label={"Ramu"} value={"Ramu"} />
-                    <Picker.Item label={"Teknaf"} value={"Teknaf"} />
-                    <Picker.Item label={"Maheshkhali"} value={"Maheshkhali"} />
-                    <Picker.Item label={"Eidgoan"} value={"Eidgoan"} />
+                    <Picker.Item key={""} label={"নির্বাচন করুন"} value={""} />
+                    {upazillas.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
                   </Picker>
+
+                  {/* {this.state.pickerDistrictKey && (
+                    <Picker
+                      style={{
+                        height: 40,
+                        width: 150,
+                      }}
+                      selectedValue={this.state && this.state.pickerUpazila}
+                      onValueChange={(value) => {
+                        this.setState({ pickerUpazila: value });
+                      }}
+                      itemStyle={{ color: "white" }}
+                    >
+                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                      {upazillas
+                        .find(
+                          (x) => x.district_id === this.state.pickerDistrictKey
+                        )
+                        .map((item) => {
+                          return (
+                            <Picker.Item
+                              key={item.id}
+                              label={item.name}
+                              value={item.name}
+                            />
+                          );
+                        })}
+                    </Picker>
+                  )} */}
                 </View>
                 <View style={{ flex: 1 }}>
                   <Text
