@@ -336,7 +336,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   // Get All Designation
 
   // Register new book-checkout data
-  saveLibraryObservation = async () => {
+  saveBookCheckout = async () => {
     const newBookCheckout = {
       date: this.state.date,
       office: this.state.pickerOffice,
@@ -3633,6 +3633,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                 marginLeft: 100,
                 marginBottom: 20,
               }}
+              onPress={this.saveBookCheckout.bind(this)}
             >
               <Text>Submit</Text>
             </TouchableOpacity>
