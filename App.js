@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/04/2021
-//  Modify Date: 09/12/2021
+//  Modify Date: 15/03/2022
 //  Description: Application index file
 
 // Library import
@@ -28,36 +28,8 @@ import LoginScreen2 from "./screens/LoginScreen2";
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Register">
-        <Stack.Screen
-          name="Register"
-          component={RegistrationScreen}
-          options={{
-            title: "Register Page", //Set Header Title
-            headerShown: false,
-            headerStyle: {
-              backgroundColor: "#f4511e", //Set Header color
-            },
-            headerTintColor: "#fff", //Set Header text color
-            headerTitleStyle: {
-              fontWeight: "bold", //Set Header text style
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Login2"
-          component={LoginScreen2}
-          options={{
-            title: "Login Page", //Set Header Title
-            headerStyle: {
-              backgroundColor: "#f4511e", //Set Header color
-            },
-            headerTintColor: "#fff", //Set Header text color
-            headerTitleStyle: {
-              fontWeight: "bold", //Set Header text style
-            },
-          }}
-        />
+      <Stack.Navigator initialRouteName="Home2">
+        
         <Stack.Screen
           name="Home2"
           component={HomeScreen2}
@@ -112,6 +84,35 @@ export default function App() {
           component={OverallSchoolObservationScreen}
           options={{
             title: "Overall School Observation Form", //Set Header Title
+          }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={RegistrationScreen}
+          options={{
+            title: "Register Page", //Set Header Title
+            headerShown: false,
+            headerStyle: {
+              backgroundColor: "#f4511e", //Set Header color
+            },
+            headerTintColor: "#fff", //Set Header text color
+            headerTitleStyle: {
+              fontWeight: "bold", //Set Header text style
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Login2"
+          component={LoginScreen2}
+          options={{
+            title: "Login Page", //Set Header Title
+            headerStyle: {
+              backgroundColor: "#f4511e", //Set Header color
+            },
+            headerTintColor: "#fff", //Set Header text color
+            headerTitleStyle: {
+              fontWeight: "bold", //Set Header text style
+            },
           }}
         />
       </Stack.Navigator>

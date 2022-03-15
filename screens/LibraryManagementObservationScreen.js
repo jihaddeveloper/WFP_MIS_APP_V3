@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/08/2021
-//  Modify Date: 20/12/2021
+//  Modify Date: 15/03/2022
 //  Description: Library management observation screen component
 
 import React from "react";
@@ -29,6 +29,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
   constructor(props) {
     super(props);
     this.state = {
+
+      //Preloaded Data
+      allProject: [],
+      allSchool: [],
+      allTeacher: [],
+      allEmployee: [],
+      allOffice: [],
+      allDesignation: [],
+      //Preloaded Data
       // checked: false,
       // option: "yes",
       // choosenIndex: 0,
@@ -180,6 +189,92 @@ export default class LibraryManagementObservationScreen extends React.Component 
     this.show("time");
   };
   // For Datepicker
+
+  // Get All Project
+  getAllProject = async () => {
+    try {
+      const response = await fetch("http://10.9.0.110:8080/api/v1/projects");
+      const json = await response.json();
+      this.setState({ allProject: json });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+  // Get All Project
+
+  // Get All Office
+  getAllOffice = async () => {
+    try {
+      const response = await fetch("http://10.9.0.110:8080/api/v1/offices");
+      const json = await response.json();
+      this.setState({ allOffice: json });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+  // Get All Office
+
+  // Get All School
+  getAllSchool = async () => {
+    try {
+      const response = await fetch("http://10.9.0.110:8080/api/v1/schools");
+      const json = await response.json();
+      this.setState({ allSchool: json });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+  // Get All School
+
+  // Get All Teacher
+  getAllTeacher = async () => {
+    try {
+      const response = await fetch("http://10.9.0.110:8080/api/v1/teachers");
+      const json = await response.json();
+      this.setState({ allTeacher: json });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+  // Get All Teacher
+
+  // Get All Employee
+  getAllEmployee = async () => {
+    try {
+      const response = await fetch("http://10.9.0.110:8080/api/v1/employees");
+      const json = await response.json();
+      this.setState({ allEmployee: json });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+  // Get All Employee
+
+  // Get All Designation
+  getAllDesignation = async () => {
+    try {
+      const response = await fetch(
+        "http://10.9.0.110:8080/api/v1/designations"
+      );
+      const json = await response.json();
+      this.setState({ allDesignation: json });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+  // Get All Designation
 
   //Register new library-observation data
   saveLibraryObservation = async () => {
