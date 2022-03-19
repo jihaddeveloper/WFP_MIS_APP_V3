@@ -193,7 +193,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All Project
   getAllProject = async () => {
     try {
-      const response = await fetch("http://10.9.0.110:8080/api/v1/projects");
+      const response = await fetch("http://10.9.0.219:8080/api/v1/projects");
       const json = await response.json();
       this.setState({ allProject: json });
     } catch (error) {
@@ -207,7 +207,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All Office
   getAllOffice = async () => {
     try {
-      const response = await fetch("http://10.9.0.110:8080/api/v1/offices");
+      const response = await fetch("http://10.9.0.219:8080/api/v1/offices");
       const json = await response.json();
       this.setState({ allOffice: json });
     } catch (error) {
@@ -221,7 +221,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All School
   getAllSchool = async () => {
     try {
-      const response = await fetch("http://10.9.0.110:8080/api/v1/schools");
+      const response = await fetch("http://10.9.0.219:8080/api/v1/schools");
       const json = await response.json();
       this.setState({ allSchool: json });
     } catch (error) {
@@ -235,7 +235,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All Teacher
   getAllTeacher = async () => {
     try {
-      const response = await fetch("http://10.9.0.110:8080/api/v1/teachers");
+      const response = await fetch("http://10.9.0.219:8080/api/v1/teachers");
       const json = await response.json();
       this.setState({ allTeacher: json });
     } catch (error) {
@@ -249,7 +249,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All Employee
   getAllEmployee = async () => {
     try {
-      const response = await fetch("http://10.9.0.110:8080/api/v1/employees");
+      const response = await fetch("http://10.9.0.219:8080/api/v1/employees");
       const json = await response.json();
       this.setState({ allEmployee: json });
     } catch (error) {
@@ -264,7 +264,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   getAllDesignation = async () => {
     try {
       const response = await fetch(
-        "http://10.9.0.110:8080/api/v1/designations"
+        "http://10.9.0.219:8080/api/v1/designations"
       );
       const json = await response.json();
       this.setState({ allDesignation: json });

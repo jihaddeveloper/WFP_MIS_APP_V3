@@ -280,14 +280,21 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   // Get All School
   getAllSchool = async () => {
     try {
-      const response = await fetch("http://10.9.0.110:8080/api/v1/schools");
+      
+      const response = await fetch("http://192.168.50.35:8080/api/v1/schools");
+      console.log('[all getAllSchool] response',response);
+
       const json = await response.json();
+      // console.log('[all getAllSchool]',getAllSchool);
       this.setState({ allSchool: json });
     } catch (error) {
       console.log(error);
-    } finally {
-      this.setState({ isLoading: false });
-    }
+      console.log('[all getAllSchool error]');
+
+    } 
+    // finally {
+    //   this.setState({ isLoading: false });
+    // }
   };
   // Get All School
 
@@ -484,12 +491,14 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   // Register new book-checkout data
 
   componentDidMount() {
+    this.getAllSchool();
+
     this.getAllProject();
     this.getAllDesignation();
     this.getAllEmployee();
     this.getAllOffice();
-    this.getAllSchool();
     this.getAllTeacher();
+    console.log("Component mounted");
   }
 
   render() {
@@ -617,21 +626,23 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       width: 150,
                     }}
                     selectedValue={this.state && this.state.pickerDistrict}
-                    onValueChange={(value, key) => {
+                    onValueChange={(item, key) => {
+                      console.log(item, key)
                       this.setState({
-                        pickerDistrict: value,
-                        pickerDistrictKey: key,
+                        pickerDistrict: item,
+                        pickerDistrictKey: item.id,
                       });
                     }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item key={""} label={"নির্বাচন করুন"} value={""} />
                     {districts.map((item) => {
+                      //console.log(item);
                       return (
                         <Picker.Item
                           key={item.id}
                           label={item.name}
-                          value={item.name}
+                          value={item}
                         />
                       );
                     })}
@@ -653,25 +664,26 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       width: 150,
                     }}
                     selectedValue={this.state && this.state.pickerUpazilla}
-                    onValueChange={(value, key) => {
+                    onValueChange={(item, key) => {
                       this.setState({
-                        pickerUpazilla: value,
-                        pickerUpazillaKey: key,
+                        pickerUpazilla: item,
+                        pickerUpazillaKey: item.id,
                       });
                     }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item key={""} label={"নির্বাচন করুন"} value={""} />
-                    {upazillas.map((item) => {
+                    {upazillas.filter((item) => item.district_id == this.state.pickerDistrictKey).map(item => {
                       return (
                         <Picker.Item
                           key={item.id}
                           label={item.name}
-                          value={item.name}
+                          value={item}
                         />
                       );
                     })}
                   </Picker>
+                  <Text>{this.state.pickerUpazilla.name}</Text>
 
                   {/* {this.state.pickerDistrictKey && (
                     <Picker
@@ -711,6 +723,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                   >
                     বিদ্যালয়ের নাম:
                   </Text>
+                  
                   <Picker
                     style={{
                       height: 40,
@@ -723,6 +736,21 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    {
+                      
+                      
+                      this.state.allSchool
+                      .filter((item) => item.upazilla == this.state.pickerUpazilla.name).map(item => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.name}
+                            value={item}
+                          />
+                        );
+                      })
+                    }
+                    {/* <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item
                       label={"Jalal Uddin GPS"}
                       value={"Jalal Uddin GPS"}
@@ -734,7 +762,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     <Picker.Item
                       label={"Monohor khali GPS"}
                       value={"Monohor khali GPS"}
-                    />
+                    /> */}
                   </Picker>
                 </View>
               </View>
@@ -1041,13 +1069,20 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           keyboardType="numeric"
                           placeholder=""
                           value={this.state.priPrimaryBoy + ""}
-                          onChangeText={(text) =>
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
                             this.setState({
-                              priPrimaryBoy: text,
-                              priPrimaryTotal:
-                                parseInt(this.state.priPrimaryTotal, 10) +
-                                parseInt(text, 10),
+                              priPrimaryBoy: value,
+                              priPrimaryTotal: value + this.state.priPrimaryGirl,
+
+                              // priPrimaryTotal:
+                              //   parseInt(this.state.priPrimaryTotal, 10) +
+                              //   parseInt(text, 10),
                             })
+                          }
+
                           }
                         />
                         <Text>{this.state.priPrimaryBoy}</Text>
@@ -1063,15 +1098,18 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           placeholder=""
+
                           value={this.state.priPrimaryGirl + ""}
-                          onChangeText={(text) =>
+
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
                             this.setState({
-                              priPrimaryGirl: text,
-                              priPrimaryTotal:
-                                parseInt(this.state.priPrimaryTotal, 10) +
-                                parseInt(text, 10),
+                              priPrimaryGirl: value,
+                              priPrimaryTotal: value + this.state.priPrimaryBoy,
                             })
-                          }
+                          }}
                         />
                         <Text>{this.state.priPrimaryGirl}</Text>
                       </View>
