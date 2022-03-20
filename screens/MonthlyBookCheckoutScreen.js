@@ -1,9 +1,10 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 11/10/2021
-//  Modify Date: 15/03/2022
+//  Modify Date: 20/03/2022
 //  Description: Monthly book checkout screen component
 
 import React from "react";
+import axios from "axios";
 import {
   Image,
   ImageBackground,
@@ -280,21 +281,19 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   // Get All School
   getAllSchool = async () => {
     try {
-      
-      const response = await fetch("http://192.168.50.35:8080/api/v1/schools");
-      console.log('[all getAllSchool] response',response);
+      const response = await axios("http://10.9.0.219:8080/api/v1/schools", {
+        method: "GET",
+        mode: "no-cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
 
-      const json = await response.json();
-      // console.log('[all getAllSchool]',getAllSchool);
-      this.setState({ allSchool: json });
+      this.setState({ allSchool: response.data, isLoading: false });
     } catch (error) {
       console.log(error);
-      console.log('[all getAllSchool error]');
-
-    } 
-    // finally {
-    //   this.setState({ isLoading: false });
-    // }
+    }
   };
   // Get All School
 
@@ -303,11 +302,9 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
     try {
       const response = await fetch("http://10.9.0.110:8080/api/v1/teachers");
       const json = await response.json();
-      this.setState({ allTeacher: json });
+      this.setState({ allTeacher: json, isLoading: false });
     } catch (error) {
       console.log(error);
-    } finally {
-      this.setState({ isLoading: false });
     }
   };
   // Get All Teacher
@@ -315,13 +312,18 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   // Get All Employee
   getAllEmployee = async () => {
     try {
-      const response = await fetch("http://10.9.0.110:8080/api/v1/employees");
-      const json = await response.json();
-      this.setState({ allEmployee: json });
+      const response = await axios("http://10.9.0.219:8080/api/v1/employees", {
+        method: "GET",
+        mode: "no-cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+
+      this.setState({ allEmployee: response.data, isLoading: false });
     } catch (error) {
       console.log(error);
-    } finally {
-      this.setState({ isLoading: false });
     }
   };
   // Get All Employee
@@ -348,9 +350,9 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       date: this.state.date,
       office: this.state.pickerOffice,
       project: this.state.pickerProject,
-      district: this.state.pickerDistrict,
-      upazila: this.state.pickerUpazila,
-      school: this.state.pickerSchool,
+      district: this.state.pickerDistrict.name,
+      upazila: this.state.pickerUpazila.name,
+      school: this.state.pickerSchool.name,
       headTeacher: this.state.pickerHeadTeacher,
       gender: this.state.pickerGender,
       visitor: this.state.pickerVisitor,
@@ -470,7 +472,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
     };
     try {
       let response = await fetch(
-        "http://10.9.0.110:8080/api/v1/book-checkouts",
+        "http://10.9.0.219:8080/api/v1/book-checkouts",
         {
           method: "POST",
           mode: "no-cors",
@@ -492,12 +494,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
 
   componentDidMount() {
     this.getAllSchool();
-
-    this.getAllProject();
-    this.getAllDesignation();
     this.getAllEmployee();
-    this.getAllOffice();
-    this.getAllTeacher();
+    // this.getAllProject();
+    // this.getAllDesignation();
+    // this.getAllOffice();
+    // this.getAllTeacher();
     console.log("Component mounted");
   }
 
@@ -575,10 +576,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"Dhaka"} value={"Dhaka"} />
-                    <Picker.Item label={"Coxsbazar"} value={"Coxsbazar"} />
-                    <Picker.Item label={"Natore"} value={"Natore"} />
-                    <Picker.Item label={"Moulvibazar"} value={"Moulvibazar"} />
+                    <Picker.Item label={"DFO"} value={"DFO"} />
+                    <Picker.Item label={"CFO"} value={"CFO"} />
+                    <Picker.Item label={"NFO"} value={"NFO"} />
+                    <Picker.Item label={"SFO"} value={"SFO"} />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -627,7 +628,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     }}
                     selectedValue={this.state && this.state.pickerDistrict}
                     onValueChange={(item, key) => {
-                      console.log(item, key)
+                      console.log(item, key);
                       this.setState({
                         pickerDistrict: item,
                         pickerDistrictKey: item.id,
@@ -647,7 +648,6 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       );
                     })}
                   </Picker>
-                  <Text>{this.state.pickerDistrictKey}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                   <Text
@@ -673,46 +673,21 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item key={""} label={"নির্বাচন করুন"} value={""} />
-                    {upazillas.filter((item) => item.district_id == this.state.pickerDistrictKey).map(item => {
-                      return (
-                        <Picker.Item
-                          key={item.id}
-                          label={item.name}
-                          value={item}
-                        />
-                      );
-                    })}
+                    {upazillas
+                      .filter(
+                        (item) =>
+                          item.district_id == this.state.pickerDistrictKey
+                      )
+                      .map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.name}
+                            value={item}
+                          />
+                        );
+                      })}
                   </Picker>
-                  <Text>{this.state.pickerUpazilla.name}</Text>
-
-                  {/* {this.state.pickerDistrictKey && (
-                    <Picker
-                      style={{
-                        height: 40,
-                        width: 150,
-                      }}
-                      selectedValue={this.state && this.state.pickerUpazila}
-                      onValueChange={(value) => {
-                        this.setState({ pickerUpazila: value });
-                      }}
-                      itemStyle={{ color: "white" }}
-                    >
-                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      {upazillas
-                        .find(
-                          (x) => x.district_id === this.state.pickerDistrictKey
-                        )
-                        .map((item) => {
-                          return (
-                            <Picker.Item
-                              key={item.id}
-                              label={item.name}
-                              value={item.name}
-                            />
-                          );
-                        })}
-                    </Picker>
-                  )} */}
                 </View>
                 <View style={{ flex: 1 }}>
                   <Text
@@ -723,7 +698,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                   >
                     বিদ্যালয়ের নাম:
                   </Text>
-                  
+
                   <Picker
                     style={{
                       height: 40,
@@ -736,11 +711,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    {
-                      
-                      
-                      this.state.allSchool
-                      .filter((item) => item.upazilla == this.state.pickerUpazilla.name).map(item => {
+                    {this.state.allSchool
+                      .filter((item) => {
+                        return item.upazilla == this.state.pickerUpazilla.name;
+                      })
+                      .map((item) => {
                         return (
                           <Picker.Item
                             key={item.id}
@@ -748,21 +723,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                             value={item}
                           />
                         );
-                      })
-                    }
-                    {/* <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item
-                      label={"Jalal Uddin GPS"}
-                      value={"Jalal Uddin GPS"}
-                    />
-                    <Picker.Item
-                      label={"Kutubdia Model GPS"}
-                      value={"Kutubdia Model GPS"}
-                    />
-                    <Picker.Item
-                      label={"Monohor khali GPS"}
-                      value={"Monohor khali GPS"}
-                    /> */}
+                      })}
                   </Picker>
                 </View>
               </View>
@@ -846,27 +807,15 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item
-                      label={"Rakhi Sarkar"}
-                      value={"Rakhi Sarkar"}
-                    />
-                    <Picker.Item
-                      label={"Badruzzaman Khan"}
-                      value={"Badruzzaman Khan"}
-                    />
-                    <Picker.Item
-                      label={"Zakir Hossain"}
-                      value={"Zakir Hossain"}
-                    />
-
-                    <Picker.Item
-                      label={"Masudul Hasan"}
-                      value={"Masudul Hasan"}
-                    />
-                    <Picker.Item
-                      label={"Mushfiqur Rahman"}
-                      value={"Mushfiqur Rahman"}
-                    />
+                    {this.state.allEmployee.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -956,14 +905,15 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item
-                      label={"Masudul Hasan"}
-                      value={"Masudul Hasan"}
-                    />
-                    <Picker.Item
-                      label={"Mushfiqur Rahman"}
-                      value={"Mushfiqur Rahman"}
-                    />
+                    {this.state.allEmployee.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -987,14 +937,15 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item
-                      label={"Masudul Hasan"}
-                      value={"Masudul Hasan"}
-                    />
-                    <Picker.Item
-                      label={"Mushfiqur Rahman"}
-                      value={"Mushfiqur Rahman"}
-                    />
+                    {this.state.allEmployee.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
                   </Picker>
                 </View>
               </View>
@@ -1075,15 +1026,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
 
                             this.setState({
                               priPrimaryBoy: value,
-                              priPrimaryTotal: value + this.state.priPrimaryGirl,
-
-                              // priPrimaryTotal:
-                              //   parseInt(this.state.priPrimaryTotal, 10) +
-                              //   parseInt(text, 10),
-                            })
-                          }
-
-                          }
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
                         />
                         <Text>{this.state.priPrimaryBoy}</Text>
                       </View>
@@ -1098,9 +1044,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           placeholder=""
-
                           value={this.state.priPrimaryGirl + ""}
-
                           onChangeText={(text) => {
                             const value = Number(text);
                             if (isNaN(value)) return false;
@@ -1108,7 +1052,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                             this.setState({
                               priPrimaryGirl: value,
                               priPrimaryTotal: value + this.state.priPrimaryBoy,
-                            })
+                            });
                           }}
                         />
                         <Text>{this.state.priPrimaryGirl}</Text>
