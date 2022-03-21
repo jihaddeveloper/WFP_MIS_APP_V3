@@ -850,9 +850,16 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     <Picker.Item label={"CD"} value={"CD"} />
                     <Picker.Item label={"POD"} value={"POD"} />
                     <Picker.Item label={"Sr.M"} value={"Sr.M"} />
+                    <Picker.Item label={"PM"} value={"PM"} />
+                    <Picker.Item label={"Sr.M"} value={"Sr.M"} />
+                    <Picker.Item label={"M"} value={"M"} />
+                    <Picker.Item label={"Sr.O"} value={"Sr.O"} />
+                    <Picker.Item label={"O"} value={"0"} />
+                    <Picker.Item label={"Sr.A"} value={"Sr.A"} />
+                    <Picker.Item label={"A"} value={"A"} />
                     <Picker.Item label={"LF"} value={"LF"} />
                     <Picker.Item label={"LPO"} value={"LPO"} />
-                    <Picker.Item label={"Officer"} value={"Officer"} />
+                    <Picker.Item label={"RM&E"} value={"RM&E"} />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -877,9 +884,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"CO"} value={"CO"} />
-                    <Picker.Item label={"Dhaka"} value={"Dhaka"} />
-                    <Picker.Item label={"Coxsbazar"} value={"Coxsbazar"} />
-                    <Picker.Item label={"Natore"} value={"Natore"} />
+                    <Picker.Item label={"DFO"} value={"DFO"} />
+                    <Picker.Item label={"CFO"} value={"CFO"} />
+                    <Picker.Item label={"NFO"} value={"NFO"} />
+                    <Picker.Item label={"SFO"} value={"SFO"} />
                   </Picker>
                 </View>
               </View>
@@ -1031,7 +1039,6 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                             });
                           }}
                         />
-                        <Text>{this.state.priPrimaryBoy}</Text>
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, বালিকা: </Text>
@@ -1055,7 +1062,6 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                             });
                           }}
                         />
-                        <Text>{this.state.priPrimaryGirl}</Text>
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <Text>শিক্ষার্থীর সংখ্যা, মোট: </Text>
@@ -1068,9 +1074,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.priPrimaryTotal + ""}
-                          editable={true}
+                          editable={false}
                         />
-                        <Text>{this.state.priPrimaryTotal}</Text>
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
@@ -1086,11 +1091,14 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           keyboardType="numeric"
                           editable={true}
                           value={this.state.priPrimaryNoBoyBC + ""}
-                          onChangeText={(text) =>
+                          onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              priPrimaryNoBoyBC: text,
-                            })
-                          }
+                              priPrimaryNoBoyBC: value,
+                              priPrimaryNoTotalBC:
+                                value + this.state.priPrimaryNoGirlBC,
+                            });
+                          }}
                         />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
@@ -1104,12 +1112,15 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           editable={true}
-                          value={this.state.priPrimaryNoBookGirlBC + ""}
-                          onChangeText={(text) =>
+                          value={this.state.priPrimaryNoGirlBC + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              priPrimaryNoBookGirlBC: text,
-                            })
-                          }
+                              priPrimaryNoGirlBC: value,
+                              priPrimaryNoTotalBC:
+                                value + this.state.priPrimaryNoBoyBC,
+                            });
+                          }}
                         />
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
@@ -1123,7 +1134,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.priPrimaryNoTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) =>
                             this.setState({
                               priPrimaryNoTotalBC: text,
@@ -1146,8 +1157,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.priPrimaryNoBookBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              priPrimaryNoBookBoyBC: text,
+                              priPrimaryNoBookBoyBC: value,
+                              priPrimaryNoBookTotalBC:
+                                value + this.state.priPrimaryNoBookGirlBC,
                             });
                           }}
                         />
@@ -1165,8 +1179,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.priPrimaryNoBookGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              priPrimaryNoBookGirlBC: text,
+                              priPrimaryNoBookGirlBC: value,
+                              priPrimaryNoBookTotalBC:
+                                value + this.state.priPrimaryNoBookBoyBC,
                             });
                           }}
                         />
@@ -1182,7 +1199,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.priPrimaryNoBookTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               priPrimaryNoBookTotalBC: text,
@@ -1247,8 +1264,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.priPrimarySpBoy + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              priPrimarySpBoy: text,
+                              priPrimarySpBoy: value,
+                              priPrimarySpTotal:
+                                value + this.state.priPrimarySpGirl,
                             });
                           }}
                         />
@@ -1266,8 +1286,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.priPrimarySpGirl + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              priPrimarySpGirl: text,
+                              priPrimarySpGirl: value,
+                              priPrimarySpTotal:
+                                value + this.state.priPrimarySpBoy,
                             });
                           }}
                         />
@@ -1283,7 +1306,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.priPrimarySpTotal + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               priPrimarySpTotal: text,
@@ -1306,8 +1329,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.priPrimaryNoSpBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              priPrimaryNoSpBoyBC: text,
+                              priPrimaryNoSpBoyBC: value,
+                              priPrimaryNoSpTotalBC:
+                                value + this.state.priPrimaryNoSpGirlBC,
                             });
                           }}
                         />
@@ -1325,8 +1351,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.priPrimaryNoSpGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              priPrimaryNoSpGirlBC: text,
+                              priPrimaryNoSpGirlBC: value,
+                              priPrimaryNoSpTotalBC:
+                                value + this.state.priPrimaryNoSpBoyBC,
                             });
                           }}
                         />
@@ -1342,7 +1371,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.priPrimaryNoSpTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               priPrimaryNoSpTotalBC: text,
@@ -1365,8 +1394,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.priPrimaryNoBookSpBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              priPrimaryNoBookSpBoyBC: text,
+                              priPrimaryNoBookSpBoyBC: value,
+                              priPrimaryNoBookSpTotalBC:
+                                value + this.state.priPrimaryNoBookSpGirlBC,
                             });
                           }}
                         />
@@ -1384,8 +1416,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.priPrimaryNoBookSpGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              priPrimaryNoBookSpGirlBC: text,
+                              priPrimaryNoBookSpGirlBC: value,
+                              priPrimaryNoBookSpTotalBC:
+                                value + this.state.priPrimaryNoBookSpBoyBC,
                             });
                           }}
                         />
@@ -1401,7 +1436,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.priPrimaryNoBookSpTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               priPrimaryNoBookSpTotalBC: text,
@@ -1465,8 +1500,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classOneBoy + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classOneBoy: text,
+                              classOneBoy: value,
+                              classOneTotal: value + this.state.classOneGirl,
                             });
                           }}
                         />
@@ -1484,8 +1521,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classOneGirl + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classOneGirl: text,
+                              classOneGirl: value,
+                              classOneTotal: value + this.state.classOneBoy,
                             });
                           }}
                         />
@@ -1501,7 +1540,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classOneTotal + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classOneTotal: text,
@@ -1524,8 +1563,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classOneNoBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classOneNoBoyBC: text,
+                              classOneNoBoyBC: value,
+                              classOneNoTotalBC:
+                                value + this.state.classOneNoGirlBC,
                             });
                           }}
                         />
@@ -1543,8 +1585,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classOneNoGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classOneNoGirlBC: text,
+                              classOneNoGirlBC: value,
+                              classOneNoTotalBC:
+                                value + this.state.classOneNoBoyBC,
                             });
                           }}
                         />
@@ -1560,7 +1605,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classOneNoTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classOneNoTotalBC: text,
@@ -1583,8 +1628,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classOneNoBookBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classOneNoBookBoyBC: text,
+                              classOneNoBookBoyBC: value,
+                              classOneNoBookTotalBC:
+                                value + this.state.classOneNoBookGirlBC,
                             });
                           }}
                         />
@@ -1602,8 +1650,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classOneNoBookGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classOneNoBookGirlBC: text,
+                              classOneNoBookGirlBC: value,
+                              classOneNoBookTotalBC:
+                                value + this.state.classOneNoBookBoyBC,
                             });
                           }}
                         />
@@ -1619,7 +1670,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classOneNoBookTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classOneNoBookTotalBC: text,
@@ -1658,7 +1709,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         fontWeight: "bold",
                       }}
                     >
-                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(রথম
+                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(প্রথম
                       শ্রেণি)
                     </Text>
                   </Card>
@@ -1684,8 +1735,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classOneSpBoy + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classOneSpBoy: text,
+                              classOneSpBoy: value,
+                              classOneSpTotal:
+                                value + this.state.classOneSpGirl,
                             });
                           }}
                         />
@@ -1703,8 +1757,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classOneSpGirl + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classOneSpGirl: text,
+                              classOneSpGirl: value,
+                              classOneSpTotal: value + this.state.classOneSpBoy,
                             });
                           }}
                         />
@@ -1720,7 +1776,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classOneSpTotal + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classOneSpTotal: text,
@@ -1743,8 +1799,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classOneNoSpBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classOneNoSpBoyBC: text,
+                              classOneNoSpBoyBC: value,
+                              classOneNoSpTotalBC:
+                                value + this.state.classOneNoSpGirlBC,
                             });
                           }}
                         />
@@ -1762,8 +1821,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classOneNoSpGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classOneNoSpGirlBC: text,
+                              classOneNoSpGirlBC: value,
+                              classOneNoSpTotalBC:
+                                value + this.state.classOneNoSpBoyBC,
                             });
                           }}
                         />
@@ -1779,7 +1841,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classOneNoSpTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classOneNoSpTotalBC: text,
@@ -1802,8 +1864,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classOneNoBookSpBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classOneNoBookSpBoyBC: text,
+                              classOneNoBookSpBoyBC: value,
+                              classOneNoBookSpTotalBC:
+                                value + this.state.classOneNoBookSpGirlBC,
                             });
                           }}
                         />
@@ -1821,8 +1886,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classOneNoBookSpGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classOneNoBookSpGirlBC: text,
+                              classOneNoBookSpGirlBC: value,
+                              classOneNoBookSpTotalBC:
+                                value + this.state.classOneNoBookSpBoyBC,
                             });
                           }}
                         />
@@ -1838,7 +1906,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classOneNoBookSpTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classOneNoBookSpTotalBC: text,
@@ -1902,8 +1970,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classTwoBoy + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classTwoBoy: text,
+                              classTwoBoy: value,
+                              classTwoTotal: value + this.state.classTwoGirl,
                             });
                           }}
                         />
@@ -1921,8 +1991,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classTwoGirl + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classTwoGirl: text,
+                              classTwoGirl: value,
+                              classTwoTotal: value + this.state.classTwoBoy,
                             });
                           }}
                         />
@@ -1938,7 +2010,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classTwoTotal + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classTwoTotal: text,
@@ -1961,8 +2033,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classTwoNoBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classTwoNoBoyBC: text,
+                              classTwoNoBoyBC: value,
+                              classTwoNoTotalBC:
+                                value + this.state.classTwoNoGirlBC,
                             });
                           }}
                         />
@@ -1980,8 +2055,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classTwoNoGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classTwoNoGirlBC: text,
+                              classTwoNoGirlBC: value,
+                              classTwoNoTotalBC:
+                                value + this.state.classTwoNoBoyBC,
                             });
                           }}
                         />
@@ -1997,7 +2075,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classTwoNoTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classTwoNoTotalBC: text,
@@ -2020,8 +2098,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classTwoNoBookBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classTwoNoBookBoyBC: text,
+                              classTwoNoBookBoyBC: value,
+                              classTwoNoBookTotalBC:
+                                value + this.state.classTwoNoBookGirlBC,
                             });
                           }}
                         />
@@ -2039,8 +2120,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classTwoNoBookGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classTwoNoBookGirlBC: text,
+                              classTwoNoBookGirlBC: value,
+                              classTwoNoBookTotalBC:
+                                value + this.state.classTwoNoBookBoyBC,
                             });
                           }}
                         />
@@ -2056,7 +2140,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classTwoNoBookTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classTwoNoBookTotalBC: text,
@@ -2121,8 +2205,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classTwoSpBoy + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classTwoSpBoy: text,
+                              classTwoSpBoy: value,
+                              classTwoSpTotal:
+                                value + this.state.classTwoSpGirl,
                             });
                           }}
                         />
@@ -2140,8 +2227,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classTwoSpGirl + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classTwoSpGirl: text,
+                              classTwoSpGirl: value,
+                              classTwoSpTotal: value + this.state.classTwoSpBoy,
                             });
                           }}
                         />
@@ -2157,7 +2246,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classTwoSpTotal + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classTwoSpTotal: text,
@@ -2180,8 +2269,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classTwoNoSpBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classTwoNoSpBoyBC: text,
+                              classTwoNoSpBoyBC: value,
+                              classTwoNoSpTotalBC:
+                                value + this.state.classTwoNoSpGirlBC,
                             });
                           }}
                         />
@@ -2199,8 +2291,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classTwoNoSpGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classTwoNoSpGirlBC: text,
+                              classTwoNoSpGirlBC: value,
+                              classTwoNoSpTotalBC:
+                                value + this.state.classTwoNoSpBoyBC,
                             });
                           }}
                         />
@@ -2216,8 +2311,9 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classTwoNoSpTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
                               classTwoNoSpTotalBC: text,
                             });
@@ -2239,8 +2335,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classTwoNoBookSpBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classTwoNoBookSpBoyBC: text,
+                              classTwoNoBookSpBoyBC: value,
+                              classTwoNoBookSpTotalBC:
+                                value + this.state.classTwoNoBookSpGirlBC,
                             });
                           }}
                         />
@@ -2258,8 +2357,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classTwoNoBookSpGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classTwoNoBookSpGirlBC: text,
+                              classTwoNoBookSpGirlBC: value,
+                              classTwoNoBookSpTotalBC:
+                                value + this.state.classTwoNoBookSpBoyBC,
                             });
                           }}
                         />
@@ -2275,7 +2377,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classTwoNoBookSpTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classTwoNoBookSpTotalBC: text,
@@ -2339,8 +2441,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classThreeBoy + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classThreeBoy: text,
+                              classThreeBoy: value,
+                              classThreeTotal:
+                                value + this.state.classThreeGirl,
                             });
                           }}
                         />
@@ -2358,8 +2463,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classThreeGirl + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classThreeGirl: text,
+                              classThreeGirl: value,
+                              classThreeTotal: value + this.state.classThreeBoy,
                             });
                           }}
                         />
@@ -2375,7 +2482,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classThreeTotal + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classThreeTotal: text,
@@ -2398,8 +2505,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classThreeNoBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classThreeNoBoyBC: text,
+                              classThreeNoBoyBC: value,
+                              classThreeNoTotalBC:
+                                value + this.state.classThreeNoGirlBC,
                             });
                           }}
                         />
@@ -2417,8 +2527,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classThreeNoGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classThreeNoGirlBC: text,
+                              classThreeNoGirlBC: value,
+                              classThreeNoTotalBC:
+                                value + this.state.classThreeNoBoyBC,
                             });
                           }}
                         />
@@ -2434,7 +2547,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classThreeNoTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classThreeNoTotalBC: text,
@@ -2457,8 +2570,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classThreeNoBookBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classThreeNoBookBoyBC: text,
+                              classThreeNoBookBoyBC: value,
+                              classThreeNoBookTotalBC:
+                                value + this.state.classThreeNoBookGirlBC,
                             });
                           }}
                         />
@@ -2476,8 +2592,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classThreeNoBookGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classThreeNoBookGirlBC: text,
+                              classThreeNoBookGirlBC: value,
+                              classThreeNoBookTotalBC:
+                                value + this.state.classThreeNoBookBoyBC,
                             });
                           }}
                         />
@@ -2493,7 +2612,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classThreeNoBookTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classThreeNoBookTotalBC: text,
@@ -2558,8 +2677,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classThreeSpBoy + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classThreeSpBoy: text,
+                              classThreeSpBoy: value,
+                              classThreeSpTotal:
+                                value + this.state.classThreeSpGirl,
                             });
                           }}
                         />
@@ -2577,8 +2699,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classThreeSpGirl + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classThreeSpGirl: text,
+                              classThreeSpGirl: value,
+                              classThreeSpTotal:
+                                value + this.state.classThreeSpBoy,
                             });
                           }}
                         />
@@ -2594,7 +2719,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classThreeSpTotal + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classThreeSpTotal: text,
@@ -2617,8 +2742,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classThreeNoSpBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classThreeNoSpBoyBC: text,
+                              classThreeNoSpBoyBC: value,
+                              classThreeNoSpTotalBC:
+                                value + this.state.classThreeNoSpGirlBC,
                             });
                           }}
                         />
@@ -2636,8 +2764,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classThreeNoSpGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classThreeNoSpGirlBC: text,
+                              classThreeNoSpGirlBC: value,
+                              classThreeNoSpTotalBC:
+                                value + this.state.classThreeNoSpBoyBC,
                             });
                           }}
                         />
@@ -2653,7 +2784,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classThreeNoSpTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classThreeNoSpTotalBC: text,
@@ -2676,8 +2807,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classThreeNoBookSpBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classThreeNoBookSpBoyBC: text,
+                              classThreeNoBookSpBoyBC: value,
+                              classThreeNoBookSpTotalBC:
+                                value + this.state.classThreeNoBookSpGirlBC,
                             });
                           }}
                         />
@@ -2695,8 +2829,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classThreeNoBookSpGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classThreeNoBookSpGirlBC: text,
+                              classThreeNoBookSpGirlBC: value,
+                              classThreeNoBookSpTotalBC:
+                                value + this.state.classThreeNoBookSpBoyBC,
                             });
                           }}
                         />
@@ -2712,7 +2849,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classThreeNoBookSpTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classThreeNoBookSpTotalBC: text,
@@ -2776,8 +2913,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFourBoy + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFourBoy: text,
+                              classFourBoy: value,
+                              classFourTotal: value + this.state.classFourGirl,
                             });
                           }}
                         />
@@ -2795,8 +2934,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFourGirl + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFourGirl: text,
+                              classFourGirl: value,
+                              classFourTotal: value + this.state.classFourBoy,
                             });
                           }}
                         />
@@ -2812,7 +2953,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classFourTotal + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classFourTotal: text,
@@ -2835,8 +2976,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFourNoBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFourNoBoyBC: text,
+                              classFourNoBoyBC: value,
+                              classFourNoTotalBC:
+                                value + this.state.classFourNoGirlBC,
                             });
                           }}
                         />
@@ -2854,8 +2998,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFourNoGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFourNoGirlBC: text,
+                              classFourNoGirlBC: value,
+                              classFourNoTotalBC:
+                                value + this.state.classFourNoBoyBC,
                             });
                           }}
                         />
@@ -2871,7 +3018,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classFourNoTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classFourNoTotalBC: text,
@@ -2894,8 +3041,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFourNoBookBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFourNoBookBoyBC: text,
+                              classFourNoBookBoyBC: value,
+                              classFourNoBookTotalBC:
+                                value + this.state.classFourNoBookGirlBC,
                             });
                           }}
                         />
@@ -2913,8 +3063,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFourNoBookGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFourNoBookGirlBC: text,
+                              classFourNoBookGirlBC: value,
+                              classFourNoBookTotalBC:
+                                value + this.state.classFourNoBookBoyBC,
                             });
                           }}
                         />
@@ -2930,7 +3083,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classFourNoBookTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classFourNoBookTotalBC: text,
@@ -2995,8 +3148,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFourSpBoy + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFourSpBoy: text,
+                              classFourSpBoy: value,
+                              classFourSpTotal:
+                                value + this.state.classFourSpGirl,
                             });
                           }}
                         />
@@ -3014,8 +3170,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFourSpGirl + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFourSpGirl: text,
+                              classFourSpGirl: value,
+                              classFourSpTotal:
+                                value + this.state.classFourSpBoy,
                             });
                           }}
                         />
@@ -3031,7 +3190,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classFourSpTotal + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classFourSpTotal: text,
@@ -3054,8 +3213,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFourNoSpBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFourNoBookBoyBC: text,
+                              classFourNoSpBoyBC: value,
+                              classFourNoSpTotalBC:
+                                value + this.state.classFourNoSpGirlBC,
                             });
                           }}
                         />
@@ -3073,8 +3235,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFourNoSpGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFourNoSpGirlBC: text,
+                              classFourNoSpGirlBC: value,
+                              classFourNoSpTotalBC:
+                                value + this.state.classFourNoSpBoyBC,
                             });
                           }}
                         />
@@ -3090,7 +3255,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classFourNoSpTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classFourNoSpTotalBC: text,
@@ -3113,8 +3278,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFourNoBookSpBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFourNoBookSpBoyBC: text,
+                              classFourNoBookSpBoyBC: value,
+                              classFourNoBookSpTotalBC:
+                                value + this.state.classFourNoBookSpGirlBC,
                             });
                           }}
                         />
@@ -3132,8 +3300,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFourNoBookSpGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFourNoBookSpGirlBC: text,
+                              classFourNoBookSpGirlBC: value,
+                              classFourNoBookSpTotalBC:
+                                value + this.state.classFourNoBookSpBoyBC,
                             });
                           }}
                         />
@@ -3149,7 +3320,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classFourNoBookSpTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classFourNoBookSpTotalBC: text,
@@ -3213,8 +3384,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFiveBoy + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFiveBoy: text,
+                              classFiveBoy: value,
+                              classFiveTotal: value + this.state.classFiveGirl,
                             });
                           }}
                         />
@@ -3232,8 +3405,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFiveGirl + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFiveGirl: text,
+                              classFiveGirl: value,
+                              classFiveTotal: value + this.state.classFiveBoy,
                             });
                           }}
                         />
@@ -3249,7 +3424,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classFiveTotal + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classFiveTotal: text,
@@ -3272,8 +3447,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFiveNoBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFiveNoBookBoyBC: text,
+                              classFiveNoBoyBC: value,
+                              classFiveNoTotalBC:
+                                value + this.state.classFiveNoGirlBC,
                             });
                           }}
                         />
@@ -3291,8 +3469,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFiveNoGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFiveNoGirlBC: text,
+                              classFiveNoGirlBC: value,
+                              classFiveNoTotalBC:
+                                value + this.state.classFiveNoBoyBC,
                             });
                           }}
                         />
@@ -3308,7 +3489,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classFiveNoTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classFiveNoTotalBC: text,
@@ -3331,8 +3512,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFiveNoBookBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFiveNoBookBoyBC: text,
+                              classFiveNoBookBoyBC: value,
+                              classFiveNoBookTotalBC:
+                                value + this.state.classFiveNoBookGirlBC,
                             });
                           }}
                         />
@@ -3350,8 +3534,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFiveNoBookGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFiveNoBookGirlBC: text,
+                              classFiveNoBookGirlBC: value,
+                              classFiveNoBookTotalBC:
+                                value + this.state.classFiveNoBookBoyBC,
                             });
                           }}
                         />
@@ -3367,7 +3554,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classFiveNoBookTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classFiveNoBookTotalBC: text,
@@ -3432,8 +3619,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFiveSpBoy + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFiveSpBoy: text,
+                              classFiveSpBoy: value,
+                              classFiveSpTotal:
+                                value + this.state.classFiveSpGirl,
                             });
                           }}
                         />
@@ -3451,8 +3641,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFiveSpGirl + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFiveSpGirl: text,
+                              classFiveSpGirl: value,
+                              classFiveSpTotal:
+                                value + this.state.classFiveSpBoy,
                             });
                           }}
                         />
@@ -3468,7 +3661,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classFiveSpTotal + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classFiveSpTotal: text,
@@ -3491,8 +3684,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFiveNoSpBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFiveNoSpBoyBC: text,
+                              classFiveNoSpBoyBC: value,
+                              classFiveNoSpTotalBC:
+                                value + this.state.classFiveNoSpGirlBC,
                             });
                           }}
                         />
@@ -3510,8 +3706,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFiveNoSpGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFiveNoSpGirlBC: text,
+                              classFiveNoSpGirlBC: value,
+                              classFiveNoSpTotalBC:
+                                value + this.state.classFiveNoSpBoyBC,
                             });
                           }}
                         />
@@ -3527,7 +3726,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classFiveNoSpTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classFiveNoSpTotalBC: text,
@@ -3550,8 +3749,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFiveNoBookSpBoyBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFiveNoBookSpBoyBC: text,
+                              classFiveNoBookSpBoyBC: value,
+                              classFiveNoBookSpTotalBC:
+                                value + this.state.classFiveNoBookSpGirlBC,
                             });
                           }}
                         />
@@ -3569,8 +3771,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           value={this.state.classFiveNoBookSpGirlBC + ""}
                           editable={true}
                           onChangeText={(text) => {
+                            const value = Number(text);
                             this.setState({
-                              classFiveNoBookSpGirlBC: text,
+                              classFiveNoBookSpGirlBC: value,
+                              classFiveNoBookSpTotalBC:
+                                value + this.state.classFiveNoBookSpBoyBC,
                             });
                           }}
                         />
@@ -3586,7 +3791,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           }}
                           keyboardType="numeric"
                           value={this.state.classFiveNoBookSpTotalBC + ""}
-                          editable={true}
+                          editable={false}
                           onChangeText={(text) => {
                             this.setState({
                               classFiveNoBookSpTotalBC: text,
