@@ -1,9 +1,10 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/08/2021
-//  Modify Date: 15/03/2022
+//  Modify Date: 22/03/2022
 //  Description: Library management observation screen component
 
 import React from "react";
+import axios from "axios";
 import {
   Image,
   ImageBackground,
@@ -29,7 +30,6 @@ export default class LibraryManagementObservationScreen extends React.Component 
   constructor(props) {
     super(props);
     this.state = {
-
       //Preloaded Data
       allProject: [],
       allSchool: [],
@@ -37,7 +37,11 @@ export default class LibraryManagementObservationScreen extends React.Component 
       allEmployee: [],
       allOffice: [],
       allDesignation: [],
+      allLibraryIndicator: [],
       //Preloaded Data
+
+      isLoading: true,
+
       // checked: false,
       // option: "yes",
       // choosenIndex: 0,
@@ -55,7 +59,9 @@ export default class LibraryManagementObservationScreen extends React.Component 
       pickerOffice: "",
       pickerProject: "",
       pickerDistrict: "",
-      pickerUpazila: "",
+      pickerDistrictKey: "",
+      pickerUpazilla: "",
+      pickerUpazillaKey: "",
       pickerSchool: "",
       pickerVisitor: "",
       pickerDesignation: "",
@@ -160,7 +166,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   //Geo values
   divisions = divisions;
   districts = districts;
-  upazilas = upazillas;
+  upazillas = upazillas;
   unions = unions;
   //Geo values
 
@@ -221,13 +227,18 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All School
   getAllSchool = async () => {
     try {
-      const response = await fetch("http://10.9.0.219:8080/api/v1/schools");
-      const json = await response.json();
-      this.setState({ allSchool: json });
+      const response = await axios("http://10.9.0.219:8080/api/v1/schools", {
+        method: "GET",
+        mode: "no-cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+
+      this.setState({ allSchool: response.data, isLoading: false });
     } catch (error) {
       console.log(error);
-    } finally {
-      this.setState({ isLoading: false });
     }
   };
   // Get All School
@@ -249,13 +260,18 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All Employee
   getAllEmployee = async () => {
     try {
-      const response = await fetch("http://10.9.0.219:8080/api/v1/employees");
-      const json = await response.json();
-      this.setState({ allEmployee: json });
+      const response = await axios("http://10.9.0.219:8080/api/v1/employees", {
+        method: "GET",
+        mode: "no-cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+
+      this.setState({ allEmployee: response.data, isLoading: false });
     } catch (error) {
       console.log(error);
-    } finally {
-      this.setState({ isLoading: false });
     }
   };
   // Get All Employee
@@ -263,18 +279,46 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All Designation
   getAllDesignation = async () => {
     try {
-      const response = await fetch(
-        "http://10.9.0.219:8080/api/v1/designations"
+      const response = await axios(
+        "http://10.9.0.219:8080/api/v1/designations",
+        {
+          method: "GET",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
       );
-      const json = await response.json();
-      this.setState({ allDesignation: json });
+
+      this.setState({ allDesignation: response.data, isLoading: false });
     } catch (error) {
       console.log(error);
-    } finally {
-      this.setState({ isLoading: false });
     }
   };
   // Get All Designation
+
+  // Get All Library Indicator
+  getAllLibraryIndicator = async () => {
+    try {
+      const response = await axios(
+        "http://10.9.0.219:8080/api/v1/library-observation-indicators",
+        {
+          method: "GET",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      this.setState({ allLibraryIndicator: response.data, isLoading: false });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // Get All Library Indicator
 
   //Register new library-observation data
   saveLibraryObservation = async () => {
@@ -282,9 +326,9 @@ export default class LibraryManagementObservationScreen extends React.Component 
       date: this.state.date,
       office: this.state.pickerOffice,
       project: this.state.pickerProject,
-      district: this.state.pickerDistrict,
-      upazila: this.state.pickerUpazila,
-      school: this.state.pickerSchool,
+      district: this.state.pickerDistrict.name,
+      upazila: this.state.pickerUpazilla.name,
+      school: this.state.pickerSchool.name,
       visitor: this.state.pickerVisitor,
       visitorDesignation: this.state.pickerDesignation,
       visitorOffice: this.state.pickerVisitorOffice,
@@ -364,7 +408,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
     };
     try {
       let response = await fetch(
-        "http://10.9.0.93:8080/api/v1/library-observations",
+        "http://10.9.0.219:8080/api/v1/library-observations",
         {
           method: "POST",
           mode: "no-cors",
@@ -383,6 +427,19 @@ export default class LibraryManagementObservationScreen extends React.Component 
     }
   };
   //Register new library-observation data
+
+  //Load data from server
+  componentDidMount() {
+    this.getAllSchool();
+    this.getAllEmployee();
+    this.getAllDesignation();
+    this.getAllLibraryIndicator();
+    // this.getAllProject();
+    // this.getAllOffice();
+    // this.getAllTeacher();
+    console.log("Component mounted");
+  }
+  //Load data from server
 
   render() {
     // All data to save
@@ -471,10 +528,10 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"Dhaka"} value={"Dhaka"} />
-                    <Picker.Item label={"Coxsbazar"} value={"Coxsbazar"} />
-                    <Picker.Item label={"Natore"} value={"Natore"} />
-                    <Picker.Item label={"Moulvibazar"} value={"Moulvibazar"} />
+                    <Picker.Item label={"DFO"} value={"DFO"} />
+                    <Picker.Item label={"CFO"} value={"CFO"} />
+                    <Picker.Item label={"NFO"} value={"NFO"} />
+                    <Picker.Item label={"SFO"} value={"SFO"} />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -498,11 +555,35 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"CORE"} value={"CORE"} />
-                    <Picker.Item label={"WFP"} value={"WFP"} />
-                    <Picker.Item label={"UN"} value={"UN"} />
-                    <Picker.Item label={"UNICEF"} value={"UNICEF"} />
-                    <Picker.Item label={"WB"} value={"WB"} />
+                    <Picker.Item
+                      label={"WFP funded project"}
+                      value={"WFP funded project"}
+                    />
+                    <Picker.Item
+                      label={"Natore LP & GEP Program"}
+                      value={"Natore LP & GEP Program"}
+                    />
+
+                    <Picker.Item
+                      label={"Dhaka LP Program"}
+                      value={"Dhaka LP Program"}
+                    />
+                    <Picker.Item
+                      label={"Cox's Bazar GEP Program"}
+                      value={"Cox's Bazar GEP Program"}
+                    />
+                    <Picker.Item
+                      label={"Sylhet GEP Program"}
+                      value={"Sylhet GEP Program"}
+                    />
+                    <Picker.Item
+                      label={"Sylhet LP Program"}
+                      value={"Sylhet LP Program"}
+                    />
+                    <Picker.Item
+                      label={"UNICEF funded Host Community Project"}
+                      value={"UNICEF funded Host Community Project"}
+                    />
                   </Picker>
                 </View>
               </View>
@@ -517,30 +598,31 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     জেলা:
                   </Text>
                   <Picker
-                    selectedValue={this.state && this.state.pickerDistrict}
-                    onValueChange={(value) => {
-                      this.setState({ pickerDistrict: value });
-                    }}
-                    itemStyle={{ color: "white" }}
                     style={{
                       height: 40,
                       width: 150,
                     }}
+                    selectedValue={this.state && this.state.pickerDistrict}
+                    onValueChange={(item, key) => {
+                      // console.log(item, key);
+                      this.setState({
+                        pickerDistrict: item,
+                        pickerDistrictKey: item.id,
+                      });
+                    }}
+                    itemStyle={{ color: "white" }}
                   >
                     <Picker.Item key={""} label={"নির্বাচন করুন"} value={""} />
                     {districts.map((item) => {
+                      //console.log(item);
                       return (
                         <Picker.Item
                           key={item.id}
                           label={item.name}
-                          value={item.name}
+                          value={item}
                         />
                       );
                     })}
-                    {/* <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"Dhaka"} value={"Dhaka"} />
-                    <Picker.Item label={"Coxsbazar"} value={"Coxsbazar"} />
-                    <Picker.Item label={"Natore"} value={"Natore"} /> */}
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -553,29 +635,34 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     উপজেলা:
                   </Text>
                   <Picker
-                    selectedValue={this.state && this.state.pickerUpazila}
-                    onValueChange={(value) => {
-                      this.setState({ pickerUpazila: value });
-                    }}
-                    itemStyle={{ color: "white" }}
                     style={{
                       height: 40,
                       width: 150,
                     }}
+                    selectedValue={this.state && this.state.pickerUpazilla}
+                    onValueChange={(item, key) => {
+                      this.setState({
+                        pickerUpazilla: item,
+                        pickerUpazillaKey: item.id,
+                      });
+                    }}
+                    itemStyle={{ color: "white" }}
                   >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item
-                      label={"Coxsbazar Sadar"}
-                      value={"Coxsbazar Sadar"}
-                    />
-
-                    <Picker.Item label={"Ukhiya"} value={"Ukhiya"} />
-                    <Picker.Item label={"Kutubdia"} value={"Kutubdia"} />
-                    <Picker.Item label={"Chakaria"} value={"Chakaria"} />
-                    <Picker.Item label={"Ramu"} value={"Ramu"} />
-                    <Picker.Item label={"Teknaf"} value={"Teknaf"} />
-                    <Picker.Item label={"Maheshkhali"} value={"Maheshkhali"} />
-                    <Picker.Item label={"Eidgoan"} value={"Eidgoan"} />
+                    <Picker.Item key={""} label={"নির্বাচন করুন"} value={""} />
+                    {upazillas
+                      .filter(
+                        (item) =>
+                          item.district_id == this.state.pickerDistrictKey
+                      )
+                      .map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.name}
+                            value={item}
+                          />
+                        );
+                      })}
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -587,30 +674,32 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   >
                     বিদ্যালয়ের নাম:
                   </Text>
+
                   <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
                     selectedValue={this.state && this.state.pickerSchool}
                     onValueChange={(value) => {
                       this.setState({ pickerSchool: value });
                     }}
                     itemStyle={{ color: "white" }}
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item
-                      label={"Jalal Uddin GPS"}
-                      value={"Jalal Uddin GPS"}
-                    />
-                    <Picker.Item
-                      label={"Kutubdia Model GPS"}
-                      value={"Kutubdia Model GPS"}
-                    />
-                    <Picker.Item
-                      label={"Monohor khali GPS"}
-                      value={"Monohor khali GPS"}
-                    />
+                    {this.state.allSchool
+                      .filter((item) => {
+                        return item.upazilla == this.state.pickerUpazilla.name;
+                      })
+                      .map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.name}
+                            value={item}
+                          />
+                        );
+                      })}
                   </Picker>
                 </View>
               </View>
@@ -644,27 +733,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item
-                      label={"Rakhi Sarkar"}
-                      value={"Rakhi Sarkar"}
-                    />
-                    <Picker.Item
-                      label={"Badruzzaman Khan"}
-                      value={"Badruzzaman Khan"}
-                    />
-                    <Picker.Item
-                      label={"Zakir Hossain"}
-                      value={"Zakir Hossain"}
-                    />
-
-                    <Picker.Item
-                      label={"Masudul Hasan"}
-                      value={"Masudul Hasan"}
-                    />
-                    <Picker.Item
-                      label={"Mushfiqur Rahman"}
-                      value={"Mushfiqur Rahman"}
-                    />
+                    {this.state.allEmployee.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -696,12 +773,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"CD"} value={"CD"} />
-                    <Picker.Item label={"POD"} value={"POD"} />
-                    <Picker.Item label={"Sr.M"} value={"Sr.M"} />
-                    <Picker.Item label={"LF"} value={"LF"} />
-                    <Picker.Item label={"LPO"} value={"LPO"} />
-                    <Picker.Item label={"Officer"} value={"Officer"} />
+                    {this.state.allDesignation.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -726,9 +806,10 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"CO"} value={"CO"} />
-                    <Picker.Item label={"Dhaka"} value={"Dhaka"} />
-                    <Picker.Item label={"Coxsbazar"} value={"Coxsbazar"} />
-                    <Picker.Item label={"Natore"} value={"Natore"} />
+                    <Picker.Item label={"DFO"} value={"DFO"} />
+                    <Picker.Item label={"CFO"} value={"CFO"} />
+                    <Picker.Item label={"NFO"} value={"NFO"} />
+                    <Picker.Item label={"SFO"} value={"SFO"} />
                   </Picker>
                 </View>
               </View>
@@ -754,14 +835,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item
-                      label={"Masudul Hasan"}
-                      value={"Masudul Hasan"}
-                    />
-                    <Picker.Item
-                      label={"Mushfiqur Rahman"}
-                      value={"Mushfiqur Rahman"}
-                    />
+                    {this.state.allEmployee.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -785,14 +867,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item
-                      label={"Masudul Hasan"}
-                      value={"Masudul Hasan"}
-                    />
-                    <Picker.Item
-                      label={"Mushfiqur Rahman"}
-                      value={"Mushfiqur Rahman"}
-                    />
+                    {this.state.allEmployee.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
                   </Picker>
                 </View>
               </View>
@@ -842,22 +925,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item
-                        label={"Indicator 1"}
-                        value={"Indicator 1"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 2"}
-                        value={"Indicator 2"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 3"}
-                        value={"Indicator 3"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 4"}
-                        value={"Indicator 4"}
-                      />
+                      {this.state.allLibraryIndicator.map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.indicatorDetail}
+                            value={item.id}
+                          />
+                        );
+                      })}
                     </Picker>
                   </View>
                 </View>
@@ -876,22 +952,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item
-                        label={"Indicator 1"}
-                        value={"Indicator 1"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 2"}
-                        value={"Indicator 2"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 3"}
-                        value={"Indicator 3"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 4"}
-                        value={"Indicator 4"}
-                      />
+                      {this.state.allLibraryIndicator.map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.indicatorDetail}
+                            value={item.id}
+                          />
+                        );
+                      })}
                     </Picker>
                   </View>
                 </View>
@@ -910,22 +979,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item
-                        label={"Indicator 1"}
-                        value={"Indicator 1"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 2"}
-                        value={"Indicator 2"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 3"}
-                        value={"Indicator 3"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 4"}
-                        value={"Indicator 4"}
-                      />
+                      {this.state.allLibraryIndicator.map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.indicatorDetail}
+                            value={item.id}
+                          />
+                        );
+                      })}
                     </Picker>
                   </View>
                 </View>
@@ -2985,22 +3047,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item
-                        label={"Indicator 1"}
-                        value={"Indicator 1"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 2"}
-                        value={"Indicator 2"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 3"}
-                        value={"Indicator 3"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 4"}
-                        value={"Indicator 4"}
-                      />
+                      {this.state.allLibraryIndicator.map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.indicatorDetail}
+                            value={item.id}
+                          />
+                        );
+                      })}
                     </Picker>
                     <Text>১.</Text>
                     <TextInput
@@ -3028,22 +3083,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item
-                        label={"Indicator 1"}
-                        value={"Indicator 1"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 2"}
-                        value={"Indicator 2"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 3"}
-                        value={"Indicator 3"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 4"}
-                        value={"Indicator 4"}
-                      />
+                      {this.state.allLibraryIndicator.map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.indicatorDetail}
+                            value={item.id}
+                          />
+                        );
+                      })}
                     </Picker>
                     <Text>২.</Text>
                     <TextInput
@@ -3071,22 +3119,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item
-                        label={"Indicator 1"}
-                        value={"Indicator 1"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 2"}
-                        value={"Indicator 2"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 3"}
-                        value={"Indicator 3"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 4"}
-                        value={"Indicator 4"}
-                      />
+                      {this.state.allLibraryIndicator.map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.indicatorDetail}
+                            value={item.id}
+                          />
+                        );
+                      })}
                     </Picker>
                     <Text>৩.</Text>
                     <TextInput
@@ -3128,22 +3169,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item
-                        label={"Indicator 1"}
-                        value={"Indicator 1"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 2"}
-                        value={"Indicator 2"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 3"}
-                        value={"Indicator 3"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 4"}
-                        value={"Indicator 4"}
-                      />
+                      {this.state.allLibraryIndicator.map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.indicatorDetail}
+                            value={item.id}
+                          />
+                        );
+                      })}
                     </Picker>
                   </View>
                   <View style={{ flex: 1, padding: 2 }}>
@@ -3164,22 +3198,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      <Picker.Item
-                        label={"Indicator 1"}
-                        value={"Indicator 1"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 2"}
-                        value={"Indicator 2"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 3"}
-                        value={"Indicator 3"}
-                      />
-                      <Picker.Item
-                        label={"Indicator 4"}
-                        value={"Indicator 4"}
-                      />
+                      {this.state.allLibraryIndicator.map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.indicatorDetail}
+                            value={item.id}
+                          />
+                        );
+                      })}
                     </Picker>
                   </View>
                 </View>

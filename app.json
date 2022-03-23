@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "WFP_MIS_APP",
+    "description": "your app desc",
     "slug": "WFP_MIS_APP",
     "version": "1.0.0",
     "orientation": "default",

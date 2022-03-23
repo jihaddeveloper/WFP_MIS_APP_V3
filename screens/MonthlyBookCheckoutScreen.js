@@ -41,15 +41,16 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
 
       isLoading: true,
 
-      checked: false,
+      // checked: false,
+      // option: "yes",
+      // choosenIndex: 0,
 
-      option: "yes",
-
-      choosenIndex: 0,
-
+      // Input value
+      // Date picker property
       date: new Date(),
       mode: "date",
       show: false,
+      // Date picker property
 
       // General data
       visitNo: "",
@@ -214,6 +215,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       classFiveNoBookSpGirlBC: 0,
       classFiveNoBookSpTotalBC: 0,
       //Book checkout data
+
+      // Input value
     };
   }
 
@@ -300,7 +303,14 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   // Get All Teacher
   getAllTeacher = async () => {
     try {
-      const response = await fetch("http://10.9.0.110:8080/api/v1/teachers");
+      const response = await fetch("http://10.9.0.219:8080/api/v1/teachers", {
+        method: "GET",
+        mode: "no-cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
       const json = await response.json();
       this.setState({ allTeacher: json, isLoading: false });
     } catch (error) {
@@ -331,15 +341,21 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   // Get All Designation
   getAllDesignation = async () => {
     try {
-      const response = await fetch(
-        "http://10.9.0.110:8080/api/v1/designations"
+      const response = await axios(
+        "http://10.9.0.219:8080/api/v1/designations",
+        {
+          method: "GET",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
       );
-      const json = await response.json();
-      this.setState({ allDesignation: json });
+
+      this.setState({ allDesignation: response.data, isLoading: false });
     } catch (error) {
       console.log(error);
-    } finally {
-      this.setState({ isLoading: false });
     }
   };
   // Get All Designation
@@ -351,7 +367,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       office: this.state.pickerOffice,
       project: this.state.pickerProject,
       district: this.state.pickerDistrict.name,
-      upazila: this.state.pickerUpazila.name,
+      upazila: this.state.pickerUpazilla.name,
       school: this.state.pickerSchool.name,
       headTeacher: this.state.pickerHeadTeacher,
       gender: this.state.pickerGender,
@@ -492,15 +508,17 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   };
   // Register new book-checkout data
 
+  //Load data from server
   componentDidMount() {
     this.getAllSchool();
     this.getAllEmployee();
+    this.getAllDesignation();
     // this.getAllProject();
-    // this.getAllDesignation();
     // this.getAllOffice();
     // this.getAllTeacher();
     console.log("Component mounted");
   }
+  //Load data from server
 
   render() {
     const { checked } = this.state;
@@ -603,10 +621,35 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"CORE"} value={"CORE"} />
-                    <Picker.Item label={"WFP"} value={"WFP"} />
-                    <Picker.Item label={"UN"} value={"UN"} />
-                    <Picker.Item label={"UNICEF"} value={"UNICEF"} />
+                    <Picker.Item
+                      label={"WFP funded project"}
+                      value={"WFP funded project"}
+                    />
+                    <Picker.Item
+                      label={"Natore LP & GEP Program"}
+                      value={"Natore LP & GEP Program"}
+                    />
+
+                    <Picker.Item
+                      label={"Dhaka LP Program"}
+                      value={"Dhaka LP Program"}
+                    />
+                    <Picker.Item
+                      label={"Cox's Bazar GEP Program"}
+                      value={"Cox's Bazar GEP Program"}
+                    />
+                    <Picker.Item
+                      label={"Sylhet GEP Program"}
+                      value={"Sylhet GEP Program"}
+                    />
+                    <Picker.Item
+                      label={"Sylhet LP Program"}
+                      value={"Sylhet LP Program"}
+                    />
+                    <Picker.Item
+                      label={"UNICEF funded Host Community Project"}
+                      value={"UNICEF funded Host Community Project"}
+                    />
                     <Picker.Item label={"WB"} value={"WB"} />
                   </Picker>
                 </View>
@@ -628,7 +671,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     }}
                     selectedValue={this.state && this.state.pickerDistrict}
                     onValueChange={(item, key) => {
-                      console.log(item, key);
+                      // console.log(item, key);
                       this.setState({
                         pickerDistrict: item,
                         pickerDistrictKey: item.id,
@@ -847,19 +890,15 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"CD"} value={"CD"} />
-                    <Picker.Item label={"POD"} value={"POD"} />
-                    <Picker.Item label={"Sr.M"} value={"Sr.M"} />
-                    <Picker.Item label={"PM"} value={"PM"} />
-                    <Picker.Item label={"Sr.M"} value={"Sr.M"} />
-                    <Picker.Item label={"M"} value={"M"} />
-                    <Picker.Item label={"Sr.O"} value={"Sr.O"} />
-                    <Picker.Item label={"O"} value={"0"} />
-                    <Picker.Item label={"Sr.A"} value={"Sr.A"} />
-                    <Picker.Item label={"A"} value={"A"} />
-                    <Picker.Item label={"LF"} value={"LF"} />
-                    <Picker.Item label={"LPO"} value={"LPO"} />
-                    <Picker.Item label={"RM&E"} value={"RM&E"} />
+                    {this.state.allDesignation.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>

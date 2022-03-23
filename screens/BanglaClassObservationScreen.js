@@ -1828,7 +1828,7 @@ export default class BanglaClassObservationScreen extends React.Component {
             </Card>
           </View>
 
-          <View style={{ padding: 10 }}>
+          {/* <View style={{ padding: 10 }}>
             <TouchableOpacity
               style={{
                 alignItems: "center",
@@ -1846,7 +1846,7 @@ export default class BanglaClassObservationScreen extends React.Component {
             >
               <Text>Submit</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
         </ScrollView>
         <View>
           <Text style={{ alignItems: "center", justifyContent: "center" }}>
