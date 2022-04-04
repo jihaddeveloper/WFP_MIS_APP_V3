@@ -42,7 +42,7 @@ function HomeScreen({ navigation }) {
           }}
         >
           McGovern-Dole International Food for Education and Child Nutrition
-          Program
+          Programme
         </Text>
       </View>
 
@@ -71,7 +71,45 @@ function HomeScreen({ navigation }) {
         </View>
       </View>
 
-      <View style={{ flexDirection: "row", marginTop: 100 }}>
+      <View style={{ flexDirection: "row", marginTop: 120 }}>
+        <View style={{ flex: 1, padding: 2, marginLeft: 40 }}>
+          <View style={styles.buttonView}>
+            <Button
+              title="Book-checkout School"
+              onPress={() => navigation.navigate("BookCheckoutSchool")}
+            ></Button>
+          </View>
+        </View>
+        <View style={{ flex: 1, padding: 2 }}>
+          <View style={styles.buttonView}>
+            <Button
+              title="Book-checkout Community"
+              onPress={() => navigation.navigate("BookCheckoutCommunity")}
+            ></Button>
+          </View>
+        </View>
+      </View>
+
+      <View style={{ flexDirection: "row" }}>
+        <View style={{ flex: 1, padding: 2, marginLeft: 40 }}>
+          <View style={styles.buttonView}>
+            <Button
+              title="Library Management"
+              onPress={() => navigation.navigate("LibraryManagement")}
+            ></Button>
+          </View>
+        </View>
+        <View style={{ flex: 1, padding: 2 }}>
+          <View style={styles.buttonView}>
+            <Button
+              title="Library Reading"
+              onPress={() => navigation.navigate("LibraryReading")}
+            ></Button>
+          </View>
+        </View>
+      </View>
+
+      <View style={{ flexDirection: "row", marginBottom: 200 }}>
         <View style={{ flex: 1, padding: 2, marginLeft: 40 }}>
           <View style={styles.buttonView}>
             <Button
@@ -83,38 +121,8 @@ function HomeScreen({ navigation }) {
         <View style={{ flex: 1, padding: 2 }}>
           <View style={styles.buttonView}>
             <Button
-              title="Library Management"
-              onPress={() => navigation.navigate("LibraryManagement")}
-            ></Button>
-          </View>
-        </View>
-      </View>
-
-      <View style={{ flexDirection: "row" }}>
-        <View style={{ flex: 1, padding: 2, marginLeft: 40 }}>
-          <View style={styles.buttonView}>
-            <Button
-              title="Library Reading"
-              onPress={() => navigation.navigate("LibraryReading")}
-            ></Button>
-          </View>
-        </View>
-        <View style={{ flex: 1, padding: 2 }}>
-          <View style={styles.buttonView}>
-            <Button
               title="Overall School"
               onPress={() => navigation.navigate("OverallSchool")}
-            ></Button>
-          </View>
-        </View>
-      </View>
-
-      <View style={{ flexDirection: "row", marginBottom: 200 }}>
-        <View style={{ flex: 1, padding: 2, marginLeft: 80 }}>
-          <View style={styles.buttonView}>
-            <Button
-              title="Monthly Book-checkout"
-              onPress={() => navigation.navigate("BookCheckout")}
             ></Button>
           </View>
         </View>

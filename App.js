@@ -21,6 +21,7 @@ import BanglaClassObservationScreen from "./screens/BanglaClassObservationScreen
 import LibraryManagementObservationScreen from "./screens/LibraryManagementObservationScreen";
 import LibraryReadingActivitiesObservationScreen from "./screens/LibraryReadingActivitiesObservationScreen";
 import MonthlyBookCheckoutScreen from "./screens/MonthlyBookCheckoutScreen";
+import MonthlyBookCheckoutCommScreen from "./screens/MonthlyBookCheckoutCommunityScreen";
 import OverallSchoolObservationScreen from "./screens/OverallSchoolObservationScreen";
 import HomeScreen2 from "./screens/HomeScreen2";
 import LoginScreen2 from "./screens/LoginScreen2";
@@ -29,7 +30,6 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home2">
-        
         <Stack.Screen
           name="Home2"
           component={HomeScreen2}
@@ -73,10 +73,17 @@ export default function App() {
           }}
         />
         <Stack.Screen
-          name="BookCheckout"
+          name="BookCheckoutSchool"
           component={MonthlyBookCheckoutScreen}
           options={{
-            title: "Book Checkout Observation Form", //Set Header Title
+            title: "Book Checkout Observation Form for School", //Set Header Title
+          }}
+        />
+        <Stack.Screen
+          name="BookCheckoutCommunity"
+          component={MonthlyBookCheckoutCommScreen}
+          options={{
+            title: "Book Checkout Observation Form for Community", //Set Header Title
           }}
         />
         <Stack.Screen

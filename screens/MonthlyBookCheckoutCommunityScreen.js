@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
-//  Create Date: 11/10/2021
-//  Modify Date: 03/04/2022
+//  Create Date: 04/04/2022
+//  Modify Date: 04/04/2022
 //  Description: Monthly book checkout screen component
 
 import React from "react";
@@ -886,7 +886,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
               marginRight: 100,
             }}
           >
-            বিদ্যালয়ের মাসিক বই চেক-আউট ও চেক-ইন পর্যবেক্ষণ ফরম
+            কমিউনিটির মাসিক বই চেক-আউট ও চেক-ইন পর্যবেক্ষণ ফরম
           </Text>
         </View>
 
