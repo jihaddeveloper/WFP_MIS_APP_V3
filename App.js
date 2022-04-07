@@ -34,7 +34,7 @@ export default function App() {
           name="Home2"
           component={HomeScreen2}
           options={{
-            title: "Home Page", //Set Header Title
+            title: "RoomtoRead WFP Data-collection Application", //Set Header Title
             headerStyle: {
               backgroundColor: "#f4511e", //Set Header color
             },

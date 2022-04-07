@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 04/04/2022
-//  Modify Date: 04/04/2022
+//  Modify Date: 06/04/2022
 //  Description: Monthly book checkout screen component
 
 import React from "react";
@@ -886,7 +886,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
               marginRight: 100,
             }}
           >
-            কমিউনিটির মাসিক বই চেক-আউট ও চেক-ইন পর্যবেক্ষণ ফরম
+            কমিউনিটি রিডিং ফোরামের মাসিক বই চেক-আউট ও চেক-ইন পর্যবেক্ষণ ফরম
           </Text>
         </View>
 
@@ -1345,7 +1345,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       fontWeight: "bold",
                     }}
                   >
-                    কমিউনিটি ক্লিনিক ভলান্টিয়ারের নাম:
+                    কমিউনিটি ভলান্টিয়ারের নাম:
                   </Text>
                   <TextInput
                     style={{
@@ -1370,8 +1370,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
             <Card style={{ padding: 10, margin: 10 }}>
               <Text style={{ padding: 5, fontWeight: "bold", fontSize: 18 }}>
                 পূর্ববর্তী মাসে বই চেক-আউট হয়েছে (নিচের টেবিল অনুযায়ী প্রতিটি
-                বিদ্যালয় থেকে তথ্য সংগ্রহ করুন এবং এবং প্রতি মাসের তথ্য পরের
-                মাসের ২৫ তারিখের সিস্টেমে ইনপুট করুন) ।
+                কমিউনিটি রিডিং ফোরাম থেকে তথ্য সংগ্রহ করুন এবং এবং প্রতি মাসের
+                তথ্য পরের মাসের ২৫ তারিখের সিস্টেমে ইনপুট করুন) ।
               </Text>
             </Card>
           </View>
@@ -1417,232 +1417,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
-                      }}
-                    >
-                      শ্রেণিকক্ষ পাঠাগারের তথ্য
-                    </Text>
-                    <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <Text>মোট বইয়ের টাইটেল সংখ্যা: </Text>
-                      </View>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <TextInput
-                          style={{
-                            height: 30,
-                            width: 100,
-                            padding: 5,
-                            borderWidth: 1,
-                          }}
-                          keyboardType="numeric"
-                          placeholder=""
-                          value={this.state.priPrimaryBoy + ""}
-                          onChangeText={(text) => {
-                            const value = Number(text);
-                            if (isNaN(value)) return false;
-
-                            this.setState({
-                              priPrimaryBoy: value,
-                              priPrimaryTotal:
-                                value + this.state.priPrimaryGirl,
-                            });
-                          }}
-                        />
-                      </View>
-                    </View>
-                    <View style={{ flexDirection: "column" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <Text>লেভেল অনুযায়ী বইয়ের টাইটেল সংখ্যা: </Text>
-                      </View>
-                      <View style={{ flexDirection: "row" }}>
-                        <View style={{ flex: 1, padding: 2 }}>
-                          <Text>সবুজ: </Text>
-                          <TextInput
-                            style={{
-                              height: 30,
-                              width: 70,
-                              padding: 5,
-                              borderWidth: 1,
-                            }}
-                            keyboardType="numeric"
-                            placeholder=""
-                            value={this.state.priPrimaryBoy + ""}
-                            onChangeText={(text) => {
-                              const value = Number(text);
-                              if (isNaN(value)) return false;
-
-                              this.setState({
-                                priPrimaryBoy: value,
-                                priPrimaryTotal:
-                                  value + this.state.priPrimaryGirl,
-                              });
-                            }}
-                          />
-                        </View>
-                        <View style={{ flex: 1, padding: 2 }}>
-                          <Text>লাল: </Text>
-                          <TextInput
-                            style={{
-                              height: 30,
-                              width: 70,
-                              padding: 5,
-                              borderWidth: 1,
-                            }}
-                            keyboardType="numeric"
-                            placeholder=""
-                            value={this.state.priPrimaryBoy + ""}
-                            onChangeText={(text) => {
-                              const value = Number(text);
-                              if (isNaN(value)) return false;
-
-                              this.setState({
-                                priPrimaryBoy: value,
-                                priPrimaryTotal:
-                                  value + this.state.priPrimaryGirl,
-                              });
-                            }}
-                          />
-                        </View>
-                        <View style={{ flex: 1, padding: 2 }}>
-                          <Text>কমলা: </Text>
-                          <TextInput
-                            style={{
-                              height: 30,
-                              width: 70,
-                              padding: 5,
-                              borderWidth: 1,
-                            }}
-                            keyboardType="numeric"
-                            placeholder=""
-                            value={this.state.priPrimaryBoy + ""}
-                            onChangeText={(text) => {
-                              const value = Number(text);
-                              if (isNaN(value)) return false;
-
-                              this.setState({
-                                priPrimaryBoy: value,
-                                priPrimaryTotal:
-                                  value + this.state.priPrimaryGirl,
-                              });
-                            }}
-                          />
-                        </View>
-                        <View style={{ flex: 1, padding: 2 }}>
-                          <Text>সাদা: </Text>
-                          <TextInput
-                            style={{
-                              height: 30,
-                              width: 70,
-                              padding: 5,
-                              borderWidth: 1,
-                            }}
-                            keyboardType="numeric"
-                            placeholder=""
-                            value={this.state.priPrimaryBoy + ""}
-                            onChangeText={(text) => {
-                              const value = Number(text);
-                              if (isNaN(value)) return false;
-
-                              this.setState({
-                                priPrimaryBoy: value,
-                                priPrimaryTotal:
-                                  value + this.state.priPrimaryGirl,
-                              });
-                            }}
-                          />
-                        </View>
-                        <View style={{ flex: 1, padding: 2 }}>
-                          <Text>নীল: </Text>
-                          <TextInput
-                            style={{
-                              height: 30,
-                              width: 70,
-                              padding: 5,
-                              borderWidth: 1,
-                            }}
-                            keyboardType="numeric"
-                            placeholder=""
-                            value={this.state.priPrimaryBoy + ""}
-                            onChangeText={(text) => {
-                              const value = Number(text);
-                              if (isNaN(value)) return false;
-
-                              this.setState({
-                                priPrimaryBoy: value,
-                                priPrimaryTotal:
-                                  value + this.state.priPrimaryGirl,
-                              });
-                            }}
-                          />
-                        </View>
-                        <View style={{ flex: 1, padding: 2 }}>
-                          <Text>হলুদ: </Text>
-                          <TextInput
-                            style={{
-                              height: 30,
-                              width: 70,
-                              padding: 5,
-                              borderWidth: 1,
-                            }}
-                            keyboardType="numeric"
-                            placeholder=""
-                            value={this.state.priPrimaryBoy + ""}
-                            onChangeText={(text) => {
-                              const value = Number(text);
-                              if (isNaN(value)) return false;
-
-                              this.setState({
-                                priPrimaryBoy: value,
-                                priPrimaryTotal:
-                                  value + this.state.priPrimaryGirl,
-                              });
-                            }}
-                          />
-                        </View>
-                      </View>
-                    </View>
-                    <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <Text>মোট বইয়ের সংখ্যা: </Text>
-                      </View>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <TextInput
-                          style={{
-                            height: 30,
-                            width: 100,
-                            padding: 5,
-                            borderWidth: 1,
-                          }}
-                          keyboardType="numeric"
-                          placeholder=""
-                          value={this.state.priPrimaryBoy + ""}
-                          onChangeText={(text) => {
-                            const value = Number(text);
-                            if (isNaN(value)) return false;
-
-                            this.setState({
-                              priPrimaryBoy: value,
-                              priPrimaryTotal:
-                                value + this.state.priPrimaryGirl,
-                            });
-                          }}
-                        />
-                      </View>
-                    </View>
-                  </Card>
-                  <Card
-                    style={{
-                      padding: 10,
-                      margin: 10,
-                      flex: 1,
-                      alignSelf: "center",
-                    }}
-                  >
-                    <Text
-                      style={{
-                        padding: 10,
-                        margin: 10,
-                        alignSelf: "center",
-                        fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       শ্রেণিকক্ষ পাঠাগারের বইয়ের চেক-আউট তথ্য
@@ -1855,6 +1631,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       শ্রেণিকক্ষ পাঠাগারের বইয়ের চেক ইন/ফেরত তথ্য
@@ -2010,6 +1788,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য
@@ -2225,6 +2005,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক ইন/ফেরত তথ্য
@@ -2389,18 +2171,9 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       alignSelf: "center",
                     }}
                   >
-                    <Text
-                      style={{
-                        padding: 10,
-                        margin: 10,
-                        alignSelf: "center",
-                        fontWeight: "bold",
-                        color: "red",
-                      }}
-                    >
-                      প্রথম শ্রেণি
-                    </Text>
+                    <Text style={styles.bigGreenText}>প্রথম শ্রেণি</Text>
                   </Card>
+
                   <Card
                     style={{
                       padding: 10,
@@ -2415,232 +2188,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
-                      }}
-                    >
-                      শ্রেণিকক্ষ পাঠাগারের বইয়ের তথ্য
-                    </Text>
-                    <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <Text>মোট বইয়ের টাইটেল সংখ্যা: </Text>
-                      </View>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <TextInput
-                          style={{
-                            height: 30,
-                            width: 100,
-                            padding: 5,
-                            borderWidth: 1,
-                          }}
-                          keyboardType="numeric"
-                          placeholder=""
-                          value={this.state.priPrimaryBoy + ""}
-                          onChangeText={(text) => {
-                            const value = Number(text);
-                            if (isNaN(value)) return false;
-
-                            this.setState({
-                              priPrimaryBoy: value,
-                              priPrimaryTotal:
-                                value + this.state.priPrimaryGirl,
-                            });
-                          }}
-                        />
-                      </View>
-                    </View>
-                    <View style={{ flexDirection: "column" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <Text>লেভেল অনুযায়ী বইয়ের টাইটেল সংখ্যা: </Text>
-                      </View>
-                      <View style={{ flexDirection: "row" }}>
-                        <View style={{ flex: 1, padding: 2 }}>
-                          <Text>সবুজ: </Text>
-                          <TextInput
-                            style={{
-                              height: 30,
-                              width: 70,
-                              padding: 5,
-                              borderWidth: 1,
-                            }}
-                            keyboardType="numeric"
-                            placeholder=""
-                            value={this.state.priPrimaryBoy + ""}
-                            onChangeText={(text) => {
-                              const value = Number(text);
-                              if (isNaN(value)) return false;
-
-                              this.setState({
-                                priPrimaryBoy: value,
-                                priPrimaryTotal:
-                                  value + this.state.priPrimaryGirl,
-                              });
-                            }}
-                          />
-                        </View>
-                        <View style={{ flex: 1, padding: 2 }}>
-                          <Text>লাল: </Text>
-                          <TextInput
-                            style={{
-                              height: 30,
-                              width: 70,
-                              padding: 5,
-                              borderWidth: 1,
-                            }}
-                            keyboardType="numeric"
-                            placeholder=""
-                            value={this.state.priPrimaryBoy + ""}
-                            onChangeText={(text) => {
-                              const value = Number(text);
-                              if (isNaN(value)) return false;
-
-                              this.setState({
-                                priPrimaryBoy: value,
-                                priPrimaryTotal:
-                                  value + this.state.priPrimaryGirl,
-                              });
-                            }}
-                          />
-                        </View>
-                        <View style={{ flex: 1, padding: 2 }}>
-                          <Text>কমলা: </Text>
-                          <TextInput
-                            style={{
-                              height: 30,
-                              width: 70,
-                              padding: 5,
-                              borderWidth: 1,
-                            }}
-                            keyboardType="numeric"
-                            placeholder=""
-                            value={this.state.priPrimaryBoy + ""}
-                            onChangeText={(text) => {
-                              const value = Number(text);
-                              if (isNaN(value)) return false;
-
-                              this.setState({
-                                priPrimaryBoy: value,
-                                priPrimaryTotal:
-                                  value + this.state.priPrimaryGirl,
-                              });
-                            }}
-                          />
-                        </View>
-                        <View style={{ flex: 1, padding: 2 }}>
-                          <Text>সাদা: </Text>
-                          <TextInput
-                            style={{
-                              height: 30,
-                              width: 70,
-                              padding: 5,
-                              borderWidth: 1,
-                            }}
-                            keyboardType="numeric"
-                            placeholder=""
-                            value={this.state.priPrimaryBoy + ""}
-                            onChangeText={(text) => {
-                              const value = Number(text);
-                              if (isNaN(value)) return false;
-
-                              this.setState({
-                                priPrimaryBoy: value,
-                                priPrimaryTotal:
-                                  value + this.state.priPrimaryGirl,
-                              });
-                            }}
-                          />
-                        </View>
-                        <View style={{ flex: 1, padding: 2 }}>
-                          <Text>নীল: </Text>
-                          <TextInput
-                            style={{
-                              height: 30,
-                              width: 70,
-                              padding: 5,
-                              borderWidth: 1,
-                            }}
-                            keyboardType="numeric"
-                            placeholder=""
-                            value={this.state.priPrimaryBoy + ""}
-                            onChangeText={(text) => {
-                              const value = Number(text);
-                              if (isNaN(value)) return false;
-
-                              this.setState({
-                                priPrimaryBoy: value,
-                                priPrimaryTotal:
-                                  value + this.state.priPrimaryGirl,
-                              });
-                            }}
-                          />
-                        </View>
-                        <View style={{ flex: 1, padding: 2 }}>
-                          <Text>হলুদ: </Text>
-                          <TextInput
-                            style={{
-                              height: 30,
-                              width: 70,
-                              padding: 5,
-                              borderWidth: 1,
-                            }}
-                            keyboardType="numeric"
-                            placeholder=""
-                            value={this.state.priPrimaryBoy + ""}
-                            onChangeText={(text) => {
-                              const value = Number(text);
-                              if (isNaN(value)) return false;
-
-                              this.setState({
-                                priPrimaryBoy: value,
-                                priPrimaryTotal:
-                                  value + this.state.priPrimaryGirl,
-                              });
-                            }}
-                          />
-                        </View>
-                      </View>
-                    </View>
-                    <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <Text>মোট বইয়ের সংখ্যা: </Text>
-                      </View>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <TextInput
-                          style={{
-                            height: 30,
-                            width: 100,
-                            padding: 5,
-                            borderWidth: 1,
-                          }}
-                          keyboardType="numeric"
-                          placeholder=""
-                          value={this.state.priPrimaryBoy + ""}
-                          onChangeText={(text) => {
-                            const value = Number(text);
-                            if (isNaN(value)) return false;
-
-                            this.setState({
-                              priPrimaryBoy: value,
-                              priPrimaryTotal:
-                                value + this.state.priPrimaryGirl,
-                            });
-                          }}
-                        />
-                      </View>
-                    </View>
-                  </Card>
-                  <Card
-                    style={{
-                      padding: 10,
-                      margin: 10,
-                      flex: 1,
-                      alignSelf: "center",
-                    }}
-                  >
-                    <Text
-                      style={{
-                        padding: 10,
-                        margin: 10,
-                        alignSelf: "center",
-                        fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       শ্রেণিকক্ষ পাঠাগারের বইয়ের চেক আউট তথ্য
@@ -2853,6 +2402,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       শ্রেণিকক্ষ পাঠাগারের বইয়ের চেক ইন/ফেরত তথ্য
@@ -3008,6 +2559,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(প্রথম
@@ -3222,10 +2775,12 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক ইন/ফেরত তথ্য
-                      (প্রাথমিক শ্রেণি)
+                      (প্রথম শ্রেণি)
                     </Text>
                     <View style={{ flexDirection: "row" }}>
                       <View style={{ flex: 1, padding: 2 }}>
@@ -3386,17 +2941,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       alignSelf: "center",
                     }}
                   >
-                    <Text
-                      style={{
-                        padding: 10,
-                        margin: 10,
-                        alignSelf: "center",
-                        fontWeight: "bold",
-                        color: "red",
-                      }}
-                    >
-                      দ্বিতীয় শ্রেণি
-                    </Text>
+                    <Text style={styles.bigGreenText}>দ্বিতীয় শ্রেণি</Text>
                   </Card>
                   <Card
                     style={{
@@ -3412,19 +2957,49 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
-                      শ্রেণিকক্ষ পাঠাগারের বইয়ের তথ্য
+                      শ্রেণিকক্ষ পাঠাগারের তথ্য
                     </Text>
                     <View style={{ flexDirection: "row" }}>
                       <View style={{ flex: 1, padding: 2 }}>
-                        <Text>মোট বইয়ের টাইটেল সংখ্যা: </Text>
+                        <Text>মোট টাইটেল সংখ্যা: </Text>
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>মোট বইয়ের সংখ্যা: </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
                             padding: 5,
                             borderWidth: 1,
                           }}
@@ -3446,15 +3021,41 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     </View>
                     <View style={{ flexDirection: "column" }}>
                       <View style={{ flex: 1, padding: 2 }}>
-                        <Text>লেভেল অনুযায়ী বইয়ের টাইটেল সংখ্যা: </Text>
+                        <Text>লেভেল অনুযায়ী বইয়ের টাইটেল সংখ্যা</Text>
                       </View>
                       <View style={{ flexDirection: "row" }}>
+                        <View style={{ flex: 1, padding: 2 }}>
+                          <Text>লেভেল: </Text>
+                          <Text>বিতরণকৃত টাইটেল: </Text>
+                          <Text>বিতরণকৃত মোট বইয়ের সংখ্যা : </Text>
+                        </View>
                         <View style={{ flex: 1, padding: 2 }}>
                           <Text>সবুজ: </Text>
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -3478,7 +3079,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -3502,7 +3124,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -3526,7 +3169,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -3550,7 +3214,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -3574,7 +3259,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -3595,34 +3301,6 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         </View>
                       </View>
                     </View>
-                    <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <Text>মোট বইয়ের সংখ্যা: </Text>
-                      </View>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <TextInput
-                          style={{
-                            height: 30,
-                            width: 100,
-                            padding: 5,
-                            borderWidth: 1,
-                          }}
-                          keyboardType="numeric"
-                          placeholder=""
-                          value={this.state.priPrimaryBoy + ""}
-                          onChangeText={(text) => {
-                            const value = Number(text);
-                            if (isNaN(value)) return false;
-
-                            this.setState({
-                              priPrimaryBoy: value,
-                              priPrimaryTotal:
-                                value + this.state.priPrimaryGirl,
-                            });
-                          }}
-                        />
-                      </View>
-                    </View>
                   </Card>
                   <Card
                     style={{
@@ -3638,6 +3316,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       শ্রেণিকক্ষ পাঠাগারের বইয়ের চেক আউট তথ্য
@@ -3850,6 +3530,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       শ্রেণিকক্ষ পাঠাগারের বইয়ের চেক ইন/ফেরত তথ্য
@@ -4005,6 +3687,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(দ্বিতীয়
@@ -4220,6 +3904,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক ইন/ফেরত তথ্য
@@ -4384,17 +4070,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       alignSelf: "center",
                     }}
                   >
-                    <Text
-                      style={{
-                        padding: 10,
-                        margin: 10,
-                        alignSelf: "center",
-                        fontWeight: "bold",
-                        color: "red",
-                      }}
-                    >
-                      তৃতীয় শ্রেণি
-                    </Text>
+                    <Text style={styles.bigGreenText}>দ্বিতীয় শ্রেণি</Text>
                   </Card>
                   <Card
                     style={{
@@ -4410,19 +4086,49 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
-                      শ্রেণিকক্ষ পাঠাগারের বইয়ের তথ্য
+                      শ্রেণিকক্ষ পাঠাগারের তথ্য
                     </Text>
                     <View style={{ flexDirection: "row" }}>
                       <View style={{ flex: 1, padding: 2 }}>
-                        <Text>মোট বইয়ের টাইটেল সংখ্যা: </Text>
+                        <Text>মোট টাইটেল সংখ্যা: </Text>
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>মোট বইয়ের সংখ্যা: </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
                             padding: 5,
                             borderWidth: 1,
                           }}
@@ -4444,15 +4150,41 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     </View>
                     <View style={{ flexDirection: "column" }}>
                       <View style={{ flex: 1, padding: 2 }}>
-                        <Text>লেভেল অনুযায়ী বইয়ের টাইটেল সংখ্যা: </Text>
+                        <Text>লেভেল অনুযায়ী বইয়ের টাইটেল সংখ্যা</Text>
                       </View>
                       <View style={{ flexDirection: "row" }}>
+                        <View style={{ flex: 1, padding: 2 }}>
+                          <Text>লেভেল: </Text>
+                          <Text>বিতরণকৃত টাইটেল: </Text>
+                          <Text>বিতরণকৃত মোট বইয়ের সংখ্যা : </Text>
+                        </View>
                         <View style={{ flex: 1, padding: 2 }}>
                           <Text>সবুজ: </Text>
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -4476,7 +4208,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -4500,7 +4253,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -4524,7 +4298,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -4548,7 +4343,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -4572,7 +4388,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -4593,29 +4430,215 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         </View>
                       </View>
                     </View>
+                  </Card>
+                  <Card
+                    style={{
+                      padding: 10,
+                      margin: 10,
+                      flex: 1,
+                      alignSelf: "center",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        padding: 10,
+                        margin: 10,
+                        alignSelf: "center",
+                        fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
+                      }}
+                    >
+                      শ্রেণিকক্ষ পাঠাগারের বইয়ের চেক আউট তথ্য
+                    </Text>
                     <View style={{ flexDirection: "row" }}>
                       <View style={{ flex: 1, padding: 2 }}>
-                        <Text>মোট বইয়ের সংখ্যা: </Text>
-                      </View>
-                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>শিক্ষার্থীর সংখ্যা, বালক: </Text>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 150,
                             padding: 5,
                             borderWidth: 1,
                           }}
                           keyboardType="numeric"
-                          placeholder=""
-                          value={this.state.priPrimaryBoy + ""}
+                          value={this.state.classTwoBoy + ""}
+                          editable={true}
                           onChangeText={(text) => {
                             const value = Number(text);
-                            if (isNaN(value)) return false;
-
                             this.setState({
-                              priPrimaryBoy: value,
-                              priPrimaryTotal:
-                                value + this.state.priPrimaryGirl,
+                              classTwoBoy: value,
+                              classTwoTotal: value + this.state.classTwoGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>শিক্ষার্থীর সংখ্যা, বালিকা: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoGirl + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              classTwoGirl: value,
+                              classTwoTotal: value + this.state.classTwoBoy,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>শিক্ষার্থীর সংখ্যা, মোট: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoTotal + ""}
+                          editable={false}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoTotal: text,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালক: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              classTwoNoBoyBC: value,
+                              classTwoNoTotalBC:
+                                value + this.state.classTwoNoGirlBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালিকা: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              classTwoNoGirlBC: value,
+                              classTwoNoTotalBC:
+                                value + this.state.classTwoNoBoyBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, মোট: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoTotalBC + ""}
+                          editable={false}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoNoTotalBC: text,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>মোট বই চেক আউট করেছে, বালক: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoBookBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              classTwoNoBookBoyBC: value,
+                              classTwoNoBookTotalBC:
+                                value + this.state.classTwoNoBookGirlBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>মোট বই চেক আউট করেছে, বালিকা: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoBookGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              classTwoNoBookGirlBC: value,
+                              classTwoNoBookTotalBC:
+                                value + this.state.classTwoNoBookBoyBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>মোট বই চেক আউট করেছে, মোট: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoBookTotalBC + ""}
+                          editable={false}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoNoBookTotalBC: text,
                             });
                           }}
                         />
@@ -4636,6 +4659,923 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
+                      }}
+                    >
+                      শ্রেণিকক্ষ পাঠাগারের বইয়ের চেক ইন/ফেরত তথ্য
+                    </Text>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>
+                          কত জন শিক্ষার্থী বই চেক ইন/ফেরত দিয়েছে, বালক:{" "}
+                        </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          editable={true}
+                          value={this.state.priPrimaryNoBoyBC + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              priPrimaryNoBoyBC: value,
+                              priPrimaryNoTotalBC:
+                                value + this.state.priPrimaryNoGirlBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>
+                          কত জন শিক্ষার্থী চেক ইন/ফেরত দিয়েছে, বালিকা:{" "}
+                        </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          editable={true}
+                          value={this.state.priPrimaryNoGirlBC + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              priPrimaryNoGirlBC: value,
+                              priPrimaryNoTotalBC:
+                                value + this.state.priPrimaryNoBoyBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>
+                          কত জন শিক্ষার্থী বই চেক ইন/ফেরত দিয়েছে, মোট:{" "}
+                        </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoTotalBC + ""}
+                          editable={false}
+                          onChangeText={(text) =>
+                            this.setState({
+                              priPrimaryNoTotalBC: text,
+                            })
+                          }
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>কত বই চেক ইন/ফেরত দেয়ার সংখ্যা , বালক: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoBookBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              priPrimaryNoBookBoyBC: value,
+                              priPrimaryNoBookTotalBC:
+                                value + this.state.priPrimaryNoBookGirlBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>কত বই চেক ইন/ফেরত দেয়ার সংখ্যা , বালিকা: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoBookGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              priPrimaryNoBookGirlBC: value,
+                              priPrimaryNoBookTotalBC:
+                                value + this.state.priPrimaryNoBookBoyBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>কত বই চেক ইন/ফেরত দেয়ার সংখ্যা, মোট:</Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoBookTotalBC + ""}
+                          editable={false}
+                          onChangeText={(text) => {
+                            this.setState({
+                              priPrimaryNoBookTotalBC: text,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                  </Card>
+                  <Card
+                    style={{
+                      padding: 10,
+                      margin: 10,
+                      flex: 1,
+                      alignSelf: "center",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        padding: 10,
+                        margin: 10,
+                        alignSelf: "center",
+                        fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
+                      }}
+                    >
+                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(দ্বিতীয়
+                      শ্রেণি)
+                    </Text>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>শিক্ষার্থীর সংখ্যা, বালক: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoSpBoy + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              classTwoSpBoy: value,
+                              classTwoSpTotal:
+                                value + this.state.classTwoSpGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>শিক্ষার্থীর সংখ্যা, বালিকা: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoSpGirl + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              classTwoSpGirl: value,
+                              classTwoSpTotal: value + this.state.classTwoSpBoy,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>শিক্ষার্থীর সংখ্যা, মোট: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoSpTotal + ""}
+                          editable={false}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoSpTotal: text,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালক: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoSpBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              classTwoNoSpBoyBC: value,
+                              classTwoNoSpTotalBC:
+                                value + this.state.classTwoNoSpGirlBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, বালিকা: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoSpGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              classTwoNoSpGirlBC: value,
+                              classTwoNoSpTotalBC:
+                                value + this.state.classTwoNoSpBoyBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>কত জন শিক্ষার্থী বই চেক আউট করেছে, মোট: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoSpTotalBC + ""}
+                          editable={false}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              classTwoNoSpTotalBC: text,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>মোট বই চেক আউট করেছে, বালক: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoBookSpBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              classTwoNoBookSpBoyBC: value,
+                              classTwoNoBookSpTotalBC:
+                                value + this.state.classTwoNoBookSpGirlBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>মোট বই চেক আউট করেছে, বালিকা: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoBookSpGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              classTwoNoBookSpGirlBC: value,
+                              classTwoNoBookSpTotalBC:
+                                value + this.state.classTwoNoBookSpBoyBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>মোট বই চেক আউট করেছে, মোট: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.classTwoNoBookSpTotalBC + ""}
+                          editable={false}
+                          onChangeText={(text) => {
+                            this.setState({
+                              classTwoNoBookSpTotalBC: text,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                  </Card>
+                  <Card
+                    style={{
+                      padding: 10,
+                      margin: 10,
+                      flex: 1,
+                      alignSelf: "center",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        padding: 10,
+                        margin: 10,
+                        alignSelf: "center",
+                        fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
+                      }}
+                    >
+                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক ইন/ফেরত তথ্য
+                      (দ্বিতীয় শ্রেণি)
+                    </Text>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>
+                          কত জন শিক্ষার্থী বই চেক ইন/ফেরত দিয়েছে, বালক:{" "}
+                        </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          editable={true}
+                          value={this.state.priPrimaryNoBoyBC + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              priPrimaryNoBoyBC: value,
+                              priPrimaryNoTotalBC:
+                                value + this.state.priPrimaryNoGirlBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>
+                          কত জন শিক্ষার্থী চেক ইন/ফেরত দিয়েছে, বালিকা:{" "}
+                        </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          editable={true}
+                          value={this.state.priPrimaryNoGirlBC + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              priPrimaryNoGirlBC: value,
+                              priPrimaryNoTotalBC:
+                                value + this.state.priPrimaryNoBoyBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>
+                          কত জন শিক্ষার্থী বই চেক ইন/ফেরত দিয়েছে, মোট:
+                        </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoTotalBC + ""}
+                          editable={false}
+                          onChangeText={(text) =>
+                            this.setState({
+                              priPrimaryNoTotalBC: text,
+                            })
+                          }
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>কত বই চেক ইন/ফেরত দেয়ার সংখ্যা , বালক: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoBookBoyBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              priPrimaryNoBookBoyBC: value,
+                              priPrimaryNoBookTotalBC:
+                                value + this.state.priPrimaryNoBookGirlBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>কত বই চেক ইন/ফেরত দেয়ার সংখ্যা , বালিকা: </Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoBookGirlBC + ""}
+                          editable={true}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            this.setState({
+                              priPrimaryNoBookGirlBC: value,
+                              priPrimaryNoBookTotalBC:
+                                value + this.state.priPrimaryNoBookBoyBC,
+                            });
+                          }}
+                        />
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>কত বই চেক ইন/ফেরত দেয়ার সংখ্যা, মোট:</Text>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 150,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          value={this.state.priPrimaryNoBookTotalBC + ""}
+                          editable={false}
+                          onChangeText={(text) => {
+                            this.setState({
+                              priPrimaryNoBookTotalBC: text,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                  </Card>
+                </Card>
+              </View>
+            </Card>
+
+            <Card style={{ padding: 10, margin: 10, flex: 1 }}>
+              <View style={{ padding: 5 }}>
+                <Card
+                  style={{
+                    padding: 10,
+                    margin: 10,
+                    flex: 1,
+                    alignSelf: "center",
+                  }}
+                >
+                  <Card
+                    style={{
+                      padding: 10,
+                      margin: 10,
+                      flex: 1,
+                      alignSelf: "center",
+                    }}
+                  >
+                    <Text style={styles.bigGreenText}>তৃতীয় শ্রেণি</Text>
+                  </Card>
+                  <Card
+                    style={{
+                      padding: 10,
+                      margin: 10,
+                      flex: 1,
+                      alignSelf: "center",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        padding: 10,
+                        margin: 10,
+                        alignSelf: "center",
+                        fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
+                      }}
+                    >
+                      শ্রেণিকক্ষ পাঠাগারের তথ্য
+                    </Text>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>মোট টাইটেল সংখ্যা: </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>মোট বইয়ের সংখ্যা: </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "column" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>লেভেল অনুযায়ী বইয়ের টাইটেল সংখ্যা</Text>
+                      </View>
+                      <View style={{ flexDirection: "row" }}>
+                        <View style={{ flex: 1, padding: 2 }}>
+                          <Text>লেভেল: </Text>
+                          <Text>বিতরণকৃত টাইটেল: </Text>
+                          <Text>বিতরণকৃত মোট বইয়ের সংখ্যা : </Text>
+                        </View>
+                        <View style={{ flex: 1, padding: 2 }}>
+                          <Text>সবুজ: </Text>
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                        </View>
+                        <View style={{ flex: 1, padding: 2 }}>
+                          <Text>লাল: </Text>
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                        </View>
+                        <View style={{ flex: 1, padding: 2 }}>
+                          <Text>কমলা: </Text>
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                        </View>
+                        <View style={{ flex: 1, padding: 2 }}>
+                          <Text>সাদা: </Text>
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                        </View>
+                        <View style={{ flex: 1, padding: 2 }}>
+                          <Text>নীল: </Text>
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                        </View>
+                        <View style={{ flex: 1, padding: 2 }}>
+                          <Text>হলুদ: </Text>
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                        </View>
+                      </View>
+                    </View>
+                  </Card>
+                  <Card
+                    style={{
+                      padding: 10,
+                      margin: 10,
+                      flex: 1,
+                      alignSelf: "center",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        padding: 10,
+                        margin: 10,
+                        alignSelf: "center",
+                        fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       শ্রেণিকক্ষ পাঠাগারের বইয়ের চেক আউট তথ্য
@@ -4849,6 +5789,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       শ্রেণিকক্ষ পাঠাগারের বইয়ের চেক ইন/ফেরত তথ্য
@@ -5004,6 +5946,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(তৃতীয়
@@ -5219,6 +6163,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক ইন/ফেরত তথ্য
@@ -5383,17 +6329,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       alignSelf: "center",
                     }}
                   >
-                    <Text
-                      style={{
-                        padding: 10,
-                        margin: 10,
-                        alignSelf: "center",
-                        fontWeight: "bold",
-                        color: "red",
-                      }}
-                    >
-                      চতুর্থ শ্রেণি
-                    </Text>
+                    <Text style={styles.bigGreenText}>চতুর্থ শ্রেণি</Text>
                   </Card>
                   <Card
                     style={{
@@ -5409,19 +6345,49 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
-                      শ্রেণিকক্ষ পাঠাগারের বইয়ের তথ্য
+                      শ্রেণিকক্ষ পাঠাগারের তথ্য
                     </Text>
                     <View style={{ flexDirection: "row" }}>
                       <View style={{ flex: 1, padding: 2 }}>
-                        <Text>মোট বইয়ের টাইটেল সংখ্যা: </Text>
+                        <Text>মোট টাইটেল সংখ্যা: </Text>
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>মোট বইয়ের সংখ্যা: </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
                             padding: 5,
                             borderWidth: 1,
                           }}
@@ -5443,15 +6409,41 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     </View>
                     <View style={{ flexDirection: "column" }}>
                       <View style={{ flex: 1, padding: 2 }}>
-                        <Text>লেভেল অনুযায়ী বইয়ের টাইটেল সংখ্যা: </Text>
+                        <Text>লেভেল অনুযায়ী বইয়ের টাইটেল সংখ্যা</Text>
                       </View>
                       <View style={{ flexDirection: "row" }}>
+                        <View style={{ flex: 1, padding: 2 }}>
+                          <Text>লেভেল: </Text>
+                          <Text>বিতরণকৃত টাইটেল: </Text>
+                          <Text>বিতরণকৃত মোট বইয়ের সংখ্যা : </Text>
+                        </View>
                         <View style={{ flex: 1, padding: 2 }}>
                           <Text>সবুজ: </Text>
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -5475,7 +6467,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -5499,7 +6512,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -5523,7 +6557,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -5547,7 +6602,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -5571,7 +6647,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -5592,34 +6689,6 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         </View>
                       </View>
                     </View>
-                    <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <Text>মোট বইয়ের সংখ্যা: </Text>
-                      </View>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <TextInput
-                          style={{
-                            height: 30,
-                            width: 100,
-                            padding: 5,
-                            borderWidth: 1,
-                          }}
-                          keyboardType="numeric"
-                          placeholder=""
-                          value={this.state.priPrimaryBoy + ""}
-                          onChangeText={(text) => {
-                            const value = Number(text);
-                            if (isNaN(value)) return false;
-
-                            this.setState({
-                              priPrimaryBoy: value,
-                              priPrimaryTotal:
-                                value + this.state.priPrimaryGirl,
-                            });
-                          }}
-                        />
-                      </View>
-                    </View>
                   </Card>
                   <Card
                     style={{
@@ -5635,6 +6704,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       শ্রেণিকক্ষ পাঠাগারের বইয়ের চেক আউট তথ্য
@@ -5847,6 +6918,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       শ্রেণিকক্ষ পাঠাগারের বইয়ের চেক ইন/ফেরত তথ্য
@@ -6002,6 +7075,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(চতুর্থ
@@ -6217,6 +7292,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক ইন/ফেরত তথ্য
@@ -6381,17 +7458,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       alignSelf: "center",
                     }}
                   >
-                    <Text
-                      style={{
-                        padding: 10,
-                        margin: 10,
-                        alignSelf: "center",
-                        fontWeight: "bold",
-                        color: "red",
-                      }}
-                    >
-                      পঞ্চম শ্রেণি
-                    </Text>
+                    <Text style={styles.bigGreenText}>পঞ্চম শ্রেণি</Text>
                   </Card>
                   <Card
                     style={{
@@ -6407,19 +7474,49 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
-                      শ্রেণিকক্ষ পাঠাগারের বইয়ের তথ্য
+                      শ্রেণিকক্ষ পাঠাগারের তথ্য
                     </Text>
                     <View style={{ flexDirection: "row" }}>
                       <View style={{ flex: 1, padding: 2 }}>
-                        <Text>মোট বইয়ের টাইটেল সংখ্যা: </Text>
+                        <Text>মোট টাইটেল সংখ্যা: </Text>
                       </View>
                       <View style={{ flex: 1, padding: 2 }}>
                         <TextInput
                           style={{
                             height: 30,
-                            width: 100,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>মোট বইয়ের সংখ্যা: </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
                             padding: 5,
                             borderWidth: 1,
                           }}
@@ -6441,15 +7538,41 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     </View>
                     <View style={{ flexDirection: "column" }}>
                       <View style={{ flex: 1, padding: 2 }}>
-                        <Text>লেভেল অনুযায়ী বইয়ের টাইটেল সংখ্যা: </Text>
+                        <Text>লেভেল অনুযায়ী বইয়ের টাইটেল সংখ্যা</Text>
                       </View>
                       <View style={{ flexDirection: "row" }}>
+                        <View style={{ flex: 1, padding: 2 }}>
+                          <Text>লেভেল: </Text>
+                          <Text>বিতরণকৃত টাইটেল: </Text>
+                          <Text>বিতরণকৃত মোট বইয়ের সংখ্যা : </Text>
+                        </View>
                         <View style={{ flex: 1, padding: 2 }}>
                           <Text>সবুজ: </Text>
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -6473,7 +7596,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -6497,7 +7641,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -6521,7 +7686,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -6545,7 +7731,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -6569,7 +7776,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <TextInput
                             style={{
                               height: 30,
-                              width: 70,
+                              width: 50,
+                              padding: 5,
+                              borderWidth: 1,
+                            }}
+                            keyboardType="numeric"
+                            placeholder=""
+                            value={this.state.priPrimaryBoy + ""}
+                            onChangeText={(text) => {
+                              const value = Number(text);
+                              if (isNaN(value)) return false;
+
+                              this.setState({
+                                priPrimaryBoy: value,
+                                priPrimaryTotal:
+                                  value + this.state.priPrimaryGirl,
+                              });
+                            }}
+                          />
+                          <TextInput
+                            style={{
+                              height: 30,
+                              width: 50,
                               padding: 5,
                               borderWidth: 1,
                             }}
@@ -6590,34 +7818,6 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         </View>
                       </View>
                     </View>
-                    <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <Text>মোট বইয়ের সংখ্যা: </Text>
-                      </View>
-                      <View style={{ flex: 1, padding: 2 }}>
-                        <TextInput
-                          style={{
-                            height: 30,
-                            width: 100,
-                            padding: 5,
-                            borderWidth: 1,
-                          }}
-                          keyboardType="numeric"
-                          placeholder=""
-                          value={this.state.priPrimaryBoy + ""}
-                          onChangeText={(text) => {
-                            const value = Number(text);
-                            if (isNaN(value)) return false;
-
-                            this.setState({
-                              priPrimaryBoy: value,
-                              priPrimaryTotal:
-                                value + this.state.priPrimaryGirl,
-                            });
-                          }}
-                        />
-                      </View>
-                    </View>
                   </Card>
                   <Card
                     style={{
@@ -6633,6 +7833,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       শ্রেণিকক্ষ পাঠাগারের বইয়ের চেক আউট তথ্য
@@ -6845,6 +8047,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       শ্রেণিকক্ষ পাঠাগারের বইয়ের চেক ইন/ফেরত তথ্য
@@ -7000,6 +8204,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(পঞ্চম
@@ -7215,6 +8421,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         margin: 10,
                         alignSelf: "center",
                         fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
                       }}
                     >
                       বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক ইন/ফেরত তথ্য
@@ -7351,6 +8559,408 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           onChangeText={(text) => {
                             this.setState({
                               priPrimaryNoBookTotalBC: text,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                  </Card>
+                </Card>
+              </View>
+            </Card>
+
+            <Card style={{ padding: 10, margin: 10, flex: 1 }}>
+              <View style={{ padding: 5 }}>
+                <Card
+                  style={{
+                    padding: 10,
+                    margin: 10,
+                    flex: 1,
+                    alignSelf: "center",
+                  }}
+                >
+                  <Card
+                    style={{
+                      padding: 10,
+                      margin: 10,
+                      flex: 1,
+                      alignSelf: "center",
+                    }}
+                  >
+                    <Text style={styles.bigGreenText}>বিদ্যালয়ের মোট তথ্য</Text>
+                  </Card>
+                  <Card
+                    style={{
+                      padding: 10,
+                      margin: 10,
+                      flex: 1,
+                      alignSelf: "center",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        padding: 10,
+                        margin: 10,
+                        alignSelf: "center",
+                        fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
+                      }}
+                    >
+                      বিদ্যালয়ের শ্রেণিকক্ষ পাঠাগারের মোট তথ্য
+                    </Text>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>বিদ্যালয়ের মোট টাইটেল সংখ্যা: </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>বিদ্যালয়ের মোট বইয়ের সংখ্যা: </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>বিদ্যালয়ের মোট শিক্ষার্থীর সংখ্যা: </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>
+                          বিদ্যালয়ের মোট বই চেক আউট করা শিক্ষার্থীর সংখ্যা:{" "}
+                        </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>বিদ্যালয়ের মোট চেক আউটকৃত বইয়ের সংখ্যা: </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>
+                          বিদ্যালয়ের মোট বই চেক ইন করা শিক্ষার্থীর সংখ্যা:{" "}
+                        </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>বিদ্যালয়ের মোট চেক ইনকৃত বইয়ের সংখ্যা: </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <Text
+                      style={{
+                        padding: 10,
+                        margin: 10,
+                        alignSelf: "center",
+                        fontWeight: "bold",
+                        fontSize: 16,
+                        color: "blue",
+                      }}
+                    >
+                      বিদ্যালয়ের শ্রেণিকক্ষ পাঠাগারের মোট তথ্য(বিশেষ চাহিদা
+                      সম্পন্ন)
+                    </Text>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>বিদ্যালয়ের মোট শিক্ষার্থীর সংখ্যা:</Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>
+                          বিদ্যালয়ের মোট বই চেক আউট করা শিক্ষার্থীর সংখ্যা:{" "}
+                        </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>বিদ্যালয়ের মোট চেক আউটকৃত বইয়ের সংখ্যা: </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>
+                          বিদ্যালয়ের মোট বই চেক ইন করা শিক্ষার্থীর সংখ্যা:{" "}
+                        </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
+                            });
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>বিদ্যালয়ের মোট চেক ইনকৃত বইয়ের সংখ্যা: </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="numeric"
+                          placeholder=""
+                          value={this.state.priPrimaryBoy + ""}
+                          onChangeText={(text) => {
+                            const value = Number(text);
+                            if (isNaN(value)) return false;
+
+                            this.setState({
+                              priPrimaryBoy: value,
+                              priPrimaryTotal:
+                                value + this.state.priPrimaryGirl,
                             });
                           }}
                         />
