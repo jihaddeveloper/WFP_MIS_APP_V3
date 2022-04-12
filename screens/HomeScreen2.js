@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/08/2021
-//  Modify Date: 08/12/2021
+//  Modify Date: 12/04/2022
 //  Description: Home screen component
 
 import React from "react";
@@ -54,7 +54,7 @@ function HomeScreen({ navigation }) {
           marginTop: 20,
         }}
       >
-        <View style={{ flex: 1, marginLeft: 200 }}>
+        <View style={{ flex: 1, marginLeft: 180 }}>
           <TouchableOpacity onPress={() => loadInBrowser("http://google.com")}>
             <Image
               style={styles.logoMain}
@@ -62,10 +62,14 @@ function HomeScreen({ navigation }) {
             ></Image>
           </TouchableOpacity>
         </View>
-        <View style={{ flex: 1, marginRight: 200 }}>
+        <View style={{ flex: 1, marginRight: 180 }}>
           <TouchableOpacity>
             <Image
-              style={styles.logoMain}
+              style={{
+                height: 100,
+                width: 100,
+                resizeMode: "contain",
+              }}
               source={require("../assets/WFP1.png")}
             ></Image>
           </TouchableOpacity>

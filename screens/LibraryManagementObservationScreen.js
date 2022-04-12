@@ -199,7 +199,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All Project
   getAllProject = async () => {
     try {
-      const response = await fetch("http://10.9.0.219:8080/api/v1/projects");
+      const response = await fetch("http://10.9.0.93:8080/api/v1/projects");
       const json = await response.json();
       this.setState({ allProject: json });
     } catch (error) {
@@ -213,7 +213,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All Office
   getAllOffice = async () => {
     try {
-      const response = await fetch("http://10.9.0.219:8080/api/v1/offices");
+      const response = await fetch("http://10.9.0.93:8080/api/v1/offices");
       const json = await response.json();
       this.setState({ allOffice: json });
     } catch (error) {
@@ -227,7 +227,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All School
   getAllSchool = async () => {
     try {
-      const response = await axios("http://10.9.0.219:8080/api/v1/schools", {
+      const response = await axios("http://10.9.0.93:8080/api/v1/schools", {
         method: "GET",
         mode: "no-cors",
         headers: {
@@ -246,7 +246,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All Teacher
   getAllTeacher = async () => {
     try {
-      const response = await fetch("http://10.9.0.219:8080/api/v1/teachers");
+      const response = await fetch("http://10.9.0.93:8080/api/v1/teachers");
       const json = await response.json();
       this.setState({ allTeacher: json });
     } catch (error) {
@@ -260,7 +260,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All Employee
   getAllEmployee = async () => {
     try {
-      const response = await axios("http://10.9.0.219:8080/api/v1/employees", {
+      const response = await axios("http://10.9.0.93:8080/api/v1/employees", {
         method: "GET",
         mode: "no-cors",
         headers: {
@@ -280,7 +280,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   getAllDesignation = async () => {
     try {
       const response = await axios(
-        "http://10.9.0.219:8080/api/v1/designations",
+        "http://10.9.0.93:8080/api/v1/designations",
         {
           method: "GET",
           mode: "no-cors",
@@ -302,7 +302,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   getAllLibraryIndicator = async () => {
     try {
       const response = await axios(
-        "http://10.9.0.219:8080/api/v1/library-observation-indicators",
+        "http://10.9.0.93:8080/api/v1/library-observation-indicators",
         {
           method: "GET",
           mode: "no-cors",
@@ -327,7 +327,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
       office: this.state.pickerOffice,
       project: this.state.pickerProject,
       district: this.state.pickerDistrict.name,
-      upazila: this.state.pickerUpazilla.name,
+      upazilla: this.state.pickerUpazilla.name,
       school: this.state.pickerSchool.name,
       visitor: this.state.pickerVisitor,
       visitorDesignation: this.state.pickerDesignation,
@@ -408,7 +408,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
     };
     try {
       let response = await fetch(
-        "http://10.9.0.219:8080/api/v1/library-observations",
+        "http://10.9.0.93:8080/api/v1/library-observations",
         {
           method: "POST",
           mode: "no-cors",
