@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/08/2021
-//  Modify Date: 22/03/2022
+//  Modify Date: 18/04/2022
 //  Description: Library management observation screen component
 
 import React from "react";
@@ -199,7 +199,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All Project
   getAllProject = async () => {
     try {
-      const response = await fetch("http://10.9.0.93:8080/api/v1/projects");
+      const response = await fetch("http://118.179.80.51:8080/api/v1/projects");
       const json = await response.json();
       this.setState({ allProject: json });
     } catch (error) {
@@ -213,7 +213,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All Office
   getAllOffice = async () => {
     try {
-      const response = await fetch("http://10.9.0.93:8080/api/v1/offices");
+      const response = await fetch("http://118.179.80.51:8080/api/v1/offices");
       const json = await response.json();
       this.setState({ allOffice: json });
     } catch (error) {
@@ -227,7 +227,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All School
   getAllSchool = async () => {
     try {
-      const response = await axios("http://10.9.0.93:8080/api/v1/schools", {
+      const response = await axios("http://118.179.80.51:8080/api/v1/schools", {
         method: "GET",
         mode: "no-cors",
         headers: {
@@ -246,7 +246,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All Teacher
   getAllTeacher = async () => {
     try {
-      const response = await fetch("http://10.9.0.93:8080/api/v1/teachers");
+      const response = await fetch("http://118.179.80.51:8080/api/v1/teachers");
       const json = await response.json();
       this.setState({ allTeacher: json });
     } catch (error) {
@@ -260,14 +260,17 @@ export default class LibraryManagementObservationScreen extends React.Component 
   // Get All Employee
   getAllEmployee = async () => {
     try {
-      const response = await axios("http://10.9.0.93:8080/api/v1/employees", {
-        method: "GET",
-        mode: "no-cors",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios(
+        "http://118.179.80.51:8080/api/v1/employees",
+        {
+          method: "GET",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       this.setState({ allEmployee: response.data, isLoading: false });
     } catch (error) {
@@ -280,7 +283,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   getAllDesignation = async () => {
     try {
       const response = await axios(
-        "http://10.9.0.93:8080/api/v1/designations",
+        "http://118.179.80.51:8080/api/v1/designations",
         {
           method: "GET",
           mode: "no-cors",
@@ -302,7 +305,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
   getAllLibraryIndicator = async () => {
     try {
       const response = await axios(
-        "http://10.9.0.93:8080/api/v1/library-observation-indicators",
+        "http://118.179.80.51:8080/api/v1/library-observation-indicators",
         {
           method: "GET",
           mode: "no-cors",
@@ -408,7 +411,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
     };
     try {
       let response = await fetch(
-        "http://10.9.0.93:8080/api/v1/library-observations",
+        "http://118.179.80.51:8080/api/v1/library-observations",
         {
           method: "POST",
           mode: "no-cors",
@@ -531,7 +534,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     <Picker.Item label={"DFO"} value={"DFO"} />
                     <Picker.Item label={"CFO"} value={"CFO"} />
                     <Picker.Item label={"NFO"} value={"NFO"} />
-                    <Picker.Item label={"SFO"} value={"SFO"} />
+                    <Picker.Item label={"MFO"} value={"MFO"} />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -809,7 +812,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     <Picker.Item label={"DFO"} value={"DFO"} />
                     <Picker.Item label={"CFO"} value={"CFO"} />
                     <Picker.Item label={"NFO"} value={"NFO"} />
-                    <Picker.Item label={"SFO"} value={"SFO"} />
+                    <Picker.Item label={"MFO"} value={"MFO"} />
                   </Picker>
                 </View>
               </View>
@@ -1124,7 +1127,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
 
                           if (
                             value === "হ্যাঁ" &&
-                            this.state.pickerIsTrainedSRMTeacher === "হ্যাঁ"
+                            this.state.pickerIsTrainedHeadTeacher === "হ্যাঁ"
                           ) {
                             this.setState({
                               pickerIsTrainedAllTeacher: "হ্যাঁ",
@@ -2593,7 +2596,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
 
                           if (
                             value === "হ্যাঁ" &&
-                            this.state.pickerSRMClassRoutine === "হ্যাঁ"
+                            this.state.pickerSRMClassWeekly === "হ্যাঁ"
                           ) {
                             this.setState({
                               pickerSRMClassRoutine: "হ্যাঁ",

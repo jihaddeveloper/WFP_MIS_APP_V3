@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 11/10/2021
-//  Modify Date: 12/04/2022
+//  Modify Date: 18/04/2022
 //  Description: Monthly book checkout screen component
 
 import React from "react";
@@ -374,7 +374,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   // Get All Project
   getAllProject = async () => {
     try {
-      const response = await fetch("http://10.9.0.93:8080/api/v1/projects");
+      const response = await fetch("http://118.179.80.51:8080/api/v1/projects");
       const json = await response.json();
       this.setState({ allProject: json });
     } catch (error) {
@@ -388,7 +388,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   // Get All Office
   getAllOffice = async () => {
     try {
-      const response = await fetch("http://10.9.0.93:8080/api/v1/offices");
+      const response = await fetch("http://118.179.80.51:8080/api/v1/offices");
       const json = await response.json();
       this.setState({ allOffice: json });
     } catch (error) {
@@ -402,7 +402,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   // Get All School
   getAllSchool = async () => {
     try {
-      const response = await axios("http://10.9.0.93:8080/api/v1/schools", {
+      const response = await axios("http://118.179.80.51:8080/api/v1/schools", {
         method: "GET",
         mode: "no-cors",
         headers: {
@@ -421,14 +421,17 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   // Get All Teacher
   getAllTeacher = async () => {
     try {
-      const response = await fetch("http://10.9.0.93:8080/api/v1/teachers", {
-        method: "GET",
-        mode: "no-cors",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "http://118.179.80.51:8080/api/v1/teachers",
+        {
+          method: "GET",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const json = await response.json();
       this.setState({ allTeacher: json, isLoading: false });
     } catch (error) {
@@ -440,14 +443,17 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   // Get All Employee
   getAllEmployee = async () => {
     try {
-      const response = await axios("http://10.9.0.93:8080/api/v1/employees", {
-        method: "GET",
-        mode: "no-cors",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios(
+        "http://118.179.80.51:8080/api/v1/employees",
+        {
+          method: "GET",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       this.setState({ allEmployee: response.data, isLoading: false });
     } catch (error) {
@@ -460,7 +466,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   getAllDesignation = async () => {
     try {
       const response = await axios(
-        "http://10.9.0.93:8080/api/v1/designations",
+        "http://118.179.80.51:8080/api/v1/designations",
         {
           method: "GET",
           mode: "no-cors",
@@ -700,7 +706,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
     };
     try {
       let response = await fetch(
-        "http://10.9.0.93:8080/api/v1/book-checkouts",
+        "http://118.179.80.51:8080/api/v1/book-checkouts",
         {
           method: "POST",
           mode: "no-cors",
@@ -809,7 +815,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     <Picker.Item label={"DFO"} value={"DFO"} />
                     <Picker.Item label={"CFO"} value={"CFO"} />
                     <Picker.Item label={"NFO"} value={"NFO"} />
-                    <Picker.Item label={"SFO"} value={"SFO"} />
+                    <Picker.Item label={"MFO"} value={"MFO"} />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -1138,7 +1144,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     <Picker.Item label={"DFO"} value={"DFO"} />
                     <Picker.Item label={"CFO"} value={"CFO"} />
                     <Picker.Item label={"NFO"} value={"NFO"} />
-                    <Picker.Item label={"SFO"} value={"SFO"} />
+                    <Picker.Item label={"MFO"} value={"MFO"} />
                   </Picker>
                 </View>
               </View>
@@ -2608,7 +2614,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         color: "blue",
                       }}
                     >
-                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(প্রথম
+                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য (প্রথম
                       শ্রেণি)
                     </Text>
                     <View style={{ flexDirection: "row" }}>
@@ -3503,7 +3509,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         color: "blue",
                       }}
                     >
-                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(দ্বিতীয়
+                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য (দ্বিতীয়
                       শ্রেণি)
                     </Text>
                     <View style={{ flexDirection: "row" }}>
@@ -4399,7 +4405,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         color: "blue",
                       }}
                     >
-                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(তৃতীয়
+                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য (তৃতীয়
                       শ্রেণি)
                     </Text>
                     <View style={{ flexDirection: "row" }}>
@@ -5295,7 +5301,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         color: "blue",
                       }}
                     >
-                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(চতুর্থ
+                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য (চতুর্থ
                       শ্রেণি)
                     </Text>
                     <View style={{ flexDirection: "row" }}>
@@ -6191,7 +6197,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         color: "blue",
                       }}
                     >
-                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য(পঞ্চম
+                      বিশেষ চাহিদা সম্পন্ন শিক্ষার্থীর বই চেক-আউট তথ্য (পঞ্চম
                       শ্রেণি)
                     </Text>
                     <View style={{ flexDirection: "row" }}>
