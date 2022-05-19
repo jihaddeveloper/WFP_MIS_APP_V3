@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/08/2021
-//  Modify Date: 12/04/2022
+//  Modify Date: 11/05/2022
 //  Description: Home screen component
 
 import React from "react";
@@ -15,8 +15,11 @@ import {
   Linking,
   TouchableOpacity,
   Alert,
+  Dimensions,
 } from "react-native";
 import { Card } from "react-native-shadow-cards";
+
+const { width, height } = Dimensions.get("window");
 
 function HomeScreen({ navigation }) {
   React.useEffect(() => {
@@ -46,39 +49,34 @@ function HomeScreen({ navigation }) {
           Programme
         </Text>
       </View>
-
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          marginTop: 150,
-        }}
-      >
-        {/* <View style={{ flex: 1, marginLeft: 180 }}>
-          <TouchableOpacity onPress={() => loadInBrowser("http://google.com")}>
-            <Image
-              style={styles.logoMain}
-              source={require("../assets/WFP1.png")}
-            ></Image>
-          </TouchableOpacity>
-        </View> */}
-        <View style={{ flex: 1, alignContent: "center" }}>
-          <TouchableOpacity>
-            <Image
-              style={{
-                height: "60%",
-                width: "100%",
-                resizeMode: "contain",
-                alignItems: "center",
-              }}
-              source={require("../assets/MISWFP.png")}
-            ></Image>
-          </TouchableOpacity>
+      <Card style={{ padding: 10, margin: 10, flex: 1 }}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            marginTop: 30,
+            alignContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <View style={{ flex: 1, alignContent: "center" }}>
+            <TouchableOpacity>
+              <Image
+                style={{
+                  height: "60%",
+                  width: "100%",
+                  resizeMode: "contain",
+                  alignItems: "center",
+                }}
+                source={require("../assets/MISWFP.png")}
+              ></Image>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </Card>
 
-      <Card style={{ padding: 10, margin: 10, flex: 1, marginBottom: 100 }}>
-        <View style={{ flexDirection: "row", marginTop: 70 }}>
+      <Card style={{ padding: 10, margin: 10, flex: 1 }}>
+        <View style={{ flexDirection: "row", marginTop: 20 }}>
           <View style={{ flex: 1, padding: 2 }}>
             <View style={styles.buttonView}>
               <Button
@@ -152,6 +150,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    height: height,
+    width: width,
   },
   logoMain: {
     height: 100,

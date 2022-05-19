@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 11/10/2021
-//  Modify Date: 18/04/2022
+//  Modify Date: 18/05/2022
 //  Description: Monthly book checkout screen component
 
 import React from "react";
@@ -18,6 +18,7 @@ import {
   Button,
   Alert,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 
 import { divisions, districts, upazillas, unions } from "bd-geojs";
@@ -25,6 +26,8 @@ import { divisions, districts, upazillas, unions } from "bd-geojs";
 import { Card } from "react-native-shadow-cards";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
+
+const { width, height } = Dimensions.get("window");
 
 export default class MonthlyBookCheckoutScreen extends React.Component {
   constructor(props) {
@@ -37,7 +40,12 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       allEmployee: [],
       allOffice: [],
       allDesignation: [],
+      allBookcheckoutSchoolData: [],
       //Preloaded Data
+
+      // Duplicate data check
+      duplicateBookCheckoutSchool: [],
+      // Duplicate data check
 
       isLoading: true,
 
@@ -53,7 +61,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       // Date picker property
 
       // General data
-      visitNo: "",
+      visitNo: 0,
       pickerOffice: "",
       pickerProject: "",
       pickerDistrict: "",
@@ -335,6 +343,23 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
 
       //School Data
       // Input value
+
+      // Validation message
+      dateError: "",
+      fieldOfficeError: "",
+      projectError: "",
+      districtError: "",
+      upazillaError: "",
+      visitNoError: "",
+      visitorNameError: "",
+      visitorDesignationError: "",
+      visitorOfficeError: "",
+      lpoError: "",
+      lfError: "",
+      schoolError: "",
+      headTeacherError: "",
+      genderError: "",
+      // Validation message
     };
   }
 
@@ -484,6 +509,54 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   };
   // Get All Designation
 
+  // Get All Book-checkout Data for school
+  getAllBookCheckoutSchool = async () => {
+    try {
+      const response = await axios(
+        "http://118.179.80.51:8080/api/v1/book-checkouts",
+        {
+          method: "GET",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      this.setState({
+        allBookcheckoutSchoolData: response.data,
+        isLoading: false,
+      });
+      console.log(
+        "Bookcheckout Data: ",
+        this.state.allBookcheckoutSchoolData.length
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // Get All Book-checkout Data for school
+
+  //Load data from server
+  componentDidMount() {
+    this.getAllSchool();
+    this.getAllEmployee();
+    this.getAllDesignation();
+    // this.getAllProject();
+    // this.getAllOffice();
+    // this.getAllTeacher();
+    this.getAllBookCheckoutSchool();
+    console.log("Component mounted");
+    console.log(
+      "Duplicate Bookcheckout Data: ",
+      this.state.duplicateBookCheckoutSchool.length
+    );
+
+    //console.log("Duplicate Data: ", this.state.duplicateBookCheckoutSchool);
+  }
+  //Load data from server
+
   // Register new book-checkout data
   saveBookCheckout = async () => {
     const newBookCheckout = {
@@ -492,14 +565,15 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       project: this.state.pickerProject,
       district: this.state.pickerDistrict.name,
       upazilla: this.state.pickerUpazilla.name,
-      school: this.state.pickerSchool.name,
-      headTeacher: this.state.pickerHeadTeacher,
-      gender: this.state.pickerGender,
+      visitNo: this.state.visitNo,
       visitor: this.state.pickerVisitor,
       visitorDesignation: this.state.pickerDesignation,
       visitorOffice: this.state.pickerVisitorOffice,
-      lf: this.state.pickerLF,
       lpo: this.state.pickerLPO,
+      lf: this.state.pickerLF,
+      school: this.state.pickerSchool,
+      headTeacher: this.state.pickerHeadTeacher,
+      gender: this.state.pickerGender,
 
       priPrimaryBoy: this.state.priPrimaryBoy,
       priPrimaryGirl: this.state.priPrimaryGirl,
@@ -704,39 +778,132 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       schoolTotalNoSpBookBCIn: this.state.schoolTotalNoSpBookBCIn,
       // School total data
     };
-    try {
-      let response = await fetch(
-        "http://118.179.80.51:8080/api/v1/book-checkouts",
-        {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newBookCheckout),
+
+    // Validation
+
+    // Check duplicate data
+    this.state.duplicateBookCheckoutSchool =
+      this.state.allBookcheckoutSchoolData.filter((item) => {
+        return (
+          item.date == this.state.date.toISOString().slice(0, 10) &&
+          item.visitNo == this.state.visitNo &&
+          item.school == this.state.pickerSchool &&
+          item.lpo == this.state.pickerLPO &&
+          item.lf == this.state.pickerLF
+        );
+      });
+    console.log(
+      "Duplicate Bookcheckout Data: ",
+      this.state.duplicateBookCheckoutSchool.length
+    );
+    // Check duplicate data
+
+    // Check empty fields
+    if (this.state.date == "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Date can not be empty");
+      return;
+    } else if (this.state.pickerOffice == "") {
+      this.setState({ fieldOfficeError: "Field office can not be empty" });
+      Alert.alert("Alert", "Field office can not be empty");
+      return;
+    } else if (this.state.pickerProject == "") {
+      this.setState({ projectError: "Project can not be empty" });
+      Alert.alert("Alert", "Project can not be empty");
+      return;
+    } else if (this.state.pickerDistrict == "") {
+      this.setState({ districtError: "District can not be empty" });
+      Alert.alert("Alert", "District can not be empty");
+      return;
+    } else if (this.state.pickerUpazilla == "") {
+      this.setState({ upazillaError: "Upazilla can not be empty" });
+      Alert.alert("Alert", "Upazilla can not be empty");
+      return;
+    } else if (this.state.visitNo == 0) {
+      this.setState({ visitNoError: "Visit no can not be empty" });
+      Alert.alert("Alert", "Visit no can not be empty");
+      return;
+    } else if (this.state.pickerVisitor == "") {
+      this.setState({ visitorNameError: "Visitor can not be empty" });
+      Alert.alert("Alert", "Visitor can not be empty");
+      return;
+    } else if (this.state.pickerDesignation == "") {
+      this.setState({
+        visitorDesignationError: "Designation can not be empty",
+      });
+      Alert.alert("Alert", "Designation can not be empty");
+      return;
+    } else if (this.state.pickerVisitorOffice == "") {
+      this.setState({ visitorOfficeError: "Visitor office can not be empty" });
+      Alert.alert("Alert", "Visitor office can not be empty");
+      return;
+    } else if (this.state.pickerLPO == "") {
+      this.setState({ lpoError: "LPO can not be empty" });
+      Alert.alert("Alert", "LPO can not be empty");
+      return;
+    } else if (this.state.pickerLF == "") {
+      this.setState({ lfError: "LF can not be empty" });
+      Alert.alert("Alert", "LF can not be empty");
+      return;
+    } else if (this.state.pickerSchool == "") {
+      this.setState({ schoolError: "School can not be empty" });
+      Alert.alert("Alert", "School can not be empty");
+      return;
+    } else if (this.state.pickerHeadTeacher == "") {
+      this.setState({ headTeacherError: "Head teacher can not be empty" });
+      Alert.alert("Alert", "Head teacher can not be empty");
+      return;
+    } else if (this.state.pickerGender == "") {
+      this.setState({ genderError: "Gender can not be empty" });
+      Alert.alert("Alert", "Gender can not be empty");
+      return;
+    } else if (this.state.duplicateBookCheckoutSchool.length > 0) {
+      Alert.alert("Alert", "Data already inserted and can't be duplicate");
+      return;
+    } else {
+      this.setState({
+        dateError: "",
+        fieldOfficeError: "",
+        projectError: "",
+        districtError: "",
+        upazillaError: "",
+        visitNoError: "",
+        visitorNameError: "",
+        visitorDesignationError: "",
+        visitorOfficeError: "",
+        lpoError: "",
+        lfError: "",
+        schoolError: "",
+        headTeacherError: "",
+        genderError: "",
+      });
+      // Check empty fields
+
+      // Send data to API
+      try {
+        let response = await fetch(
+          "http://118.179.80.51:8080/api/v1/book-checkouts",
+          {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newBookCheckout),
+          }
+        );
+        if (response.status >= 200 && response.status < 300) {
+          Alert.alert("Alert", "Book checkout data saved successfully!!!");
+          this.getAllBookCheckoutSchool();
         }
-      );
-      if (response.status >= 200 && response.status < 300) {
-        alert("Book checkout data saved successfully!!!");
+      } catch (errors) {
+        alert(errors);
       }
-    } catch (errors) {
-      alert(errors);
+      // Send data to API
     }
   };
   // Register new book-checkout data
-
-  //Load data from server
-  componentDidMount() {
-    this.getAllSchool();
-    this.getAllEmployee();
-    this.getAllDesignation();
-    // this.getAllProject();
-    // this.getAllOffice();
-    // this.getAllTeacher();
-    console.log("Component mounted");
-  }
-  //Load data from server
 
   render() {
     const { checked } = this.state;
@@ -772,13 +939,23 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
             <Card style={{ padding: 10, margin: 10, flex: 1 }}>
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    তারিখ:
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      তারিখ:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Text style={{ fontSize: 14 }}>
+                    {String(this.state.date.toISOString().slice(0, 10))}
                   </Text>
                   <Button onPress={this.datepicker} title="Select Date" />
                   {show && (
@@ -790,16 +967,24 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       onChange={this.setDate}
                     />
                   )}
+                  {/* <Text style={{ color: "red" }}>{this.state.dateError}</Text> */}
                 </View>
                 <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    ফিল্ড অফিস:
-                  </Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      ফিল্ড অফিস:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
                   <Picker
                     style={{
                       height: 40,
@@ -817,16 +1002,26 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     <Picker.Item label={"NFO"} value={"NFO"} />
                     <Picker.Item label={"MFO"} value={"MFO"} />
                   </Picker>
+                  {/* <Text style={{ color: "red" }}>
+                    {this.state.fieldOfficeError}
+                  </Text> */}
                 </View>
                 <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    প্রোজেক্ট:
-                  </Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      প্রোজেক্ট:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
                   <Picker
                     style={{
                       height: 40,
@@ -870,18 +1065,28 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     />
                     <Picker.Item label={"WB"} value={"WB"} />
                   </Picker>
+                  {/* <Text style={{ color: "red" }}>
+                    {this.state.projectError}
+                  </Text> */}
                 </View>
               </View>
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    জেলা:
-                  </Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      জেলা:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
                   <Picker
                     style={{
                       height: 40,
@@ -909,16 +1114,26 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       );
                     })}
                   </Picker>
+                  {/* <Text style={{ color: "red" }}>
+                    {this.state.districtError}
+                  </Text> */}
                 </View>
                 <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    উপজেলা:
-                  </Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      উপজেলা:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
                   <Picker
                     style={{
                       height: 40,
@@ -949,93 +1164,44 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         );
                       })}
                   </Picker>
+                  {/* <Text style={{ color: "red" }}>
+                    {this.state.upazillaError}
+                  </Text> */}
                 </View>
                 <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    বিদ্যালয়ের নাম:
-                  </Text>
-
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
-                    selectedValue={this.state && this.state.pickerSchool}
-                    onValueChange={(value) => {
-                      this.setState({ pickerSchool: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    {this.state.allSchool
-                      .filter((item) => {
-                        return item.upazilla == this.state.pickerUpazilla.name;
-                      })
-                      .map((item) => {
-                        return (
-                          <Picker.Item
-                            key={item.id}
-                            label={item.name}
-                            value={item}
-                          />
-                        );
-                      })}
-                  </Picker>
-                </View>
-              </View>
-              <View style={{ flexDirection: "row", padding: 10 }}>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    প্রধান শিক্ষকের নাম:
-                  </Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      ভিজিট নম্বর:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
                   <TextInput
                     style={{
                       height: 30,
-                      width: 200,
+                      width: 100,
                       padding: 5,
                       borderWidth: 1,
                     }}
+                    keyboardType="numeric"
                     placeholder=""
+                    editable={true}
                     onChangeText={(text) =>
-                      this.setState({ pickerHeadTeacher: text })
+                      this.setState({ visitNo: Number(text) })
                     }
-                    value={this.state.pickerHeadTeacher}
+                    value={this.state.visitNo + ""}
                   />
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    লিঙ্গ:
-                  </Text>
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 200,
-                    }}
-                    selectedValue={this.state && this.state.pickerGender}
-                    onValueChange={(value) => {
-                      this.setState({ pickerGender: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"Female"} value={"Female"} />
-                    <Picker.Item label={"Male"} value={"Male"} />
-                  </Picker>
+                  {/* <Text style={{ color: "red" }}>
+                    {this.state.headTeacherError}
+                  </Text> */}
                 </View>
               </View>
               <View style={{ flexDirection: "row", padding: 10 }}>
@@ -1120,14 +1286,21 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    পরিদর্শক এর অফিস:
-                  </Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      পরিদর্শক এর অফিস:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
                   <Picker
                     selectedValue={this.state && this.state.pickerVisitorOffice}
                     onValueChange={(value) => {
@@ -1150,50 +1323,25 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
               </View>
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    দায়িত্ব প্রাপ্ত এলএফ এর নামঃ
-                  </Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      দায়িত্ব প্রাপ্ত এলপিও এর নামঃ
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
                   <Picker
                     style={{
                       height: 40,
-                      width: 150,
-                    }}
-                    selectedValue={this.state && this.state.pickerLF}
-                    onValueChange={(value) => {
-                      this.setState({ pickerLF: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    {this.state.allEmployee.map((item) => {
-                      return (
-                        <Picker.Item
-                          key={item.id}
-                          label={item.name}
-                          value={item.name}
-                        />
-                      );
-                    })}
-                  </Picker>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    দায়িত্ব প্রাপ্ত এলপিও এর নামঃ
-                  </Text>
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 150,
+                      width: 200,
                     }}
                     selectedValue={this.state && this.state.pickerLPO}
                     onValueChange={(value) => {
@@ -1202,16 +1350,179 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    {this.state.allEmployee.map((item) => {
-                      return (
-                        <Picker.Item
-                          key={item.id}
-                          label={item.name}
-                          value={item.name}
-                        />
-                      );
-                    })}
+                    {this.state.allEmployee
+                      .filter((item) => {
+                        return item.designation == "LPO";
+                      })
+                      .map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.name}
+                            value={item.employeeRegId}
+                          />
+                        );
+                      })}
                   </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      দায়িত্ব প্রাপ্ত এলএফ এর নামঃ
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 200,
+                    }}
+                    selectedValue={this.state && this.state.pickerLF}
+                    onValueChange={(value) => {
+                      this.setState({ pickerLF: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    {this.state.allEmployee
+                      .filter((item) => {
+                        return (
+                          item.designation == "LF" &&
+                          item.supervisor == this.state.pickerLPO
+                        );
+                      })
+                      .map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.name}
+                            value={item.employeeRegId}
+                          />
+                        );
+                      })}
+                  </Picker>
+                </View>
+              </View>
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      বিদ্যালয়ের নাম:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state && this.state.pickerSchool}
+                    onValueChange={(value) => {
+                      this.setState({ pickerSchool: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    {this.state.allSchool
+                      .filter((item) => {
+                        return item.lf == this.state.pickerLF;
+                      })
+                      .map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.name}
+                            value={item.name}
+                          />
+                        );
+                      })}
+                  </Picker>
+                  {/* <Text style={{ color: "red" }}>{this.state.schoolError}</Text> */}
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      প্রধান শিক্ষকের নাম:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <TextInput
+                    style={{
+                      height: 30,
+                      width: 150,
+                      padding: 5,
+                      borderWidth: 1,
+                    }}
+                    placeholder=""
+                    onChangeText={(text) =>
+                      this.setState({ pickerHeadTeacher: text })
+                    }
+                    value={this.state.pickerHeadTeacher}
+                  />
+                  {/* <Text style={{ color: "red" }}>
+                    {this.state.headTeacherError}
+                  </Text> */}
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      লিঙ্গ:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state && this.state.pickerGender}
+                    onValueChange={(value) => {
+                      this.setState({ pickerGender: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"Female"} value={"Female"} />
+                    <Picker.Item label={"Male"} value={"Male"} />
+                    <Picker.Item label={"Other"} value={"Other"} />
+                  </Picker>
+                  {/* <Text style={{ color: "red" }}>{this.state.genderError}</Text> */}
                 </View>
               </View>
             </Card>
@@ -1222,8 +1533,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
             <Card style={{ padding: 10, margin: 10 }}>
               <Text style={{ padding: 5, fontWeight: "bold", fontSize: 18 }}>
                 পূর্ববর্তী মাসে বই চেক-আউট হয়েছে (নিচের টেবিল অনুযায়ী প্রতিটি
-                বিদ্যালয় থেকে তথ্য সংগ্রহ করুন এবং এবং প্রতি মাসের তথ্য পরের
-                মাসের ২৫ তারিখের সিস্টেমে ইনপুট করুন) ।
+                বিদ্যালয় থেকে তথ্য সংগ্রহ করুন এবং প্রতি মাসের তথ্য পরের মাসের
+                ১৫ তারিখের মধ্যে সিস্টেমে ইনপুট করুন) ।
               </Text>
             </Card>
           </View>
@@ -6654,10 +6965,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       বিদ্যালয়ের শ্রেণিকক্ষ পাঠাগারের মোট তথ্য
                     </Text>
                     <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 5, padding: 2 }}>
                         <Text>বিদ্যালয়ের মোট শিক্ষার্থীর সংখ্যা: </Text>
                       </View>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
                         <TextInput
                           style={{
                             height: 30,
@@ -6672,12 +6983,12 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 5, padding: 2 }}>
                         <Text>
                           বিদ্যালয়ের মোট বই চেক আউট করা শিক্ষার্থীর সংখ্যা:
                         </Text>
                       </View>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
                         <TextInput
                           style={{
                             height: 30,
@@ -6692,10 +7003,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 5, padding: 2 }}>
                         <Text>বিদ্যালয়ের মোট চেক আউটকৃত বইয়ের সংখ্যা: </Text>
                       </View>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
                         <TextInput
                           style={{
                             height: 30,
@@ -6710,12 +7021,12 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 5, padding: 2 }}>
                         <Text>
                           বিদ্যালয়ের মোট বই চেক ইন করা শিক্ষার্থীর সংখ্যা:
                         </Text>
                       </View>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
                         <TextInput
                           style={{
                             height: 30,
@@ -6730,10 +7041,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 5, padding: 2 }}>
                         <Text>বিদ্যালয়ের মোট চেক ইনকৃত বইয়ের সংখ্যা: </Text>
                       </View>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
                         <TextInput
                           style={{
                             height: 30,
@@ -6761,10 +7072,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       সম্পন্ন)
                     </Text>
                     <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 5, padding: 2 }}>
                         <Text>বিদ্যালয়ের মোট শিক্ষার্থীর সংখ্যা:</Text>
                       </View>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
                         <TextInput
                           style={{
                             height: 30,
@@ -6779,12 +7090,12 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 5, padding: 2 }}>
                         <Text>
                           বিদ্যালয়ের মোট বই চেক আউট করা শিক্ষার্থীর সংখ্যা:
                         </Text>
                       </View>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
                         <TextInput
                           style={{
                             height: 30,
@@ -6799,10 +7110,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 5, padding: 2 }}>
                         <Text>বিদ্যালয়ের মোট চেক আউটকৃত বইয়ের সংখ্যা: </Text>
                       </View>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
                         <TextInput
                           style={{
                             height: 30,
@@ -6817,12 +7128,12 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 5, padding: 2 }}>
                         <Text>
                           বিদ্যালয়ের মোট বই চেক ইন করা শিক্ষার্থীর সংখ্যা:
                         </Text>
                       </View>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
                         <TextInput
                           style={{
                             height: 30,
@@ -6837,10 +7148,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 5, padding: 2 }}>
                         <Text>বিদ্যালয়ের মোট চেক ইনকৃত বইয়ের সংখ্যা: </Text>
                       </View>
-                      <View style={{ flex: 1, padding: 2 }}>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
                         <TextInput
                           style={{
                             height: 30,
@@ -6891,16 +7202,20 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    flex: 1,
+    height: height,
+    width: width,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   background: {
     height: "100%",
     width: "100%",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  container: {
-    alignItems: "center",
-    flex: 1,
   },
   logoMain: {
     height: 80,

@@ -1370,8 +1370,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
             <Card style={{ padding: 10, margin: 10 }}>
               <Text style={{ padding: 5, fontWeight: "bold", fontSize: 18 }}>
                 পূর্ববর্তী মাসে বই চেক-আউট হয়েছে (নিচের টেবিল অনুযায়ী প্রতিটি
-                কমিউনিটি রিডিং ফোরাম থেকে তথ্য সংগ্রহ করুন এবং এবং প্রতি মাসের
-                তথ্য পরের মাসের ২৫ তারিখের সিস্টেমে ইনপুট করুন) ।
+                কমিউনিটি রিডিং ফোরাম থেকে তথ্য সংগ্রহ করুন এবং প্রতি মাসের তথ্য
+                পরের মাসের ১৫ তারিখের সিস্টেমে ইনপুট করুন) ।
               </Text>
             </Card>
           </View>
