@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 11/10/2021
-//  Modify Date: 18/05/2022
+//  Modify Date: 04/08/2022
 //  Description: Monthly book checkout screen component
 
 import React from "react";
@@ -40,8 +40,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       allEmployee: [],
       allOffice: [],
       allDesignation: [],
-      allBookcheckoutSchoolData: [],
       //Preloaded Data
+
+      // All Book-checkout Data
+      allBookcheckoutSchoolData: [],
+      // All Book-checkout Data
 
       // Duplicate data check
       duplicateBookCheckoutSchool: [],
@@ -76,7 +79,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       pickerVisitorOffice: "",
       pickerLF: "",
       pickerLPO: "",
-      communityVolunteer: "",
+      pickerMonth: "",
       // General data
 
       //School Data
@@ -328,10 +331,18 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       // schoolTotalNoTitle: 0,
       // schoolTotalNoBook: 0,
 
+      schoolTotalNoGirl: 0,
+      schoolTotalNoBoy: 0,
       schoolTotalNoStudent: 0,
+
+      schoolTotalNoGirlBC: 0,
+      schoolTotalNoBoyBC: 0,
       schoolTotalNoStudentBC: 0,
+
       schoolTotalNoBookBC: 0,
+
       schoolTotalNoStudentBCIn: 0,
+
       schoolTotalNoBookBCIn: 0,
 
       schoolTotalNoSpStudent: 0,
@@ -359,6 +370,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       schoolError: "",
       headTeacherError: "",
       genderError: "",
+      monthError: "",
       // Validation message
     };
   }
@@ -369,6 +381,25 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   upazillas = upazillas;
   unions = unions;
   //Geo values
+
+  //Load data from server
+  componentDidMount() {
+    this.getAllSchool();
+    this.getAllEmployee();
+    this.getAllDesignation();
+    // this.getAllProject();
+    // this.getAllOffice();
+    // this.getAllTeacher();
+    this.getAllBookCheckoutSchool();
+    console.log("Component mounted");
+    console.log(
+      "Duplicate Bookcheckout Data: ",
+      this.state.duplicateBookCheckoutSchool.length
+    );
+
+    //console.log("Duplicate Data: ", this.state.duplicateBookCheckoutSchool);
+  }
+  //Load data from server
 
   // For Datepicker
   setDate = (event, date) => {
@@ -538,25 +569,6 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   };
   // Get All Book-checkout Data for school
 
-  //Load data from server
-  componentDidMount() {
-    this.getAllSchool();
-    this.getAllEmployee();
-    this.getAllDesignation();
-    // this.getAllProject();
-    // this.getAllOffice();
-    // this.getAllTeacher();
-    this.getAllBookCheckoutSchool();
-    console.log("Component mounted");
-    console.log(
-      "Duplicate Bookcheckout Data: ",
-      this.state.duplicateBookCheckoutSchool.length
-    );
-
-    //console.log("Duplicate Data: ", this.state.duplicateBookCheckoutSchool);
-  }
-  //Load data from server
-
   // Register new book-checkout data
   saveBookCheckout = async () => {
     const newBookCheckout = {
@@ -574,6 +586,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       school: this.state.pickerSchool,
       headTeacher: this.state.pickerHeadTeacher,
       gender: this.state.pickerGender,
+      month: this.state.pickerMonth,
 
       priPrimaryBoy: this.state.priPrimaryBoy,
       priPrimaryGirl: this.state.priPrimaryGirl,
@@ -765,6 +778,12 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       //Book checkin
 
       // School total data
+
+      schoolTotalNoGirl: this.state.schoolTotalNoGirl,
+      schoolTotalNoBoy: this.state.schoolTotalNoBoy,
+      schoolTotalNoGirlBC: this.state.schoolTotalNoGirlBC,
+      schoolTotalNoBoyBC: this.state.schoolTotalNoBoyBC,
+
       schoolTotalNoStudent: this.state.schoolTotalNoStudent,
       schoolTotalNoStudentBC: this.state.schoolTotalNoStudentBC,
       schoolTotalNoBookBC: this.state.schoolTotalNoBookBC,
@@ -799,63 +818,67 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
     // Check duplicate data
 
     // Check empty fields
-    if (this.state.date == "") {
+    if (this.state.date === "") {
       this.setState({ dateError: "Date can not be empty" });
       Alert.alert("Alert", "Date can not be empty");
       return;
-    } else if (this.state.pickerOffice == "") {
+    } else if (this.state.pickerOffice === "") {
       this.setState({ fieldOfficeError: "Field office can not be empty" });
       Alert.alert("Alert", "Field office can not be empty");
       return;
-    } else if (this.state.pickerProject == "") {
+    } else if (this.state.pickerProject === "") {
       this.setState({ projectError: "Project can not be empty" });
       Alert.alert("Alert", "Project can not be empty");
       return;
-    } else if (this.state.pickerDistrict == "") {
+    } else if (this.state.pickerDistrict === "") {
       this.setState({ districtError: "District can not be empty" });
       Alert.alert("Alert", "District can not be empty");
       return;
-    } else if (this.state.pickerUpazilla == "") {
+    } else if (this.state.pickerUpazilla === "") {
       this.setState({ upazillaError: "Upazilla can not be empty" });
       Alert.alert("Alert", "Upazilla can not be empty");
       return;
-    } else if (this.state.visitNo == 0) {
+    } else if (this.state.visitNo === 0) {
       this.setState({ visitNoError: "Visit no can not be empty" });
       Alert.alert("Alert", "Visit no can not be empty");
       return;
-    } else if (this.state.pickerVisitor == "") {
+    } else if (this.state.pickerVisitor === "") {
       this.setState({ visitorNameError: "Visitor can not be empty" });
       Alert.alert("Alert", "Visitor can not be empty");
       return;
-    } else if (this.state.pickerDesignation == "") {
+    } else if (this.state.pickerDesignation === "") {
       this.setState({
         visitorDesignationError: "Designation can not be empty",
       });
       Alert.alert("Alert", "Designation can not be empty");
       return;
-    } else if (this.state.pickerVisitorOffice == "") {
+    } else if (this.state.pickerVisitorOffice === "") {
       this.setState({ visitorOfficeError: "Visitor office can not be empty" });
       Alert.alert("Alert", "Visitor office can not be empty");
       return;
-    } else if (this.state.pickerLPO == "") {
+    } else if (this.state.pickerLPO === "") {
       this.setState({ lpoError: "LPO can not be empty" });
       Alert.alert("Alert", "LPO can not be empty");
       return;
-    } else if (this.state.pickerLF == "") {
+    } else if (this.state.pickerLF === "") {
       this.setState({ lfError: "LF can not be empty" });
       Alert.alert("Alert", "LF can not be empty");
       return;
-    } else if (this.state.pickerSchool == "") {
+    } else if (this.state.pickerSchool === "") {
       this.setState({ schoolError: "School can not be empty" });
       Alert.alert("Alert", "School can not be empty");
       return;
-    } else if (this.state.pickerHeadTeacher == "") {
+    } else if (this.state.pickerHeadTeacher === "") {
       this.setState({ headTeacherError: "Head teacher can not be empty" });
       Alert.alert("Alert", "Head teacher can not be empty");
       return;
-    } else if (this.state.pickerGender == "") {
+    } else if (this.state.pickerGender === "") {
       this.setState({ genderError: "Gender can not be empty" });
       Alert.alert("Alert", "Gender can not be empty");
+      return;
+    } else if (this.state.pickerMonth === "") {
+      this.setState({ monthError: "Month can not be empty" });
+      Alert.alert("Alert", "Month can not be empty");
       return;
     } else if (this.state.duplicateBookCheckoutSchool.length > 0) {
       Alert.alert("Alert", "Data already inserted and can't be duplicate");
@@ -876,6 +899,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
         schoolError: "",
         headTeacherError: "",
         genderError: "",
+        monthError: "",
       });
       // Check empty fields
 
@@ -896,6 +920,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
         if (response.status >= 200 && response.status < 300) {
           Alert.alert("Alert", "Book checkout data saved successfully!!!");
           this.getAllBookCheckoutSchool();
+          this.props.navigation.navigate("BookCheckoutSchool");
+          this.forceUpdate();
         }
       } catch (errors) {
         alert(errors);
@@ -911,6 +937,9 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
     // For Datepicker
     const { show, date, mode } = this.state;
     // For Datepicker
+
+    // navigation
+    const { navigation } = this.props;
 
     return (
       <View style={styles.container}>
@@ -1176,6 +1205,51 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         fontWeight: "bold",
                       }}
                     >
+                      মাস:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state && this.state.pickerMonth}
+                    onValueChange={(value) => {
+                      this.setState({ pickerMonth: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"January"} value={"January"} />
+                    <Picker.Item label={"February"} value={"February"} />
+                    <Picker.Item label={"March"} value={"Dhaka LP Program"} />
+                    <Picker.Item label={"April"} value={"April"} />
+                    <Picker.Item label={"May"} value={"May"} />
+                    <Picker.Item label={"June"} value={"June"} />
+                    <Picker.Item label={"July"} value={"July"} />
+                    <Picker.Item label={"August"} value={"August"} />
+                    <Picker.Item label={"September"} value={"September"} />
+                    <Picker.Item label={"October"} value={"October"} />
+                    <Picker.Item label={"November"} value={"November"} />
+                    <Picker.Item label={"December"} value={"December"} />
+                  </Picker>
+                  {/* <Text style={{ color: "red" }}>
+                    {this.state.projectError}
+                  </Text> */}
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
                       ভিজিট নম্বর:
                     </Text>
                     <Text
@@ -1187,7 +1261,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                   <TextInput
                     style={{
                       height: 30,
-                      width: 100,
+                      width: 80,
                       padding: 5,
                       borderWidth: 1,
                     }}
@@ -1615,6 +1689,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classThreeTotal +
                                 this.state.classTwoTotal +
                                 this.state.classOneTotal,
+                              schoolTotalNoBoy:
+                                value +
+                                this.state.classOneBoy +
+                                this.state.classTwoBoy +
+                                this.state.classThreeBoy +
+                                this.state.classFourBoy +
+                                this.state.classFiveBoy,
                             });
                           }}
                         />
@@ -1646,6 +1727,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classThreeTotal +
                                 this.state.classTwoTotal +
                                 this.state.classOneTotal,
+                              schoolTotalNoGirl:
+                                value +
+                                this.state.classOneGirl +
+                                this.state.classTwoGirl +
+                                this.state.classThreeGirl +
+                                this.state.classFourGirl +
+                                this.state.classFiveGirl,
                             });
                           }}
                         />
@@ -1692,6 +1780,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classThreeNoTotalBC +
                                 this.state.classFourNoTotalBC +
                                 this.state.classFiveNoTotalBC,
+                              schoolTotalNoBoyBC:
+                                value +
+                                this.state.classOneNoBoyBC +
+                                this.state.classTwoNoBoyBC +
+                                this.state.classThreeNoBoyBC +
+                                this.state.classFourNoBoyBC +
+                                this.state.classFiveNoBoyBC,
                             });
                           }}
                         />
@@ -1722,6 +1817,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classThreeNoTotalBC +
                                 this.state.classFourNoTotalBC +
                                 this.state.classFiveNoTotalBC,
+                              schoolTotalNoGirlBC:
+                                value +
+                                this.state.classOneNoGirlBC +
+                                this.state.classTwoNoGirlBC +
+                                this.state.classThreeNoGirlBC +
+                                this.state.classFourNoGirlBC +
+                                this.state.classFiveNoGirlBC,
                             });
                           }}
                         />
@@ -2512,6 +2614,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classThreeTotal +
                                 this.state.classTwoTotal +
                                 this.state.priPrimaryTotal,
+                              schoolTotalNoBoy:
+                                value +
+                                this.state.priPrimaryBoy +
+                                this.state.classTwoBoy +
+                                this.state.classThreeBoy +
+                                this.state.classFourBoy +
+                                this.state.classFiveBoy,
                             });
                           }}
                         />
@@ -2541,6 +2650,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classThreeTotal +
                                 this.state.classTwoTotal +
                                 this.state.priPrimaryTotal,
+                              schoolTotalNoGirl:
+                                value +
+                                this.state.priPrimaryGirl +
+                                this.state.classTwoGirl +
+                                this.state.classThreeGirl +
+                                this.state.classFourGirl +
+                                this.state.classFiveGirl,
                             });
                           }}
                         />
@@ -2592,6 +2708,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classThreeNoTotalBC +
                                 this.state.classFourNoTotalBC +
                                 this.state.classFiveNoTotalBC,
+                              schoolTotalNoBoyBC:
+                                value +
+                                this.state.priPrimaryNoBoyBC +
+                                this.state.classTwoNoBoyBC +
+                                this.state.classThreeNoBoyBC +
+                                this.state.classFourNoBoyBC +
+                                this.state.classFiveNoBoyBC,
                             });
                           }}
                         />
@@ -2622,6 +2745,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classThreeNoTotalBC +
                                 this.state.classFourNoTotalBC +
                                 this.state.classFiveNoTotalBC,
+                              schoolTotalNoGirlBC:
+                                value +
+                                this.state.priPrimaryNoGirlBC +
+                                this.state.classTwoNoGirlBC +
+                                this.state.classThreeNoGirlBC +
+                                this.state.classFourNoGirlBC +
+                                this.state.classFiveNoGirlBC,
                             });
                           }}
                         />
@@ -3407,6 +3537,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classThreeTotal +
                                 this.state.classOneTotal +
                                 this.state.priPrimaryTotal,
+                              schoolTotalNoBoy:
+                                value +
+                                this.state.priPrimaryBoy +
+                                this.state.classOneBoy +
+                                this.state.classThreeBoy +
+                                this.state.classFourBoy +
+                                this.state.classFiveBoy,
                             });
                           }}
                         />
@@ -3436,6 +3573,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classThreeTotal +
                                 this.state.classOneTotal +
                                 this.state.priPrimaryTotal,
+                              schoolTotalNoGirl:
+                                value +
+                                this.state.classOneGirl +
+                                this.state.priPrimaryGirl +
+                                this.state.classThreeGirl +
+                                this.state.classFourGirl +
+                                this.state.classFiveGirl,
                             });
                           }}
                         />
@@ -3487,6 +3631,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classThreeNoTotalBC +
                                 this.state.classFourNoTotalBC +
                                 this.state.classFiveNoTotalBC,
+                              schoolTotalNoBoyBC:
+                                value +
+                                this.state.priPrimaryNoBoyBC +
+                                this.state.classOneNoBoyBC +
+                                this.state.classThreeNoBoyBC +
+                                this.state.classFourNoBoyBC +
+                                this.state.classFiveNoBoyBC,
                             });
                           }}
                         />
@@ -3517,6 +3668,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classThreeNoTotalBC +
                                 this.state.classFourNoTotalBC +
                                 this.state.classFiveNoTotalBC,
+                              schoolTotalNoGirlBC:
+                                value +
+                                this.state.priPrimaryNoGirlBC +
+                                this.state.classOneNoGirlBC +
+                                this.state.classThreeNoGirlBC +
+                                this.state.classFourNoGirlBC +
+                                this.state.classFiveNoGirlBC,
                             });
                           }}
                         />
@@ -4303,6 +4461,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classTwoTotal +
                                 this.state.classOneTotal +
                                 this.state.priPrimaryTotal,
+                              schoolTotalNoBoy:
+                                value +
+                                this.state.priPrimaryBoy +
+                                this.state.classOneBoy +
+                                this.state.classTwoBoy +
+                                this.state.classFourBoy +
+                                this.state.classFiveBoy,
                             });
                           }}
                         />
@@ -4332,6 +4497,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classTwoTotal +
                                 this.state.classOneTotal +
                                 this.state.priPrimaryTotal,
+                              schoolTotalNoGirl:
+                                value +
+                                this.state.classOneGirl +
+                                this.state.classTwoGirl +
+                                this.state.priPrimaryGirl +
+                                this.state.classFourGirl +
+                                this.state.classFiveGirl,
                             });
                           }}
                         />
@@ -4383,6 +4555,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classTwoNoTotalBC +
                                 this.state.classFourNoTotalBC +
                                 this.state.classFiveNoTotalBC,
+                              schoolTotalNoBoyBC:
+                                value +
+                                this.state.priPrimaryNoBoyBC +
+                                this.state.classTwoNoBoyBC +
+                                this.state.classOneNoBoyBC +
+                                this.state.classFourNoBoyBC +
+                                this.state.classFiveNoBoyBC,
                             });
                           }}
                         />
@@ -4413,6 +4592,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classTwoNoTotalBC +
                                 this.state.classFourNoTotalBC +
                                 this.state.classFiveNoTotalBC,
+                              schoolTotalNoGirlBC:
+                                value +
+                                this.state.priPrimaryNoGirlBC +
+                                this.state.classTwoNoGirlBC +
+                                this.state.classOneNoGirlBC +
+                                this.state.classFourNoGirlBC +
+                                this.state.classFiveNoGirlBC,
                             });
                           }}
                         />
@@ -5199,6 +5385,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classTwoTotal +
                                 this.state.classOneTotal +
                                 this.state.priPrimaryTotal,
+                              schoolTotalNoBoy:
+                                value +
+                                this.state.priPrimaryBoy +
+                                this.state.classOneBoy +
+                                this.state.classTwoBoy +
+                                this.state.classThreeBoy +
+                                this.state.classFiveBoy,
                             });
                           }}
                         />
@@ -5228,6 +5421,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classTwoTotal +
                                 this.state.classOneTotal +
                                 this.state.priPrimaryTotal,
+                              schoolTotalNoGirl:
+                                value +
+                                this.state.classOneGirl +
+                                this.state.classTwoGirl +
+                                this.state.classThreeGirl +
+                                this.state.priPrimaryGirl +
+                                this.state.classFiveGirl,
                             });
                           }}
                         />
@@ -5279,6 +5479,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classTwoNoTotalBC +
                                 this.state.classThreeNoTotalBC +
                                 this.state.classFiveNoTotalBC,
+                              schoolTotalNoBoyBC:
+                                value +
+                                this.state.priPrimaryNoBoyBC +
+                                this.state.classTwoNoBoyBC +
+                                this.state.classThreeNoBoyBC +
+                                this.state.classOneNoBoyBC +
+                                this.state.classFiveNoBoyBC,
                             });
                           }}
                         />
@@ -5309,6 +5516,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classTwoNoTotalBC +
                                 this.state.classThreeNoTotalBC +
                                 this.state.classFiveNoTotalBC,
+                              schoolTotalNoGirlBC:
+                                value +
+                                this.state.priPrimaryNoGirlBC +
+                                this.state.classTwoNoGirlBC +
+                                this.state.classThreeNoGirlBC +
+                                this.state.classOneNoGirlBC +
+                                this.state.classFiveNoGirlBC,
                             });
                           }}
                         />
@@ -6095,6 +6309,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classTwoTotal +
                                 this.state.classOneTotal +
                                 this.state.priPrimaryTotal,
+                              schoolTotalNoBoy:
+                                value +
+                                this.state.priPrimaryBoy +
+                                this.state.classOneBoy +
+                                this.state.classTwoBoy +
+                                this.state.classThreeBoy +
+                                this.state.classFourBoy,
                             });
                           }}
                         />
@@ -6124,6 +6345,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classTwoTotal +
                                 this.state.classOneTotal +
                                 this.state.priPrimaryTotal,
+                              schoolTotalNoGirl:
+                                value +
+                                this.state.classOneGirl +
+                                this.state.classTwoGirl +
+                                this.state.classThreeGirl +
+                                this.state.classFourGirl +
+                                this.state.priPrimaryGirl,
                             });
                           }}
                         />
@@ -6175,6 +6403,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classTwoNoTotalBC +
                                 this.state.classThreeNoTotalBC +
                                 this.state.classFourNoTotalBC,
+                              schoolTotalNoBoyBC:
+                                value +
+                                this.state.priPrimaryNoBoyBC +
+                                this.state.classTwoNoBoyBC +
+                                this.state.classThreeNoBoyBC +
+                                this.state.classFourNoBoyBC +
+                                this.state.classOneNoBoyBC,
                             });
                           }}
                         />
@@ -6205,6 +6440,13 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 this.state.classTwoNoTotalBC +
                                 this.state.classThreeNoTotalBC +
                                 this.state.classFourNoTotalBC,
+                              schoolTotalNoGirlBC:
+                                value +
+                                this.state.priPrimaryNoGirlBC +
+                                this.state.classTwoNoGirlBC +
+                                this.state.classThreeNoGirlBC +
+                                this.state.classFourNoGirlBC +
+                                this.state.classOneNoGirlBC,
                             });
                           }}
                         />
@@ -6966,6 +7208,42 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     </Text>
                     <View style={{ flexDirection: "row" }}>
                       <View style={{ flex: 5, padding: 2 }}>
+                        <Text>বিদ্যালয়ের মোট মেয়ে শিক্ষার্থীর সংখ্যা:</Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          editable={false}
+                          keyboardType="numeric"
+                          value={this.state.schoolTotalNoGirl + ""}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 5, padding: 2 }}>
+                        <Text>বিদ্যালয়ের মোট ছেলে শিক্ষার্থীর সংখ্যা:</Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          editable={false}
+                          keyboardType="numeric"
+                          value={this.state.schoolTotalNoBoy + ""}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 5, padding: 2 }}>
                         <Text>বিদ্যালয়ের মোট শিক্ষার্থীর সংখ্যা: </Text>
                       </View>
                       <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
@@ -6979,6 +7257,46 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           editable={false}
                           keyboardType="numeric"
                           value={this.state.schoolTotalNoStudent + ""}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 5, padding: 2 }}>
+                        <Text>
+                          বিদ্যালয়ের মোট বই চেক আউট করা মেয়ে শিক্ষার্থীর সংখ্যা:
+                        </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          editable={false}
+                          keyboardType="numeric"
+                          value={this.state.schoolTotalNoGirlBC + ""}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 5, padding: 2 }}>
+                        <Text>
+                          বিদ্যালয়ের মোট বই চেক আউট করা ছেলে শিক্ষার্থীর সংখ্যা:
+                        </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          editable={false}
+                          keyboardType="numeric"
+                          value={this.state.schoolTotalNoBoyBC + ""}
                         />
                       </View>
                     </View>
@@ -7002,6 +7320,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         />
                       </View>
                     </View>
+
                     <View style={{ flexDirection: "row" }}>
                       <View style={{ flex: 5, padding: 2 }}>
                         <Text>বিদ্যালয়ের মোট চেক আউটকৃত বইয়ের সংখ্যা: </Text>
@@ -7058,6 +7377,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         />
                       </View>
                     </View>
+
                     <Text
                       style={{
                         padding: 10,
@@ -7162,6 +7482,46 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           editable={false}
                           keyboardType="numeric"
                           value={this.state.schoolTotalNoSpBookBCIn + ""}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 5, padding: 2 }}>
+                        <Text>
+                          বিদ্যালয়ের মোট বই চেক ইন করা ছেলে শিক্ষার্থীর সংখ্যা:
+                        </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          editable={false}
+                          keyboardType="numeric"
+                          value={this.state.schoolTotalNoSpStudentBCIn + ""}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 5, padding: 2 }}>
+                        <Text>
+                          বিদ্যালয়ের মোট বই চেক ইন করা মেয়ে শিক্ষার্থীর সংখ্যা:
+                        </Text>
+                      </View>
+                      <View style={{ flex: 1, padding: 2, marginLeft: 100 }}>
+                        <TextInput
+                          style={{
+                            height: 30,
+                            width: 50,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          editable={false}
+                          keyboardType="numeric"
+                          value={this.state.schoolTotalNoSpStudentBCIn + ""}
                         />
                       </View>
                     </View>
