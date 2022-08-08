@@ -80,6 +80,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       pickerLF: "",
       pickerLPO: "",
       communityVolunteer: "",
+      pickerGenderCV: "",
       pickerMonth: "",
       // General data
 
@@ -373,6 +374,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       genderError: "",
       monthError: "",
       cVolunteerError: "",
+      cVolunteerGenderError: "",
       // Validation message
     };
   }
@@ -392,7 +394,12 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
     // this.getAllProject();
     // this.getAllOffice();
     // this.getAllTeacher();
+    this.getAllBookCheckoutCRF();
     console.log("Component mounted");
+    // console.log(
+    //   "Duplicate Bookcheckout Data CRF: ",
+    //   this.state.duplicateBookCheckoutCRF.length
+    // );
   }
   //Load data from server
 
@@ -536,7 +543,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
   getAllBookCheckoutCRF = async () => {
     try {
       const response = await axios(
-        "http://118.179.80.51:8080/api/v1/book-checkouts",
+        "http://118.179.80.51:8080/api/v1/book-checkout-community",
         {
           method: "GET",
           mode: "no-cors",
@@ -552,7 +559,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
         isLoading: false,
       });
       console.log(
-        "Bookcheckout Data: ",
+        "All Bookcheckout Data CRF: ",
         this.state.allBookcheckoutCRFData.length
       );
     } catch (error) {
@@ -569,7 +576,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       project: this.state.pickerProject,
       district: this.state.pickerDistrict.name,
       upazilla: this.state.pickerUpazilla.name,
-      school: this.state.pickerSchool.name,
+      school: this.state.pickerSchool,
       headTeacher: this.state.pickerHeadTeacher,
       gender: this.state.pickerGender,
       visitor: this.state.pickerVisitor,
@@ -579,7 +586,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       lpo: this.state.pickerLPO,
       visitNo: this.state.visitNo,
       month: this.state.pickerMonth,
-      cVolunteer: this.state.communityVolunteer,
+      communityVolunteer: this.state.communityVolunteer,
+      genderCV: this.state.pickerGenderCV,
 
       priPrimaryBoy: this.state.priPrimaryBoy,
       priPrimaryGirl: this.state.priPrimaryGirl,
@@ -799,11 +807,12 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
           item.visitNo == this.state.visitNo &&
           item.school == this.state.pickerSchool &&
           item.lpo == this.state.pickerLPO &&
-          item.lf == this.state.pickerLF
+          item.lf == this.state.pickerLF &&
+          item.month == this.state.pickerMonth
         );
       });
     console.log(
-      "Duplicate Bookcheckout Data: ",
+      "Duplicate Bookcheckout CRF Data: ",
       this.state.duplicateBookCheckoutCRF.length
     );
     // Check duplicate data
@@ -877,6 +886,12 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       });
       Alert.alert("Alert", "Community volunteer can not be empty");
       return;
+    } else if (this.state.pickerGenderCV === "") {
+      this.setState({
+        cVolunteerGenderError: "Community volunteer gender not be empty",
+      });
+      Alert.alert("Alert", "Community volunteer gender can not be empty");
+      return;
     } else if (this.state.duplicateBookCheckoutCRF.length > 0) {
       Alert.alert("Alert", "Data already inserted and can't be duplicate");
       return;
@@ -898,13 +913,14 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
         genderError: "",
         monthError: "",
         cVolunteerError: "",
+        cVolunteerGenderError: "",
       });
       // Check empty fields
 
       // Send data to API
       try {
         let response = await fetch(
-          "http://118.179.80.51:8080/api/v1/book-checkout",
+          "http://118.179.80.51:8080/api/v1/book-checkout-community",
           {
             method: "POST",
             mode: "no-cors",
@@ -917,6 +933,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
         );
         if (response.status >= 200 && response.status < 300) {
           Alert.alert("Book checkout data saved successfully!!!");
+          this.getAllBookCheckoutCRF();
+          this.forceUpdate();
         }
       } catch (errors) {
         alert(errors);
@@ -1353,7 +1371,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                   <Picker
                     style={{
                       height: 40,
-                      width: 180,
+                      width: 200,
                     }}
                     selectedValue={this.state && this.state.pickerLPO}
                     onValueChange={(value) => {
@@ -1389,7 +1407,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                   <Picker
                     style={{
                       height: 40,
-                      width: 180,
+                      width: 200,
                     }}
                     selectedValue={this.state && this.state.pickerLF}
                     onValueChange={(value) => {
@@ -1415,29 +1433,6 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                         );
                       })}
                   </Picker>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    কমিউনিটি ভলান্টিয়ারের নাম:
-                  </Text>
-                  <TextInput
-                    style={{
-                      height: 30,
-                      width: 150,
-                      padding: 5,
-                      borderWidth: 1,
-                    }}
-                    placeholder=""
-                    onChangeText={(text) =>
-                      this.setState({ communityVolunteer: text })
-                    }
-                    value={this.state.communityVolunteer}
-                  />
                 </View>
               </View>
               <View style={{ flexDirection: "row", padding: 10 }}>
@@ -1472,7 +1467,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <Picker.Item
                             key={item.id}
                             label={item.name}
-                            value={item}
+                            value={item.name}
                           />
                         );
                       })}
@@ -1518,6 +1513,56 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     selectedValue={this.state && this.state.pickerGender}
                     onValueChange={(value) => {
                       this.setState({ pickerGender: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"Female"} value={"Female"} />
+                    <Picker.Item label={"Male"} value={"Male"} />
+                  </Picker>
+                </View>
+              </View>
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    কমিউনিটি ভলান্টিয়ারের নাম:
+                  </Text>
+                  <TextInput
+                    style={{
+                      height: 30,
+                      width: 200,
+                      padding: 5,
+                      borderWidth: 1,
+                    }}
+                    placeholder=""
+                    onChangeText={(text) =>
+                      this.setState({ communityVolunteer: text })
+                    }
+                    value={this.state.communityVolunteer}
+                  />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    কমিউনিটি ভলান্টিয়ারের লিঙ্গ:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 200,
+                    }}
+                    selectedValue={this.state && this.state.pickerGenderCV}
+                    onValueChange={(value) => {
+                      this.setState({ pickerGenderCV: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
@@ -3188,7 +3233,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 value + this.state.classOneNoBookSpBoyBC,
                               schoolTotalNoSpBookBC:
                                 value +
-                                this.state.classOneNoBookSpGirlBC +
+                                this.state.classOneNoBookSpBoyBC +
                                 this.state.priPrimaryNoBookSpTotalBC +
                                 this.state.classTwoNoBookSpTotalBC +
                                 this.state.classThreeNoBookSpTotalBC +

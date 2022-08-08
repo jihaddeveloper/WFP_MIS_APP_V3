@@ -126,7 +126,7 @@ function HomeScreen({ navigation }) {
           <View style={{ flex: 1, padding: 2 }}>
             <View style={styles.buttonView}>
               <Button
-                title="বিদ্যালয়ের সামগ্রিক অবস্থা পর্যবেক্ষণ ফরম"
+                title="বিদ্যালয়ের সামগ্রিক পর্যবেক্ষণ ফরম"
                 onPress={() => navigation.navigate("OverallSchool")}
               ></Button>
             </View>

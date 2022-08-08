@@ -560,7 +560,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
         isLoading: false,
       });
       console.log(
-        "Bookcheckout Data: ",
+        "All Bookcheckout Data: ",
         this.state.allBookcheckoutSchoolData.length
       );
     } catch (error) {
@@ -808,11 +808,12 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
           item.visitNo == this.state.visitNo &&
           item.school == this.state.pickerSchool &&
           item.lpo == this.state.pickerLPO &&
-          item.lf == this.state.pickerLF
+          item.lf == this.state.pickerLF &&
+          item.month == this.state.pickerMonth
         );
       });
     console.log(
-      "Duplicate Bookcheckout Data: ",
+      "Duplicate Bookcheckout School Data: ",
       this.state.duplicateBookCheckoutSchool.length
     );
     // Check duplicate data
@@ -996,7 +997,6 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       onChange={this.setDate}
                     />
                   )}
-                  {/* <Text style={{ color: "red" }}>{this.state.dateError}</Text> */}
                 </View>
                 <View style={{ flex: 1 }}>
                   <View style={{ flexDirection: "row" }}>
@@ -3260,7 +3260,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                                 value + this.state.classOneNoBookSpBoyBC,
                               schoolTotalNoSpBookBC:
                                 value +
-                                this.state.classOneNoBookSpGirlBC +
+                                this.state.classOneNoBookSpBoyBC +
                                 this.state.priPrimaryNoBookSpTotalBC +
                                 this.state.classTwoNoBookSpTotalBC +
                                 this.state.classThreeNoBookSpTotalBC +
