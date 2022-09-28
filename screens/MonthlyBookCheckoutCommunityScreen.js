@@ -82,6 +82,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       communityVolunteer: "",
       pickerGenderCV: "",
       pickerMonth: "",
+      pickerYear: "",
       // General data
 
       //School Data
@@ -373,6 +374,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       headTeacherError: "",
       genderError: "",
       monthError: "",
+      yearError: "",
       cVolunteerError: "",
       cVolunteerGenderError: "",
       // Validation message
@@ -402,6 +404,327 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
     // );
   }
   //Load data from server
+
+  // Update state
+  updateState = () => {
+    this.setState({
+      // General data
+      visitNo: 0,
+      pickerOffice: "",
+      pickerProject: "",
+      pickerDistrict: "",
+      pickerDistrictKey: "",
+      pickerUpazilla: "",
+      pickerUpazillaKey: "",
+      pickerSchool: "",
+      pickerHeadTeacher: "",
+      pickerGender: "",
+      pickerVisitor: "",
+      pickerDesignation: "",
+      pickerVisitorOffice: "",
+      pickerLF: "",
+      pickerLPO: "",
+      communityVolunteer: "",
+      pickerGenderCV: "",
+      pickerMonth: "",
+      pickerYear: "",
+      // General data
+
+      //School Data
+
+      //Book checkout data
+      priPrimaryBoy: 0,
+      priPrimaryGirl: 0,
+      priPrimaryTotal: 0,
+
+      priPrimaryNoBoyBC: 0,
+      priPrimaryNoGirlBC: 0,
+      priPrimaryNoTotalBC: 0,
+
+      priPrimaryNoBookBoyBC: 0,
+      priPrimaryNoBookGirlBC: 0,
+      priPrimaryNoBookTotalBC: 0,
+
+      priPrimarySpBoy: 0,
+      priPrimarySpGirl: 0,
+      priPrimarySpTotal: 0,
+
+      priPrimaryNoSpBoyBC: 0,
+      priPrimaryNoSpGirlBC: 0,
+      priPrimaryNoSpTotalBC: 0,
+
+      priPrimaryNoBookSpBoyBC: 0,
+      priPrimaryNoBookSpGirlBC: 0,
+      priPrimaryNoBookSpTotalBC: 0,
+
+      classOneBoy: 0,
+      classOneGirl: 0,
+      classOneTotal: 0,
+
+      classOneNoBoyBC: 0,
+      classOneNoGirlBC: 0,
+      classOneNoTotalBC: 0,
+
+      classOneNoBookBoyBC: 0,
+      classOneNoBookGirlBC: 0,
+      classOneNoBookTotalBC: 0,
+
+      classOneSpBoy: 0,
+      classOneSpGirl: 0,
+      classOneSpTotal: 0,
+
+      classOneNoSpBoyBC: 0,
+      classOneNoSpGirlBC: 0,
+      classOneNoSpTotalBC: 0,
+
+      classOneNoBookSpBoyBC: 0,
+      classOneNoBookSpGirlBC: 0,
+      classOneNoBookSpTotalBC: 0,
+
+      classTwoBoy: 0,
+      classTwoGirl: 0,
+      classTwoTotal: 0,
+
+      classTwoNoBoyBC: 0,
+      classTwoNoGirlBC: 0,
+      classTwoNoTotalBC: 0,
+
+      classTwoNoBookBoyBC: 0,
+      classTwoNoBookGirlBC: 0,
+      classTwoNoBookTotalBC: 0,
+
+      classTwoSpBoy: 0,
+      classTwoSpGirl: 0,
+      classTwoSpTotal: 0,
+
+      classTwoNoSpBoyBC: 0,
+      classTwoNoSpGirlBC: 0,
+      classTwoNoSpTotalBC: 0,
+
+      classTwoNoBookSpBoyBC: 0,
+      classTwoNoBookSpGirlBC: 0,
+      classTwoNoBookSpTotalBC: 0,
+
+      classThreeBoy: 0,
+      classThreeGirl: 0,
+      classThreeTotal: 0,
+
+      classThreeNoBoyBC: 0,
+      classThreeNoGirlBC: 0,
+      classThreeNoTotalBC: 0,
+
+      classThreeNoBookBoyBC: 0,
+      classThreeNoBookGirlBC: 0,
+      classThreeNoBookTotalBC: 0,
+
+      classThreeSpBoy: 0,
+      classThreeSpGirl: 0,
+      classThreeSpTotal: 0,
+
+      classThreeNoSpBoyBC: 0,
+      classThreeNoSpGirlBC: 0,
+      classThreeNoSpTotalBC: 0,
+
+      classThreeNoBookSpBoyBC: 0,
+      classThreeNoBookSpGirlBC: 0,
+      classThreeNoBookSpTotalBC: 0,
+
+      classFourBoy: 0,
+      classFourGirl: 0,
+      classFourTotal: 0,
+
+      classFourNoBoyBC: 0,
+      classFourNoGirlBC: 0,
+      classFourNoTotalBC: 0,
+
+      classFourNoBookBoyBC: 0,
+      classFourNoBookGirlBC: 0,
+      classFourNoBookTotalBC: 0,
+
+      classFourSpBoy: 0,
+      classFourSpGirl: 0,
+      classFourSpTotal: 0,
+
+      classFourNoSpBoyBC: 0,
+      classFourNoSpGirlBC: 0,
+      classFourNoSpTotalBC: 0,
+
+      classFourNoBookSpBoyBC: 0,
+      classFourNoBookSpGirlBC: 0,
+      classFourNoBookSpTotalBC: 0,
+
+      classFiveBoy: 0,
+      classFiveGirl: 0,
+      classFiveTotal: 0,
+
+      classFiveNoBoyBC: 0,
+      classFiveNoGirlBC: 0,
+      classFiveNoTotalBC: 0,
+
+      classFiveNoBookBoyBC: 0,
+      classFiveNoBookGirlBC: 0,
+      classFiveNoBookTotalBC: 0,
+
+      classFiveSpBoy: 0,
+      classFiveSpGirl: 0,
+      classFiveSpTotal: 0,
+
+      classFiveNoSpBoyBC: 0,
+      classFiveNoSpGirlBC: 0,
+      classFiveNoSpTotalBC: 0,
+
+      classFiveNoBookSpBoyBC: 0,
+      classFiveNoBookSpGirlBC: 0,
+      classFiveNoBookSpTotalBC: 0,
+      //Book checkout data
+
+      //Book check-in data
+      priPrimaryNoBoyBCIn: 0,
+      priPrimaryNoGirlBCIn: 0,
+      priPrimaryNoTotalBCIn: 0,
+
+      priPrimaryNoBookBoyBCIn: 0,
+      priPrimaryNoBookGirlBCIn: 0,
+      priPrimaryNoBookTotalBCIn: 0,
+
+      priPrimaryNoSpBoyBCIn: 0,
+      priPrimaryNoSpGirlBCIn: 0,
+      priPrimaryNoSpTotalBCIn: 0,
+
+      priPrimaryNoBookSpBoyBCIn: 0,
+      priPrimaryNoBookSpGirlBCIn: 0,
+      priPrimaryNoBookSpTotalBCIn: 0,
+
+      classOneNoBoyBCIn: 0,
+      classOneNoGirlBCIn: 0,
+      classOneNoTotalBCIn: 0,
+
+      classOneNoBookBoyBCIn: 0,
+      classOneNoBookGirlBCIn: 0,
+      classOneNoBookTotalBCIn: 0,
+
+      classOneNoSpBoyBCIn: 0,
+      classOneNoSpGirlBCIn: 0,
+      classOneNoSpTotalBCIn: 0,
+
+      classOneNoBookSpBoyBCIn: 0,
+      classOneNoBookSpGirlBCIn: 0,
+      classOneNoBookSpTotalBCIn: 0,
+
+      classTwoNoBoyBCIn: 0,
+      classTwoNoGirlBCIn: 0,
+      classTwoNoTotalBCIn: 0,
+
+      classTwoNoBookBoyBCIn: 0,
+      classTwoNoBookGirlBCIn: 0,
+      classTwoNoBookTotalBCIn: 0,
+
+      classTwoNoSpBoyBCIn: 0,
+      classTwoNoSpGirlBCIn: 0,
+      classTwoNoSpTotalBCIn: 0,
+
+      classTwoNoBookSpBoyBCIn: 0,
+      classTwoNoBookSpGirlBCIn: 0,
+      classTwoNoBookSpTotalBCIn: 0,
+
+      classThreeNoBoyBCIn: 0,
+      classThreeNoGirlBCIn: 0,
+      classThreeNoTotalBCIn: 0,
+
+      classThreeNoBookBoyBCIn: 0,
+      classThreeNoBookGirlBCIn: 0,
+      classThreeNoBookTotalBCIn: 0,
+
+      classThreeNoSpBoyBCIn: 0,
+      classThreeNoSpGirlBCIn: 0,
+      classThreeNoSpTotalBCIn: 0,
+
+      classThreeNoBookSpBoyBCIn: 0,
+      classThreeNoBookSpGirlBCIn: 0,
+      classThreeNoBookSpTotalBCIn: 0,
+
+      classFourNoBoyBCIn: 0,
+      classFourNoGirlBCIn: 0,
+      classFourNoTotalBCIn: 0,
+
+      classFourNoBookBoyBCIn: 0,
+      classFourNoBookGirlBCIn: 0,
+      classFourNoBookTotalBCIn: 0,
+
+      classFourNoSpBoyBCIn: 0,
+      classFourNoSpGirlBCIn: 0,
+      classFourNoSpTotalBCIn: 0,
+
+      classFourNoBookSpBoyBCIn: 0,
+      classFourNoBookSpGirlBCIn: 0,
+      classFourNoBookSpTotalBCIn: 0,
+
+      classFiveNoBoyBCIn: 0,
+      classFiveNoGirlBCIn: 0,
+      classFiveNoTotalBCIn: 0,
+
+      classFiveNoBookBoyBCIn: 0,
+      classFiveNoBookGirlBCIn: 0,
+      classFiveNoBookTotalBCIn: 0,
+
+      classFiveNoSpBoyBCIn: 0,
+      classFiveNoSpGirlBCIn: 0,
+      classFiveNoSpTotalBCIn: 0,
+
+      classFiveNoBookSpBoyBCIn: 0,
+      classFiveNoBookSpGirlBCIn: 0,
+      classFiveNoBookSpTotalBCIn: 0,
+      //Book check-in data
+
+      //School Data
+
+      //School Total data
+      // schoolTotalNoTitle: 0,
+      // schoolTotalNoBook: 0,
+
+      schoolTotalNoGirl: 0,
+      schoolTotalNoBoy: 0,
+      schoolTotalNoStudent: 0,
+
+      schoolTotalNoGirlBC: 0,
+      schoolTotalNoBoyBC: 0,
+      schoolTotalNoStudentBC: 0,
+
+      schoolTotalNoBookBC: 0,
+
+      schoolTotalNoStudentBCIn: 0,
+
+      schoolTotalNoBookBCIn: 0,
+
+      schoolTotalNoSpStudent: 0,
+      schoolTotalNoSpStudentBC: 0,
+      schoolTotalNoSpBookBC: 0,
+      schoolTotalNoSpStudentBCIn: 0,
+      schoolTotalNoSpBookBCIn: 0,
+      //School Total data
+
+      // Validation message
+      dateError: "",
+      fieldOfficeError: "",
+      projectError: "",
+      districtError: "",
+      upazillaError: "",
+      visitNoError: "",
+      visitorNameError: "",
+      visitorDesignationError: "",
+      visitorOfficeError: "",
+      lpoError: "",
+      lfError: "",
+      schoolError: "",
+      headTeacherError: "",
+      genderError: "",
+      monthError: "",
+      yearError: "",
+      cVolunteerError: "",
+      cVolunteerGenderError: "",
+      // Validation message
+    });
+  };
 
   // For Datepicker
   setDate = (event, date) => {
@@ -586,6 +909,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       lpo: this.state.pickerLPO,
       visitNo: this.state.visitNo,
       month: this.state.pickerMonth,
+      year: this.state.pickerYear,
       communityVolunteer: this.state.communityVolunteer,
       genderCV: this.state.pickerGenderCV,
 
@@ -808,7 +1132,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
           item.school == this.state.pickerSchool &&
           item.lpo == this.state.pickerLPO &&
           item.lf == this.state.pickerLF &&
-          item.month == this.state.pickerMonth
+          item.month == this.state.pickerMonth &&
+          item.year == this.state.pickerYear
         );
       });
     console.log(
@@ -880,6 +1205,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       this.setState({ monthError: "Month can not be empty" });
       Alert.alert("Alert", "Month can not be empty");
       return;
+    } else if (this.state.pickerYear === "") {
+      this.setState({ yearError: "Year can not be empty" });
+      Alert.alert("Alert", "Year can not be empty");
+      return;
     } else if (this.state.communityVolunteer === "") {
       this.setState({
         cVolunteerError: "Community volunteer can not be empty",
@@ -912,6 +1241,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
         headTeacherError: "",
         genderError: "",
         monthError: "",
+        yearError: "",
         cVolunteerError: "",
         cVolunteerGenderError: "",
       });
@@ -934,6 +1264,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
         if (response.status >= 200 && response.status < 300) {
           Alert.alert("Book checkout data saved successfully!!!");
           this.getAllBookCheckoutCRF();
+          this.updateState();
           this.forceUpdate();
         }
       } catch (errors) {
@@ -1166,6 +1497,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       })}
                   </Picker>
                 </View>
+              </View>
+              <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
                   <View style={{ flexDirection: "row" }}>
                     <Text
@@ -1206,6 +1539,45 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     <Picker.Item label={"October"} value={"October"} />
                     <Picker.Item label={"November"} value={"November"} />
                     <Picker.Item label={"December"} value={"December"} />
+                  </Picker>
+                  {/* <Text style={{ color: "red" }}>
+                    {this.state.projectError}
+                  </Text> */}
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      বছর:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state && this.state.pickerYear}
+                    onValueChange={(value) => {
+                      this.setState({ pickerYear: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"2018"} value={"2018"} />
+                    <Picker.Item label={"2019"} value={"2019"} />
+                    <Picker.Item label={"2020"} value={"2020"} />
+                    <Picker.Item label={"2021"} value={"2021"} />
+                    <Picker.Item label={"2022"} value={"2022"} />
+                    <Picker.Item label={"2023"} value={"2023"} />
                   </Picker>
                   {/* <Text style={{ color: "red" }}>
                     {this.state.projectError}

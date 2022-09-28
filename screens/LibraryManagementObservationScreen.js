@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/08/2021
-//  Modify Date: 18/05/2022
+//  Modify Date: 25/09/2022
 //  Description: Library management observation screen component
 
 import React from "react";
@@ -44,6 +44,9 @@ export default class LibraryManagementObservationScreen extends React.Component 
       allLibraryObservationData: [],
       //Preloaded Data
 
+      // previous visit data of the library
+      preMonthData: [],
+
       // Duplicate data check
       duplicateLibraryObservation: [],
       // Duplicate data check
@@ -76,6 +79,8 @@ export default class LibraryManagementObservationScreen extends React.Component 
       pickerVisitorOffice: "",
       pickerLF: "",
       pickerLPO: "",
+      pickerMonth: "",
+      pickerYear: "",
       // General data
 
       // Last visit topic
@@ -168,7 +173,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
       // Discussion topic
 
       //library status
-      libraryStatus: "Developing",
+      libraryStatus: "Not set yet",
 
       // Input value
 
@@ -185,6 +190,8 @@ export default class LibraryManagementObservationScreen extends React.Component 
       lpoError: "",
       lfError: "",
       schoolError: "",
+      monthError: "",
+      yearError: "",
       // Validation message
     };
   }
@@ -195,6 +202,20 @@ export default class LibraryManagementObservationScreen extends React.Component 
   upazillas = upazillas;
   unions = unions;
   //Geo values
+
+  //Load data from server
+  componentDidMount() {
+    this.getAllSchool();
+    this.getAllEmployee();
+    this.getAllDesignation();
+    this.getAllLibraryIndicator();
+    // this.getAllProject();
+    // this.getAllOffice();
+    // this.getAllTeacher();
+    this.getAllLibraryObservation();
+    console.log("Component mounted");
+  }
+  //Load data from server
 
   // For Datepicker
   setDate = (event, date) => {
@@ -221,6 +242,141 @@ export default class LibraryManagementObservationScreen extends React.Component 
     this.show("time");
   };
   // For Datepicker
+
+  // Update state
+  updateState = () => {
+    this.setState({
+      // General data
+      visitNo: 0,
+      pickerOffice: "",
+      pickerProject: "",
+      pickerDistrict: "",
+      pickerDistrictKey: "",
+      pickerUpazilla: "",
+      pickerUpazillaKey: "",
+      pickerSchool: "",
+      pickerVisitor: "",
+      pickerDesignation: "",
+      pickerVisitorOffice: "",
+      pickerLF: "",
+      pickerLPO: "",
+      pickerMonth: "",
+      pickerYear: "",
+      // General data
+
+      // Last visit topic
+      pickerFollowup1: "",
+      pickerFollowup2: "",
+      pickerFollowup3: "",
+      // Last visit topic
+
+      // Indicator 1
+      pickerIsTrainedAllTeacher: "",
+      pickerIsTrainedSRMTeacher: "",
+      pickerIsTrainedHeadTeacher: "",
+      // Indicator 1
+
+      // Indicator 2
+      pickerClassroomSuitableSRM: "",
+      pickerClassroomDoorWindowLock: "",
+      pickerClassroomSafeClean: "",
+      // Indicator 2
+
+      // Indicator 3
+      pickerBookselfUseable: "",
+      pickerBookselfAccessible: "",
+      pickerBookselfEnvironmentProtected: "",
+      pickerBookselfTableCondition: "",
+      // Indicator 3
+
+      // Indicator 4
+      pickerBookRegisterUpdated: "",
+      // Indicator 4
+
+      // Indicator 5
+      pickerBookselfOrganized: "",
+      pickerBookselfBookOrganizedOpen: "",
+      pickerBookselfBookLevelViewable: "",
+      pickerBookselfBookAccessible: "",
+      // Indicator 5
+
+      // Indicator 6
+      pickerPrintRichDisplayed: "",
+      // Indicator 6
+
+      // Indicator 7
+      pickerBookCheckoutFunctional: "",
+      pickerBookCheckoutProcedureDisplayed: "",
+      pickerBookCheckoutRegisterUsable: "",
+      pickerBookCheckoutRegisterUpdated: "",
+      pickerBookCheckoutPendingBooklist: "",
+      // Indicator 7
+
+      // Indicator 8
+      pickerSRMClassRoutine: "",
+      pickerSRMClassWeekly: "",
+      pickerDailyBookCheckoutOpportunity: "",
+      // Indicator 8
+
+      // Indicator 9
+      pickerSRMRegisterUpdated: "",
+      // Indicator 9
+
+      // Indicator 10
+      pickerParentsMeeting: "",
+      // Indicator 10
+
+      // Indicator 11
+      pickerReadFestival: "",
+      // Indicator 11
+
+      // Indicator 12
+      pickerSustainabilityPlan: "",
+      pickerCollectivePlan: "",
+      pickerResponsibilityPlan: "",
+      // Indicator 12
+
+      // Discussion topic
+      pickerBestPracticeIndicator1: "",
+      bestPracticeIndicator1Details: "",
+      pickerBestPracticeIndicator2: "",
+      bestPracticeIndicator2Details: "",
+      pickerBestPracticeIndicator3: "",
+      bestPracticeIndicator3Details: "",
+
+      pickerCoachingSupportIndicator1: "",
+      coachingSupportIndicator1Details: "",
+      pickerCoachingSupportIndicator2: "",
+      coachingSupportIndicator2Details: "",
+
+      agreedStatement1: "",
+      agreedStatement2: "",
+      // Discussion topic
+
+      //library status
+      libraryStatus: "Not set yet",
+
+      // Input value
+
+      // Validation message
+      dateError: "",
+      fieldOfficeError: "",
+      projectError: "",
+      districtError: "",
+      upazillaError: "",
+      visitNoError: "",
+      visitorNameError: "",
+      visitorDesignationError: "",
+      visitorOfficeError: "",
+      lpoError: "",
+      lfError: "",
+      schoolError: "",
+      monthError: "",
+      yearError: "",
+      // Validation message
+    });
+  };
+  // Update state
 
   // Get All Project
   getAllProject = async () => {
@@ -374,20 +530,6 @@ export default class LibraryManagementObservationScreen extends React.Component 
   };
   // Get All Library Observation Data
 
-  //Load data from server
-  componentDidMount() {
-    this.getAllSchool();
-    this.getAllEmployee();
-    this.getAllDesignation();
-    this.getAllLibraryIndicator();
-    // this.getAllProject();
-    // this.getAllOffice();
-    // this.getAllTeacher();
-    this.getAllLibraryObservation();
-    console.log("Component mounted");
-  }
-  //Load data from server
-
   //Register new library-observation data
   saveLibraryObservation = async () => {
     const newLibraryObservation = {
@@ -403,6 +545,8 @@ export default class LibraryManagementObservationScreen extends React.Component 
       lpo: this.state.pickerLPO,
       lf: this.state.pickerLF,
       school: this.state.pickerSchool,
+      month: this.state.pickerMonth,
+      year: this.state.pickerYear,
 
       lastFollowupIndicator1: this.state.pickerFollowup1,
       lastFollowupIndicator2: this.state.pickerFollowup2,
@@ -486,72 +630,83 @@ export default class LibraryManagementObservationScreen extends React.Component 
           item.visitNo == this.state.visitNo &&
           item.school == this.state.pickerSchool &&
           item.lpo == this.state.pickerLPO &&
-          item.lf == this.state.pickerLF
+          item.lf == this.state.pickerLF &&
+          item.month == this.state.pickerMonth &&
+          item.year == this.state.pickerYear
         );
       });
+
     console.log(
       "Duplicate LibraryObservation Data: ",
       this.state.duplicateLibraryObservation.length
     );
     // Check duplicate data
 
-    if (this.state.date == "") {
+    if (this.state.date === "") {
       this.setState({ dateError: "Date can not be empty" });
       Alert.alert("Alert", "Date can not be empty");
       return;
-    } else if (this.state.pickerOffice == "") {
+    } else if (this.state.pickerOffice === "") {
       this.setState({ fieldOfficeError: "Field office can not be empty" });
       Alert.alert("Alert", "Field office can not be empty");
       return;
-    } else if (this.state.pickerProject == "") {
+    } else if (this.state.pickerProject === "") {
       this.setState({ projectError: "Project can not be empty" });
       Alert.alert("Alert", "Project can not be empty");
       return;
-    } else if (this.state.pickerDistrict == "") {
+    } else if (this.state.pickerDistrict === "") {
       this.setState({ districtError: "District can not be empty" });
       Alert.alert("Alert", "District can not be empty");
       return;
-    } else if (this.state.pickerUpazilla == "") {
+    } else if (this.state.pickerUpazilla === "") {
       this.setState({ upazillaError: "Upazilla can not be empty" });
       Alert.alert("Alert", "Upazilla can not be empty");
       return;
-    } else if (this.state.visitNo == 0) {
+    } else if (this.state.visitNo === 0) {
       this.setState({ visitNoError: "Visit no can not be empty" });
       Alert.alert("Alert", "Visit no can not be empty");
       return;
-    } else if (this.state.pickerVisitor == "") {
+    } else if (this.state.pickerVisitor === "") {
       this.setState({ visitorNameError: "Visitor can not be empty" });
       Alert.alert("Alert", "Visitor can not be empty");
       return;
-    } else if (this.state.pickerDesignation == "") {
+    } else if (this.state.pickerDesignation === "") {
       this.setState({
         visitorDesignationError: "Designation can not be empty",
       });
       Alert.alert("Alert", "Designation can not be empty");
       return;
-    } else if (this.state.pickerVisitorOffice == "") {
+    } else if (this.state.pickerVisitorOffice === "") {
       this.setState({ visitorOfficeError: "Visitor office can not be empty" });
       Alert.alert("Alert", "Visitor office can not be empty");
       return;
-    } else if (this.state.pickerLPO == "") {
+    } else if (this.state.pickerLPO === "") {
       this.setState({ lpoError: "LPO can not be empty" });
       Alert.alert("Alert", "LPO can not be empty");
       return;
-    } else if (this.state.pickerLF == "") {
+    } else if (this.state.pickerLF === "") {
       this.setState({ lfError: "LF can not be empty" });
       Alert.alert("Alert", "LF can not be empty");
       return;
-    } else if (this.state.pickerSchool == "") {
+    } else if (this.state.pickerSchool === "") {
       this.setState({ schoolError: "School can not be empty" });
       Alert.alert("Alert", "School can not be empty");
       return;
-    } else if (this.state.pickerHeadTeacher == "") {
+    } else if (this.state.pickerHeadTeacher === "") {
       this.setState({ headTeacherError: "Head teacher can not be empty" });
       Alert.alert("Alert", "Head teacher can not be empty");
       return;
-    } else if (this.state.pickerGender == "") {
+    } else if (this.state.pickerGender === "") {
       this.setState({ genderError: "Gender can not be empty" });
       Alert.alert("Alert", "Gender can not be empty");
+      return;
+    } else if (this.state.pickerMonth === "") {
+      this.setState({ monthError: "Month can not be empty" });
+      Alert.alert("Alert", "Month can not be empty");
+      return;
+    } else if (this.state.pickerYear === "") {
+      this.setState({ yearError: "Year can not be empty" });
+      Alert.alert("Alert", "Year can not be empty");
       return;
     } else if (this.state.duplicateLibraryObservation.length > 0) {
       Alert.alert("Alert", "Data already inserted and can't be duplicate");
@@ -570,6 +725,8 @@ export default class LibraryManagementObservationScreen extends React.Component 
         lpoError: "",
         lfError: "",
         schoolError: "",
+        monthError: "",
+        yearError: "",
       });
 
       try {
@@ -588,6 +745,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
         if (response.status >= 200 && response.status < 300) {
           Alert.alert("Library observation data saved successfully!!!");
           this.getAllLibraryObservation();
+          this.updateState();
         }
       } catch (errors) {
         alert(errors);
@@ -598,7 +756,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
 
   render() {
     // All data to save
-    const { show, date, mode } = this.state;
+    const { show, date, mode, libraryStatus } = this.state;
     // All data to save
 
     return (
@@ -665,6 +823,92 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     />
                   )}
                 </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      মাস:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state && this.state.pickerMonth}
+                    onValueChange={(value) => {
+                      this.setState({ pickerMonth: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"January"} value={"January"} />
+                    <Picker.Item label={"February"} value={"February"} />
+                    <Picker.Item label={"March"} value={"Dhaka LP Program"} />
+                    <Picker.Item label={"April"} value={"April"} />
+                    <Picker.Item label={"May"} value={"May"} />
+                    <Picker.Item label={"June"} value={"June"} />
+                    <Picker.Item label={"July"} value={"July"} />
+                    <Picker.Item label={"August"} value={"August"} />
+                    <Picker.Item label={"September"} value={"September"} />
+                    <Picker.Item label={"October"} value={"October"} />
+                    <Picker.Item label={"November"} value={"November"} />
+                    <Picker.Item label={"December"} value={"December"} />
+                  </Picker>
+                  {/* <Text style={{ color: "red" }}>
+                    {this.state.projectError}
+                  </Text> */}
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      বছর:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state && this.state.pickerYear}
+                    onValueChange={(value) => {
+                      this.setState({ pickerYear: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"2018"} value={"2018"} />
+                    <Picker.Item label={"2019"} value={"2019"} />
+                    <Picker.Item label={"2020"} value={"2020"} />
+                    <Picker.Item label={"2021"} value={"2021"} />
+                    <Picker.Item label={"2022"} value={"2022"} />
+                    <Picker.Item label={"2023"} value={"2023"} />
+                  </Picker>
+                  {/* <Text style={{ color: "red" }}>
+                    {this.state.projectError}
+                  </Text> */}
+                </View>
+              </View>
+              <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
                   <View style={{ flexDirection: "row" }}>
                     <Text
@@ -759,6 +1003,41 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     <Picker.Item label={"WB"} value={"WB"} />
                   </Picker>
                 </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      ভিজিট নম্বর:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <TextInput
+                    style={{
+                      height: 30,
+                      width: 100,
+                      padding: 5,
+                      borderWidth: 1,
+                    }}
+                    keyboardType="numeric"
+                    placeholder=""
+                    editable={true}
+                    onChangeText={(text) =>
+                      this.setState({ visitNo: Number(text) })
+                    }
+                    value={this.state.visitNo + ""}
+                  />
+                  {/* <Text style={{ color: "red" }}>
+                    {this.state.headTeacherError}
+                  </Text> */}
+                </View>
               </View>
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
@@ -852,159 +1131,8 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       })}
                   </Picker>
                 </View>
-                <View style={{ flex: 1 }}>
-                  <View style={{ flexDirection: "row" }}>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: "bold",
-                      }}
-                    >
-                      ভিজিট নম্বর:
-                    </Text>
-                    <Text
-                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
-                    >
-                      *
-                    </Text>
-                  </View>
-                  <TextInput
-                    style={{
-                      height: 30,
-                      width: 100,
-                      padding: 5,
-                      borderWidth: 1,
-                    }}
-                    keyboardType="numeric"
-                    placeholder=""
-                    editable={true}
-                    onChangeText={(text) =>
-                      this.setState({ visitNo: Number(text) })
-                    }
-                    value={this.state.visitNo + ""}
-                  />
-                  {/* <Text style={{ color: "red" }}>
-                    {this.state.headTeacherError}
-                  </Text> */}
-                </View>
               </View>
-              <View style={{ flexDirection: "row", padding: 10 }}>
-                <View style={{ flex: 1 }}>
-                  <View style={{ flexDirection: "row" }}>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: "bold",
-                      }}
-                    >
-                      পরিদর্শক এর নাম:
-                    </Text>
-                    <Text
-                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
-                    >
-                      *
-                    </Text>
-                  </View>
 
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
-                    selectedValue={this.state && this.state.pickerVisitor}
-                    onValueChange={(value) => {
-                      this.setState({ pickerVisitor: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    {this.state.allEmployee.map((item) => {
-                      return (
-                        <Picker.Item
-                          key={item.id}
-                          label={item.name}
-                          value={item.name}
-                        />
-                      );
-                    })}
-                  </Picker>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <View style={{ flexDirection: "row" }}>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: "bold",
-                      }}
-                    >
-                      পদবী:
-                    </Text>
-                    <Text
-                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
-                    >
-                      *
-                    </Text>
-                  </View>
-
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
-                    selectedValue={this.state && this.state.pickerDesignation}
-                    onValueChange={(value) => {
-                      this.setState({ pickerDesignation: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    {this.state.allDesignation.map((item) => {
-                      return (
-                        <Picker.Item
-                          key={item.id}
-                          label={item.name}
-                          value={item.name}
-                        />
-                      );
-                    })}
-                  </Picker>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <View style={{ flexDirection: "row" }}>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: "bold",
-                      }}
-                    >
-                      পরিদর্শক এর অফিস:
-                    </Text>
-                    <Text
-                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
-                    >
-                      *
-                    </Text>
-                  </View>
-                  <Picker
-                    selectedValue={this.state && this.state.pickerVisitorOffice}
-                    onValueChange={(value) => {
-                      this.setState({ pickerVisitorOffice: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"CO"} value={"CO"} />
-                    <Picker.Item label={"DFO"} value={"DFO"} />
-                    <Picker.Item label={"CFO"} value={"CFO"} />
-                    <Picker.Item label={"NFO"} value={"NFO"} />
-                    <Picker.Item label={"MFO"} value={"MFO"} />
-                  </Picker>
-                </View>
-              </View>
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
                   <View style={{ flexDirection: "row" }}>
@@ -1139,26 +1267,199 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   </Picker>
                 </View>
               </View>
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      পরিদর্শক এর নাম:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state && this.state.pickerVisitor}
+                    onValueChange={(value) => {
+                      this.setState({ pickerVisitor: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    {this.state.allEmployee.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      পদবী:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state && this.state.pickerDesignation}
+                    onValueChange={(value) => {
+                      this.setState({ pickerDesignation: value });
+
+                      this.setState({
+                        preMonthData:
+                          this.state.allLibraryObservationData.filter(
+                            (item) => {
+                              return (
+                                item.visitNo ===
+                                  parseInt(parseInt(this.state.visitNo) - 1) &&
+                                item.school === this.state.pickerSchool &&
+                                item.project === this.state.pickerProject &&
+                                item.year === this.state.pickerYear
+                              );
+                            }
+                          ),
+                      });
+
+                      console.log(
+                        "this.state.pickerSchool : " + this.state.pickerSchool
+                      );
+
+                      console.log(
+                        "this.state.pickerProject : " + this.state.pickerProject
+                      );
+
+                      console.log(
+                        "this.state.pickerYear : " + this.state.pickerYear
+                      );
+
+                      console.log(
+                        "parseInt(this.state.visitNo) : " +
+                          parseInt(parseInt(this.state.visitNo) - 1)
+                      );
+
+                      console.log(
+                        "allLibraryObservationData: " +
+                          this.state.allLibraryObservationData
+                      );
+
+                      //console.log("preMonthData: " + this.state.preMonthData);
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    {this.state.allDesignation.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      পরিদর্শক এর অফিস:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    selectedValue={this.state && this.state.pickerVisitorOffice}
+                    onValueChange={(value) => {
+                      this.setState({ pickerVisitorOffice: value });
+                      console.log("preMonthData: " + this.state.preMonthData);
+                      if (this.state.preMonthData.length > 0) {
+                        const followup1 = this.state.preMonthData.map(
+                          (item) => {
+                            return item.coachingSupportIndicator1;
+                          }
+                        );
+
+                        const followup2 = this.state.preMonthData.map(
+                          (item) => {
+                            return item.coachingSupportIndicator2;
+                          }
+                        );
+                        console.log("followup1 :" + followup1);
+                        this.setState({ pickerFollowup1: followup1 });
+                        this.setState({ pickerFollowup2: followup2 });
+                      }
+                    }}
+                    itemStyle={{ color: "white" }}
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"CO"} value={"CO"} />
+                    <Picker.Item label={"DFO"} value={"DFO"} />
+                    <Picker.Item label={"CFO"} value={"CFO"} />
+                    <Picker.Item label={"NFO"} value={"NFO"} />
+                    <Picker.Item label={"MFO"} value={"MFO"} />
+                  </Picker>
+                </View>
+              </View>
             </Card>
           </View>
 
           <View style={{ padding: 10 }}>
-            <Text style={styles.bigRedText}>নির্দেশনা </Text>
+            <Text style={styles.bigRedText}>নির্দেশNo </Text>
             <Card style={{ padding: 10, margin: 10 }}>
               <Text style={{ padding: 5 }}>
-                ১ প্রধান ইনডিকেটরের অধীন সকল সাব-ইনডিকেটর "হ্যাঁ" হলে প্রধান
-                ইনডিকেটরটি "হ্যাঁ" হবে ।
+                ১ প্রধান ইনডিকেটরের অধীন সকল সাব-ইনডিকেটর "Yes" হলে প্রধান
+                ইনডিকেটরটি "Yes" হবে ।
               </Text>
               <Text style={{ padding: 5 }}>
                 ২. পাঠাগার সংক্রান্ত ২-৩ টি ভালো দিক উল্লেখ করুন।
               </Text>
               <Text style={{ padding: 5 }}>
-                ৩. প্রথম যে ২-৩ টি ইনডিকেটরের উত্তর "না" হয়েছে তার আলোকে সহায়তার
+                ৩. প্রথম যে ২-৩ টি ইনডিকেটরের উত্তর "No" হয়েছে তার আলোকে সহায়তার
                 জন্য অগ্রাধিকারভিত্তিক ইনডিকেটর উল্লেখ করুন ।
               </Text>
               <Text style={{ padding: 5 }}>
-                ৪. শ্রেণিকক্ষ পাঠাগারের সমস্যা নিয়ে "না" হলে করনীয় কলামে
-                উল্লেখিত ব্যক্তি/ব্যক্তিবর্গের সাথে আলোচনা করুন।
+                ৪. শ্রেণিকক্ষ পাঠাগারের সমস্যা নিয়ে "No" হলে করনীয় কলামে
+                উল্লেখিত ব্যক্তি/ব্যক্তিবর্গের সাথে আলোচNo করুন।
               </Text>
               <Text style={{ padding: 5 }}>
                 ৫ রুম টু রিড থেকে কোনো পদক্ষেপ গ্রহণের প্রয়োজন হলে উল্লেখ করুন
@@ -1167,35 +1468,81 @@ export default class LibraryManagementObservationScreen extends React.Component 
             </Card>
             <Card style={{ padding: 10, margin: 10 }}>
               <Text style={{ justifyContent: "flex-end" }}>
-                ফলো-আপ করার জন্য গত পরিদর্শন থেকে প্রাপ্ত ২-৩ টি বিষয় উল্লেখ
+                ফলো-আপ করার জন্য গত পরিদর্শন থেকে প্রাপ্ত ১-২ টি বিষয় উল্লেখ
                 করুন যেখানে উন্নতি প্রয়োজন ছিল:
               </Text>
               <View style={{ flexDirection: "row" }}>
                 <View style={{ flex: 1 }}>
                   <View style={{ padding: 5 }}>
                     <Text>১.</Text>
-                    <Picker
-                      style={{
-                        height: 40,
-                        width: 150,
-                      }}
-                      selectedValue={this.state && this.state.pickerFollowup1}
-                      onValueChange={(value) => {
-                        this.setState({ pickerFollowup1: value });
-                      }}
-                      itemStyle={{ color: "white" }}
-                    >
-                      <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      {this.state.allLibraryIndicator.map((item) => {
-                        return (
-                          <Picker.Item
-                            key={item.id}
-                            label={item.indicatorDetail}
-                            value={item.indicatorDetail}
-                          />
-                        );
-                      })}
-                    </Picker>
+                    {/* {this.state.preMonthData.length > 0 && (
+                      <Picker
+                        selectedValue={this.state && this.state.pickerFollowup1}
+                        onValueChange={(value) => {
+                          this.setState({ pickerFollowup1: value });
+                        }}
+                        itemStyle={{ color: "white" }}
+                        style={{
+                          height: 40,
+                          width: 150,
+                        }}
+                      >
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        {
+                          // this.state.preMonthData.length
+                          this.state.preMonthData.map((item) => {
+                            return (
+                              <Picker.Item
+                                key={item.id}
+                                label={item.lastFollowupIndicator1}
+                                value={item.lastFollowupIndicator1}
+                              />
+                            );
+                          })
+                        }
+                        {
+                          // this.state.preMonthData.length
+                          this.state.preMonthData.map((item) => {
+                            return (
+                              <Picker.Item
+                                key={item.id}
+                                label={item.lastFollowupIndicator2}
+                                value={item.lastFollowupIndicator2}
+                              />
+                            );
+                          })
+                        }
+                      </Picker>
+                    )}
+                    {this.state.preMonthData.length === 0 && (
+                      <Picker
+                        style={{
+                          height: 40,
+                          width: 150,
+                        }}
+                        selectedValue={this.state && this.state.pickerFollowup1}
+                        onValueChange={(value) => {
+                          this.setState({ pickerFollowup1: value });
+                          //console.log("preMonthData: " + this.state.preMonthData);
+                        }}
+                        itemStyle={{ color: "white" }}
+                      >
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+
+                        {
+                          // this.state.preMonthData.length
+                          this.state.allLibraryIndicator.map((item) => {
+                            return (
+                              <Picker.Item
+                                key={item.id}
+                                label={item.indicatorDetail}
+                                value={item.indicatorDetail}
+                              />
+                            );
+                          })
+                        }
+                      </Picker>
+                    )} */}
                     <TextInput
                       style={{ height: 150, padding: 5, borderWidth: 1 }}
                       multiline={true}
@@ -1209,7 +1556,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                 <View style={{ flex: 1 }}>
                   <View style={{ padding: 5 }}>
                     <Text>২.</Text>
-                    <Picker
+                    {/* <Picker
                       style={{
                         height: 40,
                         width: 150,
@@ -1230,7 +1577,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           />
                         );
                       })}
-                    </Picker>
+                    </Picker> */}
                     <TextInput
                       style={{ height: 150, padding: 5, borderWidth: 1 }}
                       multiline={true}
@@ -1241,7 +1588,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     ></TextInput>
                   </View>
                 </View>
-                <View style={{ flex: 1 }}>
+                {/* <View style={{ flex: 1 }}>
                   <View style={{ padding: 5 }}>
                     <Text>৩.</Text>
                     <Picker
@@ -1275,7 +1622,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       value={this.state.pickerFollowup3 + ""}
                     ></TextInput>
                   </View>
-                </View>
+                </View> */}
               </View>
             </Card>
           </View>
@@ -1291,8 +1638,8 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   textAlign: "center",
                 }}
               >
-                ইনডিকেটর(প্রতিটি সাব-ইনডিকেটর "হ্যাঁ" হলে প্রধান ইনডিকেটর
-                "হ্যাঁ" হবে)
+                ইনডিকেটর(প্রতিটি সাব-ইনডিকেটর "Yes" হলে প্রধান ইনডিকেটর "Yes"
+                হবে)
               </Text>
             </View>
 
@@ -1313,8 +1660,8 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   fontSize: 14,
                 }}
               >
-                (১-৭ পর্যন্ত সবগুলো প্রধান সূচক "হ্যাঁ" না হওয়া পর্যন্ত
-                বিদ্যালয়ের শ্রেণি পাঠাগারগুলো "উন্নয়নশীল" হিসেবে গণ্য হবে)
+                (১-৭ পর্যন্ত সবগুলো প্রধান সূচক "Yes" না হওয়া পর্যন্ত বিদ্যালয়ের
+                শ্রেণি পাঠাগারগুলো "উন্নয়নশীল" হিসেবে গণ্য হবে)
               </Text>
             </View>
 
@@ -1361,7 +1708,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       />
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         এলপিও-কে অবহিত করুন এবং রুম টু রিডের সহায়তা প্রয়োজন হলে
                         মাসিক প্রতিবেদনে উল্লেখ করুন
@@ -1408,28 +1755,61 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           });
 
                           if (
-                            value === "হ্যাঁ" &&
-                            this.state.pickerIsTrainedHeadTeacher === "হ্যাঁ"
+                            value === "Yes" &&
+                            this.state.pickerIsTrainedHeadTeacher === "Yes"
                           ) {
                             this.setState({
-                              pickerIsTrainedAllTeacher: "হ্যাঁ",
+                              pickerIsTrainedAllTeacher: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerIsTrainedAllTeacher: "না",
+                              pickerIsTrainedAllTeacher: "No",
                             });
                           }
                           //Alert.alert(this.state.pickerIsTrainedAllTeacher);
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         এলপিও-কে অবহিত করুন এবং রুম টু রিডের সহায়তা প্রয়োজন হলে
                         মাসিক প্রতিবেদনে উল্লেখ করুন
@@ -1475,28 +1855,61 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           });
 
                           if (
-                            value === "হ্যাঁ" &&
-                            this.state.pickerIsTrainedSRMTeacher === "হ্যাঁ"
+                            value === "Yes" &&
+                            this.state.pickerIsTrainedSRMTeacher === "Yes"
                           ) {
                             this.setState({
-                              pickerIsTrainedAllTeacher: "হ্যাঁ",
+                              pickerIsTrainedAllTeacher: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerIsTrainedAllTeacher: "না",
+                              pickerIsTrainedAllTeacher: "No",
                             });
                           }
                           //Alert.alert(this.state.pickerIsTrainedAllTeacher);
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         এলপিও-কে অবহিত করুন এবং রুম টু রিডের সহায়তা প্রয়োজন হলে
                         মাসিক প্রতিবেদনে উল্লেখ করুন
@@ -1547,7 +1960,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       />
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         প্রধান শিক্ষকের সাথে আলোচনা এবং LPO-কে অবহিত করুন ।
                         সহায়তা প্রয়োজন হলে মাসিক প্রতিবেদন উল্লেখ করুন
@@ -1594,27 +2007,60 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           });
 
                           if (
-                            value === "হ্যাঁ" &&
-                            this.state.pickerClassroomSafeClean === "হ্যাঁ"
+                            value === "Yes" &&
+                            this.state.pickerClassroomSafeClean === "Yes"
                           ) {
                             this.setState({
-                              pickerClassroomSuitableSRM: "হ্যাঁ",
+                              pickerClassroomSuitableSRM: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerClassroomSuitableSRM: "না",
+                              pickerClassroomSuitableSRM: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         প্রধান শিক্ষকের সাথে আলোচনা এবং LPO-কে অবহিত করুন ।
                         সহায়তা প্রয়োজন হলে মাসিক প্রতিবেদন উল্লেখ করুন
@@ -1658,27 +2104,60 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           this.setState({ pickerClassroomSafeClean: value });
 
                           if (
-                            value === "হ্যাঁ" &&
-                            this.state.pickerClassroomDoorWindowLock === "হ্যাঁ"
+                            value === "Yes" &&
+                            this.state.pickerClassroomDoorWindowLock === "Yes"
                           ) {
                             this.setState({
-                              pickerClassroomSuitableSRM: "হ্যাঁ",
+                              pickerClassroomSuitableSRM: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerClassroomSuitableSRM: "না",
+                              pickerClassroomSuitableSRM: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         প্রধান শিক্ষকের সাথে আলোচনা এবং LPO-কে অবহিত করুন ।
                         সহায়তা প্রয়োজন হলে মাসিক প্রতিবেদন উল্লেখ করুন
@@ -1730,7 +2209,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       />
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে আরও ভালো কোনো
                         স্থানে ঠিকমত বুক-শেলফটি স্থাপন করা যায় কিনা এ বিষয়ে
@@ -1780,29 +2259,62 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           });
 
                           if (
-                            value === "হ্যাঁ" &&
+                            value === "Yes" &&
                             this.state.pickerBookselfEnvironmentProtected ===
-                              "হ্যাঁ" &&
-                            this.state.pickerBookselfTableCondition === "হ্যাঁ"
+                              "Yes" &&
+                            this.state.pickerBookselfTableCondition === "Yes"
                           ) {
                             this.setState({
-                              pickerBookselfUseable: "হ্যাঁ",
+                              pickerBookselfUseable: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerBookselfUseable: "না",
+                              pickerBookselfUseable: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে আরও ভালো কোনো
                         স্থানে ঠিকমত বুক-শেলফটি স্থাপন করা যায় কিনা এ বিষয়ে
@@ -1852,28 +2364,61 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           });
 
                           if (
-                            value === "হ্যাঁ" &&
-                            this.state.pickerBookselfAccessible === "হ্যাঁ" &&
+                            value === "Yes" &&
+                            this.state.pickerBookselfAccessible === "Yes" &&
                             this.state.pickerBookselfTableCondition
                           ) {
                             this.setState({
-                              pickerBookselfUseable: "হ্যাঁ",
+                              pickerBookselfUseable: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerBookselfUseable: "না",
+                              pickerBookselfUseable: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে আরও ভালো কোনো
                         স্থানে ঠিকমত বুক-শেলফটি স্থাপন করা যায় কিনা এ বিষয়ে
@@ -1921,29 +2466,62 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           });
 
                           if (
-                            value === "হ্যাঁ" &&
-                            this.state.pickerBookselfAccessible === "হ্যাঁ" &&
+                            value === "Yes" &&
+                            this.state.pickerBookselfAccessible === "Yes" &&
                             this.state.pickerBookselfEnvironmentProtected ===
-                              "হ্যাঁ"
+                              "Yes"
                           ) {
                             this.setState({
-                              pickerBookselfUseable: "হ্যাঁ",
+                              pickerBookselfUseable: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerBookselfUseable: "না",
+                              pickerBookselfUseable: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে আরও ভালো কোনো
                         স্থানে ঠিকমত বুক-শেলফটি স্থাপন করা যায় কিনা এ বিষয়ে
@@ -1997,16 +2575,49 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         }
                         onValueChange={(value) => {
                           this.setState({ pickerBookRegisterUpdated: value });
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         বুক রেজিস্টার যাচাই করুন এবং হালনাগাদ করুন । পাঠাগারের
                         প্রধান শিক্ষকের সাথে আলোচনা করুন । প্রয়োজনে সংশ্লিষ্ট
@@ -2058,7 +2669,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       />
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে বই কিভাবে সাজাতে হয়
                         বলুন এবং পাঠাগার শিক্ষক বা বুক ক্যাপ্টেনের সাথে নিয়ে বই
@@ -2107,29 +2718,62 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           });
 
                           if (
-                            value === "হ্যাঁ" &&
+                            value === "Yes" &&
                             this.state.pickerBookselfBookLevelViewable ===
-                              "হ্যাঁ" &&
-                            this.state.pickerBookselfBookAccessible === "হ্যাঁ"
+                              "Yes" &&
+                            this.state.pickerBookselfBookAccessible === "Yes"
                           ) {
                             this.setState({
-                              pickerBookselfOrganized: "হ্যাঁ",
+                              pickerBookselfOrganized: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerBookselfOrganized: "না",
+                              pickerBookselfOrganized: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে বই কিভাবে সাজাতে হয়
                         বলুন এবং পাঠাগার শিক্ষক বা বুক ক্যাপ্টেনের সাথে নিয়ে বই
@@ -2177,29 +2821,62 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           });
 
                           if (
-                            value === "হ্যাঁ" &&
+                            value === "Yes" &&
                             this.state.pickerBookselfBookOrganizedOpen ===
-                              "হ্যাঁ" &&
-                            this.state.pickerBookselfBookAccessible === "হ্যাঁ"
+                              "Yes" &&
+                            this.state.pickerBookselfBookAccessible === "Yes"
                           ) {
                             this.setState({
-                              pickerBookselfOrganized: "হ্যাঁ",
+                              pickerBookselfOrganized: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerBookselfOrganized: "না",
+                              pickerBookselfOrganized: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে বই কিভাবে সাজাতে হয়
                         বলুন এবং পাঠাগার শিক্ষক বা বুক ক্যাপ্টেনের সাথে নিয়ে বই
@@ -2246,30 +2923,62 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           });
 
                           if (
-                            value === "হ্যাঁ" &&
+                            value === "Yes" &&
                             this.state.pickerBookselfBookOrganizedOpen ===
-                              "হ্যাঁ" &&
-                            this.state.pickerBookselfBookLevelViewable ===
-                              "হ্যাঁ"
+                              "Yes" &&
+                            this.state.pickerBookselfBookLevelViewable === "Yes"
                           ) {
                             this.setState({
-                              pickerBookselfOrganized: "হ্যাঁ",
+                              pickerBookselfOrganized: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerBookselfOrganized: "না",
+                              pickerBookselfOrganized: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যনুয়ালের আলোকে বই কিভাবে সাজাতে হয়
                         বলুন এবং পাঠাগার শিক্ষক বা বুক ক্যাপ্টেনের সাথে নিয়ে বই
@@ -2322,16 +3031,49 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         }
                         onValueChange={(value) => {
                           this.setState({ pickerPrintRichDisplayed: value });
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যানুয়ালএর আলোকে শ্রেণীকক্ষ
                         ছাপাসমৃদ্ধ করার পদক্ষেপ নিন । প্রয়োজনে সংশ্লিষ্ট এসআরএম
@@ -2383,7 +3125,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       />
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যানুয়ালএর আলোকে বই গ্রহণ ও জমা
                         রেজিস্টার নিশ্চিত করুন । বই কম চেক-আউট হয়ে থাকলে প্রধান
@@ -2434,32 +3176,65 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           });
 
                           if (
-                            value === "হ্যাঁ" &&
+                            value === "Yes" &&
                             this.state.pickerBookCheckoutRegisterUsable ===
-                              "হ্যাঁ" &&
+                              "Yes" &&
                             this.state.pickerBookCheckoutRegisterUpdated ===
-                              "হ্যাঁ" &&
+                              "Yes" &&
                             this.state.pickerBookCheckoutPendingBooklist ===
-                              "হ্যাঁ"
+                              "Yes"
                           ) {
                             this.setState({
-                              pickerBookCheckoutFunctional: "হ্যাঁ",
+                              pickerBookCheckoutFunctional: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerBookCheckoutFunctional: "না",
+                              pickerBookCheckoutFunctional: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যানুয়ালএর আলোকে বই গ্রহণ ও জমা
                         রেজিস্টার নিশ্চিত করুন । বই কম চেক-আউট হয়ে থাকলে প্রধান
@@ -2507,32 +3282,65 @@ export default class LibraryManagementObservationScreen extends React.Component 
                             pickerBookCheckoutRegisterUsable: value,
                           });
                           if (
-                            value === "হ্যাঁ" &&
+                            value === "Yes" &&
                             this.state.pickerBookCheckoutProcedureDisplayed ===
-                              "হ্যাঁ" &&
+                              "Yes" &&
                             this.state.pickerBookCheckoutRegisterUpdated ===
-                              "হ্যাঁ" &&
+                              "Yes" &&
                             this.state.pickerBookCheckoutPendingBooklist ===
-                              "হ্যাঁ"
+                              "Yes"
                           ) {
                             this.setState({
-                              pickerBookCheckoutFunctional: "হ্যাঁ",
+                              pickerBookCheckoutFunctional: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerBookCheckoutFunctional: "না",
+                              pickerBookCheckoutFunctional: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যানুয়ালএর আলোকে বই গ্রহণ ও জমা
                         রেজিস্টার নিশ্চিত করুন । বই কম চেক-আউট হয়ে থাকলে প্রধান
@@ -2582,32 +3390,65 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           });
 
                           if (
-                            value === "হ্যাঁ" &&
+                            value === "Yes" &&
                             this.state.pickerBookCheckoutProcedureDisplayed ===
-                              "হ্যাঁ" &&
+                              "Yes" &&
                             this.state.pickerBookCheckoutRegisterUsable ===
-                              "হ্যাঁ" &&
+                              "Yes" &&
                             this.state.pickerBookCheckoutPendingBooklist ===
-                              "হ্যাঁ"
+                              "Yes"
                           ) {
                             this.setState({
-                              pickerBookCheckoutFunctional: "হ্যাঁ",
+                              pickerBookCheckoutFunctional: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerBookCheckoutFunctional: "না",
+                              pickerBookCheckoutFunctional: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যানুয়ালএর আলোকে বই গ্রহণ ও জমা
                         রেজিস্টার নিশ্চিত করুন । বই কম চেক-আউট হয়ে থাকলে প্রধান
@@ -2657,32 +3498,65 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           });
 
                           if (
-                            value === "হ্যাঁ" &&
+                            value === "Yes" &&
                             this.state.pickerBookCheckoutProcedureDisplayed ===
-                              "হ্যাঁ" &&
+                              "Yes" &&
                             this.state.pickerBookCheckoutRegisterUsable ===
-                              "হ্যাঁ" &&
+                              "Yes" &&
                             this.state.pickerBookCheckoutRegisterUpdated ===
-                              "হ্যাঁ"
+                              "Yes"
                           ) {
                             this.setState({
-                              pickerBookCheckoutFunctional: "হ্যাঁ",
+                              pickerBookCheckoutFunctional: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerBookCheckoutFunctional: "না",
+                              pickerBookCheckoutFunctional: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         পাঠাগার ব্যবস্থাপনা ম্যানুয়ালএর আলোকে বই গ্রহণ ও জমা
                         রেজিস্টার নিশ্চিত করুন । বই কম চেক-আউট হয়ে থাকলে প্রধান
@@ -2713,8 +3587,8 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   fontSize: 14,
                 }}
               >
-                (১-৭ পর্যন্ত সবগুলো প্রধান সূচক "হ্যাঁ" হলে এবং ৮-৯ ইনডিকেটর
-                চলমান থাকলে বিদ্যালয়টি "কার্যকরী" হিসেবে গণ্য হবে) ।
+                (১-৭ পর্যন্ত সবগুলো প্রধান সূচক "Yes" হলে এবং ৮-৯ ইনডিকেটর চলমান
+                থাকলে বিদ্যালয়টি "কার্যকরী" হিসেবে গণ্য হবে) ।
               </Text>
             </View>
 
@@ -2760,7 +3634,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       />
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         LPO-কে অবহিত করুন এবং রুম টু রিডের সহায়তা প্রয়োজন হলে
                         মাসিক প্রতিবেদন উল্লেখ করুন । প্রয়োজন হলে প্রধান
@@ -2808,28 +3682,61 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           });
 
                           if (
-                            value === "হ্যাঁ" &&
+                            value === "Yes" &&
                             this.state.pickerDailyBookCheckoutOpportunity ===
-                              "হ্যাঁ"
+                              "Yes"
                           ) {
                             this.setState({
-                              pickerSRMClassRoutine: "হ্যাঁ",
+                              pickerSRMClassRoutine: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerSRMClassRoutine: "না",
+                              pickerSRMClassRoutine: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         LPO-কে অবহিত করুন এবং রুম টু রিডের সহায়তা প্রয়োজন হলে
                         মাসিক প্রতিবেদন উল্লেখ করুন । প্রয়োজন হলে প্রধান
@@ -2877,27 +3784,60 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           });
 
                           if (
-                            value === "হ্যাঁ" &&
-                            this.state.pickerSRMClassWeekly === "হ্যাঁ"
+                            value === "Yes" &&
+                            this.state.pickerSRMClassWeekly === "Yes"
                           ) {
                             this.setState({
-                              pickerSRMClassRoutine: "হ্যাঁ",
+                              pickerSRMClassRoutine: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerSRMClassRoutine: "না",
+                              pickerSRMClassRoutine: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         LPO-কে অবহিত করুন এবং রুম টু রিডের সহায়তা প্রয়োজন হলে
                         মাসিক প্রতিবেদন উল্লেখ করুন । প্রয়োজন হলে প্রধান
@@ -2951,16 +3891,49 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         }
                         onValueChange={(value) => {
                           this.setState({ pickerSRMRegisterUpdated: value });
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         LPO-কে অবহিত করুন এবং মাসিক সভায় তা তুলে ধরুন ।
                       </Text>
@@ -2987,7 +3960,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   fontSize: 14,
                 }}
               >
-                (১-৯ পর্যন্ত সবগুলো প্রধান সূচক "হ্যাঁ" হলে এবং ১০-১২ পর্যন্ত
+                (১-৯ পর্যন্ত সবগুলো প্রধান সূচক "Yes" হলে এবং ১০-১২ পর্যন্ত
                 ইনডিকেটর চলমান থাকলে বিদ্যালয়টি "অধিক কার্যকরী" হিসেবে গণ্য হবে)
                 ।
               </Text>
@@ -3037,16 +4010,49 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         }
                         onValueChange={(value) => {
                           this.setState({ pickerParentsMeeting: value });
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         প্রধান শিক্ষককের জানান এবং LPO-কে অবহিত করুন ।
                       </Text>
@@ -3097,18 +4103,51 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         }
                         onValueChange={(value) => {
                           this.setState({ pickerReadFestival: value });
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
-                        প্রধান শিক্ষককের সাথে আলোচনা করুন এবং LPO'র ফলোআপের জন্য
+                        প্রধান শিক্ষককের সাথে আলোচNo করুন এবং LPO'র ফলোআপের জন্য
                         নোট নিন ।
                       </Text>
                     </View>
@@ -3158,7 +4197,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       />
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         প্রধান শিক্ষককের সাথে আলোচনা করুন এবং LPO'র ফলোআপের জন্য
                         নোট নিন ।
@@ -3205,27 +4244,60 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           });
 
                           if (
-                            value === "হ্যাঁ" &&
-                            this.state.pickerResponsibilityPlan === "হ্যাঁ"
+                            value === "Yes" &&
+                            this.state.pickerResponsibilityPlan === "Yes"
                           ) {
                             this.setState({
-                              pickerSustainabilityPlan: "হ্যাঁ",
+                              pickerSustainabilityPlan: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerSustainabilityPlan: "না",
+                              pickerSustainabilityPlan: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         প্রধান শিক্ষককের সাথে আলোচনা করুন এবং LPO'র ফলোআপের জন্য
                         নোট নিন ।
@@ -3268,27 +4340,60 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         onValueChange={(value) => {
                           this.setState({ pickerResponsibilityPlan: value });
                           if (
-                            value === "হ্যাঁ" &&
-                            this.state.pickerCollectivePlan === "হ্যাঁ"
+                            value === "Yes" &&
+                            this.state.pickerCollectivePlan === "Yes"
                           ) {
                             this.setState({
-                              pickerSustainabilityPlan: "হ্যাঁ",
+                              pickerSustainabilityPlan: "Yes",
                             });
                           } else {
                             this.setState({
-                              pickerSustainabilityPlan: "না",
+                              pickerSustainabilityPlan: "No",
+                            });
+                          }
+
+                          // Set library status
+                          if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes" &&
+                            this.state.pickerSRMClassRoutine === "Yes" &&
+                            this.state.pickerSRMRegisterUpdated === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Highly Functioning",
+                            });
+                          } else if (
+                            this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                            this.state.pickerClassroomSuitableSRM === "Yes" &&
+                            this.state.pickerBookselfUseable === "Yes" &&
+                            this.state.pickerBookRegisterUpdated === "Yes" &&
+                            this.state.pickerBookselfOrganized === "Yes" &&
+                            this.state.pickerPrintRichDisplayed === "Yes" &&
+                            this.state.pickerBookCheckoutFunctional === "Yes"
+                          ) {
+                            this.setState({
+                              libraryStatus: "Functioning",
+                            });
+                          } else {
+                            this.setState({
+                              libraryStatus: "Developing",
                             });
                           }
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"হ্যাঁ"} />
-                        <Picker.Item label={"না"} value={"না"} />
+                        <Picker.Item label={"Yes"} value={"Yes"} />
+                        <Picker.Item label={"No"} value={"No"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 2, padding: 2 }}>
-                      <Text style={{ fontWeight: "bold" }}>না হলে করনীয়: </Text>
+                      <Text style={{ fontWeight: "bold" }}>No হলে করনীয়: </Text>
                       <Text>
                         প্রধান শিক্ষককের সাথে আলোচনা করুন এবং LPO'র ফলোআপের জন্য
                         নোট নিন ।
@@ -3609,7 +4714,8 @@ export default class LibraryManagementObservationScreen extends React.Component 
                         color: "red",
                       }}
                     >
-                      {this.state.libraryStatus}
+                      {libraryStatus}
+                      {/* {this.state.libraryStatus} */}
                     </Text>
                   </View>
                 </View>
