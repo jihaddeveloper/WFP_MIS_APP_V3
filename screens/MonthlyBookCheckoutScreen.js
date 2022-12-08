@@ -1395,31 +1395,17 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       value={"WFP funded project"}
                     />
                     <Picker.Item
-                      label={"Natore LP & GEP Program"}
-                      value={"Natore LP & GEP Program"}
+                      label={"Natore LP Program"}
+                      value={"Natore LP Program"}
                     />
-
                     <Picker.Item
                       label={"Dhaka LP Program"}
                       value={"Dhaka LP Program"}
                     />
                     <Picker.Item
-                      label={"Cox's Bazar GEP Program"}
-                      value={"Cox's Bazar GEP Program"}
+                      label={"Moulvibazar LP Program"}
+                      value={"Moulvibazar LP Program"}
                     />
-                    <Picker.Item
-                      label={"Sylhet GEP Program"}
-                      value={"Sylhet GEP Program"}
-                    />
-                    <Picker.Item
-                      label={"Sylhet LP Program"}
-                      value={"Sylhet LP Program"}
-                    />
-                    <Picker.Item
-                      label={"UNICEF funded Host Community Project"}
-                      value={"UNICEF funded Host Community Project"}
-                    />
-                    <Picker.Item label={"WB"} value={"WB"} />
                   </Picker>
                   {/* <Text style={{ color: "red" }}>
                     {this.state.projectError}
@@ -1641,9 +1627,6 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     }
                     value={this.state.visitNo + ""}
                   />
-                  {/* <Text style={{ color: "red" }}>
-                    {this.state.headTeacherError}
-                  </Text> */}
                 </View>
               </View>
               <View style={{ flexDirection: "row", padding: 10 }}>

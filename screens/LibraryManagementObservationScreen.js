@@ -629,8 +629,6 @@ export default class LibraryManagementObservationScreen extends React.Component 
           item.date == this.state.date.toISOString().slice(0, 10) &&
           item.visitNo == this.state.visitNo &&
           item.school == this.state.pickerSchool &&
-          item.lpo == this.state.pickerLPO &&
-          item.lf == this.state.pickerLF &&
           item.month == this.state.pickerMonth &&
           item.year == this.state.pickerYear
         );
@@ -1444,7 +1442,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
           </View>
 
           <View style={{ padding: 10 }}>
-            <Text style={styles.bigRedText}>নির্দেশNo </Text>
+            <Text style={styles.bigRedText}>নির্দেশনা </Text>
             <Card style={{ padding: 10, margin: 10 }}>
               <Text style={{ padding: 5 }}>
                 ১ প্রধান ইনডিকেটরের অধীন সকল সাব-ইনডিকেটর "Yes" হলে প্রধান

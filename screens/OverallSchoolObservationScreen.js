@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 29/08/2021
-//  Modify Date: 08/12/2021
+//  Modify Date: 30/11/2022
 //  Description: Overall school observation screen component
 
 import React from "react";
@@ -16,6 +16,8 @@ import {
   Picker,
   Button,
   TouchableOpacity,
+  Alert,
+  Dimensions,
 } from "react-native";
 import { Checkbox } from "react-native-paper";
 import { Card } from "react-native-shadow-cards";
