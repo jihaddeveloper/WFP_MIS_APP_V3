@@ -124,7 +124,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
       lastFollowupTopic3: "",
 
       ind1FriendlyCommunicationStatus: "",
-      ind1FriendlyCommunicatiofetchnNotes: "",
+      ind1FriendlyCommunicationNotes: "",
 
       ind2SRMInspiringStatus: "",
       ind2SRMInspiringNotes: "",
@@ -169,6 +169,8 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
       agreedStatement2: "",
 
       teacherStatus: "",
+
+      dateError: "",
     };
   }
 
@@ -576,125 +578,181 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
       teacherStatus: this.state.teacherStatus,
     };
 
-    // Validation
-    // if (this.state.date === "") {
-    //   Alert.alert("Alert", "Date can not be empty");
-    //   return;
-    // } else if (this.state.pickerMonth === "") {
-    //   Alert.alert("Alert", "Month can not be empty");
-    //   return;
-    // } else if (this.state.pickerYear === "") {
-    //   Alert.alert("Alert", "Year can not be empty");
-    //   return;
-    // } else if (this.state.pickerDistrict === "") {
-    //   Alert.alert("Alert", "District can not be empty");
-    //   return;
-    // } else if (this.state.pickerUpazilla === "") {
-    //   Alert.alert("Alert", "Upazilla can not be empty");
-    //   return;
-    // } else if (this.state.pickerOffice === "") {
-    //   Alert.alert("Alert", "Office can not be empty");
-    //   return;
-    // } else if (this.state.pickerProject === "") {
-    //   Alert.alert("Alert", "Project can not be empty");
-    //   return;
-    // } else if (this.state.visitNo === 0) {
-    //   Alert.alert("Alert", "Visit No can not be 0");
-    //   return;
-    // } else if (this.state.pickerLF === "") {
-    //   Alert.alert("Alert", "LF can not be empty");
-    //   return;
-    // } else if (this.state.pickerLPO === "") {
-    //   Alert.alert("Alert", "LPO can not be empty");
-    //   return;
-    // } else if (this.state.pickerSchool === "") {
-    //   Alert.alert("Alert", "School can not be empty");
-    //   return;
-    // } else if (this.state.pickerVisitor === "") {
-    //   Alert.alert("Alert", "Visitor can not be empty");
-    //   return;
-    // } else if (this.state.pickerDesignation === "") {
-    //   Alert.alert("Alert", "Designation can not be empty");
-    //   return;
-    // } else if (this.state.pickerVisitorOffice === "") {
-    //   Alert.alert("Alert", "Visitor Office can not be empty");
-    //   return;
-    // } else if (this.state.classTeacher === "") {
-    //   Alert.alert("Alert", "Class Teacher can not be empty");
-    //   return;
-    // } else if (this.state.classTeacherGender === "") {
-    //   Alert.alert("Alert", "Gender can not be empty");
-    //   return;
-    // } else if (this.state.teacherTrained === "") {
-    //   Alert.alert("Alert", "Teacher training can not be empty");
-    //   return;
-    // } else if (this.state.grade === "") {
-    //   Alert.alert("Alert", "Grade can not be empty");
-    //   return;
-    // } else if (this.state.section === "") {
-    //   Alert.alert("Alert", "Section can not be empty");
-    //   return;
-    // } else if (this.state.classStartTime === "") {
-    //   Alert.alert("Alert", "Class Start Time can not be empty");
-    //   return;
-    // } else if (this.state.classEndTime === "") {
-    //   Alert.alert("Alert", "Class End Time can not be empty");
-    //   return;
-    // } else if (this.state.teachingTopic === "") {
-    //   Alert.alert("Alert", "Teaching Topic can not be empty");
-    //   return;
-    // } else if (this.state.teachingDay === "") {
-    //   Alert.alert("Alert", "Teaching Day can not be empty");
-    //   return;
-    // } else if (this.state.studentBoy === "") {
-    //   Alert.alert("Alert", "Student Boy can not be empty");
-    //   return;
-    // } else if (this.state.studentGirl === "") {
-    //   Alert.alert("Alert", "Student Girl can not be empty");
-    //   return;
-    // } else if (this.state.presentBoy === "") {
-    //   Alert.alert("Alert", "Present Boy can not be empty");
-    //   return;
-    // } else if (this.state.presentGirl === "") {
-    //   Alert.alert("Alert", "Present Girl can not be empty");
-    //   return;
-    // } else if (this.state.typeOfReading === "") {
-    //   Alert.alert("Alert", "Type Of Reading can not be empty");
-    //   return;
-    // } else if (this.state.bestPracticeInd1 === "") {
-    //   Alert.alert("Alert", "Best Practice Ind1 can not be empty");
-    //   return;
-    // } else if (this.state.bestPracticeInd2 === "") {
-    //   Alert.alert("Alert", "Best Practice Ind2 can not be empty");
-    //   return;
-    // } else if (this.state.bestPracticeInd3 === "") {
-    //   Alert.alert("Alert", "Best Practice Ind3 can not be empty");
-    //   return;
-    // } else if (this.state.coachingSupportInd1 === "") {
-    //   Alert.alert("Alert", "Coaching Support Ind1 can not be empty");
-    //   return;
-    // } else if (this.state.coachingSupportInd2 === "") {
-    //   Alert.alert("Alert", "Coaching Support Ind2 can not be empty");
-    //   return;
-    // } else if (this.state.coachingSupportDetailsInd1 === "") {
-    //   Alert.alert("Alert", "Coaching Support Details Ind1 can not be empty");
-    //   return;
-    // } else if (this.state.coachingSupportDetailsInd2 === "") {
-    //   Alert.alert("Alert", "Coaching Support Details Ind2 can not be empty");
-    //   return;
-    // } else if (this.state.agreedStatement1 === "") {
-    //   Alert.alert("Alert", "Agreed Statement1 can not be empty");
-    //   return;
-    // } else if (this.state.agreedStatement2 === "") {
-    //   Alert.alert("Alert", "Agreed Statement2 can not be empty");
-    //   return;
-    // } else
+    //Check duplicate data
+    this.state.duplicateSRMClassObservationData =
+      this.state.allSRMClassData.filter((item) => {
+        return (
+          item.date == this.state.date.toISOString().slice(0, 10) &&
+          item.visitNo == this.state.visitNo &&
+          item.school == this.state.pickerSchool &&
+          item.month == this.state.pickerMonth &&
+          item.year == this.state.pickerYear
+        );
+      });
 
-    if (this.state.duplicateSRMClassObservationData.length > 0) {
+    console.log(
+      "Duplicate SRM Class Data: ",
+      this.state.duplicateSRMClassObservationData.length
+    );
+    //Check duplicate data
+
+    // Validation
+    if (this.state.date === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Date can not be empty");
+      return;
+    } else if (this.state.pickerMonth === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Month can not be empty");
+      return;
+    } else if (this.state.pickerYear === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Year can not be empty");
+      return;
+    } else if (this.state.pickerDistrict === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "District can not be empty");
+      return;
+    } else if (this.state.pickerUpazilla === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Upazilla can not be empty");
+      return;
+    } else if (this.state.pickerOffice === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Office can not be empty");
+      return;
+    } else if (this.state.pickerProject === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Project can not be empty");
+      return;
+    } else if (this.state.visitNo === 0) {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Visit No can not be 0");
+      return;
+    } else if (this.state.pickerLF === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "LF can not be empty");
+      return;
+    } else if (this.state.pickerLPO === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "LPO can not be empty");
+      return;
+    } else if (this.state.pickerSchool === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "School can not be empty");
+      return;
+    } else if (this.state.pickerVisitor === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Visitor can not be empty");
+      return;
+    } else if (this.state.pickerDesignation === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Designation can not be empty");
+      return;
+    } else if (this.state.pickerVisitorOffice === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Visitor Office can not be empty");
+      return;
+    } else if (this.state.classTeacher === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Class Teacher can not be empty");
+      return;
+    } else if (this.state.classTeacherGender === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Gender can not be empty");
+      return;
+    } else if (this.state.teacherTrained === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Teacher training can not be empty");
+      return;
+    } else if (this.state.grade === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Grade can not be empty");
+      return;
+    } else if (this.state.section === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Section can not be empty");
+      return;
+    } else if (this.state.classStartTime === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Class Start Time can not be empty");
+      return;
+    } else if (this.state.classEndTime === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Class End Time can not be empty");
+      return;
+    } else if (this.state.teachingTopic === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Teaching Topic can not be empty");
+      return;
+    } else if (this.state.teachingDay === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Teaching Day can not be empty");
+      return;
+    } else if (this.state.studentBoy === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Student Boy can not be empty");
+      return;
+    } else if (this.state.studentGirl === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Student Girl can not be empty");
+      return;
+    } else if (this.state.presentBoy === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Present Boy can not be empty");
+      return;
+    } else if (this.state.presentGirl === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Present Girl can not be empty");
+      return;
+    } else if (this.state.typeOfReading === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Type Of Reading can not be empty");
+      return;
+    } else if (this.state.bestPracticeInd1 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Best Practice Ind1 can not be empty");
+      return;
+    } else if (this.state.bestPracticeInd2 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Best Practice Ind2 can not be empty");
+      return;
+    } else if (this.state.bestPracticeInd3 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Best Practice Ind3 can not be empty");
+      return;
+    } else if (this.state.coachingSupportInd1 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Coaching Support Ind1 can not be empty");
+      return;
+    } else if (this.state.coachingSupportInd2 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Coaching Support Ind2 can not be empty");
+      return;
+    } else if (this.state.coachingSupportDetailsInd1 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Coaching Support Details Ind1 can not be empty");
+      return;
+    } else if (this.state.coachingSupportDetailsInd2 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Coaching Support Details Ind2 can not be empty");
+      return;
+    } else if (this.state.agreedStatement1 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Agreed Statement1 can not be empty");
+      return;
+    } else if (this.state.agreedStatement2 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Agreed Statement2 can not be empty");
+      return;
+    } else if (this.state.duplicateSRMClassObservationData.length > 0) {
+      this.setState({ dateError: "Date can not be empty" });
       Alert.alert("Alert", "Duplicate SRM Class data !!");
       return;
     } else {
+      this.setState({ dateError: "" });
       // Send data to API
+
       try {
         let response = await fetch(
           "http://118.179.80.51:8080/api/v1/srm-class",
@@ -708,6 +766,9 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
             body: JSON.stringify(newSRMClass),
           }
         );
+
+        console.log("response:" + JSON.stringify(newSRMClass));
+
         if (response.status >= 200 && response.status < 300) {
           Alert.alert(
             "Alert",
@@ -1296,7 +1357,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                                 parseInt(parseInt(this.state.visitNo) - 1) &&
                               item.school === this.state.pickerSchool &&
                               item.project === this.state.pickerProject &&
-                              item.month === this.state.pickerMonth
+                              item.year === this.state.pickerYear
                             );
                           }
                         ),
@@ -1362,20 +1423,24 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                       this.setState({ pickerVisitorOffice: value });
                       //console.log("preMonthData: " + this.state.preMonthData);
                       if (this.state.preMonthData.length > 0) {
-                        const followup1 = this.state.preMonthData.map(
-                          (item) => {
+                        const followup1 = this.state.preMonthData
+                          .map((item) => {
                             return item.coachingSupportInd1;
-                          }
-                        );
+                          })
+                          .toString();
 
-                        const followup2 = this.state.preMonthData.map(
-                          (item) => {
+                        const followup2 = this.state.preMonthData
+                          .map((item) => {
                             return item.coachingSupportInd2;
-                          }
-                        );
+                          })
+                          .toString();
                         console.log("followup1 :" + followup1);
-                        this.setState({ lastFollowupTopic1: followup1 });
-                        this.setState({ lastFollowupTopic2: followup2 });
+                        this.setState({
+                          lastFollowupTopic1: followup1,
+                        });
+                        this.setState({
+                          lastFollowupTopic2: followup2,
+                        });
                       }
                     }}
                     itemStyle={{ color: "white" }}
@@ -3141,25 +3206,6 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                       selectedValue={this.state.bestPracticeInd1}
                       onValueChange={(value) => {
                         this.setState({ bestPracticeInd1: value });
-
-                        //Check duplicate data
-                        this.state.duplicateSRMClassObservationData =
-                          this.state.allSRMClassData.filter((item) => {
-                            return (
-                              item.date ==
-                                this.state.date.toISOString().slice(0, 10) &&
-                              item.visitNo == this.state.visitNo &&
-                              item.school == this.state.pickerSchool &&
-                              item.month == this.state.pickerMonth &&
-                              item.year == this.state.pickerYear
-                            );
-                          });
-
-                        console.log(
-                          "Duplicate SRM Class Data: ",
-                          this.state.duplicateSRMClassObservationData.length
-                        );
-                        //Check duplicate data
                       }}
                       itemStyle={{ color: "white" }}
                     >
@@ -3461,50 +3507,50 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                 marginLeft: 100,
                 marginBottom: 20,
               }}
-              // disabled={
-              //   !this.state.pickerMonth ||
-              //   !this.state.pickerYear ||
-              //   !this.state.pickerDistrict ||
-              //   !this.state.pickerUpazilla ||
-              //   !this.state.pickerOffice ||
-              //   !this.state.pickerProject ||
-              //   !this.state.pickerLPO ||
-              //   !this.state.pickerLF ||
-              //   !this.state.pickerSchool ||
-              //   !this.state.pickerVisitor ||
-              //   !this.state.pickerDesignation ||
-              //   !this.state.pickerVisitorOffice ||
-              //   !this.state.classTeacher ||
-              //   !this.state.classTeacherGender ||
-              //   !this.state.teacherTrained ||
-              //   !this.state.grade ||
-              //   !this.state.section ||
-              //   !this.state.classStartTime ||
-              //   !this.state.classEndTime ||
-              //   !this.state.teachingTopic ||
-              //   !this.state.teachingDay ||
-              //   !this.state.bestPracticeInd1 ||
-              //   !this.state.bestPracticeInd2 ||
-              //   !this.state.bestPracticeInd3 ||
-              //   !this.state.coachingSupportInd1 ||
-              //   !this.state.coachingSupportInd2 ||
-              //   !this.state.coachingSupportDetailsInd1 ||
-              //   !this.state.coachingSupportDetailsInd2 ||
-              //   !this.state.agreedStatement1 ||
-              //   !this.state.agreedStatement2
+              disabled={
+                !this.state.pickerMonth ||
+                !this.state.pickerYear ||
+                !this.state.pickerDistrict ||
+                !this.state.pickerUpazilla ||
+                !this.state.pickerOffice ||
+                !this.state.pickerProject ||
+                !this.state.pickerLPO ||
+                !this.state.pickerLF ||
+                !this.state.pickerSchool ||
+                !this.state.pickerVisitor ||
+                !this.state.pickerDesignation ||
+                !this.state.pickerVisitorOffice ||
+                !this.state.classTeacher ||
+                !this.state.classTeacherGender ||
+                !this.state.teacherTrained ||
+                !this.state.grade ||
+                !this.state.section ||
+                !this.state.classStartTime ||
+                !this.state.classEndTime ||
+                !this.state.teachingTopic ||
+                !this.state.teachingDay ||
+                !this.state.bestPracticeInd1 ||
+                !this.state.bestPracticeInd2 ||
+                !this.state.bestPracticeInd3 ||
+                !this.state.coachingSupportInd1 ||
+                !this.state.coachingSupportInd2 ||
+                !this.state.coachingSupportDetailsInd1 ||
+                !this.state.coachingSupportDetailsInd2 ||
+                !this.state.agreedStatement1 ||
+                !this.state.agreedStatement2
 
-              //   // !this.state.ind1FriendlyCommunicationStatus ||
-              //   // !this.state.ind2SRMInspiringStatus ||
-              //   // !this.state.ind3SRMInstructionStatus ||
-              //   // !this.state.ind4BookShowingStatus ||
-              //   // !this.state.ind5WordTeachingStatus ||
-              //   // !this.state.ind6StoryReadingStatus ||
-              //   // !this.state.ind7StorySuitableStatus ||
-              //   // !this.state.ind8StoryReadingCombinationStatus ||
-              //   // !this.state.ind9AllStudentEngagementStatus ||
-              //   // !this.state.ind10InclusiveAssessmentStatus ||
-              //   // !this.state.ind11AskingForBCOStatus ||
-              // }
+                // !this.state.ind1FriendlyCommunicationStatus ||
+                // !this.state.ind2SRMInspiringStatus ||
+                // !this.state.ind3SRMInstructionStatus ||
+                // !this.state.ind4BookShowingStatus ||
+                // !this.state.ind5WordTeachingStatus ||
+                // !this.state.ind6StoryReadingStatus ||
+                // !this.state.ind7StorySuitableStatus ||
+                // !this.state.ind8StoryReadingCombinationStatus ||
+                // !this.state.ind9AllStudentEngagementStatus ||
+                // !this.state.ind10InclusiveAssessmentStatus ||
+                // !this.state.ind11AskingForBCOStatus ||
+              }
               onPress={this.saveSRMClassObservation.bind(this)}
             >
               <Text>Submit</Text>

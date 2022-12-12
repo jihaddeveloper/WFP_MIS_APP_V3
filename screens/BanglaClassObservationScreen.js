@@ -193,6 +193,8 @@ export default class BanglaClassObservationScreen extends React.Component {
       totalFor5: 0,
 
       teacherStatus: "",
+
+      dateError: "",
     };
   }
 
@@ -811,10 +813,207 @@ export default class BanglaClassObservationScreen extends React.Component {
     );
     //Check duplicate data
 
-    if (this.state.duplicateBanglaClassObservationData.length > 0) {
+    // Validation
+    if (this.state.date === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Date can not be empty");
+      return;
+    } else if (this.state.pickerMonth === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Month can not be empty");
+      return;
+    } else if (this.state.pickerYear === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Year can not be empty");
+      return;
+    } else if (this.state.pickerDistrict === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "District can not be empty");
+      return;
+    } else if (this.state.pickerUpazilla === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Upazilla can not be empty");
+      return;
+    } else if (this.state.pickerOffice === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Office can not be empty");
+      return;
+    } else if (this.state.pickerProject === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Project can not be empty");
+      return;
+    } else if (this.state.visitNo === 0) {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Visit No can not be 0");
+      return;
+    } else if (this.state.pickerLF === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "LF can not be empty");
+      return;
+    } else if (this.state.pickerLPO === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "LPO can not be empty");
+      return;
+    } else if (this.state.pickerSchool === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "School can not be empty");
+      return;
+    } else if (this.state.pickerVisitor === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Visitor can not be empty");
+      return;
+    } else if (this.state.pickerDesignation === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Designation can not be empty");
+      return;
+    } else if (this.state.pickerVisitorOffice === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Visitor Office can not be empty");
+      return;
+    } else if (this.state.classTeacher === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Class Teacher can not be empty");
+      return;
+    } else if (this.state.classTeacherGender === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Gender can not be empty");
+      return;
+    } else if (this.state.teacherTrained === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Teacher training can not be empty");
+      return;
+    } else if (this.state.grade === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Grade can not be empty");
+      return;
+    } else if (this.state.section === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Section can not be empty");
+      return;
+    } else if (this.state.classStartTime === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Class Start Time can not be empty");
+      return;
+    } else if (this.state.classEndTime === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Class End Time can not be empty");
+      return;
+    } else if (this.state.teachingTopic === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Teaching Topic can not be empty");
+      return;
+    } else if (this.state.teachingDay === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Teaching Day can not be empty");
+      return;
+    } else if (this.state.studentBoy === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Student Boy can not be empty");
+      return;
+    } else if (this.state.studentGirl === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Student Girl can not be empty");
+      return;
+    } else if (this.state.presentBoy === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Present Boy can not be empty");
+      return;
+    } else if (this.state.presentGirl === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Present Girl can not be empty");
+      return;
+    } else if (this.state.ind1PhonemicAwarenessStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 1 can not be empty");
+      return;
+    } else if (this.state.ind2LetterIdentificationStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 2 can not be empty");
+      return;
+    } else if (this.state.ind3VocabularyIdentificationStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 3 can not be empty");
+      return;
+    } else if (this.state.ind4FluencyIdentificationStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 4 can not be empty");
+      return;
+    } else if (this.state.ind5ComprehensionStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 5 can not be empty");
+      return;
+    } else if (this.state.ind6WritingActivitiesStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 6 can not be empty");
+      return;
+    } else if (this.state.ind7IDoWeDoYouDoStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 7 can not be empty");
+      return;
+    } else if (this.state.ind8GroupWorkStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 8 can not be empty");
+      return;
+    } else if (this.state.ind9TimeOnTaskStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 9 can not be empty");
+      return;
+    } else if (this.state.ind10UseTeachingAidStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 10 can not be empty");
+      return;
+    } else if (this.state.ind11ContinuityOfLessonsStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 11 can not be empty");
+      return;
+    } else if (this.state.ind12AssessmentStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 12 can not be empty");
+      return;
+    } else if (this.state.bestPracticeInd1 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Best Practice Ind1 can not be empty");
+      return;
+    } else if (this.state.bestPracticeInd2 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Best Practice Ind2 can not be empty");
+      return;
+    } else if (this.state.bestPracticeInd3 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Best Practice Ind3 can not be empty");
+      return;
+    } else if (this.state.coachingSupportInd1 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Coaching Support Ind1 can not be empty");
+      return;
+    } else if (this.state.coachingSupportInd2 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Coaching Support Ind2 can not be empty");
+      return;
+    } else if (this.state.coachingSupportDetailsInd1 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Coaching Support Details Ind1 can not be empty");
+      return;
+    } else if (this.state.coachingSupportDetailsInd2 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Coaching Support Details Ind2 can not be empty");
+      return;
+    } else if (this.state.agreedStatement1 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Agreed Statement1 can not be empty");
+      return;
+    } else if (this.state.agreedStatement2 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Agreed Statement2 can not be empty");
+      return;
+    } else if (this.state.duplicateBanglaClassObservationData.length > 0) {
+      this.setState({ dateError: "Date can not be empty" });
       Alert.alert("Alert", "Duplicate Bangla Class data !!");
       return;
     } else {
+      // Set error message empty
+      this.setState({ dateError: "" });
+
       // Send data to API
       try {
         let response = await fetch(
@@ -1418,7 +1617,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                                   parseInt(parseInt(this.state.visitNo) - 1) &&
                                 item.school === this.state.pickerSchool &&
                                 item.project === this.state.pickerProject &&
-                                item.month === this.state.pickerMonth
+                                item.year === this.state.pickerYear
                               );
                             }
                           ),
@@ -1482,22 +1681,28 @@ export default class BanglaClassObservationScreen extends React.Component {
                     selectedValue={this.state.pickerVisitorOffice}
                     onValueChange={(value) => {
                       this.setState({ pickerVisitorOffice: value });
-                      //console.log("preMonthData: " + this.state.preMonthData);
+                      console.log(
+                        "preMonthData: " + this.state.preMonthData.length
+                      );
                       if (this.state.preMonthData.length > 0) {
-                        const followup1 = this.state.preMonthData.map(
-                          (item) => {
+                        const followup1 = this.state.preMonthData
+                          .map((item) => {
                             return item.coachingSupportInd1;
-                          }
-                        );
+                          })
+                          .toString();
 
-                        const followup2 = this.state.preMonthData.map(
-                          (item) => {
+                        const followup2 = this.state.preMonthData
+                          .map((item) => {
                             return item.coachingSupportInd2;
-                          }
-                        );
+                          })
+                          .toString();
                         console.log("followup1 :" + followup1);
-                        this.setState({ lastFollowupTopic1: followup1 });
-                        this.setState({ lastFollowupTopic2: followup2 });
+                        this.setState({
+                          lastFollowupTopic1: followup1,
+                        });
+                        this.setState({
+                          lastFollowupTopic2: followup2,
+                        });
                       }
                     }}
                     itemStyle={{ color: "white" }}
@@ -3861,56 +4066,56 @@ export default class BanglaClassObservationScreen extends React.Component {
                 marginLeft: 100,
                 marginBottom: 20,
               }}
-              // disabled={
-              //   !this.state.pickerMonth ||
-              //   !this.state.pickerYear ||
-              //   !this.state.pickerDistrict ||
-              //   !this.state.pickerUpazilla ||
-              //   !this.state.pickerOffice ||
-              //   !this.state.pickerProject ||
-              //   !this.state.pickerLPO ||
-              //   !this.state.pickerLF ||
-              //   !this.state.pickerSchool ||
-              //   !this.state.pickerVisitor ||
-              //   !this.state.pickerDesignation ||
-              //   !this.state.pickerVisitorOffice ||
-              //   !this.state.classTeacher ||
-              //   !this.state.classTeacherGender ||
-              //   !this.state.teacherTrained ||
-              //   !this.state.grade ||
-              //   !this.state.section ||
-              //   !this.state.classStartTime ||
-              //   !this.state.classEndTime ||
-              //   !this.state.teachingTopic ||
-              //   !this.state.teachingDay ||
-              //   !this.state.ind1PhonemicAwarenessStatus ||
-              //   !this.state.ind2LetterIdentificationStatus ||
-              //   !this.state.ind3VocabularyIdentificationStatus ||
-              //   !this.state.ind4FluencyIdentificationStatus ||
-              //   !this.state.ind5ComprehensionStatus ||
-              //   !this.state.ind6WritingActivitiesStatus ||
-              //   !this.state.ind7IDoWeDoYouDoStatus ||
-              //   !this.state.ind8GroupWorkStatus ||
-              //   !this.state.ind9TimeOnTaskStatus ||
-              //   !this.state.ind10UseTeachingAidStatus ||
-              //   !this.state.ind11ContinuityOfLessonsStatus ||
-              //   !this.state.ind12AssessmentStatus ||
-              //   !this.state.bestPracticeInd1 ||
-              //   !this.state.bestPracticeInd2 ||
-              //   !this.state.bestPracticeInd3 ||
-              //   !this.state.coachingSupportInd1 ||
-              //   !this.state.coachingSupportInd2 ||
-              //   !this.state.coachingSupportDetailsInd1 ||
-              //   !this.state.coachingSupportDetailsInd2 ||
-              //   !this.state.agreedStatement1 ||
-              //   !this.state.agreedStatement2 ||
-              //   !this.state.question1 ||
-              //   !this.state.student1 ||
-              //   !this.state.student2 ||
-              //   !this.state.student3 ||
-              //   !this.state.student4 ||
-              //   !this.state.student5
-              // }
+              disabled={
+                !this.state.pickerMonth ||
+                !this.state.pickerYear ||
+                !this.state.pickerDistrict ||
+                !this.state.pickerUpazilla ||
+                !this.state.pickerOffice ||
+                !this.state.pickerProject ||
+                !this.state.pickerLPO ||
+                !this.state.pickerLF ||
+                !this.state.pickerSchool ||
+                !this.state.pickerVisitor ||
+                !this.state.pickerDesignation ||
+                !this.state.pickerVisitorOffice ||
+                !this.state.classTeacher ||
+                !this.state.classTeacherGender ||
+                !this.state.teacherTrained ||
+                !this.state.grade ||
+                !this.state.section ||
+                !this.state.classStartTime ||
+                !this.state.classEndTime ||
+                !this.state.teachingTopic ||
+                !this.state.teachingDay ||
+                !this.state.ind1PhonemicAwarenessStatus ||
+                !this.state.ind2LetterIdentificationStatus ||
+                !this.state.ind3VocabularyIdentificationStatus ||
+                !this.state.ind4FluencyIdentificationStatus ||
+                !this.state.ind5ComprehensionStatus ||
+                !this.state.ind6WritingActivitiesStatus ||
+                !this.state.ind7IDoWeDoYouDoStatus ||
+                !this.state.ind8GroupWorkStatus ||
+                !this.state.ind9TimeOnTaskStatus ||
+                !this.state.ind10UseTeachingAidStatus ||
+                !this.state.ind11ContinuityOfLessonsStatus ||
+                !this.state.ind12AssessmentStatus ||
+                !this.state.bestPracticeInd1 ||
+                !this.state.bestPracticeInd2 ||
+                !this.state.bestPracticeInd3 ||
+                !this.state.coachingSupportInd1 ||
+                !this.state.coachingSupportInd2 ||
+                !this.state.coachingSupportDetailsInd1 ||
+                !this.state.coachingSupportDetailsInd2 ||
+                !this.state.agreedStatement1 ||
+                !this.state.agreedStatement2 ||
+                !this.state.question1 ||
+                !this.state.student1 ||
+                !this.state.student2 ||
+                !this.state.student3 ||
+                !this.state.student4 ||
+                !this.state.student5
+              }
               onPress={this.saveBanglaClassObservation.bind(this)}
             >
               <Text>Submit</Text>
