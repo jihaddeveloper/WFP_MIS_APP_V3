@@ -4,6 +4,7 @@
 //  Description: Overall school observation screen component
 
 import React from "react";
+import axios from "axios";
 import {
   Image,
   ImageBackground,
@@ -21,20 +22,107 @@ import {
 } from "react-native";
 import { Checkbox } from "react-native-paper";
 import { Card } from "react-native-shadow-cards";
+
+import { divisions, districts, upazillas, unions } from "bd-geojs";
+
 import DateTimePicker from "@react-native-community/datetimepicker";
 
+import DatePicker from "react-native-modern-datepicker";
+
+const { width, height } = Dimensions.get("window");
+
 export default class OverallSchoolObservationScreen extends React.Component {
-  state = {
-    checked: false,
+  constructor(props) {
+    super(props);
 
-    option: "yes",
+    this.state = {
+      checked: false,
 
-    choosenIndex: 0,
+      option: "yes",
 
-    date: new Date(),
-    mode: "date",
-    show: false,
-  };
+      choosenIndex: 0,
+
+      //Preloaded Data
+      allProject: [],
+      allSchool: [],
+      allTeacher: [],
+      allEmployee: [],
+      allOffice: [],
+      allDesignation: [],
+      allLibraryIndicator: [],
+      allBanglaIndicator: [],
+      allLibraryObservationData: [],
+      allBanglaClassObservationData: [],
+      //Preloaded Data
+
+      // previous visit data of the bangla class
+      preMonthData: [],
+      // previous visit data of the bangla class
+
+      // Duplicate data check
+      duplicateBanglaClassObservationData: [],
+      // Duplicate data check
+
+      //button status
+      buttonState: false,
+      //button status
+
+      isLoading: true,
+
+      checked: false,
+
+      option: "yes",
+
+      choosenIndex: 0,
+
+      // Date picker property
+      date: new Date(),
+      time: new Date(Date.now()),
+      mode: "date",
+      show: false,
+      startTime: "",
+      endTime: "",
+      // Date picker property
+
+      // General data
+      visitNo: 0,
+      pickerOffice: "",
+      pickerProject: "",
+      pickerDistrict: "",
+      pickerDistrictKey: "",
+      pickerUpazilla: "",
+      pickerUpazillaKey: "",
+      pickerSchool: "",
+      pickerVisitor: "",
+      pickerDesignation: "",
+      pickerVisitorOffice: "",
+      pickerLF: "",
+      pickerLPO: "",
+      pickerLFName: "",
+      pickerLPOName: "",
+      pickerMonth: "",
+      pickerYear: "",
+      headTeacher: "",
+      note: "",
+    };
+  }
+
+  //Geo values
+  divisions = divisions;
+  districts = districts;
+  upazillas = upazillas;
+  unions = unions;
+  //Geo values
+
+  //Load data from server
+  componentDidMount() {
+    this.getAllSchool();
+    this.getAllEmployee();
+    this.getAllDesignation();
+    this.getAllBanglaIndicator();
+    this.getAllBanglaClassObservation();
+  }
+  //Load data from server
 
   // For Datepicker
   setDate = (event, date) => {
@@ -62,6 +150,530 @@ export default class OverallSchoolObservationScreen extends React.Component {
   };
   // For Datepicker
 
+  // Get All Project
+  getAllProject = async () => {
+    try {
+      const response = await fetch("http://118.179.80.51:8080/api/v1/projects");
+      const json = await response.json();
+      this.setState({ allProject: json });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+  // Get All Project
+
+  // Get All Office
+  getAllOffice = async () => {
+    try {
+      const response = await fetch("http://118.179.80.51:8080/api/v1/offices");
+      const json = await response.json();
+      this.setState({ allOffice: json });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+  // Get All Office}
+
+  // Get All School
+  getAllSchool = async () => {
+    try {
+      const response = await axios("http://118.179.80.51:8080/api/v1/schools", {
+        method: "GET",
+        mode: "no-cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+
+      this.setState({ allSchool: response.data, isLoading: false });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // Get All School
+
+  // Get All Teacher
+  getAllTeacher = async () => {
+    try {
+      const response = await fetch("http://118.179.80.51:8080/api/v1/teachers");
+      const json = await response.json();
+      this.setState({ allTeacher: json });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+  // Get All Teacher
+
+  // Get All Employee
+  getAllEmployee = async () => {
+    try {
+      const response = await axios(
+        "http://118.179.80.51:8080/api/v1/employees",
+        {
+          method: "GET",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      this.setState({ allEmployee: response.data, isLoading: false });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // Get All Employee
+
+  // Get All Designation
+  getAllDesignation = async () => {
+    try {
+      const response = await axios(
+        "http://118.179.80.51:8080/api/v1/designations",
+        {
+          method: "GET",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      this.setState({ allDesignation: response.data, isLoading: false });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // Get All Designation
+
+  // Get All Bangla Indicator
+  getAllBanglaIndicator = async () => {
+    try {
+      const response = await axios(
+        "http://118.179.80.51:8080/api/v1/bangla-indicator",
+        {
+          method: "GET",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      this.setState({ allBanglaIndicator: response.data, isLoading: false });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // Get All Bangla Indicator
+
+  // Get All Book-checkout Data for school
+  getAllBanglaClassObservation = async () => {
+    try {
+      const response = await axios(
+        "http://118.179.80.51:8080/api/v1/bangla-class",
+        {
+          method: "GET",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      this.setState({
+        allBanglaClassObservationData: response.data,
+        isLoading: false,
+      });
+      console.log(
+        "All Bangla-class Data: ",
+        this.state.allBanglaClassObservationData.length
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // Get All Book-checkout Data for school
+
+  // Register new book-checkout data
+  saveBanglaClassObservation = async () => {
+    const newBanglaClass = {
+      date: this.state.date,
+      month: this.state.pickerMonth,
+      year: this.state.pickerYear,
+      district: this.state.pickerDistrict.name,
+      upazilla: this.state.pickerUpazilla.name,
+      fieldOffice: this.state.pickerOffice,
+      project: this.state.pickerProject,
+      visitNo: this.state.visitNo,
+      lpo: this.state.pickerLPO.employeeRegId,
+      lpoName: this.state.pickerLPOName.name,
+      lf: this.state.pickerLF.employeeRegId,
+      lfName: this.state.pickerLFName.name,
+      school: this.state.pickerSchool,
+      visitor: this.state.pickerVisitor,
+      visitorDesignation: this.state.pickerDesignation,
+      visitorOffice: this.state.pickerVisitorOffice,
+      classTeacher: this.state.classTeacher,
+      teacherGender: this.state.classTeacherGender,
+      isTrained: this.state.teacherTrained,
+      grade: this.state.grade,
+      section: this.state.section,
+      classStartTime: this.state.classStartTime,
+      classEndTime: this.state.classEndTime,
+      contentName: this.state.teachingTopic,
+      periodDay: this.state.teachingDay,
+      totalAdmittedStudent: this.state.studentTotal,
+      totalAdmittedGirl: this.state.studentGirl,
+      totalAdmittedBoy: this.state.studentBoy,
+      totalPresentStudent: this.state.presentTotal,
+      totalPresentGirl: this.state.presentGirl,
+      totalPresentBoy: this.state.presentBoy,
+
+      lastFollowupTopic1: this.state.lastFollowupTopic1,
+      lastFollowupTopic2: this.state.lastFollowupTopic2,
+      lastFollowupTopic3: this.state.lastFollowupTopic3,
+
+      ind1PhonemicAwarenessStatus: this.state.ind1PhonemicAwarenessStatus,
+      ind1PhonemicAwarenessNotes: this.state.ind1PhonemicAwarenessNotes,
+
+      ind2LetterIdentificationStatus: this.state.ind2LetterIdentificationStatus,
+      ind2LetterIdentificationNotes: this.state.ind2LetterIdentificationNotes,
+
+      ind3VocabularyIdentificationStatus:
+        this.state.ind3VocabularyIdentificationStatus,
+      ind3VocabularyIdentificationNotes:
+        this.state.ind3VocabularyIdentificationNotes,
+
+      ind4FluencyIdentificationStatus:
+        this.state.ind4FluencyIdentificationStatus,
+      ind4FluencyIdentificationNotes: this.state.ind4FluencyIdentificationNotes,
+
+      ind5ComprehensionStatus: this.state.ind5ComprehensionStatus,
+      ind5ComprehensionNotes: this.state.ind5ComprehensionNotes,
+
+      ind6WritingActivitiesStatus: this.state.ind6WritingActivitiesStatus,
+      ind6WritingActivitiesNotes: this.state.ind6WritingActivitiesNotes,
+
+      ind7IDoWeDoYouDoStatus: this.state.ind7IDoWeDoYouDoStatus,
+      ind7IDoWeDoYouDoNotes: this.state.ind7IDoWeDoYouDoNotes,
+
+      ind8GroupWorkStatus: this.state.ind8GroupWorkStatus,
+      ind8GroupWorkNotes: this.state.ind8GroupWorkNotes,
+
+      ind9TimeOnTaskStatus: this.state.ind9TimeOnTaskStatus,
+      ind9TimeOnTaskNotes: this.state.ind9TimeOnTaskNotes,
+
+      ind10UseTeachingAidStatus: this.state.ind10UseTeachingAidStatus,
+      ind10UseTeachingAidNotes: this.state.ind10UseTeachingAidNotes,
+
+      ind11ContinuityOfLessonsStatus: this.state.ind11ContinuityOfLessonsStatus,
+      ind11ContinuityOfLessonsNotes: this.state.ind11ContinuityOfLessonsNotes,
+
+      ind12AssessmentStatus: this.state.ind12AssessmentStatus,
+      ind12AssessmentNotes: this.state.ind12AssessmentNotes,
+
+      bestPracticeInd1: this.state.bestPracticeInd1,
+      bestPracticeInd2: this.state.bestPracticeInd2,
+      bestPracticeInd3: this.state.bestPracticeInd3,
+
+      coachingSupportInd1: this.state.coachingSupportInd1,
+      coachingSupportInd2: this.state.coachingSupportInd2,
+      coachingSupportDetailsInd1: this.state.coachingSupportDetailsInd1,
+      coachingSupportDetailsInd2: this.state.coachingSupportDetailsInd2,
+
+      agreedStatement1: this.state.agreedStatement1,
+      agreedStatement2: this.state.agreedStatement2,
+
+      question1: this.state.question1,
+
+      student1: this.state.student1,
+      student2: this.state.student2,
+      student3: this.state.student3,
+      student4: this.state.student4,
+      student5: this.state.student5,
+
+      noRightFor1: this.state.noRightFor1,
+      noWrongFor1: this.state.noWrongFor1,
+      totalFor1: this.state.totalFor1,
+      noRightFor2: this.state.noRightFor2,
+      noWrongFor2: this.state.noWrongFor2,
+      totalFor2: this.state.totalFor2,
+      noRightFor3: this.state.noRightFor3,
+      noWrongFor3: this.state.noWrongFor3,
+      totalFor3: this.state.totalFor3,
+      noRightFor4: this.state.noRightFor4,
+      noWrongFor4: this.state.noWrongFor4,
+      totalFor4: this.state.totalFor4,
+      noRightFor5: this.state.noRightFor5,
+      noWrongFor5: this.state.noWrongFor5,
+      totalFor5: this.state.totalFor5,
+
+      teacherStatus: this.state.teacherStatus,
+    };
+
+    // Validation
+
+    //Check duplicate data
+    this.state.duplicateBanglaClassObservationData =
+      this.state.allBanglaClassObservationData.filter((item) => {
+        return (
+          item.date == this.state.date.toISOString().slice(0, 10) &&
+          item.visitNo == this.state.visitNo &&
+          item.school == this.state.pickerSchool &&
+          item.month == this.state.pickerMonth &&
+          item.year == this.state.pickerYear
+        );
+      });
+
+    console.log(
+      "Duplicate Bangla Class Data: ",
+      this.state.duplicateBanglaClassObservationData.length
+    );
+    //Check duplicate data
+
+    // Validation
+    if (this.state.date === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Date can not be empty");
+      return;
+    } else if (this.state.pickerMonth === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Month can not be empty");
+      return;
+    } else if (this.state.pickerYear === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Year can not be empty");
+      return;
+    } else if (this.state.pickerDistrict === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "District can not be empty");
+      return;
+    } else if (this.state.pickerUpazilla === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Upazilla can not be empty");
+      return;
+    } else if (this.state.pickerOffice === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Office can not be empty");
+      return;
+    } else if (this.state.pickerProject === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Project can not be empty");
+      return;
+    } else if (this.state.visitNo === 0) {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Visit No can not be 0");
+      return;
+    } else if (this.state.pickerLF === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "LF can not be empty");
+      return;
+    } else if (this.state.pickerLPO === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "LPO can not be empty");
+      return;
+    } else if (this.state.pickerSchool === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "School can not be empty");
+      return;
+    } else if (this.state.pickerVisitor === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Visitor can not be empty");
+      return;
+    } else if (this.state.pickerDesignation === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Designation can not be empty");
+      return;
+    } else if (this.state.pickerVisitorOffice === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Visitor Office can not be empty");
+      return;
+    } else if (this.state.classTeacher === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Class Teacher can not be empty");
+      return;
+    } else if (this.state.classTeacherGender === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Gender can not be empty");
+      return;
+    } else if (this.state.teacherTrained === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Teacher training can not be empty");
+      return;
+    } else if (this.state.grade === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Grade can not be empty");
+      return;
+    } else if (this.state.section === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Section can not be empty");
+      return;
+    } else if (this.state.classStartTime === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Class Start Time can not be empty");
+      return;
+    } else if (this.state.classEndTime === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Class End Time can not be empty");
+      return;
+    } else if (this.state.teachingTopic === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Teaching Topic can not be empty");
+      return;
+    } else if (this.state.teachingDay === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Teaching Day can not be empty");
+      return;
+    } else if (this.state.studentBoy === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Student Boy can not be empty");
+      return;
+    } else if (this.state.studentGirl === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Student Girl can not be empty");
+      return;
+    } else if (this.state.presentBoy === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Present Boy can not be empty");
+      return;
+    } else if (this.state.presentGirl === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Present Girl can not be empty");
+      return;
+    } else if (this.state.ind1PhonemicAwarenessStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 1 can not be empty");
+      return;
+    } else if (this.state.ind2LetterIdentificationStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 2 can not be empty");
+      return;
+    } else if (this.state.ind3VocabularyIdentificationStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 3 can not be empty");
+      return;
+    } else if (this.state.ind4FluencyIdentificationStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 4 can not be empty");
+      return;
+    } else if (this.state.ind5ComprehensionStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 5 can not be empty");
+      return;
+    } else if (this.state.ind6WritingActivitiesStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 6 can not be empty");
+      return;
+    } else if (this.state.ind7IDoWeDoYouDoStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 7 can not be empty");
+      return;
+    } else if (this.state.ind8GroupWorkStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 8 can not be empty");
+      return;
+    } else if (this.state.ind9TimeOnTaskStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 9 can not be empty");
+      return;
+    } else if (this.state.ind10UseTeachingAidStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 10 can not be empty");
+      return;
+    } else if (this.state.ind11ContinuityOfLessonsStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 11 can not be empty");
+      return;
+    } else if (this.state.ind12AssessmentStatus === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Indicator 12 can not be empty");
+      return;
+    } else if (this.state.bestPracticeInd1 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Best Practice Ind1 can not be empty");
+      return;
+    } else if (this.state.bestPracticeInd2 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Best Practice Ind2 can not be empty");
+      return;
+    } else if (this.state.bestPracticeInd3 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Best Practice Ind3 can not be empty");
+      return;
+    } else if (this.state.coachingSupportInd1 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Coaching Support Ind1 can not be empty");
+      return;
+    } else if (this.state.coachingSupportInd2 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Coaching Support Ind2 can not be empty");
+      return;
+    } else if (this.state.coachingSupportDetailsInd1 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Coaching Support Details Ind1 can not be empty");
+      return;
+    } else if (this.state.coachingSupportDetailsInd2 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Coaching Support Details Ind2 can not be empty");
+      return;
+    } else if (this.state.agreedStatement1 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Agreed Statement1 can not be empty");
+      return;
+    } else if (this.state.agreedStatement2 === "") {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Agreed Statement2 can not be empty");
+      return;
+    } else if (this.state.duplicateBanglaClassObservationData.length > 0) {
+      this.setState({ dateError: "Date can not be empty" });
+      Alert.alert("Alert", "Duplicate Bangla Class data !!");
+      return;
+    } else {
+      // Set error message empty
+      this.setState({ dateError: "" });
+
+      // Send data to API
+      try {
+        let response = await fetch(
+          "http://118.179.80.51:8080/api/v1/bangla-class",
+          {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newBanglaClass),
+          }
+        );
+        if (response.status >= 200 && response.status < 300) {
+          Alert.alert(
+            "Alert",
+            "Bangla class obsvervatio data saved successfully!!!"
+          );
+          this.getAllBanglaClassObservation();
+          this.updateToInitialState();
+        }
+      } catch (errors) {
+        alert(errors);
+      }
+      // Send data to API
+    }
+  };
+  // Register new bangla class data
+
   render() {
     const { checked } = this.state;
 
@@ -76,7 +688,7 @@ export default class OverallSchoolObservationScreen extends React.Component {
             style={{
               fontSize: 24,
               fontWeight: "bold",
-              marginTop: 100,
+              marginTop: 50,
               marginBottom: 50,
               alignContent: "center",
               textAlign: "center",
@@ -95,18 +707,25 @@ export default class OverallSchoolObservationScreen extends React.Component {
             <Card style={{ padding: 10, margin: 10, flex: 1 }}>
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    তারিখ:
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      তারিখ:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Text style={{ fontSize: 14 }}>
+                    {String(this.state.date.toISOString().slice(0, 10))}
                   </Text>
-
-                  <Button onPress={this.datepicker} title="Show date picker!" />
-
-                  {/* <Button onPress={this.timepicker} title="Show time picker!" /> */}
+                  <Button onPress={this.datepicker} title="Select Date" />
                   {show && (
                     <DateTimePicker
                       value={date}
@@ -116,82 +735,437 @@ export default class OverallSchoolObservationScreen extends React.Component {
                       onChange={this.setDate}
                     />
                   )}
-
-                  {/* <DatePicker
-                    style={{ width: 150 }}
-                    date={this.state.date}
-                    mode="date"
-                    placeholder="select date"
-                    format="YYYY-MM-DD"
-                    minDate="2016-05-01"
-                    maxDate="2016-06-01"
-                    confirmBtnText="Confirm"
-                    cancelBtnText="Cancel"
-                    customStyles={{
-                      dateIcon: {
-                        position: "absolute",
-                        left: 0,
-                        top: 4,
-                        marginLeft: 0,
-                      },
-                      dateInput: {
-                        marginLeft: 0,
-                      },
-                      // ... You can check the source to find the other keys.
-                    }}
-                    onDateChange={(date) => {
-                      this.setState({ date: date });
-                    }}
-                  /> */}
                 </View>
                 <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    উপজেলা:
-                  </Text>
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 120,
-                    }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
-                    onValueChange={(value) => {
-                      this.setState({ option: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"উখিয়া"} value={"Ukhiya"} />
-                    <Picker.Item label={"কুতুবদিয়া"} value={"Kutubdia"} />
-                  </Picker>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    বিদ্যালয়ের নাম:
-                  </Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      মাস:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
                   <Picker
                     style={{
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state.pickerMonth}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerMonth: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"অ আ স্কুল"} value={"LF"} />
-                    <Picker.Item label={"ক খ  স্কুল"} value={"LPO"} />
+                    <Picker.Item label={"January"} value={"January"} />
+                    <Picker.Item label={"February"} value={"February"} />
+                    <Picker.Item label={"March"} value={"Dhaka LP Program"} />
+                    <Picker.Item label={"April"} value={"April"} />
+                    <Picker.Item label={"May"} value={"May"} />
+                    <Picker.Item label={"June"} value={"June"} />
+                    <Picker.Item label={"July"} value={"July"} />
+                    <Picker.Item label={"August"} value={"August"} />
+                    <Picker.Item label={"September"} value={"September"} />
+                    <Picker.Item label={"October"} value={"October"} />
+                    <Picker.Item label={"November"} value={"November"} />
+                    <Picker.Item label={"December"} value={"December"} />
+                  </Picker>
+                  {/* <Text style={{ color: "red" }}>
+                    {this.state.projectError}
+                  </Text> */}
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      বছর:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state.pickerYear}
+                    onValueChange={(value) => {
+                      this.setState({ pickerYear: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"2018"} value={"2018"} />
+                    <Picker.Item label={"2019"} value={"2019"} />
+                    <Picker.Item label={"2020"} value={"2020"} />
+                    <Picker.Item label={"2021"} value={"2021"} />
+                    <Picker.Item label={"2022"} value={"2022"} />
+                    <Picker.Item label={"2023"} value={"2023"} />
+                  </Picker>
+                  {/* <Text style={{ color: "red" }}>
+                    {this.state.projectError}
+                  </Text> */}
+                </View>
+              </View>
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      জেলা:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state.pickerDistrict}
+                    onValueChange={(item, key) => {
+                      // console.log(item, key);
+                      this.setState({
+                        pickerDistrict: item,
+                        pickerDistrictKey: item.id,
+                      });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item key={""} label={"নির্বাচন করুন"} value={""} />
+                    {districts.map((item) => {
+                      //console.log(item);
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item}
+                        />
+                      );
+                    })}
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      উপজেলা:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state.pickerUpazilla}
+                    onValueChange={(item, key) => {
+                      this.setState({
+                        pickerUpazilla: item,
+                        pickerUpazillaKey: item.id,
+                      });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item key={""} label={"নির্বাচন করুন"} value={""} />
+                    {upazillas
+                      .filter(
+                        (item) =>
+                          item.district_id == this.state.pickerDistrictKey
+                      )
+                      .map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.name}
+                            value={item}
+                          />
+                        );
+                      })}
+                  </Picker>
+                </View>
+              </View>
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      ফিল্ড অফিস:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state.pickerOffice}
+                    onValueChange={(value) => {
+                      this.setState({ pickerOffice: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"DFO"} value={"DFO"} />
+                    <Picker.Item label={"CFO"} value={"CFO"} />
+                    <Picker.Item label={"NFO"} value={"NFO"} />
+                    <Picker.Item label={"MFO"} value={"MFO"} />
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      প্রোজেক্ট:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state.pickerProject}
+                    onValueChange={(value) => {
+                      this.setState({ pickerProject: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item
+                      label={"WFP funded project"}
+                      value={"WFP funded project"}
+                    />
+                    <Picker.Item
+                      label={"Natore LP Program"}
+                      value={"Natore LP Program"}
+                    />
+                    <Picker.Item
+                      label={"Dhaka LP Program"}
+                      value={"Dhaka LP Program"}
+                    />
+                    <Picker.Item
+                      label={"Moulvibazar LP Program"}
+                      value={"Moulvibazar LP Program"}
+                    />
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      ভিজিট নম্বর:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <TextInput
+                    style={{
+                      height: 30,
+                      width: 100,
+                      padding: 5,
+                      borderWidth: 1,
+                    }}
+                    keyboardType="numeric"
+                    placeholder=""
+                    editable={true}
+                    onChangeText={(text) =>
+                      this.setState({ visitNo: Number(text) })
+                    }
+                    value={this.state.visitNo + ""}
+                  />
+                </View>
+              </View>
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      দায়িত্ব প্রাপ্ত এলপিও
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state.pickerLPO}
+                    onValueChange={(value) => {
+                      this.setState({
+                        pickerLPO: value,
+                        pickerLPOName: value,
+                      });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    {this.state.allEmployee
+                      .filter((item) => {
+                        return item.designation == "LPO";
+                      })
+                      .map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.name}
+                            value={item}
+                            //item.employeeRegId
+                          />
+                        );
+                      })}
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      দায়িত্ব প্রাপ্ত এলএফ
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state.pickerLF}
+                    onValueChange={(value) => {
+                      this.setState({
+                        pickerLF: value,
+                        pickerLFName: value,
+                      });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    {this.state.allEmployee
+                      .filter((item) => {
+                        return (
+                          item.designation == "LF" &&
+                          item.supervisor == this.state.pickerLPO.employeeRegId
+                        );
+                      })
+                      .map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.name}
+                            value={item}
+                          />
+                        );
+                      })}
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      বিদ্যালয়ের নাম:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state.pickerSchool}
+                    onValueChange={(value) => {
+                      this.setState({ pickerSchool: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    {this.state.allSchool
+                      .filter((item) => {
+                        return item.lf == this.state.pickerLF.employeeRegId;
+                      })
+                      .map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.name}
+                            value={item.name}
+                          />
+                        );
+                      })}
                   </Picker>
                 </View>
               </View>
@@ -216,17 +1190,24 @@ export default class OverallSchoolObservationScreen extends React.Component {
                   <Picker
                     style={{
                       height: 40,
-                      width: 200,
+                      width: 150,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state.pickerVisitor}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerVisitor: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"মাসুদুল হাসান"} value={"LF"} />
-                    <Picker.Item label={"মুশফিকুর রহমান "} value={"LPO"} />
+                    {this.state.allEmployee.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -249,17 +1230,121 @@ export default class OverallSchoolObservationScreen extends React.Component {
                   <Picker
                     style={{
                       height: 40,
-                      width: 200,
+                      width: 150,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state.pickerDesignation}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ pickerDesignation: value });
+
+                      this.setState({
+                        preMonthData:
+                          this.state.allBanglaClassObservationData.filter(
+                            (item) => {
+                              return (
+                                item.visitNo ===
+                                  parseInt(parseInt(this.state.visitNo) - 1) &&
+                                item.school === this.state.pickerSchool &&
+                                item.project === this.state.pickerProject &&
+                                item.year === this.state.pickerYear
+                              );
+                            }
+                          ),
+                      });
+
+                      // console.log(
+                      //   "this.state.pickerSchool : " + this.state.pickerSchool
+                      // );
+
+                      // console.log(
+                      //   "this.state.pickerProject : " + this.state.pickerProject
+                      // );
+
+                      // console.log(
+                      //   "this.state.pickerYear : " + this.state.pickerYear
+                      // );
+
+                      // console.log(
+                      //   "parseInt(this.state.visitNo) : " +
+                      //     parseInt(parseInt(this.state.visitNo) - 1)
+                      // );
+
+                      // console.log(
+                      //   "allLibraryObservationData: " +
+                      //     this.state.allLibraryObservationData
+                      // );
+
+                      //console.log("preMonthData: " + this.state.preMonthData);
                     }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"এলএফ"} value={"LF"} />
-                    <Picker.Item label={"এলপিও "} value={"LPO"} />
+                    {this.state.allDesignation.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      পরিদর্শক এর অফিস:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    selectedValue={this.state.pickerVisitorOffice}
+                    onValueChange={(value) => {
+                      this.setState({ pickerVisitorOffice: value });
+                      console.log(
+                        "preMonthData: " + this.state.preMonthData.length
+                      );
+                      if (this.state.preMonthData.length > 0) {
+                        const followup1 = this.state.preMonthData
+                          .map((item) => {
+                            return item.coachingSupportInd1;
+                          })
+                          .toString();
+
+                        const followup2 = this.state.preMonthData
+                          .map((item) => {
+                            return item.coachingSupportInd2;
+                          })
+                          .toString();
+                        console.log("followup1 :" + followup1);
+                        this.setState({
+                          lastFollowupTopic1: followup1,
+                        });
+                        this.setState({
+                          lastFollowupTopic2: followup2,
+                        });
+                      }
+                    }}
+                    itemStyle={{ color: "white" }}
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"CO"} value={"CO"} />
+                    <Picker.Item label={"DFO"} value={"DFO"} />
+                    <Picker.Item label={"CFO"} value={"CFO"} />
+                    <Picker.Item label={"NFO"} value={"NFO"} />
+                    <Picker.Item label={"MFO"} value={"MFO"} />
                   </Picker>
                 </View>
               </View>
@@ -280,6 +1365,15 @@ export default class OverallSchoolObservationScreen extends React.Component {
                       padding: 5,
                       borderWidth: 1,
                     }}
+                    keyboardType="default"
+                    placeholder=""
+                    editable={true}
+                    onChangeText={(text) =>
+                      this.setState({
+                        headTeacher: text,
+                      })
+                    }
+                    value={this.state.headTeacher + ""}
                   />
                 </View>
                 <View style={{ flex: 1 }}>
@@ -296,68 +1390,46 @@ export default class OverallSchoolObservationScreen extends React.Component {
                       height: 40,
                       width: 200,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
+                    selectedValue={this.state.classTeacherGender}
                     onValueChange={(value) => {
-                      this.setState({ option: value });
+                      this.setState({ classTeacherGender: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"মহিলা"} value={"female"} />
-                    <Picker.Item label={"পুরুষ"} value={"male"} />
+                    <Picker.Item label={"Female"} value={"Female"} />
+                    <Picker.Item label={"Male"} value={"Male"} />
+                    <Picker.Item label={"Other"} value={"Other"} />
                   </Picker>
                 </View>
               </View>
               <View style={{ flexDirection: "row", padding: 10 }}>
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 2 }}>
                   <Text
                     style={{
                       fontSize: 16,
                       fontWeight: "bold",
                     }}
                   >
-                    দায়িত্ব প্রাপ্ত এলএফ এর নামঃ
+                    মন্তব্য :
                   </Text>
-                  <Picker
+                  <TextInput
                     style={{
-                      height: 40,
-                      width: 200,
+                      height: 80,
+                      width: 520,
+                      padding: 5,
+                      borderWidth: 1,
                     }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
-                    onValueChange={(value) => {
-                      this.setState({ option: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"মাসুদুল হাসান"} value={"LF"} />
-                    <Picker.Item label={"মুশফিকুর রহমান "} value={"LPO"} />
-                  </Picker>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    দায়িত্ব প্রাপ্ত এলপিও এর নামঃ
-                  </Text>
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 200,
-                    }}
-                    selectedValue={(this.state && this.state.option) || "yes"}
-                    onValueChange={(value) => {
-                      this.setState({ option: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"মাসুদুল হাসান"} value={"LF"} />
-                    <Picker.Item label={"মুশফিকুর রহমান "} value={"LPO"} />
-                  </Picker>
+                    keyboardType="default"
+                    placeholder=""
+                    editable={true}
+                    onChangeText={(text) =>
+                      this.setState({
+                        note: text,
+                      })
+                    }
+                    value={this.state.note + ""}
+                  />
                 </View>
               </View>
             </Card>
@@ -2826,6 +3898,14 @@ export default class OverallSchoolObservationScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    flex: 1,
+    height: height,
+    width: width,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   background: {
     height: "100%",
     width: "100%",
@@ -2833,9 +3913,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  container: {
-    alignItems: "center",
-    flex: 1,
+  input: {
+    height: 40,
+    width: 100,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
   },
   logoMain: {
     height: 80,

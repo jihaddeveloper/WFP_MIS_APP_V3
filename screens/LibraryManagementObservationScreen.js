@@ -1407,17 +1407,17 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       this.setState({ pickerVisitorOffice: value });
                       console.log("preMonthData: " + this.state.preMonthData);
                       if (this.state.preMonthData.length > 0) {
-                        const followup1 = this.state.preMonthData.map(
-                          (item) => {
+                        const followup1 = this.state.preMonthData
+                          .map((item) => {
                             return item.coachingSupportIndicator1;
-                          }
-                        );
+                          })
+                          .toString();
 
-                        const followup2 = this.state.preMonthData.map(
-                          (item) => {
+                        const followup2 = this.state.preMonthData
+                          .map((item) => {
                             return item.coachingSupportIndicator2;
-                          }
-                        );
+                          })
+                          .toString();
                         console.log("followup1 :" + followup1);
                         this.setState({ pickerFollowup1: followup1 });
                         this.setState({ pickerFollowup2: followup2 });

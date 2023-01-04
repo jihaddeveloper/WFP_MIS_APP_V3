@@ -114,6 +114,8 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
       presentGirl: 0,
       presentTotal: 0,
 
+      note: "",
+
       // General data
 
       typeOfReading: "",
@@ -272,6 +274,8 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
       presentBoy: 0,
       presentGirl: 0,
       presentTotal: 0,
+
+      note: "",
 
       // General data
 
@@ -519,6 +523,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
       totalPresentStudent: this.state.presentTotal,
       totalPresentGirl: this.state.presentGirl,
       totalPresentBoy: this.state.presentBoy,
+      note: this.state.note,
 
       lastFollowupTopic1: this.state.lastFollowupTopic1,
       lastFollowupTopic2: this.state.lastFollowupTopic2,
@@ -1547,62 +1552,65 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
 
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    শ্রেণী:
-                  </Text>
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
-                    selectedValue={this.state.grade}
-                    onValueChange={(value) => {
-                      this.setState({ grade: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"Pre-Primary"} value={"Pre-Primary"} />
-                    <Picker.Item label={"Grade 1"} value={"Grade 1"} />
-                    <Picker.Item label={"Grade 2"} value={"Grade 2"} />
-                  </Picker>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    শাখা:
-                  </Text>
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
-                    selectedValue={this.state.section}
-                    onValueChange={(value) => {
-                      this.setState({ section: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"A"} value={"A"} />
-                    <Picker.Item label={"B"} value={"B"} />
-                    <Picker.Item label={"C"} value={"C"} />
-                  </Picker>
-                </View>
-              </View>
-
-              <View style={{ flexDirection: "row", padding: 10 }}>
-                <View style={{ flex: 1 }}>
                   <View style={{ flexDirection: "row" }}>
+                    <View style={{ flex: 1 }}>
+                      <Text
+                        style={{
+                          fontSize: 16,
+                          fontWeight: "bold",
+                        }}
+                      >
+                        শ্রেণী:
+                      </Text>
+                      <Picker
+                        style={{
+                          height: 40,
+                          width: 150,
+                        }}
+                        selectedValue={this.state.grade}
+                        onValueChange={(value) => {
+                          this.setState({ grade: value });
+                        }}
+                        itemStyle={{ color: "white" }}
+                      >
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item
+                          label={"Pre-Primary"}
+                          value={"Pre-Primary"}
+                        />
+                        <Picker.Item label={"Grade 1"} value={"Grade 1"} />
+                        <Picker.Item label={"Grade 2"} value={"Grade 2"} />
+                        <Picker.Item label={"Grade 3"} value={"Grade 3"} />
+                        <Picker.Item label={"Grade 4"} value={"Grade 4"} />
+                        <Picker.Item label={"Grade 5"} value={"Grade 5"} />
+                      </Picker>
+
+                      <Text
+                        style={{
+                          fontSize: 16,
+                          fontWeight: "bold",
+                        }}
+                      >
+                        শাখা:
+                      </Text>
+                      <Picker
+                        style={{
+                          height: 40,
+                          width: 150,
+                        }}
+                        selectedValue={this.state.section}
+                        onValueChange={(value) => {
+                          this.setState({ section: value });
+                        }}
+                        itemStyle={{ color: "white" }}
+                      >
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"A"} value={"A"} />
+                        <Picker.Item label={"B"} value={"B"} />
+                        <Picker.Item label={"C"} value={"C"} />
+                        <Picker.Item label={"N/A"} value={"N/A"} />
+                      </Picker>
+                    </View>
                     <View style={{ flex: 1 }}>
                       <Text
                         style={{
@@ -1687,58 +1695,6 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                       )} */}
                     </View>
                   </View>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    পাঠ নং/ পাঠের নাম:
-                  </Text>
-                  <TextInput
-                    style={{
-                      height: 30,
-                      width: 200,
-                      padding: 5,
-                      borderWidth: 1,
-                    }}
-                    keyboardType="default"
-                    placeholder=""
-                    editable={true}
-                    onChangeText={(text) =>
-                      this.setState({ teachingTopic: text })
-                    }
-                    value={this.state.teachingTopic + ""}
-                  />
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    দিন:
-                  </Text>
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
-                    selectedValue={this.state.teachingDay}
-                    onValueChange={(value) => {
-                      this.setState({ teachingDay: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"1st"} value={"1st"} />
-                    <Picker.Item label={"2nd"} value={"2nd"} />
-                    <Picker.Item label={"3rd"} value={"3rd"} />
-                    <Picker.Item label={"4th"} value={"4th"} />
-                    <Picker.Item label={"5th"} value={"5th"} />
-                    <Picker.Item label={"6th"} value={"6th"} />
-                  </Picker>
                 </View>
               </View>
 
@@ -1877,6 +1833,36 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                       />
                     </View>
                   </View>
+                </View>
+              </View>
+
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 2 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    মন্তব্য :
+                  </Text>
+                  <TextInput
+                    style={{
+                      height: 80,
+                      width: 520,
+                      padding: 5,
+                      borderWidth: 1,
+                    }}
+                    keyboardType="default"
+                    placeholder=""
+                    editable={true}
+                    onChangeText={(text) =>
+                      this.setState({
+                        note: text,
+                      })
+                    }
+                    value={this.state.note + ""}
+                  />
                 </View>
               </View>
             </Card>
@@ -3303,9 +3289,9 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                   <View style={{ flex: 1, padding: 2 }}>
                     <Text>
                       অগ্রাধিকারভিত্তিতে বিদ্যালয়ের পাঠাগারগুলো উন্নয়নের জন্য যে
-                      ১/২ টি ইনডিকেটর (এরিয়ার নম্বর) চিহ্নিত করেছেন তা প্রধান
-                      শিক্ষককে অবহিত করুন এবং তিনি পাঠাগারগুলো উন্নয়নে কি করতে
-                      পারেন সেটি উল্লেখ করুন ।
+                      ১/২ টি ইনডিকেটর (এরিয়ার নম্বর) চিহ্নিত করেছেন তা শিক্ষককে
+                      অবহিত করুন এবং তিনি পাঠাগারগুলো উন্নয়নে কি করতে পারেন সেটি
+                      উল্লেখ করুন ।
                     </Text>
                   </View>
                 </View>
@@ -3419,7 +3405,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                 <View style={{ flexDirection: "row" }}>
                   <View style={{ flex: 1, padding: 2 }}>
                     <Text>
-                      যে কাজ গুলো করার জন্য প্রধান শিক্ষক একমত হয়েছেন সেটি/
+                      যে কাজ গুলো করার জন্য শ্রেণী শিক্ষক একমত হয়েছেন সেটি/
                       সেগুলো উল্লেখ করুন ।
                     </Text>
                   </View>
@@ -3527,13 +3513,12 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                 !this.state.section ||
                 !this.state.classStartTime ||
                 !this.state.classEndTime ||
-                !this.state.teachingTopic ||
-                !this.state.teachingDay ||
+                !this.state.note ||
+                !this.state.typeOfReading ||
                 !this.state.bestPracticeInd1 ||
                 !this.state.bestPracticeInd2 ||
                 !this.state.bestPracticeInd3 ||
                 !this.state.coachingSupportInd1 ||
-                !this.state.coachingSupportInd2 ||
                 !this.state.coachingSupportDetailsInd1 ||
                 !this.state.coachingSupportDetailsInd2 ||
                 !this.state.agreedStatement1 ||

@@ -112,6 +112,8 @@ export default class BanglaClassObservationScreen extends React.Component {
       presentGirl: 0,
       presentTotal: 0,
 
+      note: "",
+
       // General data
 
       typeOfReading: "",
@@ -437,6 +439,8 @@ export default class BanglaClassObservationScreen extends React.Component {
       presentGirl: 0,
       presentTotal: 0,
 
+      note: "",
+
       // General data
 
       lastFollowupTopic1: "",
@@ -710,6 +714,8 @@ export default class BanglaClassObservationScreen extends React.Component {
       totalPresentStudent: this.state.presentTotal,
       totalPresentGirl: this.state.presentGirl,
       totalPresentBoy: this.state.presentBoy,
+
+      note: this.state.note,
 
       lastFollowupTopic1: this.state.lastFollowupTopic1,
       lastFollowupTopic2: this.state.lastFollowupTopic2,
@@ -1832,6 +1838,9 @@ export default class BanglaClassObservationScreen extends React.Component {
                     <Picker.Item label={"Pre-Primary"} value={"Pre-Primary"} />
                     <Picker.Item label={"Grade 1"} value={"Grade 1"} />
                     <Picker.Item label={"Grade 2"} value={"Grade 2"} />
+                    <Picker.Item label={"Grade 3"} value={"Grade 3"} />
+                    <Picker.Item label={"Grade 4"} value={"Grade 4"} />
+                    <Picker.Item label={"Grade 5"} value={"Grade 5"} />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -1858,6 +1867,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                     <Picker.Item label={"A"} value={"A"} />
                     <Picker.Item label={"B"} value={"B"} />
                     <Picker.Item label={"C"} value={"C"} />
+                    <Picker.Item label={"N/A"} value={"N/A"} />
                   </Picker>
                 </View>
               </View>
@@ -1982,7 +1992,22 @@ export default class BanglaClassObservationScreen extends React.Component {
                   >
                     দিন:
                   </Text>
-                  <Picker
+                  <TextInput
+                    style={{
+                      height: 30,
+                      width: 200,
+                      padding: 5,
+                      borderWidth: 1,
+                    }}
+                    keyboardType="default"
+                    placeholder=""
+                    editable={true}
+                    onChangeText={(text) =>
+                      this.setState({ teachingDay: text })
+                    }
+                    value={this.state.teachingDay + ""}
+                  />
+                  {/* <Picker
                     style={{
                       height: 40,
                       width: 150,
@@ -2000,7 +2025,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                     <Picker.Item label={"4th"} value={"4th"} />
                     <Picker.Item label={"5th"} value={"5th"} />
                     <Picker.Item label={"6th"} value={"6th"} />
-                  </Picker>
+                  </Picker> */}
                 </View>
               </View>
 
@@ -2141,6 +2166,36 @@ export default class BanglaClassObservationScreen extends React.Component {
                   </View>
                 </View>
               </View>
+
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 2 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    মন্তব্য :
+                  </Text>
+                  <TextInput
+                    style={{
+                      height: 80,
+                      width: 520,
+                      padding: 5,
+                      borderWidth: 1,
+                    }}
+                    keyboardType="default"
+                    placeholder=""
+                    editable={true}
+                    onChangeText={(text) =>
+                      this.setState({
+                        note: text,
+                      })
+                    }
+                    value={this.state.note + ""}
+                  />
+                </View>
+              </View>
             </Card>
           </View>
 
@@ -2244,7 +2299,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                   >
                     <Text>
                       ১. শিক্ষক ধ্বনি সচেতনাতার কাজে ব্যবহৃত সকল বর্ণ ও শব্দের
-                      ধ্বনি সঠিকভাবে উচ্চারণ করেছেন এবং শিক্ষাত্রিদের চর্চা করার
+                      ধ্বনি সঠিকভাবে উচ্চারণ করেছেন এবং শিক্ষার্থীদের চর্চা করার
                       সুযোগ দিয়েছেন ।
                     </Text>
                     <Text style={{ fontWeight: "bold" }}>
