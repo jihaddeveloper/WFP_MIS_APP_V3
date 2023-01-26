@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/08/2021
-//  Modify Date: 25/09/2022
+//  Modify Date: 25/01/2023
 //  Description: Library management observation screen component
 
 import React from "react";
@@ -79,8 +79,12 @@ export default class LibraryManagementObservationScreen extends React.Component 
       pickerVisitorOffice: "",
       pickerLF: "",
       pickerLPO: "",
+      pickerLFName: "",
+      pickerLPOName: "",
       pickerMonth: "",
       pickerYear: "",
+
+      note: "",
       // General data
 
       // Last visit topic
@@ -260,8 +264,12 @@ export default class LibraryManagementObservationScreen extends React.Component 
       pickerVisitorOffice: "",
       pickerLF: "",
       pickerLPO: "",
+      pickerLFName: "",
+      pickerLPOName: "",
       pickerMonth: "",
       pickerYear: "",
+
+      note: "",
       // General data
 
       // Last visit topic
@@ -542,11 +550,15 @@ export default class LibraryManagementObservationScreen extends React.Component 
       visitor: this.state.pickerVisitor,
       visitorDesignation: this.state.pickerDesignation,
       visitorOffice: this.state.pickerVisitorOffice,
-      lpo: this.state.pickerLPO,
-      lf: this.state.pickerLF,
+      lpo: this.state.pickerLPO.employeeRegId,
+      lf: this.state.pickerLF.employeeRegId,
+      lfName: this.state.pickerLFName.name,
+      lpoName: this.state.pickerLPOName.name,
       school: this.state.pickerSchool,
       month: this.state.pickerMonth,
       year: this.state.pickerYear,
+
+      note: this.state.note,
 
       lastFollowupIndicator1: this.state.pickerFollowup1,
       lastFollowupIndicator2: this.state.pickerFollowup2,
@@ -744,6 +756,8 @@ export default class LibraryManagementObservationScreen extends React.Component 
           Alert.alert("Library observation data saved successfully!!!");
           this.getAllLibraryObservation();
           this.updateState();
+        } else {
+          Alert.alert("Alert", "Error there !!!");
         }
       } catch (errors) {
         alert(errors);
@@ -906,6 +920,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   </Text> */}
                 </View>
               </View>
+
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
                   <View style={{ flexDirection: "row" }}>
@@ -928,7 +943,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={this.state && this.state.pickerOffice}
+                    selectedValue={this.state.pickerOffice}
                     onValueChange={(value) => {
                       this.setState({ pickerOffice: value });
                     }}
@@ -962,7 +977,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={this.state && this.state.pickerProject}
+                    selectedValue={this.state.pickerProject}
                     onValueChange={(value) => {
                       this.setState({ pickerProject: value });
                     }}
@@ -974,31 +989,17 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       value={"WFP funded project"}
                     />
                     <Picker.Item
-                      label={"Natore LP & GEP Program"}
-                      value={"Natore LP & GEP Program"}
+                      label={"Natore LP Program"}
+                      value={"Natore LP Program"}
                     />
-
                     <Picker.Item
                       label={"Dhaka LP Program"}
                       value={"Dhaka LP Program"}
                     />
                     <Picker.Item
-                      label={"Cox's Bazar GEP Program"}
-                      value={"Cox's Bazar GEP Program"}
+                      label={"Moulvibazar LP Program"}
+                      value={"Moulvibazar LP Program"}
                     />
-                    <Picker.Item
-                      label={"Sylhet GEP Program"}
-                      value={"Sylhet GEP Program"}
-                    />
-                    <Picker.Item
-                      label={"Sylhet LP Program"}
-                      value={"Sylhet LP Program"}
-                    />
-                    <Picker.Item
-                      label={"UNICEF funded Host Community Project"}
-                      value={"UNICEF funded Host Community Project"}
-                    />
-                    <Picker.Item label={"WB"} value={"WB"} />
                   </Picker>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -1037,6 +1038,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   </Text> */}
                 </View>
               </View>
+
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
                   <View style={{ flexDirection: "row" }}>
@@ -1153,9 +1155,9 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={this.state && this.state.pickerLPO}
+                    selectedValue={this.state.pickerLPO}
                     onValueChange={(value) => {
-                      this.setState({ pickerLPO: value });
+                      this.setState({ pickerLPO: value, pickerLPOName: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
@@ -1169,7 +1171,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           <Picker.Item
                             key={item.id}
                             label={item.name}
-                            value={item.employeeRegId}
+                            value={item}
                           />
                         );
                       })}
@@ -1198,7 +1200,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     }}
                     selectedValue={this.state && this.state.pickerLF}
                     onValueChange={(value) => {
-                      this.setState({ pickerLF: value });
+                      this.setState({ pickerLF: value, pickerLFName: value });
                     }}
                     itemStyle={{ color: "white" }}
                   >
@@ -1215,7 +1217,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           <Picker.Item
                             key={item.id}
                             label={item.name}
-                            value={item.employeeRegId}
+                            value={item}
                           />
                         );
                       })}
@@ -1265,6 +1267,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   </Picker>
                 </View>
               </View>
+
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
                   <View style={{ flexDirection: "row" }}>
@@ -1288,7 +1291,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={this.state && this.state.pickerVisitor}
+                    selectedValue={this.state.pickerVisitor}
                     onValueChange={(value) => {
                       this.setState({ pickerVisitor: value });
                     }}
@@ -1328,7 +1331,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={this.state && this.state.pickerDesignation}
+                    selectedValue={this.state.pickerDesignation}
                     onValueChange={(value) => {
                       this.setState({ pickerDesignation: value });
 
@@ -1347,27 +1350,27 @@ export default class LibraryManagementObservationScreen extends React.Component 
                           ),
                       });
 
-                      console.log(
-                        "this.state.pickerSchool : " + this.state.pickerSchool
-                      );
+                      // console.log(
+                      //   "this.state.pickerSchool : " + this.state.pickerSchool
+                      // );
 
-                      console.log(
-                        "this.state.pickerProject : " + this.state.pickerProject
-                      );
+                      // console.log(
+                      //   "this.state.pickerProject : " + this.state.pickerProject
+                      // );
 
-                      console.log(
-                        "this.state.pickerYear : " + this.state.pickerYear
-                      );
+                      // console.log(
+                      //   "this.state.pickerYear : " + this.state.pickerYear
+                      // );
 
-                      console.log(
-                        "parseInt(this.state.visitNo) : " +
-                          parseInt(parseInt(this.state.visitNo) - 1)
-                      );
+                      // console.log(
+                      //   "parseInt(this.state.visitNo) : " +
+                      //     parseInt(parseInt(this.state.visitNo) - 1)
+                      // );
 
-                      console.log(
-                        "allLibraryObservationData: " +
-                          this.state.allLibraryObservationData
-                      );
+                      // console.log(
+                      //   "allLibraryObservationData: " +
+                      //     this.state.allLibraryObservationData
+                      // );
 
                       //console.log("preMonthData: " + this.state.preMonthData);
                     }}
@@ -1438,6 +1441,36 @@ export default class LibraryManagementObservationScreen extends React.Component 
                   </Picker>
                 </View>
               </View>
+
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 2 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    মন্তব্য :
+                  </Text>
+                  <TextInput
+                    style={{
+                      height: 80,
+                      width: 520,
+                      padding: 5,
+                      borderWidth: 1,
+                    }}
+                    keyboardType="default"
+                    placeholder=""
+                    editable={true}
+                    onChangeText={(text) =>
+                      this.setState({
+                        note: text,
+                      })
+                    }
+                    value={this.state.note + ""}
+                  />
+                </View>
+              </View>
             </Card>
           </View>
 
@@ -1473,74 +1506,6 @@ export default class LibraryManagementObservationScreen extends React.Component 
                 <View style={{ flex: 1 }}>
                   <View style={{ padding: 5 }}>
                     <Text>১.</Text>
-                    {/* {this.state.preMonthData.length > 0 && (
-                      <Picker
-                        selectedValue={this.state && this.state.pickerFollowup1}
-                        onValueChange={(value) => {
-                          this.setState({ pickerFollowup1: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        {
-                          // this.state.preMonthData.length
-                          this.state.preMonthData.map((item) => {
-                            return (
-                              <Picker.Item
-                                key={item.id}
-                                label={item.lastFollowupIndicator1}
-                                value={item.lastFollowupIndicator1}
-                              />
-                            );
-                          })
-                        }
-                        {
-                          // this.state.preMonthData.length
-                          this.state.preMonthData.map((item) => {
-                            return (
-                              <Picker.Item
-                                key={item.id}
-                                label={item.lastFollowupIndicator2}
-                                value={item.lastFollowupIndicator2}
-                              />
-                            );
-                          })
-                        }
-                      </Picker>
-                    )}
-                    {this.state.preMonthData.length === 0 && (
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state && this.state.pickerFollowup1}
-                        onValueChange={(value) => {
-                          this.setState({ pickerFollowup1: value });
-                          //console.log("preMonthData: " + this.state.preMonthData);
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-
-                        {
-                          // this.state.preMonthData.length
-                          this.state.allLibraryIndicator.map((item) => {
-                            return (
-                              <Picker.Item
-                                key={item.id}
-                                label={item.indicatorDetail}
-                                value={item.indicatorDetail}
-                              />
-                            );
-                          })
-                        }
-                      </Picker>
-                    )} */}
                     <TextInput
                       style={{ height: 150, padding: 5, borderWidth: 1 }}
                       multiline={true}
@@ -1798,6 +1763,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                               libraryStatus: "Developing",
                             });
                           }
+                          // Set library status
                         }}
                         itemStyle={{ color: "white" }}
                       >
@@ -4431,6 +4397,40 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       }
                       onValueChange={(value) => {
                         this.setState({ pickerBestPracticeIndicator1: value });
+
+                        // Set library status
+                        if (
+                          this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                          this.state.pickerClassroomSuitableSRM === "Yes" &&
+                          this.state.pickerBookselfUseable === "Yes" &&
+                          this.state.pickerBookRegisterUpdated === "Yes" &&
+                          this.state.pickerBookselfOrganized === "Yes" &&
+                          this.state.pickerPrintRichDisplayed === "Yes" &&
+                          this.state.pickerBookCheckoutFunctional === "Yes" &&
+                          this.state.pickerSRMClassRoutine === "Yes" &&
+                          this.state.pickerSRMRegisterUpdated === "Yes"
+                        ) {
+                          this.setState({
+                            libraryStatus: "Highly Functioning",
+                          });
+                        } else if (
+                          this.state.pickerIsTrainedAllTeacher === "Yes" &&
+                          this.state.pickerClassroomSuitableSRM === "Yes" &&
+                          this.state.pickerBookselfUseable === "Yes" &&
+                          this.state.pickerBookRegisterUpdated === "Yes" &&
+                          this.state.pickerBookselfOrganized === "Yes" &&
+                          this.state.pickerPrintRichDisplayed === "Yes" &&
+                          this.state.pickerBookCheckoutFunctional === "Yes"
+                        ) {
+                          this.setState({
+                            libraryStatus: "Functioning",
+                          });
+                        } else {
+                          this.setState({
+                            libraryStatus: "Developing",
+                          });
+                        }
+                        // Set library status
                       }}
                       itemStyle={{ color: "white", length: 100 }}
                     >
@@ -4796,6 +4796,8 @@ const styles = StyleSheet.create({
     color: "red",
     fontWeight: "bold",
     fontSize: 15,
+    alignSelf: "center",
+    alignContent: "center",
   },
   pickerStyle: {
     height: 150,

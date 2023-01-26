@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 25/08/2021
-//  Modify Date: 30/11/2022
+//  Modify Date: 25/01/2023
 //  Description: Library reading activities observation screen component
 
 import React from "react";
@@ -240,24 +240,23 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
   // Update state
   updateToInitialState = () => {
     this.setState({
-      // General data
-      visitNo: 0,
+      pickerMonth: "",
+      pickerYear: "",
+      pickerDistrict: "",
+      pickerUpazilla: "",
+      pickerDistrictKey: "",
+      pickerUpazillaKey: "",
       pickerOffice: "",
       pickerProject: "",
-      pickerDistrict: "",
-      pickerDistrictKey: "",
-      pickerUpazilla: "",
-      pickerUpazillaKey: "",
-      pickerSchool: "",
-      pickerVisitor: "",
-      pickerDesignation: "",
-      pickerVisitorOffice: "",
+      visitNo: 0,
       pickerLF: "",
       pickerLPO: "",
       pickerLFName: "",
       pickerLPOName: "",
-      pickerMonth: "",
-      pickerYear: "",
+      pickerSchool: "",
+      pickerVisitor: "",
+      pickerDesignation: "",
+      pickerVisitorOffice: "",
 
       classTeacher: "",
       classTeacherGender: "",
@@ -279,12 +278,12 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
 
       // General data
 
+      typeOfReading: "",
+      timeOfReading: "",
+
       lastFollowupTopic1: "",
       lastFollowupTopic2: "",
       lastFollowupTopic3: "",
-
-      typeOfReading: "",
-      timeOfReading: "",
 
       ind1FriendlyCommunicationStatus: "",
       ind1FriendlyCommunicationNotes: "",
@@ -332,6 +331,8 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
       agreedStatement2: "",
 
       teacherStatus: "",
+
+      dateError: "",
     });
   };
   // Update state
@@ -678,38 +679,6 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
       this.setState({ dateError: "Date can not be empty" });
       Alert.alert("Alert", "Section can not be empty");
       return;
-    } else if (this.state.classStartTime === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Class Start Time can not be empty");
-      return;
-    } else if (this.state.classEndTime === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Class End Time can not be empty");
-      return;
-    } else if (this.state.teachingTopic === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Teaching Topic can not be empty");
-      return;
-    } else if (this.state.teachingDay === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Teaching Day can not be empty");
-      return;
-    } else if (this.state.studentBoy === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Student Boy can not be empty");
-      return;
-    } else if (this.state.studentGirl === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Student Girl can not be empty");
-      return;
-    } else if (this.state.presentBoy === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Present Boy can not be empty");
-      return;
-    } else if (this.state.presentGirl === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Present Girl can not be empty");
-      return;
     } else if (this.state.typeOfReading === "") {
       this.setState({ dateError: "Date can not be empty" });
       Alert.alert("Alert", "Type Of Reading can not be empty");
@@ -772,7 +741,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
           }
         );
 
-        console.log("response:" + JSON.stringify(newSRMClass));
+        //console.log("response:" + JSON.stringify(newSRMClass));
 
         if (response.status >= 200 && response.status < 300) {
           Alert.alert(
@@ -781,6 +750,8 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
           );
           this.getAllSRMClassObservation();
           this.updateToInitialState();
+        } else {
+          Alert.alert("Alert", "Error there !!!");
         }
       } catch (errors) {
         alert(errors);
@@ -1877,19 +1848,19 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                 হলেই কেবল সম্পূর্ণ পাঠ পর্যবেক্ষণ করুন ।
               </Text>
               <Text style={{ padding: 5 }}>
-                ২। সম্পূর্ণ পাঠ পর্যবেক্ষণ করুন তবে প্রাইওরিটি এরিয়ার ভিত্তিতে
-                ভালো দিক ও সহাওয়াতার ক্ষেত্রগুলা চিহ্নিত করুন ।
+                ২। সম্পূর্ণ পাঠ পর্যবেক্ষণ করুন তবে প্রায়োরিটি এরিয়ার ভিত্তিতে
+                ভালো দিক ও সহায়তার ক্ষেত্রগুলা চিহ্নিত করুন ।
               </Text>
               <Text style={{ padding: 5 }}>
                 ৩। পড়ার ঘণ্টা কার্যক্রম সংক্রান্ত ২-৩ টি ভালো দিক উল্লেখ করুন।
               </Text>
               <Text style={{ padding: 5 }}>
-                ৪। প্রাইওরিটি এরিয়ার ভিত্তিতে যে ১-২ টি ইনডিকেটরের উত্তর "না" বা
-                আংশিক হয়েছে তার আলোকে সহায়তার জন্য অগ্রাধিকারভিত্তিক ইনডিকেটর
+                ৪। প্রায়োরিটি এরিয়ার ভিত্তিতে যে ১-২ টি ইনডিকেটরের উত্তর "না"
+                বা আংশিক হয়েছে তার আলোকে সহায়তার জন্য অগ্রাধিকারভিত্তিক ইনডিকেটর
                 উল্লেখ করুন ।
               </Text>
               <Text style={{ padding: 5 }}>
-                ৫। শ্রেণীকক্ষ পড়ার ঘণ্টা কার্যক্রমে উন্নয়ন যোগ্য ১/২ টি ইনডিকেটর
+                ৫। শ্রেণিকক্ষ পড়ার ঘণ্টা কার্যক্রমে উন্নয়ন যোগ্য ১/২ টি ইনডিকেটর
                 নিয়ে সংশ্লিষ্ট শিক্ষকের সাথে আলোচনা করুন।
               </Text>
               <Text style={{ padding: 5 }}>
@@ -1989,6 +1960,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                       value={"স্বাধীনভাবে পড়া"}
                     />
                     <Picker.Item label={"জুটিতে পড়া"} value={"জুটিতে পড়া"} />
+                    <Picker.Item label={"N/A"} value={"N/A"} />
                   </Picker>
                 </View>
               </Card>
@@ -2022,120 +1994,128 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
               </View>
               <View style={{ padding: 5 }}>
                 {/* pointerEvents="none" */}
-                <View>
+
+                <Card
+                  style={{
+                    padding: 10,
+                    margin: 10,
+                    flex: 1,
+                    alignSelf: "center",
+                    disabled: true,
+                  }}
+                >
                   <Card
                     style={{
-                      padding: 10,
-                      margin: 10,
+                      padding: 5,
+                      margin: 5,
                       flex: 1,
                       alignSelf: "center",
-                      disabled: true,
                     }}
                   >
-                    <Card
-                      style={{
-                        padding: 5,
-                        margin: 5,
-                        flex: 1,
-                        alignSelf: "center",
-                      }}
-                    >
-                      <Text>
-                        ১. শিক্ষক সকল শিক্ষার্থীদের সাথে বন্ধুত্বপূর্ণ যোগাযোগ
-                        করেছেন ।
-                      </Text>
-                      <Text style={{ fontWeight: "bold" }}>
-                        অগ্রাধিকার এরিয়া: ১
-                      </Text>
-                    </Card>
-                    <Card
-                      style={{
-                        padding: 5,
-                        margin: 5,
-                        flex: 1,
-                        alignSelf: "center",
-                      }}
-                    >
-                      <View style={{ flexDirection: "row" }}>
-                        <View style={{ flex: 1, padding: 2 }}>
-                          <Text>পর্যবেক্ষণ: </Text>
-                          <Picker
-                            style={{
-                              height: 40,
-                              width: 150,
-                            }}
-                            onValueChange={(value) => {
-                              this.setState({
-                                ind1FriendlyCommunicationStatus: value,
-                              });
-
-                              // Set teacher status
-                              if (
-                                this.state.ind4BookShowingStatus === "Yes" &&
-                                this.state.ind9AllStudentEngagementStatus ===
-                                  "Yes"
-                              ) {
-                                this.setState({
-                                  teacherStatus: "Priority 3",
-                                });
-                              } else if (
-                                this.state.ind1FriendlyCommunicationStatus ===
-                                  "Yes" &&
-                                this.state.ind2SRMInspiringStatus === "Yes" &&
-                                this.state.ind3SRMInstructionStatus === "Yes" &&
-                                this.state.ind6StoryReadingStatus === "Yes" &&
-                                this.state.ind7StorySuitableStatus === "Yes" &&
-                                this.state.ind8StoryReadingCombinationStatus ===
-                                  "Yes" &&
-                                this.state.ind11AskingForBCOStatus === "Yes"
-                              ) {
-                                this.setState({
-                                  teacherStatus: "Priority 2",
-                                });
-                              } else {
-                                this.setState({
-                                  teacherStatus: "Priority 1",
-                                });
-                              }
-                              // Set teacher status
-                            }}
-                            selectedValue={
-                              this.state.ind1FriendlyCommunicationStatus
-                            }
-                            itemStyle={{ color: "white" }}
-                          >
-                            <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                            <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
-                            <Picker.Item label={"না"} value={"No"} />
-                            <Picker.Item label={"আংশিক"} value={"Partial"} />
-                          </Picker>
-                        </View>
-                        <View style={{ flex: 2, padding: 2 }}>
-                          <Text>মন্তব্য: </Text>
-                          <TextInput
-                            style={{
-                              height: 50,
-                              width: 350,
-                              padding: 5,
-                              borderWidth: 1,
-                            }}
-                            keyboardType="default"
-                            placeholder=""
-                            editable={true}
-                            onChangeText={(text) =>
-                              this.setState({
-                                ind1FriendlyCommunicationNotes: text,
-                              })
-                            }
-                            value={
-                              this.state.ind1FriendlyCommunicationNotes + ""
-                            }
-                          ></TextInput>
-                        </View>
-                      </View>
-                    </Card>
+                    <Text>
+                      ১. শিক্ষক সকল শিক্ষার্থীদের সাথে বন্ধুত্বপূর্ণ যোগাযোগ
+                      করেছেন ।
+                    </Text>
+                    <Text style={{ fontWeight: "bold" }}>
+                      অগ্রাধিকার এরিয়া: ১
+                    </Text>
                   </Card>
-                </View>
+                  <Card
+                    style={{
+                      padding: 5,
+                      margin: 5,
+                      flex: 1,
+                      alignSelf: "center",
+                    }}
+                  >
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flex: 1, padding: 2 }}>
+                        <Text>পর্যবেক্ষণ: </Text>
+                        <Picker
+                          style={{
+                            height: 40,
+                            width: 150,
+                          }}
+                          onValueChange={(value) => {
+                            this.setState({
+                              ind1FriendlyCommunicationStatus: value,
+                            });
+
+                            // Set teacher status
+                            if (
+                              this.state.ind1FriendlyCommunicationStatus ===
+                                "Yes" &&
+                              this.state.ind2SRMInspiringStatus === "Yes" &&
+                              this.state.ind3SRMInstructionStatus === "Yes" &&
+                              this.state.ind6StoryReadingStatus === "Yes" &&
+                              this.state.ind7StorySuitableStatus === "Yes" &&
+                              this.state.ind8StoryReadingCombinationStatus ===
+                                "Yes" &&
+                              this.state.ind11AskingForBCOStatus === "Yes" &&
+                              this.state.ind4BookShowingStatus === "Yes" &&
+                              this.state.ind9AllStudentEngagementStatus ===
+                                "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              this.state.ind1FriendlyCommunicationStatus ===
+                                "Yes" &&
+                              this.state.ind2SRMInspiringStatus === "Yes" &&
+                              this.state.ind3SRMInstructionStatus === "Yes" &&
+                              this.state.ind6StoryReadingStatus === "Yes" &&
+                              this.state.ind7StorySuitableStatus === "Yes" &&
+                              this.state.ind8StoryReadingCombinationStatus ===
+                                "Yes" &&
+                              this.state.ind11AskingForBCOStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
+                            // Set teacher status
+                          }}
+                          selectedValue={
+                            this.state.ind1FriendlyCommunicationStatus
+                          }
+                          itemStyle={{ color: "white" }}
+                        >
+                          <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                          <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
+                          <Picker.Item label={"না"} value={"No"} />
+                          <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
+                        </Picker>
+                      </View>
+                      <View style={{ flex: 2, padding: 2 }}>
+                        <Text>মন্তব্য: </Text>
+                        <TextInput
+                          style={{
+                            height: 50,
+                            width: 350,
+                            padding: 5,
+                            borderWidth: 1,
+                          }}
+                          keyboardType="default"
+                          placeholder=""
+                          editable={true}
+                          onChangeText={(text) =>
+                            this.setState({
+                              ind1FriendlyCommunicationNotes: text,
+                            })
+                          }
+                          value={this.state.ind1FriendlyCommunicationNotes + ""}
+                        ></TextInput>
+                      </View>
+                    </View>
+                  </Card>
+                </Card>
+
                 <Card
                   style={{
                     padding: 10,
@@ -2171,6 +2151,15 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
 
                             // Set teacher status
                             if (
+                              this.state.ind1FriendlyCommunicationStatus ===
+                                "Yes" &&
+                              this.state.ind2SRMInspiringStatus === "Yes" &&
+                              this.state.ind3SRMInstructionStatus === "Yes" &&
+                              this.state.ind6StoryReadingStatus === "Yes" &&
+                              this.state.ind7StorySuitableStatus === "Yes" &&
+                              this.state.ind8StoryReadingCombinationStatus ===
+                                "Yes" &&
+                              this.state.ind11AskingForBCOStatus === "Yes" &&
                               this.state.ind4BookShowingStatus === "Yes" &&
                               this.state.ind9AllStudentEngagementStatus ===
                                 "Yes"
@@ -2205,6 +2194,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -2230,6 +2220,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                     </View>
                   </Card>
                 </Card>
+
                 <Card
                   style={{
                     padding: 10,
@@ -2265,6 +2256,15 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
 
                             // Set teacher status
                             if (
+                              this.state.ind1FriendlyCommunicationStatus ===
+                                "Yes" &&
+                              this.state.ind2SRMInspiringStatus === "Yes" &&
+                              this.state.ind3SRMInstructionStatus === "Yes" &&
+                              this.state.ind6StoryReadingStatus === "Yes" &&
+                              this.state.ind7StorySuitableStatus === "Yes" &&
+                              this.state.ind8StoryReadingCombinationStatus ===
+                                "Yes" &&
+                              this.state.ind11AskingForBCOStatus === "Yes" &&
                               this.state.ind4BookShowingStatus === "Yes" &&
                               this.state.ind9AllStudentEngagementStatus ===
                                 "Yes"
@@ -2299,6 +2299,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -2382,6 +2383,15 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
 
                             // Set teacher status
                             if (
+                              this.state.ind1FriendlyCommunicationStatus ===
+                                "Yes" &&
+                              this.state.ind2SRMInspiringStatus === "Yes" &&
+                              this.state.ind3SRMInstructionStatus === "Yes" &&
+                              this.state.ind6StoryReadingStatus === "Yes" &&
+                              this.state.ind7StorySuitableStatus === "Yes" &&
+                              this.state.ind8StoryReadingCombinationStatus ===
+                                "Yes" &&
+                              this.state.ind11AskingForBCOStatus === "Yes" &&
                               this.state.ind4BookShowingStatus === "Yes" &&
                               this.state.ind9AllStudentEngagementStatus ===
                                 "Yes"
@@ -2416,6 +2426,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -2474,6 +2485,15 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
 
                             // Set teacher status
                             if (
+                              this.state.ind1FriendlyCommunicationStatus ===
+                                "Yes" &&
+                              this.state.ind2SRMInspiringStatus === "Yes" &&
+                              this.state.ind3SRMInstructionStatus === "Yes" &&
+                              this.state.ind6StoryReadingStatus === "Yes" &&
+                              this.state.ind7StorySuitableStatus === "Yes" &&
+                              this.state.ind8StoryReadingCombinationStatus ===
+                                "Yes" &&
+                              this.state.ind11AskingForBCOStatus === "Yes" &&
                               this.state.ind4BookShowingStatus === "Yes" &&
                               this.state.ind9AllStudentEngagementStatus ===
                                 "Yes"
@@ -2508,6 +2528,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -2590,6 +2611,15 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
 
                             // Set teacher status
                             if (
+                              this.state.ind1FriendlyCommunicationStatus ===
+                                "Yes" &&
+                              this.state.ind2SRMInspiringStatus === "Yes" &&
+                              this.state.ind3SRMInstructionStatus === "Yes" &&
+                              this.state.ind6StoryReadingStatus === "Yes" &&
+                              this.state.ind7StorySuitableStatus === "Yes" &&
+                              this.state.ind8StoryReadingCombinationStatus ===
+                                "Yes" &&
+                              this.state.ind11AskingForBCOStatus === "Yes" &&
                               this.state.ind4BookShowingStatus === "Yes" &&
                               this.state.ind9AllStudentEngagementStatus ===
                                 "Yes"
@@ -2624,6 +2654,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -2660,7 +2691,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                 >
                   <Card style={{ padding: 10, flex: 1, alignSelf: "center" }}>
                     <Text>
-                      ৭. শুধুমাত্র অংশ গ্রহণ মূলক পড়ার ক্ষেত্রে: গল্পটি
+                      ৭. শুধুমাত্র অংশগ্রহণ মূলক পড়ার ক্ষেত্রে: গল্পটি
                       শিক্ষার্থীদের পড়ার লেভেল অনুযায়ী উপযুক্ত ছিল ।
                     </Text>
                     <Text style={{ fontWeight: "bold" }}>
@@ -2684,6 +2715,15 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
 
                             // Set teacher status
                             if (
+                              this.state.ind1FriendlyCommunicationStatus ===
+                                "Yes" &&
+                              this.state.ind2SRMInspiringStatus === "Yes" &&
+                              this.state.ind3SRMInstructionStatus === "Yes" &&
+                              this.state.ind6StoryReadingStatus === "Yes" &&
+                              this.state.ind7StorySuitableStatus === "Yes" &&
+                              this.state.ind8StoryReadingCombinationStatus ===
+                                "Yes" &&
+                              this.state.ind11AskingForBCOStatus === "Yes" &&
                               this.state.ind4BookShowingStatus === "Yes" &&
                               this.state.ind9AllStudentEngagementStatus ===
                                 "Yes"
@@ -2718,6 +2758,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -2754,7 +2795,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                 >
                   <Card style={{ padding: 10, flex: 1, alignSelf: "center" }}>
                     <Text>
-                      ৮. শুধুমাত্র অংশ গ্রহণ মূলক পড়ার জন্য: গল্পটি দ্বিতীয়বার
+                      ৮. শুধুমাত্র অংশগ্রহণ মূলক পড়ার জন্য: গল্পটি দ্বিতীয়বার
                       পড়ার ক্ষেত্রে, শিক্ষক শিক্ষার্থীরা একসাথে পড়েছেন ।
                     </Text>
                     <Text>
@@ -2786,6 +2827,15 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
 
                             // Set teacher status
                             if (
+                              this.state.ind1FriendlyCommunicationStatus ===
+                                "Yes" &&
+                              this.state.ind2SRMInspiringStatus === "Yes" &&
+                              this.state.ind3SRMInstructionStatus === "Yes" &&
+                              this.state.ind6StoryReadingStatus === "Yes" &&
+                              this.state.ind7StorySuitableStatus === "Yes" &&
+                              this.state.ind8StoryReadingCombinationStatus ===
+                                "Yes" &&
+                              this.state.ind11AskingForBCOStatus === "Yes" &&
                               this.state.ind4BookShowingStatus === "Yes" &&
                               this.state.ind9AllStudentEngagementStatus ===
                                 "Yes"
@@ -2820,6 +2870,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -2890,6 +2941,15 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
 
                             // Set teacher status
                             if (
+                              this.state.ind1FriendlyCommunicationStatus ===
+                                "Yes" &&
+                              this.state.ind2SRMInspiringStatus === "Yes" &&
+                              this.state.ind3SRMInstructionStatus === "Yes" &&
+                              this.state.ind6StoryReadingStatus === "Yes" &&
+                              this.state.ind7StorySuitableStatus === "Yes" &&
+                              this.state.ind8StoryReadingCombinationStatus ===
+                                "Yes" &&
+                              this.state.ind11AskingForBCOStatus === "Yes" &&
                               this.state.ind4BookShowingStatus === "Yes" &&
                               this.state.ind9AllStudentEngagementStatus ===
                                 "Yes"
@@ -2924,6 +2984,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -3009,6 +3070,15 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
 
                             // Set teacher status
                             if (
+                              this.state.ind1FriendlyCommunicationStatus ===
+                                "Yes" &&
+                              this.state.ind2SRMInspiringStatus === "Yes" &&
+                              this.state.ind3SRMInstructionStatus === "Yes" &&
+                              this.state.ind6StoryReadingStatus === "Yes" &&
+                              this.state.ind7StorySuitableStatus === "Yes" &&
+                              this.state.ind8StoryReadingCombinationStatus ===
+                                "Yes" &&
+                              this.state.ind11AskingForBCOStatus === "Yes" &&
                               this.state.ind4BookShowingStatus === "Yes" &&
                               this.state.ind9AllStudentEngagementStatus ===
                                 "Yes"
@@ -3043,6 +3113,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -3103,6 +3174,15 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
 
                             // Set teacher status
                             if (
+                              this.state.ind1FriendlyCommunicationStatus ===
+                                "Yes" &&
+                              this.state.ind2SRMInspiringStatus === "Yes" &&
+                              this.state.ind3SRMInstructionStatus === "Yes" &&
+                              this.state.ind6StoryReadingStatus === "Yes" &&
+                              this.state.ind7StorySuitableStatus === "Yes" &&
+                              this.state.ind8StoryReadingCombinationStatus ===
+                                "Yes" &&
+                              this.state.ind11AskingForBCOStatus === "Yes" &&
                               this.state.ind4BookShowingStatus === "Yes" &&
                               this.state.ind9AllStudentEngagementStatus ===
                                 "Yes"
@@ -3137,6 +3217,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -3192,6 +3273,44 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                       selectedValue={this.state.bestPracticeInd1}
                       onValueChange={(value) => {
                         this.setState({ bestPracticeInd1: value });
+
+                        // Set teacher status
+                        if (
+                          this.state.ind1FriendlyCommunicationStatus ===
+                            "Yes" &&
+                          this.state.ind2SRMInspiringStatus === "Yes" &&
+                          this.state.ind3SRMInstructionStatus === "Yes" &&
+                          this.state.ind6StoryReadingStatus === "Yes" &&
+                          this.state.ind7StorySuitableStatus === "Yes" &&
+                          this.state.ind8StoryReadingCombinationStatus ===
+                            "Yes" &&
+                          this.state.ind11AskingForBCOStatus === "Yes" &&
+                          this.state.ind4BookShowingStatus === "Yes" &&
+                          this.state.ind9AllStudentEngagementStatus === "Yes"
+                        ) {
+                          this.setState({
+                            teacherStatus: "Priority 3",
+                          });
+                        } else if (
+                          this.state.ind1FriendlyCommunicationStatus ===
+                            "Yes" &&
+                          this.state.ind2SRMInspiringStatus === "Yes" &&
+                          this.state.ind3SRMInstructionStatus === "Yes" &&
+                          this.state.ind6StoryReadingStatus === "Yes" &&
+                          this.state.ind7StorySuitableStatus === "Yes" &&
+                          this.state.ind8StoryReadingCombinationStatus ===
+                            "Yes" &&
+                          this.state.ind11AskingForBCOStatus === "Yes"
+                        ) {
+                          this.setState({
+                            teacherStatus: "Priority 2",
+                          });
+                        } else {
+                          this.setState({
+                            teacherStatus: "Priority 1",
+                          });
+                        }
+                        // Set teacher status
                       }}
                       itemStyle={{ color: "white" }}
                     >
@@ -3205,6 +3324,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                           />
                         );
                       })}
+                      <Picker.Item label={"N/A"} value={"N/A"} />
                     </Picker>
                     <Text>১.</Text>
                     <TextInput
@@ -3239,6 +3359,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                           />
                         );
                       })}
+                      <Picker.Item label={"N/A"} value={"N/A"} />
                     </Picker>
                     <Text>২.</Text>
                     <TextInput
@@ -3273,6 +3394,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                           />
                         );
                       })}
+                      <Picker.Item label={"N/A"} value={"N/A"} />
                     </Picker>
                     <Text>৩.</Text>
                     <TextInput
@@ -3319,6 +3441,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                           />
                         );
                       })}
+                      <Picker.Item label={"N/A"} value={"N/A"} />
                     </Picker>
                     <Text>১.</Text>
                     <TextInput
@@ -3353,6 +3476,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                           />
                         );
                       })}
+                      <Picker.Item label={"N/A"} value={"N/A"} />
                     </Picker>
                     <Text>২.</Text>
                     <TextInput
@@ -3493,49 +3617,47 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                 marginLeft: 100,
                 marginBottom: 20,
               }}
-              disabled={
-                !this.state.pickerMonth ||
-                !this.state.pickerYear ||
-                !this.state.pickerDistrict ||
-                !this.state.pickerUpazilla ||
-                !this.state.pickerOffice ||
-                !this.state.pickerProject ||
-                !this.state.pickerLPO ||
-                !this.state.pickerLF ||
-                !this.state.pickerSchool ||
-                !this.state.pickerVisitor ||
-                !this.state.pickerDesignation ||
-                !this.state.pickerVisitorOffice ||
-                !this.state.classTeacher ||
-                !this.state.classTeacherGender ||
-                !this.state.teacherTrained ||
-                !this.state.grade ||
-                !this.state.section ||
-                !this.state.classStartTime ||
-                !this.state.classEndTime ||
-                !this.state.note ||
-                !this.state.typeOfReading ||
-                !this.state.bestPracticeInd1 ||
-                !this.state.bestPracticeInd2 ||
-                !this.state.bestPracticeInd3 ||
-                !this.state.coachingSupportInd1 ||
-                !this.state.coachingSupportDetailsInd1 ||
-                !this.state.coachingSupportDetailsInd2 ||
-                !this.state.agreedStatement1 ||
-                !this.state.agreedStatement2
+              // disabled={
+              //   !this.state.pickerMonth ||
+              //   !this.state.pickerYear ||
+              //   !this.state.pickerDistrict ||
+              //   !this.state.pickerUpazilla ||
+              //   !this.state.pickerOffice ||
+              //   !this.state.pickerProject ||
+              //   !this.state.pickerLPO ||
+              //   !this.state.pickerLF ||
+              //   !this.state.pickerSchool ||
+              //   !this.state.pickerVisitor ||
+              //   !this.state.pickerDesignation ||
+              //   !this.state.pickerVisitorOffice ||
+              //   !this.state.classTeacher ||
+              //   !this.state.classTeacherGender ||
+              //   !this.state.teacherTrained ||
+              //   !this.state.grade ||
+              //   !this.state.section ||
+              //   !this.state.note ||
+              //   !this.state.typeOfReading ||
+              //   !this.state.bestPracticeInd1 ||
+              //   !this.state.bestPracticeInd2 ||
+              //   !this.state.bestPracticeInd3 ||
+              //   !this.state.coachingSupportInd1 ||
+              //   !this.state.coachingSupportDetailsInd1 ||
+              //   !this.state.coachingSupportDetailsInd2 ||
+              //   !this.state.agreedStatement1 ||
+              //   !this.state.agreedStatement2
 
-                // !this.state.ind1FriendlyCommunicationStatus ||
-                // !this.state.ind2SRMInspiringStatus ||
-                // !this.state.ind3SRMInstructionStatus ||
-                // !this.state.ind4BookShowingStatus ||
-                // !this.state.ind5WordTeachingStatus ||
-                // !this.state.ind6StoryReadingStatus ||
-                // !this.state.ind7StorySuitableStatus ||
-                // !this.state.ind8StoryReadingCombinationStatus ||
-                // !this.state.ind9AllStudentEngagementStatus ||
-                // !this.state.ind10InclusiveAssessmentStatus ||
-                // !this.state.ind11AskingForBCOStatus ||
-              }
+              //   // !this.state.ind1FriendlyCommunicationStatus ||
+              //   // !this.state.ind2SRMInspiringStatus ||
+              //   // !this.state.ind3SRMInstructionStatus ||
+              //   // !this.state.ind4BookShowingStatus ||
+              //   // !this.state.ind5WordTeachingStatus ||
+              //   // !this.state.ind6StoryReadingStatus ||
+              //   // !this.state.ind7StorySuitableStatus ||
+              //   // !this.state.ind8StoryReadingCombinationStatus ||
+              //   // !this.state.ind9AllStudentEngagementStatus ||
+              //   // !this.state.ind10InclusiveAssessmentStatus ||
+              //   // !this.state.ind11AskingForBCOStatus ||
+              // }
               onPress={this.saveSRMClassObservation.bind(this)}
             >
               <Text>Submit</Text>
@@ -3595,6 +3717,8 @@ const styles = StyleSheet.create({
     color: "red",
     fontWeight: "bold",
     fontSize: 15,
+    alignSelf: "center",
+    alignContent: "center",
   },
   pickerStyle: {
     height: 150,

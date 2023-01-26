@@ -7949,6 +7949,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 24,
     alignSelf: "center",
+    alignContent: "center",
   },
   bigGreenText: {
     color: "green",

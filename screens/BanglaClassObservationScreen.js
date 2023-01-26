@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/08/2021
-//  Modify Date: 27/10/2022
+//  Modify Date: 25/01/2023
 //  Description: Bangla class observation component
 
 import React from "react";
@@ -1041,6 +1041,8 @@ export default class BanglaClassObservationScreen extends React.Component {
           );
           this.getAllBanglaClassObservation();
           this.updateToInitialState();
+        } else {
+          Alert.alert("Alert", "Error there !!!");
         }
       } catch (errors) {
         alert(errors);
@@ -1990,7 +1992,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                       fontWeight: "bold",
                     }}
                   >
-                    দিন:
+                    পিরিয়ড:
                   </Text>
                   <TextInput
                     style={{
@@ -2298,7 +2300,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                     }}
                   >
                     <Text>
-                      ১. শিক্ষক ধ্বনি সচেতনাতার কাজে ব্যবহৃত সকল বর্ণ ও শব্দের
+                      ১. শিক্ষক ধ্বনি সচেতনতার কাজে ব্যবহৃত সকল বর্ণ ও শব্দের
                       ধ্বনি সঠিকভাবে উচ্চারণ করেছেন এবং শিক্ষার্থীদের চর্চা করার
                       সুযোগ দিয়েছেন ।
                     </Text>
@@ -2331,13 +2333,18 @@ export default class BanglaClassObservationScreen extends React.Component {
                             if (
                               this.state.ind1PhonemicAwarenessStatus ===
                                 "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
                               this.state.ind4FluencyIdentificationStatus ===
                                 "Yes" &&
                               this.state.ind6WritingActivitiesStatus ===
                                 "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
                               this.state.ind10UseTeachingAidStatus === "Yes" &&
                               this.state.ind11ContinuityOfLessonsStatus ===
-                                "Yes"
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
                             ) {
                               this.setState({
                                 teacherStatus: "Priority 3",
@@ -2366,6 +2373,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -2429,13 +2437,18 @@ export default class BanglaClassObservationScreen extends React.Component {
                             if (
                               this.state.ind1PhonemicAwarenessStatus ===
                                 "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
                               this.state.ind4FluencyIdentificationStatus ===
                                 "Yes" &&
                               this.state.ind6WritingActivitiesStatus ===
                                 "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
                               this.state.ind10UseTeachingAidStatus === "Yes" &&
                               this.state.ind11ContinuityOfLessonsStatus ===
-                                "Yes"
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
                             ) {
                               this.setState({
                                 teacherStatus: "Priority 3",
@@ -2463,6 +2476,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -2528,13 +2542,18 @@ export default class BanglaClassObservationScreen extends React.Component {
                             if (
                               this.state.ind1PhonemicAwarenessStatus ===
                                 "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
                               this.state.ind4FluencyIdentificationStatus ===
                                 "Yes" &&
                               this.state.ind6WritingActivitiesStatus ===
                                 "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
                               this.state.ind10UseTeachingAidStatus === "Yes" &&
                               this.state.ind11ContinuityOfLessonsStatus ===
-                                "Yes"
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
                             ) {
                               this.setState({
                                 teacherStatus: "Priority 3",
@@ -2562,6 +2581,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -2600,11 +2620,11 @@ export default class BanglaClassObservationScreen extends React.Component {
                 >
                   <Card style={{ padding: 10, flex: 1, alignSelf: "center" }}>
                     <Text>
-                      ৪. শিক্ষক শিক্ষার্থীদের সাবলিল পঠন (সঠিক গতি , শুদ্ধ
-                      উচ্চারণ ও অভিব্যাক্তি বজায় রেখে পড়া) উপস্থাপন করে
-                      দেখিয়েছেন এবং শিক্ষার্থীদের শব্দ ভাণ্ডারের শব্দগুলো অর্থসহ
-                      শিখিয়েছেন এবং শিক্ষাথ্রিদের শব্দগুলো ব্যবহার করে নতুন
-                      বাক্য গঠনের সুযোগ দিয়েছেন । (প্রযোজ্য ক্ষেত্রে)
+                      ৪. শিক্ষক শিক্ষার্থীদের সাবলীল পঠন (সঠিক গতি , শুদ্ধ
+                      উচ্চারণ ও অভিব্যক্তি বজায় রেখে পড়া) উপস্থাপন করে দেখিয়েছেন
+                      এবং শিক্ষার্থীদের শব্দ ভাণ্ডারের শব্দগুলো অর্থসহ শিখিয়েছেন
+                      এবং শিক্ষার্থীদের শব্দগুলো ব্যবহার করে নতুন বাক্য গঠনের
+                      সুযোগ দিয়েছেন । (প্রযোজ্য ক্ষেত্রে)
                     </Text>
                     <Text style={{ fontWeight: "bold" }}>
                       অগ্রাধিকার এরিয়া: ২
@@ -2631,13 +2651,18 @@ export default class BanglaClassObservationScreen extends React.Component {
                             if (
                               this.state.ind1PhonemicAwarenessStatus ===
                                 "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
                               this.state.ind4FluencyIdentificationStatus ===
                                 "Yes" &&
                               this.state.ind6WritingActivitiesStatus ===
                                 "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
                               this.state.ind10UseTeachingAidStatus === "Yes" &&
                               this.state.ind11ContinuityOfLessonsStatus ===
-                                "Yes"
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
                             ) {
                               this.setState({
                                 teacherStatus: "Priority 3",
@@ -2665,6 +2690,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -2726,13 +2752,18 @@ export default class BanglaClassObservationScreen extends React.Component {
                             if (
                               this.state.ind1PhonemicAwarenessStatus ===
                                 "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
                               this.state.ind4FluencyIdentificationStatus ===
                                 "Yes" &&
                               this.state.ind6WritingActivitiesStatus ===
                                 "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
                               this.state.ind10UseTeachingAidStatus === "Yes" &&
                               this.state.ind11ContinuityOfLessonsStatus ===
-                                "Yes"
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
                             ) {
                               this.setState({
                                 teacherStatus: "Priority 3",
@@ -2760,6 +2791,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -2822,13 +2854,18 @@ export default class BanglaClassObservationScreen extends React.Component {
                             if (
                               this.state.ind1PhonemicAwarenessStatus ===
                                 "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
                               this.state.ind4FluencyIdentificationStatus ===
                                 "Yes" &&
                               this.state.ind6WritingActivitiesStatus ===
                                 "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
                               this.state.ind10UseTeachingAidStatus === "Yes" &&
                               this.state.ind11ContinuityOfLessonsStatus ===
-                                "Yes"
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
                             ) {
                               this.setState({
                                 teacherStatus: "Priority 3",
@@ -2856,6 +2893,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -2905,8 +2943,8 @@ export default class BanglaClassObservationScreen extends React.Component {
                 >
                   <Card style={{ padding: 10, flex: 1, alignSelf: "center" }}>
                     <Text>
-                      ৭. শিক্ষক শিখন-শিখানো কার্যক্রমে আমি করি-আমরা করি-তুমি কর
-                      পদ্ধতিটি ব্যাবহার করেছেন । (প্রযোজ্য ক্ষেত্রে)
+                      ৭. শিক্ষক শিখন-শেখানো কার্যক্রমে আমি করি-আমরা করি-তুমি কর
+                      পদ্ধতিটি ব্যবহার করেছেন । (প্রযোজ্য ক্ষেত্রে)
                     </Text>
                     <Text style={{ fontWeight: "bold" }}>
                       অগ্রাধিকার এরিয়া: ১
@@ -2931,13 +2969,18 @@ export default class BanglaClassObservationScreen extends React.Component {
                             if (
                               this.state.ind1PhonemicAwarenessStatus ===
                                 "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
                               this.state.ind4FluencyIdentificationStatus ===
                                 "Yes" &&
                               this.state.ind6WritingActivitiesStatus ===
                                 "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
                               this.state.ind10UseTeachingAidStatus === "Yes" &&
                               this.state.ind11ContinuityOfLessonsStatus ===
-                                "Yes"
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
                             ) {
                               this.setState({
                                 teacherStatus: "Priority 3",
@@ -2965,6 +3008,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -3025,13 +3069,18 @@ export default class BanglaClassObservationScreen extends React.Component {
                             if (
                               this.state.ind1PhonemicAwarenessStatus ===
                                 "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
                               this.state.ind4FluencyIdentificationStatus ===
                                 "Yes" &&
                               this.state.ind6WritingActivitiesStatus ===
                                 "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
                               this.state.ind10UseTeachingAidStatus === "Yes" &&
                               this.state.ind11ContinuityOfLessonsStatus ===
-                                "Yes"
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
                             ) {
                               this.setState({
                                 teacherStatus: "Priority 3",
@@ -3059,6 +3108,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -3119,13 +3169,18 @@ export default class BanglaClassObservationScreen extends React.Component {
                             if (
                               this.state.ind1PhonemicAwarenessStatus ===
                                 "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
                               this.state.ind4FluencyIdentificationStatus ===
                                 "Yes" &&
                               this.state.ind6WritingActivitiesStatus ===
                                 "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
                               this.state.ind10UseTeachingAidStatus === "Yes" &&
                               this.state.ind11ContinuityOfLessonsStatus ===
-                                "Yes"
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
                             ) {
                               this.setState({
                                 teacherStatus: "Priority 3",
@@ -3153,6 +3208,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -3189,8 +3245,8 @@ export default class BanglaClassObservationScreen extends React.Component {
                 >
                   <Card style={{ padding: 10, flex: 1, alignSelf: "center" }}>
                     <Text>
-                      ১০. শিক্ষক পাঠের শিখন-শিখানো কাজে সহায়ক উপকরণ (রুম টু রিড
-                      কর্তৃক প্রদত্ত) ব্যাবহার করেছেন ।
+                      ১০. শিক্ষক পাঠের শিখন-শেখানো কাজে সহায়ক উপকরণ (রুম টু রিড
+                      কর্তৃক প্রদত্ত) ব্যবহার করেছেন ।
                     </Text>
                     <Text style={{ fontWeight: "bold" }}>
                       অগ্রাধিকার এরিয়া: ২
@@ -3213,13 +3269,18 @@ export default class BanglaClassObservationScreen extends React.Component {
                             if (
                               this.state.ind1PhonemicAwarenessStatus ===
                                 "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
                               this.state.ind4FluencyIdentificationStatus ===
                                 "Yes" &&
                               this.state.ind6WritingActivitiesStatus ===
                                 "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
                               this.state.ind10UseTeachingAidStatus === "Yes" &&
                               this.state.ind11ContinuityOfLessonsStatus ===
-                                "Yes"
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
                             ) {
                               this.setState({
                                 teacherStatus: "Priority 3",
@@ -3247,6 +3308,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -3311,13 +3373,18 @@ export default class BanglaClassObservationScreen extends React.Component {
                             if (
                               this.state.ind1PhonemicAwarenessStatus ===
                                 "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
                               this.state.ind4FluencyIdentificationStatus ===
                                 "Yes" &&
                               this.state.ind6WritingActivitiesStatus ===
                                 "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
                               this.state.ind10UseTeachingAidStatus === "Yes" &&
                               this.state.ind11ContinuityOfLessonsStatus ===
-                                "Yes"
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
                             ) {
                               this.setState({
                                 teacherStatus: "Priority 3",
@@ -3345,6 +3412,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -3382,8 +3450,8 @@ export default class BanglaClassObservationScreen extends React.Component {
                   <Card style={{ padding: 10, flex: 1, alignSelf: "center" }}>
                     <Text>
                       ১২. শিক্ষক ছেলে-মেয়ে, বিশেষ চাহিদা সম্পন্ন ও পিছিয়ে পড়া
-                      শিক্ষার্থীদেরকে পাঠের কাজে এবং মূল্যায়নে অংশ গ্রহণ
-                      করিয়েছেন ।
+                      শিক্ষার্থীদেরকে পাঠের কাজে এবং মূল্যায়নে অংশগ্রহণ করিয়েছেন
+                      ।
                     </Text>
                     <Text style={{ fontWeight: "bold" }}>
                       অগ্রাধিকার এরিয়া: ২
@@ -3405,13 +3473,18 @@ export default class BanglaClassObservationScreen extends React.Component {
                             if (
                               this.state.ind1PhonemicAwarenessStatus ===
                                 "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
                               this.state.ind4FluencyIdentificationStatus ===
                                 "Yes" &&
                               this.state.ind6WritingActivitiesStatus ===
                                 "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
                               this.state.ind10UseTeachingAidStatus === "Yes" &&
                               this.state.ind11ContinuityOfLessonsStatus ===
-                                "Yes"
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
                             ) {
                               this.setState({
                                 teacherStatus: "Priority 3",
@@ -3439,6 +3512,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           <Picker.Item label={"হ্যাঁ"} value={"Yes"} />
                           <Picker.Item label={"না"} value={"No"} />
                           <Picker.Item label={"আংশিক"} value={"Partial"} />
+                          <Picker.Item label={"N/A"} value={"N/A"} />
                         </Picker>
                       </View>
                       <View style={{ flex: 2, padding: 2 }}>
@@ -3477,7 +3551,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                 <View style={{ flexDirection: "row" }}>
                   <View style={{ flex: 1, padding: 2 }}>
                     <Text>
-                      শিক্ষক ভালো করেছেন এমন ২/৩ টি সূচক ( অগ্রুধিকার এরিয়ায়র
+                      শিক্ষক ভালো করেছেন এমন ২/৩ টি সূচক ( অগ্রাধিকার এরিয়ায়র
                       নম্বর ) উল্লেখ করুন ।
                     </Text>
                   </View>
@@ -3493,6 +3567,38 @@ export default class BanglaClassObservationScreen extends React.Component {
                       selectedValue={this.state.bestPracticeInd1}
                       onValueChange={(value) => {
                         this.setState({ bestPracticeInd1: value });
+
+                        // Set teacher status
+                        if (
+                          this.state.ind1PhonemicAwarenessStatus === "Yes" &&
+                          this.state.ind2LetterIdentificationStatus === "Yes" &&
+                          this.state.ind4FluencyIdentificationStatus ===
+                            "Yes" &&
+                          this.state.ind6WritingActivitiesStatus === "Yes" &&
+                          this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                          this.state.ind8GroupWorkStatus === "Yes" &&
+                          this.state.ind10UseTeachingAidStatus === "Yes" &&
+                          this.state.ind11ContinuityOfLessonsStatus === "Yes" &&
+                          this.state.ind12AssessmentStatus === "Yes"
+                        ) {
+                          this.setState({
+                            teacherStatus: "Priority 3",
+                          });
+                        } else if (
+                          this.state.ind2LetterIdentificationStatus === "Yes" &&
+                          this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                          this.state.ind8GroupWorkStatus === "Yes" &&
+                          this.state.ind12AssessmentStatus === "Yes"
+                        ) {
+                          this.setState({
+                            teacherStatus: "Priority 2",
+                          });
+                        } else {
+                          this.setState({
+                            teacherStatus: "Priority 1",
+                          });
+                        }
+                        // Set teacher status
                       }}
                       itemStyle={{ color: "white" }}
                     >
@@ -3506,6 +3612,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           />
                         );
                       })}
+                      <Picker.Item label={"N/A"} value={"N/A"} />
                     </Picker>
                     <Text>১.</Text>
                     <TextInput
@@ -3540,6 +3647,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           />
                         );
                       })}
+                      <Picker.Item label={"N/A"} value={"N/A"} />
                     </Picker>
                     <Text>২.</Text>
                     <TextInput
@@ -3574,6 +3682,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           />
                         );
                       })}
+                      <Picker.Item label={"N/A"} value={"N/A"} />
                     </Picker>
                     <Text>৩.</Text>
                     <TextInput
@@ -3591,7 +3700,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                     <Text>
                       অগ্রাধিকারভিত্তিতে শিক্ষককে তার নিজস্ব উন্নয়নের জন্য যে
                       ১/২ টি সূচক (এরিয়ার নম্বর) চিহ্নিত করেছেন তা উল্লেখ করুন
-                      এবং তিনি তার উন্নয়ন এ কিভাবে এটি করবেন সেটি উল্লেখ করুন ।
+                      এবং তিনি তার উন্নয়নে কিভাবে এটি করবেন সেটি উল্লেখ করুন ।
                     </Text>
                   </View>
                 </View>
@@ -3619,6 +3728,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           />
                         );
                       })}
+                      <Picker.Item label={"N/A"} value={"N/A"} />
                     </Picker>
                     <Text>১.</Text>
                     <TextInput
@@ -3653,6 +3763,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                           />
                         );
                       })}
+                      <Picker.Item label={"N/A"} value={"N/A"} />
                     </Picker>
                     <Text>২.</Text>
                     <TextInput
@@ -4121,56 +4232,56 @@ export default class BanglaClassObservationScreen extends React.Component {
                 marginLeft: 100,
                 marginBottom: 20,
               }}
-              disabled={
-                !this.state.pickerMonth ||
-                !this.state.pickerYear ||
-                !this.state.pickerDistrict ||
-                !this.state.pickerUpazilla ||
-                !this.state.pickerOffice ||
-                !this.state.pickerProject ||
-                !this.state.pickerLPO ||
-                !this.state.pickerLF ||
-                !this.state.pickerSchool ||
-                !this.state.pickerVisitor ||
-                !this.state.pickerDesignation ||
-                !this.state.pickerVisitorOffice ||
-                !this.state.classTeacher ||
-                !this.state.classTeacherGender ||
-                !this.state.teacherTrained ||
-                !this.state.grade ||
-                !this.state.section ||
-                !this.state.classStartTime ||
-                !this.state.classEndTime ||
-                !this.state.teachingTopic ||
-                !this.state.teachingDay ||
-                !this.state.ind1PhonemicAwarenessStatus ||
-                !this.state.ind2LetterIdentificationStatus ||
-                !this.state.ind3VocabularyIdentificationStatus ||
-                !this.state.ind4FluencyIdentificationStatus ||
-                !this.state.ind5ComprehensionStatus ||
-                !this.state.ind6WritingActivitiesStatus ||
-                !this.state.ind7IDoWeDoYouDoStatus ||
-                !this.state.ind8GroupWorkStatus ||
-                !this.state.ind9TimeOnTaskStatus ||
-                !this.state.ind10UseTeachingAidStatus ||
-                !this.state.ind11ContinuityOfLessonsStatus ||
-                !this.state.ind12AssessmentStatus ||
-                !this.state.bestPracticeInd1 ||
-                !this.state.bestPracticeInd2 ||
-                !this.state.bestPracticeInd3 ||
-                !this.state.coachingSupportInd1 ||
-                !this.state.coachingSupportInd2 ||
-                !this.state.coachingSupportDetailsInd1 ||
-                !this.state.coachingSupportDetailsInd2 ||
-                !this.state.agreedStatement1 ||
-                !this.state.agreedStatement2 ||
-                !this.state.question1 ||
-                !this.state.student1 ||
-                !this.state.student2 ||
-                !this.state.student3 ||
-                !this.state.student4 ||
-                !this.state.student5
-              }
+              // disabled={
+              //   !this.state.pickerMonth ||
+              //   !this.state.pickerYear ||
+              //   !this.state.pickerDistrict ||
+              //   !this.state.pickerUpazilla ||
+              //   !this.state.pickerOffice ||
+              //   !this.state.pickerProject ||
+              //   !this.state.pickerLPO ||
+              //   !this.state.pickerLF ||
+              //   !this.state.pickerSchool ||
+              //   !this.state.pickerVisitor ||
+              //   !this.state.pickerDesignation ||
+              //   !this.state.pickerVisitorOffice ||
+              //   !this.state.classTeacher ||
+              //   !this.state.classTeacherGender ||
+              //   !this.state.teacherTrained ||
+              //   !this.state.grade ||
+              //   !this.state.section ||
+              //   !this.state.classStartTime ||
+              //   !this.state.classEndTime ||
+              //   !this.state.teachingTopic ||
+              //   !this.state.teachingDay ||
+              //   !this.state.ind1PhonemicAwarenessStatus ||
+              //   !this.state.ind2LetterIdentificationStatus ||
+              //   !this.state.ind3VocabularyIdentificationStatus ||
+              //   !this.state.ind4FluencyIdentificationStatus ||
+              //   !this.state.ind5ComprehensionStatus ||
+              //   !this.state.ind6WritingActivitiesStatus ||
+              //   !this.state.ind7IDoWeDoYouDoStatus ||
+              //   !this.state.ind8GroupWorkStatus ||
+              //   !this.state.ind9TimeOnTaskStatus ||
+              //   !this.state.ind10UseTeachingAidStatus ||
+              //   !this.state.ind11ContinuityOfLessonsStatus ||
+              //   !this.state.ind12AssessmentStatus ||
+              //   !this.state.bestPracticeInd1 ||
+              //   !this.state.bestPracticeInd2 ||
+              //   !this.state.bestPracticeInd3 ||
+              //   !this.state.coachingSupportInd1 ||
+              //   !this.state.coachingSupportInd2 ||
+              //   !this.state.coachingSupportDetailsInd1 ||
+              //   !this.state.coachingSupportDetailsInd2 ||
+              //   !this.state.agreedStatement1 ||
+              //   !this.state.agreedStatement2 ||
+              //   !this.state.question1 ||
+              //   !this.state.student1 ||
+              //   !this.state.student2 ||
+              //   !this.state.student3 ||
+              //   !this.state.student4 ||
+              //   !this.state.student5
+              // }
               onPress={this.saveBanglaClassObservation.bind(this)}
             >
               <Text>Submit</Text>
@@ -4230,6 +4341,8 @@ const styles = StyleSheet.create({
     color: "red",
     fontWeight: "bold",
     fontSize: 15,
+    alignSelf: "center",
+    alignContent: "center",
   },
   pickerStyle: {
     height: 150,
