@@ -14,15 +14,14 @@ import {
   Text,
   ScrollView,
   TextInput,
-  Picker,
   Button,
   TouchableOpacity,
   Alert,
   Dimensions,
 } from "react-native";
 
+import { Picker } from "@react-native-picker/picker";
 import { divisions, districts, upazillas, unions } from "bd-geojs";
-
 import { Card } from "react-native-shadow-cards";
 
 import DateTimePicker from "@react-native-community/datetimepicker";

@@ -75,20 +75,20 @@ function HomeScreen({ navigation }) {
         </View>
       </Card>
 
-      <Card style={{ padding: 10, margin: 10, flex: 1 }}>
-        <View style={{ flexDirection: "row", marginTop: 20 }}>
+      <Card style={{ padding: 10, margin: 10, flex: 1, marginTop: 10 }}>
+        <View style={{ flexDirection: "row", marginTop: 80 }}>
           <View style={{ flex: 1, padding: 2 }}>
-            <View style={styles.buttonView}>
+            <View>
               <Button
-                title="বিদ্যালয়ের মাসিক বই চেক আউট/ইন তথ্য ফরম"
+                title="বিদ্যালয়ের বই চেক আউট/ইন তথ্য ফরম"
                 onPress={() => navigation.navigate("BookCheckoutSchool")}
               ></Button>
             </View>
           </View>
           <View style={{ flex: 1, padding: 2 }}>
-            <View style={styles.buttonView}>
+            <View>
               <Button
-                title="কমিউনিটির মাসিক বই চেক আউট/ইন তথ্য ফরম"
+                title="কমিউনিটির বই চেক আউট/ইন তথ্য ফরম"
                 onPress={() => navigation.navigate("BookCheckoutCommunity")}
               ></Button>
             </View>
@@ -97,7 +97,7 @@ function HomeScreen({ navigation }) {
 
         <View style={{ flexDirection: "row" }}>
           <View style={{ flex: 1, padding: 2 }}>
-            <View style={styles.buttonView}>
+            <View>
               <Button
                 title="শ্রেণীকক্ষ পাঠাগার পর্যবেক্ষণ ফরম"
                 onPress={() => navigation.navigate("LibraryManagement")}
@@ -105,7 +105,7 @@ function HomeScreen({ navigation }) {
             </View>
           </View>
           <View style={{ flex: 1, padding: 2 }}>
-            <View style={styles.buttonView}>
+            <View>
               <Button
                 title="পড়ার ঘণ্টা কার্যক্রম পর্যবেক্ষণ ফরম"
                 onPress={() => navigation.navigate("LibraryReading")}
@@ -116,7 +116,7 @@ function HomeScreen({ navigation }) {
 
         <View style={{ flexDirection: "row" }}>
           <View style={{ flex: 1, padding: 2 }}>
-            <View style={styles.buttonView}>
+            <View>
               <Button
                 title="বাংলা ক্লাস পর্যবেক্ষণ ফরম"
                 onPress={() => navigation.navigate("BanglaClass")}
@@ -124,7 +124,7 @@ function HomeScreen({ navigation }) {
             </View>
           </View>
           <View style={{ flex: 1, padding: 2 }}>
-            <View style={styles.buttonView}>
+            <View>
               <Button
                 title="বিদ্যালয়ের সামগ্রিক পর্যবেক্ষণ ফরম"
                 onPress={() => navigation.navigate("OverallSchool")}

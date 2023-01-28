@@ -14,20 +14,19 @@ import {
   Text,
   ScrollView,
   TextInput,
-  Picker,
   Button,
   TouchableOpacity,
   Alert,
   Dimensions,
 } from "react-native";
-import { Checkbox } from "react-native-paper";
+
+import { Picker } from "@react-native-picker/picker";
+
 import { Card } from "react-native-shadow-cards";
 
 import { divisions, districts, upazillas, unions } from "bd-geojs";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
-
-import DatePicker from "react-native-modern-datepicker";
 
 const { width, height } = Dimensions.get("window");
 

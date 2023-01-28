@@ -14,13 +14,13 @@ import {
   Text,
   ScrollView,
   TextInput,
-  Picker,
   Button,
   Alert,
   TouchableOpacity,
   Dimensions,
 } from "react-native";
 
+import { Picker } from "@react-native-picker/picker";
 import { divisions, districts, upazillas, unions } from "bd-geojs";
 
 import { Card } from "react-native-shadow-cards";

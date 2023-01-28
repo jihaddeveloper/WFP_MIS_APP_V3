@@ -14,20 +14,19 @@ import {
   Text,
   ScrollView,
   TextInput,
-  Picker,
   Button,
   Alert,
   TouchableOpacity,
   Dimensions,
 } from "react-native";
 
+import { Picker } from "@react-native-picker/picker";
+
 import { divisions, districts, upazillas, unions } from "bd-geojs";
 
 import { Card } from "react-native-shadow-cards";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
-
-import DatePicker from "react-native-modern-datepicker";
 
 const { width, height } = Dimensions.get("window");
 
@@ -216,146 +215,6 @@ export default class BanglaClassObservationScreen extends React.Component {
     this.getAllBanglaClassObservation();
   }
   //Load data from server
-
-  // Form validation
-  isFormValid = () => {
-    const {
-      pickerOffice,
-      pickerProject,
-      pickerDistrict,
-      pickerUpazilla,
-      pickerSchool,
-      pickerVisitor,
-      pickerDesignation,
-      pickerVisitorOffice,
-      pickerLF,
-      pickerLPO,
-      pickerMonth,
-      pickerYear,
-
-      classTeacher,
-      classTeacherGender,
-      teacherTrained,
-      grade,
-      section,
-      classStartTime,
-      classEndTime,
-      teachingTopic,
-      teachingDay,
-
-      ind1PhonemicAwarenessStatus,
-
-      ind2LetterIdentificationStatus,
-
-      ind3VocabularyIdentificationStatus,
-
-      ind4FluencyIdentificationStatus,
-
-      ind5ComprehensionStatus,
-
-      ind6WritingActivitiesStatus,
-
-      ind7IDoWeDoYouDoStatus,
-
-      ind8GroupWorkStatus,
-
-      ind9TimeOnTaskStatus,
-
-      ind10UseTeachingAidStatus,
-
-      ind11ContinuityOfLessonsStatus,
-
-      ind12AssessmentStatus,
-
-      bestPracticeInd1,
-      bestPracticeInd2,
-      bestPracticeInd3,
-
-      coachingSupportInd1,
-      coachingSupportInd2,
-      coachingSupportDetailsInd1,
-      coachingSupportDetailsInd2,
-
-      agreedStatement1,
-      agreedStatement2,
-
-      question1,
-
-      student1,
-      student2,
-      student3,
-      student4,
-      student5,
-    } = this.state;
-
-    return (
-      pickerOffice ||
-      pickerProject ||
-      pickerDistrict ||
-      pickerDistrictKey ||
-      pickerUpazilla ||
-      pickerUpazillaKey ||
-      pickerSchool ||
-      pickerVisitor ||
-      pickerDesignation ||
-      pickerVisitorOffice ||
-      pickerLF ||
-      pickerLPO ||
-      pickerLFName ||
-      pickerLPOName ||
-      pickerMonth ||
-      pickerYear ||
-      classTeacher ||
-      classTeacherGender ||
-      teacherTrained ||
-      grade ||
-      section ||
-      classStartTime ||
-      classEndTime ||
-      teachingTopic ||
-      teachingDay ||
-      ind1PhonemicAwarenessStatus ||
-      ind1PhonemicAwarenessNotes ||
-      ind2LetterIdentificationStatus ||
-      ind2LetterIdentificationNotes ||
-      ind3VocabularyIdentificationStatus ||
-      ind3VocabularyIdentificationNotes ||
-      ind4FluencyIdentificationStatus ||
-      ind4FluencyIdentificationNotes ||
-      ind5ComprehensionStatus ||
-      ind5ComprehensionNotes ||
-      ind6WritingActivitiesStatus ||
-      ind6WritingActivitiesNotes ||
-      ind7IDoWeDoYouDoStatus ||
-      ind7IDoWeDoYouDoNotes ||
-      ind8GroupWorkStatus ||
-      ind8GroupWorkNotes ||
-      ind9TimeOnTaskStatus ||
-      ind9TimeOnTaskNotes ||
-      ind10UseTeachingAidStatus ||
-      ind10UseTeachingAidNotes ||
-      ind11ContinuityOfLessonsStatus ||
-      ind11ContinuityOfLessonsNotes ||
-      ind12AssessmentStatus ||
-      ind12AssessmentNotes ||
-      bestPracticeInd1 ||
-      bestPracticeInd2 ||
-      bestPracticeInd3 ||
-      coachingSupportInd1 ||
-      coachingSupportInd2 ||
-      coachingSupportDetailsInd1 ||
-      coachingSupportDetailsInd2 ||
-      agreedStatement1 ||
-      agreedStatement2 ||
-      question1 ||
-      student1 ||
-      student2 ||
-      student3 ||
-      student4 ||
-      student5
-    );
-  };
-  // Form validation
 
   // For Datepicker
   setDate = (event, date) => {
