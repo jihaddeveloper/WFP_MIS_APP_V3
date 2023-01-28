@@ -1208,7 +1208,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                       .filter((item) => {
                         return (
                           item.designation == "LF" &&
-                          item.supervisor == this.state.pickerLPO
+                          item.supervisor == this.state.pickerLPO.employeeRegId
                         );
                       })
                       .map((item) => {
@@ -1252,7 +1252,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     {this.state.allSchool
                       .filter((item) => {
-                        return item.lf == this.state.pickerLF;
+                        return item.lf == this.state.pickerLF.employeeRegId;
                       })
                       .map((item) => {
                         return (
