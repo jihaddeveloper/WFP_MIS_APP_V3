@@ -68,7 +68,7 @@ function HomeScreen({ navigation }) {
                   resizeMode: "contain",
                   alignItems: "center",
                 }}
-                source={require("../assets/MISWFP.png")}
+                source={require("../assets/rtrwfp.png")}
               ></Image>
             </TouchableOpacity>
           </View>
