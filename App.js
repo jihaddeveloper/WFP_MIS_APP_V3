@@ -14,9 +14,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
 
 // Screen import
-import LoginScreen from "./screens/LoginScreen";
+
 import RegistrationScreen from "./screens/RegistrationScreen";
-import HomeScreen from "./screens/HomeScreen";
 import BanglaClassObservationScreen from "./screens/BanglaClassObservationScreen";
 import LibraryManagementObservationScreen from "./screens/LibraryManagementObservationScreen";
 import LibraryReadingActivitiesObservationScreen from "./screens/LibraryReadingActivitiesObservationScreen";
@@ -58,12 +57,6 @@ export default function App() {
             title: "Library Management Observation Form", //Set Header Title
           }}
         />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Login"
-          component={LoginScreen}
-        />
-        <Stack.Screen name="Home" component={HomeScreen} />
 
         <Stack.Screen
           name="LibraryReading"
