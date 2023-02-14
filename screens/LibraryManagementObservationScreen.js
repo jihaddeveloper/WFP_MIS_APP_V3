@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 17/08/2021
-//  Modify Date: 25/01/2023
+//  Modify Date: 07/02/2023
 //  Description: Library management observation screen component
 
 import React from "react";
@@ -670,10 +670,6 @@ export default class LibraryManagementObservationScreen extends React.Component 
     } else if (this.state.pickerUpazilla === "") {
       this.setState({ upazillaError: "Upazilla can not be empty" });
       Alert.alert("Alert", "Upazilla can not be empty");
-      return;
-    } else if (this.state.visitNo === 0) {
-      this.setState({ visitNoError: "Visit no can not be empty" });
-      Alert.alert("Alert", "Visit no can not be empty");
       return;
     } else if (this.state.pickerVisitor === "") {
       this.setState({ visitorNameError: "Visitor can not be empty" });

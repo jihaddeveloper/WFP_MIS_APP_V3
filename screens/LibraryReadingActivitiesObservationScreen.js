@@ -592,7 +592,8 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
           item.visitNo == this.state.visitNo &&
           item.school == this.state.pickerSchool &&
           item.month == this.state.pickerMonth &&
-          item.year == this.state.pickerYear
+          item.year == this.state.pickerYear &&
+          item.grade == this.state.grade
         );
       });
 
@@ -630,10 +631,6 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
     } else if (this.state.pickerProject === "") {
       this.setState({ dateError: "Date can not be empty" });
       Alert.alert("Alert", "Project can not be empty");
-      return;
-    } else if (this.state.visitNo === 0) {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Visit No can not be 0");
       return;
     } else if (this.state.pickerLF === "") {
       this.setState({ dateError: "Date can not be empty" });
@@ -678,46 +675,6 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
     } else if (this.state.section === "") {
       this.setState({ dateError: "Date can not be empty" });
       Alert.alert("Alert", "Section can not be empty");
-      return;
-    } else if (this.state.typeOfReading === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Type Of Reading can not be empty");
-      return;
-    } else if (this.state.bestPracticeInd1 === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Best Practice Ind1 can not be empty");
-      return;
-    } else if (this.state.bestPracticeInd2 === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Best Practice Ind2 can not be empty");
-      return;
-    } else if (this.state.bestPracticeInd3 === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Best Practice Ind3 can not be empty");
-      return;
-    } else if (this.state.coachingSupportInd1 === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Coaching Support Ind1 can not be empty");
-      return;
-    } else if (this.state.coachingSupportInd2 === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Coaching Support Ind2 can not be empty");
-      return;
-    } else if (this.state.coachingSupportDetailsInd1 === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Coaching Support Details Ind1 can not be empty");
-      return;
-    } else if (this.state.coachingSupportDetailsInd2 === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Coaching Support Details Ind2 can not be empty");
-      return;
-    } else if (this.state.agreedStatement1 === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Agreed Statement1 can not be empty");
-      return;
-    } else if (this.state.agreedStatement2 === "") {
-      this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Agreed Statement2 can not be empty");
       return;
     } else if (this.state.duplicateSRMClassObservationData.length > 0) {
       this.setState({ dateError: "Date can not be empty" });
@@ -2042,42 +1999,42 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                             });
 
                             // Set teacher status
-                            if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes" &&
-                              this.state.ind4BookShowingStatus === "Yes" &&
-                              this.state.ind9AllStudentEngagementStatus ===
-                                "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 3",
-                              });
-                            } else if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 2",
-                              });
-                            } else {
-                              this.setState({
-                                teacherStatus: "Priority 1",
-                              });
-                            }
+                            // if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes" &&
+                            //   this.state.ind4BookShowingStatus === "Yes" &&
+                            //   this.state.ind9AllStudentEngagementStatus ===
+                            //     "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 3",
+                            //   });
+                            // } else if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 2",
+                            //   });
+                            // } else {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 1",
+                            //   });
+                            // }
                             // Set teacher status
                           }}
                           selectedValue={
@@ -2150,42 +2107,42 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                             });
 
                             // Set teacher status
-                            if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes" &&
-                              this.state.ind4BookShowingStatus === "Yes" &&
-                              this.state.ind9AllStudentEngagementStatus ===
-                                "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 3",
-                              });
-                            } else if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 2",
-                              });
-                            } else {
-                              this.setState({
-                                teacherStatus: "Priority 1",
-                              });
-                            }
+                            // if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes" &&
+                            //   this.state.ind4BookShowingStatus === "Yes" &&
+                            //   this.state.ind9AllStudentEngagementStatus ===
+                            //     "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 3",
+                            //   });
+                            // } else if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 2",
+                            //   });
+                            // } else {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 1",
+                            //   });
+                            // }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2255,42 +2212,42 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                             });
 
                             // Set teacher status
-                            if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes" &&
-                              this.state.ind4BookShowingStatus === "Yes" &&
-                              this.state.ind9AllStudentEngagementStatus ===
-                                "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 3",
-                              });
-                            } else if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 2",
-                              });
-                            } else {
-                              this.setState({
-                                teacherStatus: "Priority 1",
-                              });
-                            }
+                            // if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes" &&
+                            //   this.state.ind4BookShowingStatus === "Yes" &&
+                            //   this.state.ind9AllStudentEngagementStatus ===
+                            //     "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 3",
+                            //   });
+                            // } else if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 2",
+                            //   });
+                            // } else {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 1",
+                            //   });
+                            // }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2382,42 +2339,42 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                             });
 
                             // Set teacher status
-                            if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes" &&
-                              this.state.ind4BookShowingStatus === "Yes" &&
-                              this.state.ind9AllStudentEngagementStatus ===
-                                "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 3",
-                              });
-                            } else if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 2",
-                              });
-                            } else {
-                              this.setState({
-                                teacherStatus: "Priority 1",
-                              });
-                            }
+                            // if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes" &&
+                            //   this.state.ind4BookShowingStatus === "Yes" &&
+                            //   this.state.ind9AllStudentEngagementStatus ===
+                            //     "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 3",
+                            //   });
+                            // } else if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 2",
+                            //   });
+                            // } else {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 1",
+                            //   });
+                            // }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2484,42 +2441,42 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                             this.setState({ ind5WordTeachingStatus: value });
 
                             // Set teacher status
-                            if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes" &&
-                              this.state.ind4BookShowingStatus === "Yes" &&
-                              this.state.ind9AllStudentEngagementStatus ===
-                                "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 3",
-                              });
-                            } else if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 2",
-                              });
-                            } else {
-                              this.setState({
-                                teacherStatus: "Priority 1",
-                              });
-                            }
+                            // if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes" &&
+                            //   this.state.ind4BookShowingStatus === "Yes" &&
+                            //   this.state.ind9AllStudentEngagementStatus ===
+                            //     "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 3",
+                            //   });
+                            // } else if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 2",
+                            //   });
+                            // } else {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 1",
+                            //   });
+                            // }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2610,42 +2567,42 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                             });
 
                             // Set teacher status
-                            if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes" &&
-                              this.state.ind4BookShowingStatus === "Yes" &&
-                              this.state.ind9AllStudentEngagementStatus ===
-                                "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 3",
-                              });
-                            } else if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 2",
-                              });
-                            } else {
-                              this.setState({
-                                teacherStatus: "Priority 1",
-                              });
-                            }
+                            // if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes" &&
+                            //   this.state.ind4BookShowingStatus === "Yes" &&
+                            //   this.state.ind9AllStudentEngagementStatus ===
+                            //     "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 3",
+                            //   });
+                            // } else if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 2",
+                            //   });
+                            // } else {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 1",
+                            //   });
+                            // }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2714,42 +2671,42 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                             });
 
                             // Set teacher status
-                            if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes" &&
-                              this.state.ind4BookShowingStatus === "Yes" &&
-                              this.state.ind9AllStudentEngagementStatus ===
-                                "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 3",
-                              });
-                            } else if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 2",
-                              });
-                            } else {
-                              this.setState({
-                                teacherStatus: "Priority 1",
-                              });
-                            }
+                            // if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes" &&
+                            //   this.state.ind4BookShowingStatus === "Yes" &&
+                            //   this.state.ind9AllStudentEngagementStatus ===
+                            //     "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 3",
+                            //   });
+                            // } else if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 2",
+                            //   });
+                            // } else {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 1",
+                            //   });
+                            // }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2826,42 +2783,42 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                             });
 
                             // Set teacher status
-                            if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes" &&
-                              this.state.ind4BookShowingStatus === "Yes" &&
-                              this.state.ind9AllStudentEngagementStatus ===
-                                "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 3",
-                              });
-                            } else if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 2",
-                              });
-                            } else {
-                              this.setState({
-                                teacherStatus: "Priority 1",
-                              });
-                            }
+                            // if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes" &&
+                            //   this.state.ind4BookShowingStatus === "Yes" &&
+                            //   this.state.ind9AllStudentEngagementStatus ===
+                            //     "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 3",
+                            //   });
+                            // } else if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 2",
+                            //   });
+                            // } else {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 1",
+                            //   });
+                            // }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2940,42 +2897,42 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                             });
 
                             // Set teacher status
-                            if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes" &&
-                              this.state.ind4BookShowingStatus === "Yes" &&
-                              this.state.ind9AllStudentEngagementStatus ===
-                                "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 3",
-                              });
-                            } else if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 2",
-                              });
-                            } else {
-                              this.setState({
-                                teacherStatus: "Priority 1",
-                              });
-                            }
+                            // if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes" &&
+                            //   this.state.ind4BookShowingStatus === "Yes" &&
+                            //   this.state.ind9AllStudentEngagementStatus ===
+                            //     "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 3",
+                            //   });
+                            // } else if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 2",
+                            //   });
+                            // } else {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 1",
+                            //   });
+                            // }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -3069,42 +3026,42 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                             });
 
                             // Set teacher status
-                            if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes" &&
-                              this.state.ind4BookShowingStatus === "Yes" &&
-                              this.state.ind9AllStudentEngagementStatus ===
-                                "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 3",
-                              });
-                            } else if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 2",
-                              });
-                            } else {
-                              this.setState({
-                                teacherStatus: "Priority 1",
-                              });
-                            }
+                            // if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes" &&
+                            //   this.state.ind4BookShowingStatus === "Yes" &&
+                            //   this.state.ind9AllStudentEngagementStatus ===
+                            //     "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 3",
+                            //   });
+                            // } else if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 2",
+                            //   });
+                            // } else {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 1",
+                            //   });
+                            // }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -3173,42 +3130,42 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                             });
 
                             // Set teacher status
-                            if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes" &&
-                              this.state.ind4BookShowingStatus === "Yes" &&
-                              this.state.ind9AllStudentEngagementStatus ===
-                                "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 3",
-                              });
-                            } else if (
-                              this.state.ind1FriendlyCommunicationStatus ===
-                                "Yes" &&
-                              this.state.ind2SRMInspiringStatus === "Yes" &&
-                              this.state.ind3SRMInstructionStatus === "Yes" &&
-                              this.state.ind6StoryReadingStatus === "Yes" &&
-                              this.state.ind7StorySuitableStatus === "Yes" &&
-                              this.state.ind8StoryReadingCombinationStatus ===
-                                "Yes" &&
-                              this.state.ind11AskingForBCOStatus === "Yes"
-                            ) {
-                              this.setState({
-                                teacherStatus: "Priority 2",
-                              });
-                            } else {
-                              this.setState({
-                                teacherStatus: "Priority 1",
-                              });
-                            }
+                            // if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes" &&
+                            //   this.state.ind4BookShowingStatus === "Yes" &&
+                            //   this.state.ind9AllStudentEngagementStatus ===
+                            //     "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 3",
+                            //   });
+                            // } else if (
+                            //   this.state.ind1FriendlyCommunicationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind2SRMInspiringStatus === "Yes" &&
+                            //   this.state.ind3SRMInstructionStatus === "Yes" &&
+                            //   this.state.ind6StoryReadingStatus === "Yes" &&
+                            //   this.state.ind7StorySuitableStatus === "Yes" &&
+                            //   this.state.ind8StoryReadingCombinationStatus ===
+                            //     "Yes" &&
+                            //   this.state.ind11AskingForBCOStatus === "Yes"
+                            // ) {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 2",
+                            //   });
+                            // } else {
+                            //   this.setState({
+                            //     teacherStatus: "Priority 1",
+                            //   });
+                            // }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -3570,7 +3527,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
             </Card>
           </View>
 
-          <View style={{ padding: 10 }}>
+          {/* <View style={{ padding: 10 }}>
             <Text style={styles.bigRedText}>শিক্ষকের অবস্থা</Text>
             <Card style={{ padding: 10, margin: 10, flex: 1 }}>
               <View style={{ padding: 5 }}>
@@ -3594,13 +3551,12 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                       }}
                     >
                       {this.state.teacherStatus}
-                      {/* {this.state.teacherStatus} */}
                     </Text>
                   </View>
                 </View>
               </View>
             </Card>
-          </View>
+          </View> */}
 
           <View style={{ padding: 10 }}>
             <TouchableOpacity

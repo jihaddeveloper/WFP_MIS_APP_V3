@@ -1,6 +1,6 @@
 //  Author: Mohammad Jihad Hossain
 //  Create Date: 29/08/2021
-//  Modify Date: 25/01/2023
+//  Modify Date: 07/02/2023
 //  Description: Overall school observation screen component
 
 import React from "react";
@@ -110,62 +110,29 @@ export default class OverallSchoolObservationScreen extends React.Component {
       lastFollowupTopic3: "",
 
       prePrimaryClassObservation: "",
-      oneClassObservation: "",
-      twoClassObservation: "",
-      threeClassObservation: "",
-      fourClassObservation: "",
-      fiveClassObservation: "",
+      oneBanglaClassObservation: "",
+      twoBanglaClassObservation: "",
+      prePrimaryClassTeacherPriority: "",
+      oneBanglaClassTeacherPriority: "",
+      twoBanglaClassTeacherPriority: "",
       classObservationComment: "",
 
-      prePrimaryBanglaClassObservation1: "",
-      oneBanglaClassObservation1: "",
-      twoBanglaClassObservation1: "",
-      threeBanglaClassObservation1: "",
-      fourBanglaClassObservation1: "",
-      fiveBanglaClassObservation1: "",
-      banglaClassComment1: "",
+      prePrimarySRMObservation: "",
+      oneSRMObservation: "",
+      twoSRMObservation: "",
+      prePrimarySRMTeacherPriority: "",
+      oneSRMTeacherPriority: "",
+      twoSRMTeacherPriority: "",
+      srmCommentPPOneTwo: "",
 
-      prePrimaryBanglaClassObservation2: "",
-      oneBanglaClassObservation2: "",
-      twoBanglaClassObservation2: "",
-      threeBanglaClassObservation2: "",
-      fourBanglaClassObservation2: "",
-      fiveBanglaClassObservation2: "",
-      banglaClassComment2: "",
+      threeSRMObservation: "",
+      fourSRMObservation: "",
+      fiveSRMObservation: "",
+      threeSRMTeacherPriority: "",
+      fourSRMTeacherPriority: "",
+      fiveSRMTeacherPriority: "",
+      srmCommentThreeFourFive: "",
 
-      prePrimarySRMClassObservation1: "",
-      oneSRMClassObservation1: "",
-      twoSRMClassObservation1: "",
-      threeSRMClassObservation1: "",
-      fourSRMClassObservation1: "",
-      fiveSRMClassObservation1: "",
-      srmComment1: "",
-
-      prePrimarySRMClassObservation2: "",
-      oneSRMClassObservation2: "",
-      twoSRMClassObservation2: "",
-      threeSRMClassObservation2: "",
-      fourSRMClassObservation2: "",
-      fiveSRMClassObservation2: "",
-      srmComment2: "",
-
-      prePrimaryLibraryObservation: "",
-      oneLibraryObservation: "",
-      twoLibraryObservation: "",
-      threeLibraryObservation: "",
-      fourLibraryObservation: "",
-      fiveLibraryObservation: "",
-      libraryObservationComment: "",
-
-      classObservationTeacherPriority: "",
-      banglaTeacherPriority1: "",
-      banglaTeacherPriority2: "",
-      srmTeacherPriority1: "",
-      srmTeacherPriority2: "",
-      libraryObservationTeacherPriority: "",
-
-      schoolPriorityArea: "",
-      comment: "",
       other: "",
 
       ind1AllTeacherTrainedStatus: "",
@@ -315,62 +282,28 @@ export default class OverallSchoolObservationScreen extends React.Component {
       lastFollowupTopic3: "",
 
       prePrimaryClassObservation: "",
-      oneClassObservation: "",
-      twoClassObservation: "",
-      threeClassObservation: "",
-      fourClassObservation: "",
-      fiveClassObservation: "",
+      oneBanglaClassObservation: "",
+      twoBanglaClassObservation: "",
+      prePrimaryClassTeacherPriority: "",
+      oneBanglaClassTeacherPriority: "",
+      twoBanglaClassTeacherPriority: "",
       classObservationComment: "",
 
-      prePrimaryBanglaClassObservation1: "",
-      oneBanglaClassObservation1: "",
-      twoBanglaClassObservation1: "",
-      threeBanglaClassObservation1: "",
-      fourBanglaClassObservation1: "",
-      fiveBanglaClassObservation1: "",
-      banglaClassComment1: "",
+      prePrimarySRMObservation: "",
+      oneSRMObservation: "",
+      twoSRMObservation: "",
+      prePrimarySRMTeacherPriority: "",
+      oneSRMTeacherPriority: "",
+      twoSRMTeacherPriority: "",
+      srmCommentPPOneTwo: "",
 
-      prePrimaryBanglaClassObservation2: "",
-      oneBanglaClassObservation2: "",
-      twoBanglaClassObservation2: "",
-      threeBanglaClassObservation2: "",
-      fourBanglaClassObservation2: "",
-      fiveBanglaClassObservation2: "",
-      banglaClassComment2: "",
-
-      prePrimarySRMClassObservation1: "",
-      oneSRMClassObservation1: "",
-      twoSRMClassObservation1: "",
-      threeSRMClassObservation1: "",
-      fourSRMClassObservation1: "",
-      fiveSRMClassObservation1: "",
-      srmComment1: "",
-
-      prePrimarySRMClassObservation2: "",
-      oneSRMClassObservation2: "",
-      twoSRMClassObservation2: "",
-      threeSRMClassObservation2: "",
-      fourSRMClassObservation2: "",
-      fiveSRMClassObservation2: "",
-      srmComment2: "",
-
-      prePrimaryLibraryObservation: "",
-      oneLibraryObservation: "",
-      twoLibraryObservation: "",
-      threeLibraryObservation: "",
-      fourLibraryObservation: "",
-      fiveLibraryObservation: "",
-      libraryObservationComment: "",
-
-      classObservationTeacherPriority: "",
-      banglaTeacherPriority1: "",
-      banglaTeacherPriority2: "",
-      srmTeacherPriority1: "",
-      srmTeacherPriority2: "",
-      libraryObservationTeacherPriority: "",
-
-      schoolPriorityArea: "",
-      comment: "",
+      threeSRMObservation: "",
+      fourSRMObservation: "",
+      fiveSRMObservation: "",
+      threeSRMTeacherPriority: "",
+      fourSRMTeacherPriority: "",
+      fiveSRMTeacherPriority: "",
+      srmCommentThreeFourFive: "",
       other: "",
 
       ind1AllTeacherTrainedStatus: "",
@@ -631,66 +564,29 @@ export default class OverallSchoolObservationScreen extends React.Component {
       lastFollowupTopic3: this.state.lastFollowupTopic3,
 
       prePrimaryClassObservation: this.state.prePrimaryClassObservation,
-      oneClassObservation: this.state.oneClassObservation,
-      twoClassObservation: this.state.twoClassObservation,
-      threeClassObservation: this.state.threeClassObservation,
-      fourClassObservation: this.state.fourClassObservation,
-      fiveClassObservation: this.state.fiveClassObservation,
+      oneBanglaClassObservation: this.state.oneBanglaClassObservation,
+      twoBanglaClassObservation: this.state.twoBanglaClassObservation,
+      prePrimaryClassTeacherPriority: this.state.prePrimaryClassTeacherPriority,
+      oneBanglaClassTeacherPriority: this.state.oneBanglaClassTeacherPriority,
+      twoBanglaClassTeacherPriority: this.state.twoBanglaClassTeacherPriority,
       classObservationComment: this.state.classObservationComment,
 
-      prePrimaryBanglaClassObservation1:
-        this.state.prePrimaryBanglaClassObservation1,
-      oneBanglaClassObservation1: this.state.oneBanglaClassObservation1,
-      twoBanglaClassObservation1: this.state.twoBanglaClassObservation1,
-      threeBanglaClassObservation1: this.state.threeBanglaClassObservation1,
-      fourBanglaClassObservation1: this.state.fourBanglaClassObservation1,
-      fiveBanglaClassObservation1: this.state.fiveBanglaClassObservation1,
-      banglaClassComment1: this.state.banglaClassComment1,
+      prePrimarySRMObservation: this.state.prePrimarySRMObservation,
+      oneSRMObservation: this.state.oneSRMObservation,
+      twoSRMObservation: this.state.twoSRMObservation,
+      prePrimarySRMTeacherPriority: this.state.prePrimarySRMTeacherPriority,
+      oneSRMTeacherPriority: this.state.oneSRMTeacherPriority,
+      twoSRMTeacherPriority: this.state.twoSRMTeacherPriority,
+      srmCommentPPOneTwo: this.state.srmCommentPPOneTwo,
 
-      prePrimaryBanglaClassObservation2:
-        this.state.prePrimaryBanglaClassObservation2,
-      oneBanglaClassObservation2: this.state.oneBanglaClassObservation2,
-      twoBanglaClassObservation2: this.state.twoBanglaClassObservation2,
-      threeBanglaClassObservation2: this.state.threeBanglaClassObservation2,
-      fourBanglaClassObservation2: this.state.fourBanglaClassObservation2,
-      fiveBanglaClassObservation2: this.state.fiveBanglaClassObservation2,
-      banglaClassComment2: this.state.banglaClassComment2,
+      threeSRMObservation: this.state.threeSRMObservation,
+      fourSRMObservation: this.state.fourSRMObservation,
+      fiveSRMObservation: this.state.fiveSRMObservation,
+      threeSRMTeacherPriority: this.state.threeSRMTeacherPriority,
+      fourSRMTeacherPriority: this.state.fourSRMTeacherPriority,
+      fiveSRMTeacherPriority: this.state.fiveSRMTeacherPriority,
+      srmCommentThreeFourFive: this.state.srmCommentThreeFourFive,
 
-      prePrimarySRMClassObservation1: this.state.prePrimarySRMClassObservation1,
-      oneSRMClassObservation1: this.state.oneSRMClassObservation1,
-      twoSRMClassObservation1: this.state.twoSRMClassObservation1,
-      threeSRMClassObservation1: this.state.threeSRMClassObservation1,
-      fourSRMClassObservation1: this.state.fourSRMClassObservation1,
-      fiveSRMClassObservation1: this.state.fiveSRMClassObservation1,
-      srmComment1: this.state.srmComment1,
-
-      prePrimarySRMClassObservation2: this.state.prePrimarySRMClassObservation2,
-      oneSRMClassObservation2: this.state.oneSRMClassObservation2,
-      twoSRMClassObservation2: this.state.twoSRMClassObservation2,
-      threeSRMClassObservation2: this.state.threeSRMClassObservation2,
-      fourSRMClassObservation2: this.state.fourSRMClassObservation2,
-      fiveSRMClassObservation2: this.state.fiveSRMClassObservation2,
-      srmComment2: this.state.srmComment2,
-
-      prePrimaryLibraryObservation: this.state.prePrimaryLibraryObservation,
-      oneLibraryObservation: this.state.oneLibraryObservation,
-      twoLibraryObservation: this.state.twoLibraryObservation,
-      threeLibraryObservation: this.state.threeLibraryObservation,
-      fourLibraryObservation: this.state.fourLibraryObservation,
-      fiveLibraryObservation: this.state.fiveLibraryObservation,
-      libraryObservationComment: this.state.libraryObservationComment,
-
-      classObservationTeacherPriority:
-        this.state.classObservationTeacherPriority,
-      banglaTeacherPriority1: this.state.banglaTeacherPriority1,
-      banglaTeacherPriority2: this.state.banglaTeacherPriority2,
-      srmTeacherPriority1: this.state.srmTeacherPriority1,
-      srmTeacherPriority2: this.state.srmTeacherPriority2,
-      libraryObservationTeacherPriority:
-        this.state.libraryObservationTeacherPriority,
-
-      schoolPriorityArea: this.state.schoolPriorityArea,
-      comment: this.state.comment,
       other: this.state.other,
 
       ind1AllTeacherTrainedStatus: this.state.ind1AllTeacherTrainedStatus,
@@ -1738,16 +1634,19 @@ export default class OverallSchoolObservationScreen extends React.Component {
             <View style={{ padding: 5 }}>
               <Card style={{ padding: 5, margin: 10, flex: 1 }}>
                 <Card style={{ padding: 5, flex: 1, alignSelf: "center" }}>
-                  <Text style={styles.bigRedText}>ক্লাস পর্যবেক্ষণ</Text>
+                  <Text style={styles.bigRedText}>
+                    ক্লাস পর্যবেক্ষণ (প্রাক-প্রাথমিক, প্রথম ও দ্বিতীয় শ্রেণির
+                    বাংলা)
+                  </Text>
                 </Card>
                 <Card style={{ padding: 5, flex: 1, alignSelf: "center" }}>
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 1, padding: 2 }}>
-                      <Text>প্রাক প্রাথমিক শ্রেনি</Text>
+                      <Text>প্রাক-প্রাথমিক শ্রেণি (বাংলা)</Text>
                       <Picker
                         style={{
                           height: 40,
-                          width: 150,
+                          width: 180,
                         }}
                         selectedValue={this.state.prePrimaryClassObservation}
                         onValueChange={(value) => {
@@ -1756,131 +1655,122 @@ export default class OverallSchoolObservationScreen extends React.Component {
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
+                        <Picker.Item label={"৪"} value={"৪"} />
                         <Picker.Item label={"N/A"} value={"N/A"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 1, padding: 2 }}>
-                      <Text>প্রথম শ্রেনি</Text>
+                      <Text>প্রথম শ্রেণি (বাংলা)</Text>
                       <Picker
                         style={{
                           height: 40,
-                          width: 150,
+                          width: 180,
                         }}
-                        selectedValue={this.state.oneClassObservation}
+                        selectedValue={this.state.oneBanglaClassObservation}
                         onValueChange={(value) => {
-                          this.setState({ oneClassObservation: value });
+                          this.setState({ oneBanglaClassObservation: value });
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
+                        <Picker.Item label={"৪"} value={"৪"} />
                         <Picker.Item label={"N/A"} value={"N/A"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 1, padding: 2 }}>
-                      <Text>দ্বিতীয় শ্রেনি</Text>
+                      <Text>দ্বিতীয় শ্রেণি (বাংলা)</Text>
                       <Picker
                         style={{
                           height: 40,
-                          width: 150,
+                          width: 180,
                         }}
-                        selectedValue={this.state.twoClassObservation}
+                        selectedValue={this.state.twoBanglaClassObservation}
                         onValueChange={(value) => {
-                          this.setState({ twoClassObservation: value });
+                          this.setState({ twoBanglaClassObservation: value });
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
+                        <Picker.Item label={"৪"} value={"৪"} />
                         <Picker.Item label={"N/A"} value={"N/A"} />
                       </Picker>
                     </View>
                   </View>
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 1, padding: 2 }}>
-                      <Text>তৃতীয় শ্রেনি</Text>
+                      <Text>শিক্ষকের প্রায়োরিটি এরিয়া (প্রাক-প্রাথমিক)</Text>
                       <Picker
                         style={{
                           height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.threeClassObservation}
-                        onValueChange={(value) => {
-                          this.setState({ threeClassObservation: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>চতুর্থ শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.fourClassObservation}
-                        onValueChange={(value) => {
-                          this.setState({ fourClassObservation: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>পঞ্চম শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.fiveClassObservation}
-                        onValueChange={(value) => {
-                          this.setState({ fiveClassObservation: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                  </View>
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>শিক্ষকের প্রায়োরিটি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
+                          width: 180,
                         }}
                         selectedValue={
-                          this.state.classObservationTeacherPriority
+                          this.state.prePrimaryClassTeacherPriority
                         }
                         onValueChange={(value) => {
                           this.setState({
-                            classObservationTeacherPriority: value,
+                            prePrimaryClassTeacherPriority: value,
                           });
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"1"} value={"1"} />
-                        <Picker.Item label={"2"} value={"2"} />
-                        <Picker.Item label={"3"} value={"3"} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
+                        <Picker.Item label={"N/A"} value={"N/A"} />
+                      </Picker>
+                    </View>
+                    <View style={{ flex: 1, padding: 2 }}>
+                      <Text>শিক্ষকের প্রায়োরিটি এরিয়া (প্রথম)</Text>
+                      <Picker
+                        style={{
+                          height: 40,
+                          width: 180,
+                        }}
+                        selectedValue={this.state.oneBanglaClassTeacherPriority}
+                        onValueChange={(value) => {
+                          this.setState({
+                            oneBanglaClassTeacherPriority: value,
+                          });
+                        }}
+                        itemStyle={{ color: "white" }}
+                      >
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
+                        <Picker.Item label={"N/A"} value={"N/A"} />
+                      </Picker>
+                    </View>
+                    <View style={{ flex: 1, padding: 2 }}>
+                      <Text>শিক্ষকের প্রায়োরিটি এরিয়া (দ্বিতীয়)</Text>
+                      <Picker
+                        style={{
+                          height: 40,
+                          width: 180,
+                        }}
+                        selectedValue={this.state.twoBanglaClassTeacherPriority}
+                        onValueChange={(value) => {
+                          this.setState({
+                            twoBanglaClassTeacherPriority: value,
+                          });
+                        }}
+                        itemStyle={{ color: "white" }}
+                      >
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
                         <Picker.Item label={"N/A"} value={"N/A"} />
                       </Picker>
                     </View>
@@ -1910,154 +1800,136 @@ export default class OverallSchoolObservationScreen extends React.Component {
               <Card style={{ padding: 5, margin: 10, flex: 1 }}>
                 <Card style={{ padding: 5, flex: 1, alignSelf: "center" }}>
                   <Text style={styles.bigRedText}>
-                    বাংলা ক্লাস পর্যবেক্ষণ ১
+                    ক্লাস পর্যবেক্ষণ (প্রাক-প্রাথমিক, প্রথম ও দ্বিতীয় শ্রেণির
+                    পড়ার ঘণ্টা/এসআরএম)
                   </Text>
                 </Card>
                 <Card style={{ padding: 5, flex: 1, alignSelf: "center" }}>
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 1, padding: 2 }}>
-                      <Text>প্রাক প্রাথমিক শ্রেনি</Text>
+                      <Text>প্রাক-প্রাথমিক শ্রেণি (পড়ার ঘণ্টা)</Text>
                       <Picker
                         style={{
                           height: 40,
-                          width: 150,
+                          width: 180,
                         }}
-                        selectedValue={
-                          this.state.prePrimaryBanglaClassObservation1
-                        }
+                        selectedValue={this.state.prePrimarySRMObservation}
                         onValueChange={(value) => {
-                          this.setState({
-                            prePrimaryBanglaClassObservation1: value,
-                          });
+                          this.setState({ prePrimarySRMObservation: value });
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
+                        <Picker.Item label={"৪"} value={"৪"} />
                         <Picker.Item label={"N/A"} value={"N/A"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 1, padding: 2 }}>
-                      <Text>প্রথম শ্রেনি</Text>
+                      <Text>প্রথম শ্রেণি (পড়ার ঘণ্টা)</Text>
                       <Picker
                         style={{
                           height: 40,
-                          width: 150,
+                          width: 180,
                         }}
-                        selectedValue={this.state.oneBanglaClassObservation1}
+                        selectedValue={this.state.oneSRMObservation}
                         onValueChange={(value) => {
-                          this.setState({ oneBanglaClassObservation1: value });
+                          this.setState({ oneSRMObservation: value });
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
+                        <Picker.Item label={"৪"} value={"৪"} />
                         <Picker.Item label={"N/A"} value={"N/A"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 1, padding: 2 }}>
-                      <Text>দ্বিতীয় শ্রেনি</Text>
+                      <Text>দ্বিতীয় শ্রেণি (পড়ার ঘণ্টা)</Text>
                       <Picker
                         style={{
                           height: 40,
-                          width: 150,
+                          width: 180,
                         }}
-                        selectedValue={this.state.twoBanglaClassObservation1}
+                        selectedValue={this.state.twoSRMObservation}
                         onValueChange={(value) => {
-                          this.setState({ twoBanglaClassObservation1: value });
+                          this.setState({ twoSRMObservation: value });
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                  </View>
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>তৃতীয় শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.threeBanglaClassObservation1}
-                        onValueChange={(value) => {
-                          this.setState({
-                            threeBanglaClassObservation1: value,
-                          });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>চতুর্থ শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.fourBanglaClassObservation1}
-                        onValueChange={(value) => {
-                          this.setState({ fourBanglaClassObservation1: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>পঞ্চম শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.fiveBanglaClassObservation1}
-                        onValueChange={(value) => {
-                          this.setState({ fiveBanglaClassObservation1: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
+                        <Picker.Item label={"৪"} value={"৪"} />
                         <Picker.Item label={"N/A"} value={"N/A"} />
                       </Picker>
                     </View>
                   </View>
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 1, padding: 2 }}>
-                      <Text>শিক্ষকের প্রায়োরিটি</Text>
+                      <Text>শিক্ষকের প্রায়োরিটি এরিয়া (প্রাক-প্রাথমিক)</Text>
                       <Picker
                         style={{
                           height: 40,
-                          width: 150,
+                          width: 180,
                         }}
-                        selectedValue={this.state.banglaTeacherPriority1}
+                        selectedValue={this.state.prePrimarySRMTeacherPriority}
                         onValueChange={(value) => {
                           this.setState({
-                            banglaTeacherPriority1: value,
+                            prePrimarySRMTeacherPriority: value,
                           });
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"1"} value={"1"} />
-                        <Picker.Item label={"2"} value={"2"} />
-                        <Picker.Item label={"3"} value={"3"} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
+                        <Picker.Item label={"N/A"} value={"N/A"} />
+                      </Picker>
+                    </View>
+                    <View style={{ flex: 1, padding: 2 }}>
+                      <Text>শিক্ষকের প্রায়োরিটি এরিয়া (প্রথম)</Text>
+                      <Picker
+                        style={{
+                          height: 40,
+                          width: 180,
+                        }}
+                        selectedValue={this.state.oneSRMTeacherPriority}
+                        onValueChange={(value) => {
+                          this.setState({ oneSRMTeacherPriority: value });
+                        }}
+                        itemStyle={{ color: "white" }}
+                      >
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
+                        <Picker.Item label={"N/A"} value={"N/A"} />
+                      </Picker>
+                    </View>
+                    <View style={{ flex: 1, padding: 2 }}>
+                      <Text>শিক্ষকের প্রায়োরিটি এরিয়া (দ্বিতীয়)</Text>
+                      <Picker
+                        style={{
+                          height: 40,
+                          width: 180,
+                        }}
+                        selectedValue={this.state.twoSRMTeacherPriority}
+                        onValueChange={(value) => {
+                          this.setState({ twoSRMTeacherPriority: value });
+                        }}
+                        itemStyle={{ color: "white" }}
+                      >
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
                         <Picker.Item label={"N/A"} value={"N/A"} />
                       </Picker>
                     </View>
@@ -2073,10 +1945,10 @@ export default class OverallSchoolObservationScreen extends React.Component {
                       editable={true}
                       onChangeText={(text) =>
                         this.setState({
-                          banglaClassComment1: text,
+                          srmCommentPPOneTwo: text,
                         })
                       }
-                      value={this.state.banglaClassComment1 + ""}
+                      value={this.state.srmCommentPPOneTwo + ""}
                     ></TextInput>
                   </View>
                 </Card>
@@ -2087,154 +1959,134 @@ export default class OverallSchoolObservationScreen extends React.Component {
               <Card style={{ padding: 5, margin: 10, flex: 1 }}>
                 <Card style={{ padding: 5, flex: 1, alignSelf: "center" }}>
                   <Text style={styles.bigRedText}>
-                    বাংলা ক্লাস পর্যবেক্ষণ ২
+                    ক্লাস পর্যবেক্ষণ (তৃতীয়, চতুর্থ ও পঞ্চম শ্রেণির পড়ার
+                    ঘণ্টা/এসআরএম)
                   </Text>
                 </Card>
                 <Card style={{ padding: 5, flex: 1, alignSelf: "center" }}>
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 1, padding: 2 }}>
-                      <Text>প্রাক প্রাথমিক শ্রেনি</Text>
+                      <Text>তৃতীয় শ্রেণি (পড়ার ঘণ্টা)</Text>
                       <Picker
                         style={{
                           height: 40,
-                          width: 150,
+                          width: 180,
                         }}
-                        selectedValue={
-                          this.state.prePrimaryBanglaClassObservation2
-                        }
+                        selectedValue={this.state.threeSRMObservation}
                         onValueChange={(value) => {
-                          this.setState({
-                            prePrimaryBanglaClassObservation2: value,
-                          });
+                          this.setState({ threeSRMObservation: value });
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
+                        <Picker.Item label={"৪"} value={"৪"} />
                         <Picker.Item label={"N/A"} value={"N/A"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 1, padding: 2 }}>
-                      <Text>প্রথম শ্রেনি</Text>
+                      <Text>চতুর্থ শ্রেণি (পড়ার ঘণ্টা)</Text>
                       <Picker
                         style={{
                           height: 40,
-                          width: 150,
+                          width: 180,
                         }}
-                        selectedValue={this.state.oneBanglaClassObservation2}
+                        selectedValue={this.state.fourSRMObservation}
                         onValueChange={(value) => {
-                          this.setState({ oneBanglaClassObservation2: value });
+                          this.setState({ fourSRMObservation: value });
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
+                        <Picker.Item label={"৪"} value={"৪"} />
                         <Picker.Item label={"N/A"} value={"N/A"} />
                       </Picker>
                     </View>
                     <View style={{ flex: 1, padding: 2 }}>
-                      <Text>দ্বিতীয় শ্রেনি</Text>
+                      <Text>পঞ্চম শ্রেণি (পড়ার ঘণ্টা)</Text>
                       <Picker
                         style={{
                           height: 40,
-                          width: 150,
+                          width: 180,
                         }}
-                        selectedValue={this.state.twoBanglaClassObservation2}
+                        selectedValue={this.state.fiveSRMObservation}
                         onValueChange={(value) => {
-                          this.setState({ twoBanglaClassObservation2: value });
+                          this.setState({ fiveSRMObservation: value });
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                  </View>
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>তৃতীয় শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.threeBanglaClassObservation2}
-                        onValueChange={(value) => {
-                          this.setState({
-                            threeBanglaClassObservation2: value,
-                          });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>চতুর্থ শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.fourBanglaClassObservation2}
-                        onValueChange={(value) => {
-                          this.setState({ fourBanglaClassObservation2: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>পঞ্চম শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.fiveBanglaClassObservation2}
-                        onValueChange={(value) => {
-                          this.setState({ fiveBanglaClassObservation2: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
+                        <Picker.Item label={"৪"} value={"৪"} />
                         <Picker.Item label={"N/A"} value={"N/A"} />
                       </Picker>
                     </View>
                   </View>
                   <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 1, padding: 2 }}>
-                      <Text>শিক্ষকের প্রায়োরিটি</Text>
+                      <Text>শিক্ষকের প্রায়োরিটি এরিয়া (তৃতীয়)</Text>
                       <Picker
                         style={{
                           height: 40,
-                          width: 150,
+                          width: 180,
                         }}
-                        selectedValue={this.state.banglaTeacherPriority2}
+                        selectedValue={this.state.threeSRMTeacherPriority}
                         onValueChange={(value) => {
-                          this.setState({
-                            banglaTeacherPriority2: value,
-                          });
+                          this.setState({ threeSRMTeacherPriority: value });
                         }}
                         itemStyle={{ color: "white" }}
                       >
                         <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"1"} value={"1"} />
-                        <Picker.Item label={"2"} value={"2"} />
-                        <Picker.Item label={"3"} value={"3"} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
+                        <Picker.Item label={"N/A"} value={"N/A"} />
+                      </Picker>
+                    </View>
+                    <View style={{ flex: 1, padding: 2 }}>
+                      <Text>শিক্ষকের প্রায়োরিটি এরিয়া (চতুর্থ)</Text>
+                      <Picker
+                        style={{
+                          height: 40,
+                          width: 180,
+                        }}
+                        selectedValue={this.state.fourSRMTeacherPriority}
+                        onValueChange={(value) => {
+                          this.setState({ fourSRMTeacherPriority: value });
+                        }}
+                        itemStyle={{ color: "white" }}
+                      >
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
+                        <Picker.Item label={"N/A"} value={"N/A"} />
+                      </Picker>
+                    </View>
+                    <View style={{ flex: 1, padding: 2 }}>
+                      <Text>শিক্ষকের প্রায়োরিটি এরিয়া (পঞ্চম)</Text>
+                      <Picker
+                        style={{
+                          height: 40,
+                          width: 180,
+                        }}
+                        selectedValue={this.state.fiveSRMTeacherPriority}
+                        onValueChange={(value) => {
+                          this.setState({ fiveSRMTeacherPriority: value });
+                        }}
+                        itemStyle={{ color: "white" }}
+                      >
+                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                        <Picker.Item label={"১"} value={"১"} />
+                        <Picker.Item label={"২"} value={"২"} />
+                        <Picker.Item label={"৩"} value={"৩"} />
                         <Picker.Item label={"N/A"} value={"N/A"} />
                       </Picker>
                     </View>
@@ -2250,571 +2102,11 @@ export default class OverallSchoolObservationScreen extends React.Component {
                       editable={true}
                       onChangeText={(text) =>
                         this.setState({
-                          banglaClassComment2: text,
+                          srmCommentThreeFourFive: text,
                         })
                       }
-                      value={this.state.banglaClassComment2 + ""}
+                      value={this.state.srmCommentThreeFourFive + ""}
                     ></TextInput>
-                  </View>
-                </Card>
-              </Card>
-            </View>
-
-            <View style={{ padding: 5 }}>
-              <Card style={{ padding: 5, margin: 10, flex: 1 }}>
-                <Card style={{ padding: 5, flex: 1, alignSelf: "center" }}>
-                  <Text style={styles.bigRedText}>
-                    শ্রেণি পাঠ/পড়ার ঘণ্টা পর্যবেক্ষণ ১
-                  </Text>
-                </Card>
-                <Card style={{ padding: 5, flex: 1, alignSelf: "center" }}>
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>প্রাক প্রাথমিক শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={
-                          this.state.prePrimarySRMClassObservation1
-                        }
-                        onValueChange={(value) => {
-                          this.setState({
-                            prePrimarySRMClassObservation1: value,
-                          });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>প্রথম শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.oneSRMClassObservation1}
-                        onValueChange={(value) => {
-                          this.setState({ oneSRMClassObservation1: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>দ্বিতীয় শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.twoSRMClassObservation1}
-                        onValueChange={(value) => {
-                          this.setState({ twoSRMClassObservation1: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                  </View>
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>তৃতীয় শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.threeSRMClassObservation1}
-                        onValueChange={(value) => {
-                          this.setState({ threeSRMClassObservation1: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>চতুর্থ শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.fourSRMClassObservation1}
-                        onValueChange={(value) => {
-                          this.setState({ fourSRMClassObservation1: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>পঞ্চম শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.fiveSRMClassObservation1}
-                        onValueChange={(value) => {
-                          this.setState({ fiveSRMClassObservation1: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                  </View>
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>শিক্ষকের প্রায়োরিটি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.srmTeacherPriority1}
-                        onValueChange={(value) => {
-                          this.setState({
-                            srmTeacherPriority1: value,
-                          });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"1"} value={"1"} />
-                        <Picker.Item label={"2"} value={"2"} />
-                        <Picker.Item label={"3"} value={"3"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                  </View>
-                </Card>
-                <Card style={{ padding: 10, flex: 1, alignSelf: "center" }}>
-                  <View style={{ flex: 1, padding: 2 }}>
-                    <Text>মন্তব্য: </Text>
-                    <TextInput
-                      style={{ height: 50, padding: 5, borderWidth: 1 }}
-                      keyboardType="default"
-                      placeholder=""
-                      editable={true}
-                      onChangeText={(text) =>
-                        this.setState({
-                          srmComment1: text,
-                        })
-                      }
-                      value={this.state.srmComment1 + ""}
-                    ></TextInput>
-                  </View>
-                </Card>
-              </Card>
-            </View>
-
-            <View style={{ padding: 5 }}>
-              <Card style={{ padding: 5, margin: 10, flex: 1 }}>
-                <Card style={{ padding: 5, flex: 1, alignSelf: "center" }}>
-                  <Text style={styles.bigRedText}>
-                    শ্রেণি পাঠ/পড়ার ঘণ্টা পর্যবেক্ষণ ২
-                  </Text>
-                </Card>
-                <Card style={{ padding: 5, flex: 1, alignSelf: "center" }}>
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>প্রাক প্রাথমিক শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={
-                          this.state.prePrimarySRMClassObservation2
-                        }
-                        onValueChange={(value) => {
-                          this.setState({
-                            prePrimarySRMClassObservation2: value,
-                          });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>প্রথম শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.oneSRMClassObservation2}
-                        onValueChange={(value) => {
-                          this.setState({ oneSRMClassObservation2: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>দ্বিতীয় শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.twoSRMClassObservation2}
-                        onValueChange={(value) => {
-                          this.setState({ twoSRMClassObservation2: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                  </View>
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>তৃতীয় শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.threeSRMClassObservation2}
-                        onValueChange={(value) => {
-                          this.setState({ threeSRMClassObservation2: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>চতুর্থ শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.fourSRMClassObservation2}
-                        onValueChange={(value) => {
-                          this.setState({ fourSRMClassObservation2: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>পঞ্চম শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.fiveSRMClassObservation2}
-                        onValueChange={(value) => {
-                          this.setState({ fiveSRMClassObservation2: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                  </View>
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>শিক্ষকের প্রায়োরিটি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.srmTeacherPriority2}
-                        onValueChange={(value) => {
-                          this.setState({
-                            srmTeacherPriority2: value,
-                          });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"1"} value={"1"} />
-                        <Picker.Item label={"2"} value={"2"} />
-                        <Picker.Item label={"3"} value={"3"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                  </View>
-                </Card>
-                <Card style={{ padding: 10, flex: 1, alignSelf: "center" }}>
-                  <View style={{ flex: 1, padding: 2 }}>
-                    <Text>মন্তব্য: </Text>
-                    <TextInput
-                      style={{ height: 50, padding: 5, borderWidth: 1 }}
-                      keyboardType="default"
-                      placeholder=""
-                      editable={true}
-                      onChangeText={(text) =>
-                        this.setState({
-                          srmComment2: text,
-                        })
-                      }
-                      value={this.state.srmComment2 + ""}
-                    ></TextInput>
-                  </View>
-                </Card>
-              </Card>
-            </View>
-
-            <View style={{ padding: 5 }}>
-              <Card style={{ padding: 5, margin: 10, flex: 1 }}>
-                <Card style={{ padding: 5, flex: 1, alignSelf: "center" }}>
-                  <Text style={styles.bigRedText}>
-                    পাঠাগার ব্যবস্থাপনা পর্যবেক্ষণ
-                  </Text>
-                </Card>
-                <Card style={{ padding: 5, flex: 1, alignSelf: "center" }}>
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>প্রাক প্রাথমিক শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.prePrimaryLibraryObservation}
-                        onValueChange={(value) => {
-                          this.setState({
-                            prePrimaryLibraryObservation: value,
-                          });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>প্রথম শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.oneLibraryObservation}
-                        onValueChange={(value) => {
-                          this.setState({ oneLibraryObservation: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>দ্বিতীয় শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.twoLibraryObservation}
-                        onValueChange={(value) => {
-                          this.setState({ twoLibraryObservation: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                  </View>
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>তৃতীয় শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.threeLibraryObservation}
-                        onValueChange={(value) => {
-                          this.setState({ threeLibraryObservation: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>চতুর্থ শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.fourLibraryObservation}
-                        onValueChange={(value) => {
-                          this.setState({ fourLibraryObservation: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>পঞ্চম শ্রেনি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.fiveLibraryObservation}
-                        onValueChange={(value) => {
-                          this.setState({ fiveLibraryObservation: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"হ্যাঁ"} value={"yes"} />
-                        <Picker.Item label={"না"} value={"no"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                  </View>
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>শিক্ষকের প্রায়োরিটি</Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={
-                          this.state.libraryObservationTeacherPriority
-                        }
-                        onValueChange={(value) => {
-                          this.setState({
-                            libraryObservationTeacherPriority: value,
-                          });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"1"} value={"1"} />
-                        <Picker.Item label={"2"} value={"2"} />
-                        <Picker.Item label={"3"} value={"3"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
-                  </View>
-                </Card>
-                <Card style={{ padding: 10, flex: 1, alignSelf: "center" }}>
-                  <View style={{ flex: 1, padding: 2 }}>
-                    <Text>মন্তব্য: </Text>
-                    <TextInput
-                      style={{ height: 50, padding: 5, borderWidth: 1 }}
-                      keyboardType="default"
-                      placeholder=""
-                      editable={true}
-                      onChangeText={(text) =>
-                        this.setState({
-                          libraryObservationComment: text,
-                        })
-                      }
-                      value={this.state.libraryObservationComment + ""}
-                    ></TextInput>
-                  </View>
-                </Card>
-              </Card>
-            </View>
-
-            <View style={{ padding: 5 }}>
-              <Card style={{ padding: 5, margin: 10, flex: 1 }}>
-                <Card style={{ padding: 5, flex: 1, alignSelf: "center" }}>
-                  <Text style={styles.bigRedText}>
-                    বিদ্যালয়ের সার্বিক অবস্থা পর্যবেক্ষণ
-                  </Text>
-                </Card>
-
-                <Card style={{ padding: 5, flex: 1, alignSelf: "center" }}>
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={{ flex: 1, padding: 2 }}>
-                      <Text>বিদ্যালয়ের প্রায়োরিটি এরিয়া: </Text>
-                      <Picker
-                        style={{
-                          height: 40,
-                          width: 150,
-                        }}
-                        selectedValue={this.state.schoolPriorityArea}
-                        onValueChange={(value) => {
-                          this.setState({ schoolPriorityArea: value });
-                        }}
-                        itemStyle={{ color: "white" }}
-                      >
-                        <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                        <Picker.Item label={"1"} value={"1"} />
-                        <Picker.Item label={"2"} value={"2"} />
-                        <Picker.Item label={"3"} value={"3"} />
-                        <Picker.Item label={"N/A"} value={"N/A"} />
-                      </Picker>
-                    </View>
                   </View>
                 </Card>
               </Card>

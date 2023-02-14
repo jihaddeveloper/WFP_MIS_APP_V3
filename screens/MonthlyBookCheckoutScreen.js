@@ -80,6 +80,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       pickerVisitorOffice: "",
       pickerLF: "",
       pickerLPO: "",
+
+      pickerLFName: "",
+      pickerLPOName: "",
+
       pickerMonth: "",
       pickerYear: "",
       // General data
@@ -423,6 +427,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       pickerVisitorOffice: "",
       pickerLF: "",
       pickerLPO: "",
+
+      pickerLFName: "",
+      pickerLPOName: "",
+
       pickerMonth: "",
       pickerYear: "",
       // General data
@@ -901,8 +909,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       visitor: this.state.pickerVisitor,
       visitorDesignation: this.state.pickerDesignation,
       visitorOffice: this.state.pickerVisitorOffice,
-      lpo: this.state.pickerLPO,
-      lf: this.state.pickerLF,
+      lpo: this.state.pickerLPO.employeeRegId,
+      lf: this.state.pickerLF.employeeRegId,
+      lpoName: this.state.pickerLPOName.name,
+      lfName: this.state.pickerLFName.name,
       school: this.state.pickerSchool,
       headTeacher: this.state.pickerHeadTeacher,
       gender: this.state.pickerGender,
@@ -1769,7 +1779,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       height: 40,
                       width: 200,
                     }}
-                    selectedValue={this.state && this.state.pickerLPO}
+                    selectedValue={this.state.pickerLPO}
                     onValueChange={(value) => {
                       this.setState({ pickerLPO: value });
                     }}
@@ -1785,7 +1795,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <Picker.Item
                             key={item.id}
                             label={item.name}
-                            value={item.employeeRegId}
+                            value={item}
                           />
                         );
                       })}
@@ -1823,7 +1833,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       .filter((item) => {
                         return (
                           item.designation == "LF" &&
-                          item.supervisor == this.state.pickerLPO
+                          item.supervisor == this.state.pickerLPO.employeeRegId
                         );
                       })
                       .map((item) => {
@@ -1831,7 +1841,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                           <Picker.Item
                             key={item.id}
                             label={item.name}
-                            value={item.employeeRegId}
+                            value={item}
                           />
                         );
                       })}
@@ -1860,7 +1870,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                       height: 40,
                       width: 150,
                     }}
-                    selectedValue={this.state && this.state.pickerSchool}
+                    selectedValue={this.state.pickerSchool}
                     onValueChange={(value) => {
                       this.setState({ pickerSchool: value });
                     }}
@@ -1869,7 +1879,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     {this.state.allSchool
                       .filter((item) => {
-                        return item.lf == this.state.pickerLF;
+                        return item.lf == this.state.pickerLF.employeeRegId;
                       })
                       .map((item) => {
                         return (

@@ -79,6 +79,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       pickerVisitorOffice: "",
       pickerLF: "",
       pickerLPO: "",
+
+      pickerLFName: "",
+      pickerLPOName: "",
+
       communityVolunteer: "",
       pickerGenderCV: "",
       pickerMonth: "",
@@ -424,6 +428,10 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       pickerVisitorOffice: "",
       pickerLF: "",
       pickerLPO: "",
+
+      pickerLFName: "",
+      pickerLPOName: "",
+
       communityVolunteer: "",
       pickerGenderCV: "",
       pickerMonth: "",
@@ -905,8 +913,11 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       visitor: this.state.pickerVisitor,
       visitorDesignation: this.state.pickerDesignation,
       visitorOffice: this.state.pickerVisitorOffice,
-      lf: this.state.pickerLF,
-      lpo: this.state.pickerLPO,
+      lf: this.state.pickerLF.employeeRegId,
+      lfName: this.state.pickerLF.name,
+      lpo: this.state.pickerLPO.employeeRegId,
+      lpoName: this.state.pickerLPO.name,
+
       visitNo: this.state.visitNo,
       month: this.state.pickerMonth,
       year: this.state.pickerYear,
