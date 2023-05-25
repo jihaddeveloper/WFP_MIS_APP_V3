@@ -669,7 +669,8 @@ export default class BanglaClassObservationScreen extends React.Component {
           item.school == this.state.pickerSchool &&
           item.month == this.state.pickerMonth &&
           item.year == this.state.pickerYear &&
-          item.grade == this.state.grade
+          item.grade == this.state.grade &&
+          item.section == this.state.section
         );
       });
 
@@ -882,7 +883,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"January"} value={"January"} />
                     <Picker.Item label={"February"} value={"February"} />
-                    <Picker.Item label={"March"} value={"Dhaka LP Program"} />
+                    <Picker.Item label={"March"} value={"March"} />
                     <Picker.Item label={"April"} value={"April"} />
                     <Picker.Item label={"May"} value={"May"} />
                     <Picker.Item label={"June"} value={"June"} />
@@ -1291,6 +1292,65 @@ export default class BanglaClassObservationScreen extends React.Component {
 
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    শ্রেণী:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state.grade}
+                    onValueChange={(value) => {
+                      this.setState({ grade: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"Pre-Primary"} value={"Pre-Primary"} />
+                    <Picker.Item label={"Grade 1"} value={"Grade 1"} />
+                    <Picker.Item label={"Grade 2"} value={"Grade 2"} />
+                    <Picker.Item label={"Grade 3"} value={"Grade 3"} />
+                    <Picker.Item label={"Grade 4"} value={"Grade 4"} />
+                    <Picker.Item label={"Grade 5"} value={"Grade 5"} />
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    শাখা:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state.section}
+                    onValueChange={(value) => {
+                      this.setState({ section: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"A"} value={"A"} />
+                    <Picker.Item label={"B"} value={"B"} />
+                    <Picker.Item label={"C"} value={"C"} />
+                    <Picker.Item label={"N/A"} value={"N/A"} />
+                  </Picker>
+                </View>
+              </View>
+
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 1 }}>
                   <View style={{ flexDirection: "row" }}>
                     <Text
                       style={{
@@ -1365,33 +1425,36 @@ export default class BanglaClassObservationScreen extends React.Component {
                                   parseInt(parseInt(this.state.visitNo) - 1) &&
                                 item.school === this.state.pickerSchool &&
                                 item.project === this.state.pickerProject &&
-                                item.year === this.state.pickerYear
+                                item.year === this.state.pickerYear &&
+                                item.month === this.state.pickerMonth &&
+                                item.grade === this.state.grade
                               );
                             }
                           ),
                       });
 
-                      // console.log(
-                      //   "this.state.pickerSchool : " + this.state.pickerSchool
-                      // );
+                      console.log(
+                        "this.state.pickerSchool : " + this.state.pickerSchool
+                      );
 
-                      // console.log(
-                      //   "this.state.pickerProject : " + this.state.pickerProject
-                      // );
+                      console.log(
+                        "this.state.pickerProject : " + this.state.pickerProject
+                      );
 
-                      // console.log(
-                      //   "this.state.pickerYear : " + this.state.pickerYear
-                      // );
+                      console.log(
+                        "this.state.pickerYear : " + this.state.pickerYear
+                      );
 
-                      // console.log(
-                      //   "parseInt(this.state.visitNo) : " +
-                      //     parseInt(parseInt(this.state.visitNo) - 1)
-                      // );
+                      console.log(
+                        "this.state.pickerMonth : " + this.state.pickerMonth
+                      );
 
-                      // console.log(
-                      //   "allLibraryObservationData: " +
-                      //     this.state.allLibraryObservationData
-                      // );
+                      console.log("this.state.grade : " + this.state.grade);
+
+                      console.log(
+                        "parseInt(this.state.visitNo) : " +
+                          parseInt(parseInt(this.state.visitNo) - 1)
+                      );
 
                       //console.log("preMonthData: " + this.state.preMonthData);
                     }}
@@ -1552,65 +1615,6 @@ export default class BanglaClassObservationScreen extends React.Component {
                       <Picker.Item label={"No"} value={"No"} />
                     </Picker>
                   </View>
-                </View>
-              </View>
-
-              <View style={{ flexDirection: "row", padding: 10 }}>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    শ্রেণী:
-                  </Text>
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
-                    selectedValue={this.state.grade}
-                    onValueChange={(value) => {
-                      this.setState({ grade: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"Pre-Primary"} value={"Pre-Primary"} />
-                    <Picker.Item label={"Grade 1"} value={"Grade 1"} />
-                    <Picker.Item label={"Grade 2"} value={"Grade 2"} />
-                    <Picker.Item label={"Grade 3"} value={"Grade 3"} />
-                    <Picker.Item label={"Grade 4"} value={"Grade 4"} />
-                    <Picker.Item label={"Grade 5"} value={"Grade 5"} />
-                  </Picker>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    শাখা:
-                  </Text>
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
-                    selectedValue={this.state.section}
-                    onValueChange={(value) => {
-                      this.setState({ section: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"A"} value={"A"} />
-                    <Picker.Item label={"B"} value={"B"} />
-                    <Picker.Item label={"C"} value={"C"} />
-                    <Picker.Item label={"N/A"} value={"N/A"} />
-                  </Picker>
                 </View>
               </View>
 
@@ -2070,6 +2074,78 @@ export default class BanglaClassObservationScreen extends React.Component {
                             });
 
                             // Set teacher status
+                            if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind4FluencyIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind6WritingActivitiesStatus ===
+                                "Yes" ||
+                                this.state.ind6WritingActivitiesStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind3VocabularyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind5ComprehensionStatus === "Yes" &&
+                              this.state.ind6WritingActivitiesStatus ===
+                                "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
+                              this.state.ind9TimeOnTaskStatus === "Yes" &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
+                            // Set teacher status
+
+                            // Set teacher status
                             // if (
                             //   this.state.ind1PhonemicAwarenessStatus ===
                             //     "Yes" &&
@@ -2174,40 +2250,75 @@ export default class BanglaClassObservationScreen extends React.Component {
                             });
 
                             // Set teacher status
-                            // if (
-                            //   this.state.ind1PhonemicAwarenessStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind4FluencyIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind6WritingActivitiesStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                            //   this.state.ind11ContinuityOfLessonsStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 3",
-                            //   });
-                            // } else if (
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 2",
-                            //   });
-                            // } else {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 1",
-                            //   });
-                            // }
+                            if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind4FluencyIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind6WritingActivitiesStatus ===
+                                "Yes" ||
+                                this.state.ind6WritingActivitiesStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind3VocabularyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind5ComprehensionStatus === "Yes" &&
+                              this.state.ind6WritingActivitiesStatus ===
+                                "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
+                              this.state.ind9TimeOnTaskStatus === "Yes" &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2279,40 +2390,75 @@ export default class BanglaClassObservationScreen extends React.Component {
                             });
 
                             // Set teacher status
-                            // if (
-                            //   this.state.ind1PhonemicAwarenessStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind4FluencyIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind6WritingActivitiesStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                            //   this.state.ind11ContinuityOfLessonsStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 3",
-                            //   });
-                            // } else if (
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 2",
-                            //   });
-                            // } else {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 1",
-                            //   });
-                            // }
+                            if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind4FluencyIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind6WritingActivitiesStatus ===
+                                "Yes" ||
+                                this.state.ind6WritingActivitiesStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind3VocabularyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind5ComprehensionStatus === "Yes" &&
+                              this.state.ind6WritingActivitiesStatus ===
+                                "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
+                              this.state.ind9TimeOnTaskStatus === "Yes" &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2388,40 +2534,75 @@ export default class BanglaClassObservationScreen extends React.Component {
                             });
 
                             // Set teacher status
-                            // if (
-                            //   this.state.ind1PhonemicAwarenessStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind4FluencyIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind6WritingActivitiesStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                            //   this.state.ind11ContinuityOfLessonsStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 3",
-                            //   });
-                            // } else if (
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 2",
-                            //   });
-                            // } else {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 1",
-                            //   });
-                            // }
+                            if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind4FluencyIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind6WritingActivitiesStatus ===
+                                "Yes" ||
+                                this.state.ind6WritingActivitiesStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind3VocabularyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind5ComprehensionStatus === "Yes" &&
+                              this.state.ind6WritingActivitiesStatus ===
+                                "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
+                              this.state.ind9TimeOnTaskStatus === "Yes" &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2489,40 +2670,75 @@ export default class BanglaClassObservationScreen extends React.Component {
                             this.setState({ ind5ComprehensionStatus: value });
 
                             // Set teacher status
-                            // if (
-                            //   this.state.ind1PhonemicAwarenessStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind4FluencyIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind6WritingActivitiesStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                            //   this.state.ind11ContinuityOfLessonsStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 3",
-                            //   });
-                            // } else if (
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 2",
-                            //   });
-                            // } else {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 1",
-                            //   });
-                            // }
+                            if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind4FluencyIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind6WritingActivitiesStatus ===
+                                "Yes" ||
+                                this.state.ind6WritingActivitiesStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind3VocabularyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind5ComprehensionStatus === "Yes" &&
+                              this.state.ind6WritingActivitiesStatus ===
+                                "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
+                              this.state.ind9TimeOnTaskStatus === "Yes" &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2591,40 +2807,75 @@ export default class BanglaClassObservationScreen extends React.Component {
                             });
 
                             // Set teacher status
-                            // if (
-                            //   this.state.ind1PhonemicAwarenessStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind4FluencyIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind6WritingActivitiesStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                            //   this.state.ind11ContinuityOfLessonsStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 3",
-                            //   });
-                            // } else if (
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 2",
-                            //   });
-                            // } else {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 1",
-                            //   });
-                            // }
+                            if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind4FluencyIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind6WritingActivitiesStatus ===
+                                "Yes" ||
+                                this.state.ind6WritingActivitiesStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind3VocabularyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind5ComprehensionStatus === "Yes" &&
+                              this.state.ind6WritingActivitiesStatus ===
+                                "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
+                              this.state.ind9TimeOnTaskStatus === "Yes" &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2706,40 +2957,75 @@ export default class BanglaClassObservationScreen extends React.Component {
                             });
 
                             // Set teacher status
-                            // if (
-                            //   this.state.ind1PhonemicAwarenessStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind4FluencyIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind6WritingActivitiesStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                            //   this.state.ind11ContinuityOfLessonsStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 3",
-                            //   });
-                            // } else if (
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 2",
-                            //   });
-                            // } else {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 1",
-                            //   });
-                            // }
+                            if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind4FluencyIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind6WritingActivitiesStatus ===
+                                "Yes" ||
+                                this.state.ind6WritingActivitiesStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind3VocabularyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind5ComprehensionStatus === "Yes" &&
+                              this.state.ind6WritingActivitiesStatus ===
+                                "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
+                              this.state.ind9TimeOnTaskStatus === "Yes" &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2806,40 +3092,75 @@ export default class BanglaClassObservationScreen extends React.Component {
                             this.setState({ ind8GroupWorkStatus: value });
 
                             // Set teacher status
-                            // if (
-                            //   this.state.ind1PhonemicAwarenessStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind4FluencyIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind6WritingActivitiesStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                            //   this.state.ind11ContinuityOfLessonsStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 3",
-                            //   });
-                            // } else if (
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 2",
-                            //   });
-                            // } else {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 1",
-                            //   });
-                            // }
+                            if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind4FluencyIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind6WritingActivitiesStatus ===
+                                "Yes" ||
+                                this.state.ind6WritingActivitiesStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind3VocabularyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind5ComprehensionStatus === "Yes" &&
+                              this.state.ind6WritingActivitiesStatus ===
+                                "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
+                              this.state.ind9TimeOnTaskStatus === "Yes" &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2906,40 +3227,75 @@ export default class BanglaClassObservationScreen extends React.Component {
                             this.setState({ ind9TimeOnTaskStatus: value });
 
                             // Set teacher status
-                            // if (
-                            //   this.state.ind1PhonemicAwarenessStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind4FluencyIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind6WritingActivitiesStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                            //   this.state.ind11ContinuityOfLessonsStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 3",
-                            //   });
-                            // } else if (
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 2",
-                            //   });
-                            // } else {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 1",
-                            //   });
-                            // }
+                            if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind4FluencyIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind6WritingActivitiesStatus ===
+                                "Yes" ||
+                                this.state.ind6WritingActivitiesStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind3VocabularyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind5ComprehensionStatus === "Yes" &&
+                              this.state.ind6WritingActivitiesStatus ===
+                                "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
+                              this.state.ind9TimeOnTaskStatus === "Yes" &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -3006,40 +3362,75 @@ export default class BanglaClassObservationScreen extends React.Component {
                             this.setState({ ind10UseTeachingAidStatus: value });
 
                             // Set teacher status
-                            // if (
-                            //   this.state.ind1PhonemicAwarenessStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind4FluencyIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind6WritingActivitiesStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                            //   this.state.ind11ContinuityOfLessonsStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 3",
-                            //   });
-                            // } else if (
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 2",
-                            //   });
-                            // } else {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 1",
-                            //   });
-                            // }
+                            if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind4FluencyIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind6WritingActivitiesStatus ===
+                                "Yes" ||
+                                this.state.ind6WritingActivitiesStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind3VocabularyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind5ComprehensionStatus === "Yes" &&
+                              this.state.ind6WritingActivitiesStatus ===
+                                "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
+                              this.state.ind9TimeOnTaskStatus === "Yes" &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -3110,40 +3501,75 @@ export default class BanglaClassObservationScreen extends React.Component {
                             });
 
                             // Set teacher status
-                            // if (
-                            //   this.state.ind1PhonemicAwarenessStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind4FluencyIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind6WritingActivitiesStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                            //   this.state.ind11ContinuityOfLessonsStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 3",
-                            //   });
-                            // } else if (
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 2",
-                            //   });
-                            // } else {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 1",
-                            //   });
-                            // }
+                            if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind4FluencyIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind6WritingActivitiesStatus ===
+                                "Yes" ||
+                                this.state.ind6WritingActivitiesStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind3VocabularyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind5ComprehensionStatus === "Yes" &&
+                              this.state.ind6WritingActivitiesStatus ===
+                                "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
+                              this.state.ind9TimeOnTaskStatus === "Yes" &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -3211,40 +3637,75 @@ export default class BanglaClassObservationScreen extends React.Component {
                             this.setState({ ind12AssessmentStatus: value });
 
                             // Set teacher status
-                            // if (
-                            //   this.state.ind1PhonemicAwarenessStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind4FluencyIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind6WritingActivitiesStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                            //   this.state.ind11ContinuityOfLessonsStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 3",
-                            //   });
-                            // } else if (
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 2",
-                            //   });
-                            // } else {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 1",
-                            //   });
-                            // }
+                            if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind4FluencyIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind6WritingActivitiesStatus ===
+                                "Yes" ||
+                                this.state.ind6WritingActivitiesStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              this.state.ind1PhonemicAwarenessStatus ===
+                                "Yes" &&
+                              this.state.ind2LetterIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind3VocabularyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind4FluencyIdentificationStatus ===
+                                "Yes" &&
+                              this.state.ind5ComprehensionStatus === "Yes" &&
+                              this.state.ind6WritingActivitiesStatus ===
+                                "Yes" &&
+                              this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                              this.state.ind8GroupWorkStatus === "Yes" &&
+                              this.state.ind9TimeOnTaskStatus === "Yes" &&
+                              this.state.ind10UseTeachingAidStatus === "Yes" &&
+                              this.state.ind11ContinuityOfLessonsStatus ===
+                                "Yes" &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              (this.state.ind2LetterIdentificationStatus ===
+                                "Yes" ||
+                                this.state.ind2LetterIdentificationStatus ===
+                                  "N/A") &&
+                              (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                                this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                              (this.state.ind8GroupWorkStatus === "Yes" ||
+                                this.state.ind8GroupWorkStatus === "N/A") &&
+                              this.state.ind12AssessmentStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -3312,12 +3773,20 @@ export default class BanglaClassObservationScreen extends React.Component {
                         // Set teacher status
                         if (
                           this.state.ind1PhonemicAwarenessStatus === "Yes" &&
-                          this.state.ind2LetterIdentificationStatus === "Yes" &&
-                          this.state.ind4FluencyIdentificationStatus ===
-                            "Yes" &&
-                          this.state.ind6WritingActivitiesStatus === "Yes" &&
-                          this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                          this.state.ind8GroupWorkStatus === "Yes" &&
+                          (this.state.ind2LetterIdentificationStatus ===
+                            "Yes" ||
+                            this.state.ind2LetterIdentificationStatus ===
+                              "N/A") &&
+                          (this.state.ind4FluencyIdentificationStatus ===
+                            "Yes" ||
+                            this.state.ind4FluencyIdentificationStatus ===
+                              "N/A") &&
+                          (this.state.ind6WritingActivitiesStatus === "Yes" ||
+                            this.state.ind6WritingActivitiesStatus === "N/A") &&
+                          (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                            this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                          (this.state.ind8GroupWorkStatus === "Yes" ||
+                            this.state.ind8GroupWorkStatus === "N/A") &&
                           this.state.ind10UseTeachingAidStatus === "Yes" &&
                           this.state.ind11ContinuityOfLessonsStatus === "Yes" &&
                           this.state.ind12AssessmentStatus === "Yes"
@@ -3326,9 +3795,33 @@ export default class BanglaClassObservationScreen extends React.Component {
                             teacherStatus: "Priority 3",
                           });
                         } else if (
+                          this.state.ind1PhonemicAwarenessStatus === "Yes" &&
                           this.state.ind2LetterIdentificationStatus === "Yes" &&
+                          this.state.ind3VocabularyIdentificationStatus ===
+                            "Yes" &&
+                          this.state.ind4FluencyIdentificationStatus ===
+                            "Yes" &&
+                          this.state.ind5ComprehensionStatus === "Yes" &&
+                          this.state.ind6WritingActivitiesStatus === "Yes" &&
                           this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
                           this.state.ind8GroupWorkStatus === "Yes" &&
+                          this.state.ind9TimeOnTaskStatus === "Yes" &&
+                          this.state.ind10UseTeachingAidStatus === "Yes" &&
+                          this.state.ind11ContinuityOfLessonsStatus === "Yes" &&
+                          this.state.ind12AssessmentStatus === "Yes"
+                        ) {
+                          this.setState({
+                            teacherStatus: "Priority 3",
+                          });
+                        } else if (
+                          (this.state.ind2LetterIdentificationStatus ===
+                            "Yes" ||
+                            this.state.ind2LetterIdentificationStatus ===
+                              "N/A") &&
+                          (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                            this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                          (this.state.ind8GroupWorkStatus === "Yes" ||
+                            this.state.ind8GroupWorkStatus === "N/A") &&
                           this.state.ind12AssessmentStatus === "Yes"
                         ) {
                           this.setState({
@@ -3375,6 +3868,70 @@ export default class BanglaClassObservationScreen extends React.Component {
                       selectedValue={this.state.bestPracticeInd2}
                       onValueChange={(value) => {
                         this.setState({ bestPracticeInd2: value });
+
+                        // Set teacher status
+                        if (
+                          this.state.ind1PhonemicAwarenessStatus === "Yes" &&
+                          (this.state.ind2LetterIdentificationStatus ===
+                            "Yes" ||
+                            this.state.ind2LetterIdentificationStatus ===
+                              "N/A") &&
+                          (this.state.ind4FluencyIdentificationStatus ===
+                            "Yes" ||
+                            this.state.ind4FluencyIdentificationStatus ===
+                              "N/A") &&
+                          (this.state.ind6WritingActivitiesStatus === "Yes" ||
+                            this.state.ind6WritingActivitiesStatus === "N/A") &&
+                          (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                            this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                          (this.state.ind8GroupWorkStatus === "Yes" ||
+                            this.state.ind8GroupWorkStatus === "N/A") &&
+                          this.state.ind10UseTeachingAidStatus === "Yes" &&
+                          this.state.ind11ContinuityOfLessonsStatus === "Yes" &&
+                          this.state.ind12AssessmentStatus === "Yes"
+                        ) {
+                          this.setState({
+                            teacherStatus: "Priority 3",
+                          });
+                        } else if (
+                          this.state.ind1PhonemicAwarenessStatus === "Yes" &&
+                          this.state.ind2LetterIdentificationStatus === "Yes" &&
+                          this.state.ind3VocabularyIdentificationStatus ===
+                            "Yes" &&
+                          this.state.ind4FluencyIdentificationStatus ===
+                            "Yes" &&
+                          this.state.ind5ComprehensionStatus === "Yes" &&
+                          this.state.ind6WritingActivitiesStatus === "Yes" &&
+                          this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
+                          this.state.ind8GroupWorkStatus === "Yes" &&
+                          this.state.ind9TimeOnTaskStatus === "Yes" &&
+                          this.state.ind10UseTeachingAidStatus === "Yes" &&
+                          this.state.ind11ContinuityOfLessonsStatus === "Yes" &&
+                          this.state.ind12AssessmentStatus === "Yes"
+                        ) {
+                          this.setState({
+                            teacherStatus: "Priority 3",
+                          });
+                        } else if (
+                          (this.state.ind2LetterIdentificationStatus ===
+                            "Yes" ||
+                            this.state.ind2LetterIdentificationStatus ===
+                              "N/A") &&
+                          (this.state.ind7IDoWeDoYouDoStatus === "Yes" ||
+                            this.state.ind7IDoWeDoYouDoStatus === "N/A") &&
+                          (this.state.ind8GroupWorkStatus === "Yes" ||
+                            this.state.ind8GroupWorkStatus === "N/A") &&
+                          this.state.ind12AssessmentStatus === "Yes"
+                        ) {
+                          this.setState({
+                            teacherStatus: "Priority 2",
+                          });
+                        } else {
+                          this.setState({
+                            teacherStatus: "Priority 1",
+                          });
+                        }
+                        // Set teacher status
                       }}
                       itemStyle={{ color: "white" }}
                     >
@@ -3436,7 +3993,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                     ></TextInput>
                   </View>
                 </View>
-                <View style={{ flexDirection: "row" }}>
+                <View style={{ flexDirection: "row", marginTop: 20 }}>
                   <View style={{ flex: 1, padding: 2 }}>
                     <Text>
                       অগ্রাধিকারভিত্তিতে শিক্ষককে তার নিজস্ব উন্নয়নের জন্য যে
@@ -3517,7 +4074,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                     ></TextInput>
                   </View>
                 </View>
-                <View style={{ flexDirection: "row" }}>
+                <View style={{ flexDirection: "row", marginTop: 20 }}>
                   <View style={{ flex: 1, padding: 2 }}>
                     <Text>কিভাবে করবেন ঃ</Text>
                   </View>
@@ -3927,7 +4484,7 @@ export default class BanglaClassObservationScreen extends React.Component {
             </Card>
           </View>
 
-          {/* <View style={{ padding: 10 }}>
+          <View style={{ padding: 10 }}>
             <Text style={styles.bigRedText}>শিক্ষকের অবস্থা</Text>
             <Card style={{ padding: 10, margin: 10, flex: 1 }}>
               <View style={{ padding: 5 }}>
@@ -3956,7 +4513,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                 </View>
               </View>
             </Card>
-          </View> */}
+          </View>
 
           <View style={{ padding: 10 }}>
             <TouchableOpacity

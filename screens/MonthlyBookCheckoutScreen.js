@@ -911,8 +911,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
       visitorOffice: this.state.pickerVisitorOffice,
       lpo: this.state.pickerLPO.employeeRegId,
       lf: this.state.pickerLF.employeeRegId,
-      lpoName: this.state.pickerLPOName.name,
-      lfName: this.state.pickerLFName.name,
+      lpoName: this.state.pickerLPO.name,
+      lfName: this.state.pickerLF.name,
       school: this.state.pickerSchool,
       headTeacher: this.state.pickerHeadTeacher,
       gender: this.state.pickerGender,
@@ -1553,7 +1553,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"January"} value={"January"} />
                     <Picker.Item label={"February"} value={"February"} />
-                    <Picker.Item label={"March"} value={"Dhaka LP Program"} />
+                    <Picker.Item label={"March"} value={"March"} />
                     <Picker.Item label={"April"} value={"April"} />
                     <Picker.Item label={"May"} value={"May"} />
                     <Picker.Item label={"June"} value={"June"} />

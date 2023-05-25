@@ -894,7 +894,7 @@ export default class OverallSchoolObservationScreen extends React.Component {
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"January"} value={"January"} />
                     <Picker.Item label={"February"} value={"February"} />
-                    <Picker.Item label={"March"} value={"Dhaka LP Program"} />
+                    <Picker.Item label={"March"} value={"March"} />
                     <Picker.Item label={"April"} value={"April"} />
                     <Picker.Item label={"May"} value={"May"} />
                     <Picker.Item label={"June"} value={"June"} />
@@ -5040,7 +5040,7 @@ export default class OverallSchoolObservationScreen extends React.Component {
                     ></TextInput>
                   </View>
                 </View>
-                <View style={{ flexDirection: "row" }}>
+                <View style={{ flexDirection: "row", marginTop: 20 }}>
                   <View style={{ flex: 1, padding: 2 }}>
                     <Text>
                       ২/৩ টি নম্বরসহ উল্লেখ করুন যেখানে প্রধান শিক্ষক উন্নয়নের
@@ -5121,7 +5121,7 @@ export default class OverallSchoolObservationScreen extends React.Component {
                     ></TextInput>
                   </View>
                 </View>
-                <View style={{ flexDirection: "row" }}>
+                <View style={{ flexDirection: "row", marginTop: 20 }}>
                   <View style={{ flex: 1, padding: 2 }}>
                     <Text>কিভাবে করবেন ঃ</Text>
                   </View>

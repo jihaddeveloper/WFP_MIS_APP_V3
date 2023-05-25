@@ -22,6 +22,7 @@ import LibraryReadingActivitiesObservationScreen from "./screens/LibraryReadingA
 import MonthlyBookCheckoutScreen from "./screens/MonthlyBookCheckoutScreen";
 import MonthlyBookCheckoutCommScreen from "./screens/MonthlyBookCheckoutCommunityScreen";
 import OverallSchoolObservationScreen from "./screens/OverallSchoolObservationScreen";
+import PrePrimaryClassScreen from "./screens/PrePrimaryClassScreen";
 import HomeScreen2 from "./screens/HomeScreen2";
 import LoginScreen2 from "./screens/LoginScreen2";
 
@@ -84,6 +85,13 @@ export default function App() {
           component={OverallSchoolObservationScreen}
           options={{
             title: "Overall School Observation Form", //Set Header Title
+          }}
+        />
+        <Stack.Screen
+          name="PrePrimaryClass"
+          component={PrePrimaryClassScreen}
+          options={{
+            title: "PrePrimary Class Observation Form", //Set Header Title
           }}
         />
         <Stack.Screen

@@ -132,6 +132,17 @@ function HomeScreen({ navigation }) {
             </View>
           </View>
         </View>
+        <View style={{ flexDirection: "row" }}>
+          <View style={{ flex: 1, padding: 2 }}>
+            <View>
+              <Button
+                title="শ্রেণিকক্ষ কার্যক্রম  প্রাক-প্রাথমিক"
+                onPress={() => navigation.navigate("PrePrimaryClass")}
+              ></Button>
+            </View>
+          </View>
+          <View style={{ flex: 1, padding: 2 }}></View>
+        </View>
       </Card>
 
       <View>
