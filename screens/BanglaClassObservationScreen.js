@@ -510,7 +510,7 @@ export default class BanglaClassObservationScreen extends React.Component {
   };
   // Get All Bangla Indicator
 
-  // Get All Book-checkout Data for school
+  // Get All Bangla Class Data for school
   getAllBanglaClassObservation = async () => {
     try {
       const response = await axios(
@@ -537,9 +537,9 @@ export default class BanglaClassObservationScreen extends React.Component {
       console.log(error);
     }
   };
-  // Get All Book-checkout Data for school
+  // Get All Bangla Class Data for school
 
-  // Register new book-checkout data
+  // Register new Bangla Class data
   saveBanglaClassObservation = async () => {
     const newBanglaClass = {
       date: this.state.date,
@@ -791,7 +791,7 @@ export default class BanglaClassObservationScreen extends React.Component {
       // Send data to API
     }
   };
-  // Register new bangla class data
+  // Register new Bangla Class data
 
   render() {
     // For Datepicker
@@ -1182,7 +1182,7 @@ export default class BanglaClassObservationScreen extends React.Component {
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     {this.state.allEmployee
                       .filter((item) => {
-                        return item.designation == "LPO";
+                        return item.designation.includes("LPO");
                       })
                       .map((item) => {
                         return (

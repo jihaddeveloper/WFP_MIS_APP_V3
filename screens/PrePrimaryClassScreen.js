@@ -42,17 +42,17 @@ export default class PrePrimaryClassScreen extends React.Component {
       allOffice: [],
       allDesignation: [],
       allLibraryIndicator: [],
-      allBanglaIndicator: [],
+      allPreprimaryIndicator: [],
       allLibraryObservationData: [],
-      allBanglaClassObservationData: [],
+      allPreprimaryClassObservationData: [],
       //Preloaded Data
 
-      // previous visit data of the bangla class
+      // previous visit data of the PrePrimary class
       preMonthData: [],
-      // previous visit data of the bangla class
+      // previous visit data of the PrePrimary class
 
       // Duplicate data check
-      duplicateBanglaClassObservationData: [],
+      duplicatePreprimaryClassObservationData: [],
       // Duplicate data check
 
       //button status
@@ -178,8 +178,8 @@ export default class PrePrimaryClassScreen extends React.Component {
     this.getAllSchool();
     this.getAllEmployee();
     this.getAllDesignation();
-    this.getAllBanglaIndicator();
-    this.getAllBanglaClassObservation();
+    this.getAllPreprimaryIndicator();
+    this.getAllPreprimaryClassObservation();
   }
   //Load data from server
 
@@ -275,32 +275,32 @@ export default class PrePrimaryClassScreen extends React.Component {
       lastFollowupTopic2: "",
       lastFollowupTopic3: "",
 
-      ind1_1UsingBigbookStatus: "",
-      ind1_1UsingBigbookNotes: "",
+      ind11UsingBigbookStatus: "",
+      ind11UsingBigbookNotes: "",
 
-      ind1_2PictureDiscussionStatus: "",
-      ind1_2PictureDiscussionNotes: "",
+      ind12PictureDiscussionStatus: "",
+      ind12PictureDiscussionNotes: "",
 
-      ind1_3FollowedInstructionStatus: "",
-      ind1_3FollowedInstructionNotes: "",
+      ind13FollowedInstructionStatus: "",
+      ind13FollowedInstructionNotes: "",
 
-      ind2_1UsingTalkingChartStatus: "",
-      ind2_1UsingTalkingChartNotes: "",
+      ind21UsingTalkingChartStatus: "",
+      ind21UsingTalkingChartNotes: "",
 
-      ind2_2UsingPictureELementStatus: "",
-      ind2_2UsingPictureELementNotes: "",
+      ind22UsingPictureElementStatus: "",
+      ind22UsingPictureElementNotes: "",
 
-      ind2_3FollowedInstructionStepStatus: "",
-      ind2_3FollowedInstructionStepNotes: "",
+      ind23FollowedInstructionStepStatus: "",
+      ind23FollowedInstructionStepNotes: "",
 
-      ind3_1LaguageGameStatus: "",
-      ind3_1LaguageGameNotes: "",
+      ind31LanguageGameStatus: "",
+      ind31LanguageGameNotes: "",
 
-      ind3_2LaguageGameIWeYouStatus: "",
-      ind3_2LaguageGameIWeYouNotes: "",
+      ind32LanguageGameIWeYouStatus: "",
+      ind32LanguageGameIWeYouNotes: "",
 
-      ind3_3LaguageGameExtraStatus: "",
-      ind3_3LaguageGameExtraNotes: "",
+      ind33LanguageGameExtraStatus: "",
+      ind33LanguageGameExtraNotes: "",
 
       bestPracticeInd1: "",
       bestPracticeInd2: "",
@@ -426,33 +426,11 @@ export default class PrePrimaryClassScreen extends React.Component {
   };
   // Get All Designation
 
-  // Get All Bangla Indicator
-  getAllBanglaIndicator = async () => {
+  // Get All Preprimary Indicator
+  getAllPreprimaryIndicator = async () => {
     try {
       const response = await axios(
-        "http://118.179.80.51:8080/api/v1/bangla-indicator",
-        {
-          method: "GET",
-          mode: "no-cors",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      this.setState({ allBanglaIndicator: response.data, isLoading: false });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  // Get All Bangla Indicator
-
-  // Get All Book-checkout Data for school
-  getAllBanglaClassObservation = async () => {
-    try {
-      const response = await axios(
-        "http://118.179.80.51:8080/api/v1/bangla-class",
+        "http://118.179.80.51:8080/api/v1/preprimary-indicator",
         {
           method: "GET",
           mode: "no-cors",
@@ -464,22 +442,47 @@ export default class PrePrimaryClassScreen extends React.Component {
       );
 
       this.setState({
-        allBanglaClassObservationData: response.data,
+        allPreprimaryIndicator: response.data,
+        isLoading: false,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // Get All Preprimary Indicator
+
+  // Get All Preprimary Data for school
+  getAllPreprimaryClassObservation = async () => {
+    try {
+      const response = await axios(
+        "http://118.179.80.51:8080/api/v1/preprimary",
+        {
+          method: "GET",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      this.setState({
+        allPreprimaryClassObservationData: response.data,
         isLoading: false,
       });
       console.log(
-        "All Bangla-class Data: ",
-        this.state.allBanglaClassObservationData.length
+        "allPreprimaryClassObservationData Data: ",
+        this.state.allPreprimaryClassObservationData.length
       );
     } catch (error) {
       console.log(error);
     }
   };
-  // Get All Book-checkout Data for school
+  // Get All Preprimary Data for school
 
-  // Register new book-checkout data
-  saveBanglaClassObservation = async () => {
-    const newBanglaClass = {
+  // Register new Preprimary Class data
+  savePreprimaryClassObservation = async () => {
+    const newPreprimary = {
       date: this.state.date,
       month: this.state.pickerMonth,
       year: this.state.pickerYear,
@@ -503,14 +506,19 @@ export default class PrePrimaryClassScreen extends React.Component {
       section: this.state.section,
       classStartTime: this.state.classStartTime,
       classEndTime: this.state.classEndTime,
-      contentName: this.state.teachingTopic,
+
+      contentName1: this.state.teachingTopic1,
+      contentName2: this.state.teachingTopic2,
+      contentName3: this.state.teachingTopic3,
+
+      periodMonth: this.state.teachingMonth,
+      periodWeek: this.state.teachingWeek,
       periodDay: this.state.teachingDay,
-      totalAdmittedStudent: this.state.studentTotal,
-      totalAdmittedGirl: this.state.studentGirl,
-      totalAdmittedBoy: this.state.studentBoy,
-      totalPresentStudent: this.state.presentTotal,
-      totalPresentGirl: this.state.presentGirl,
-      totalPresentBoy: this.state.presentBoy,
+
+      totalPresentStudent: this.state.studentTotal,
+      totalPresentGirl: this.state.studentGirl,
+      totalPresentBoy: this.state.studentBoy,
+      totalPresentSpecial: this.state.studentSpecial,
 
       note: this.state.note,
 
@@ -518,44 +526,34 @@ export default class PrePrimaryClassScreen extends React.Component {
       lastFollowupTopic2: this.state.lastFollowupTopic2,
       lastFollowupTopic3: this.state.lastFollowupTopic3,
 
-      ind1PhonemicAwarenessStatus: this.state.ind1PhonemicAwarenessStatus,
-      ind1PhonemicAwarenessNotes: this.state.ind1PhonemicAwarenessNotes,
+      ind11UsingBigbookStatus: this.state.ind11UsingBigbookStatus,
+      ind11UsingBigbookNotes: this.state.ind11UsingBigbookNotes,
 
-      ind2LetterIdentificationStatus: this.state.ind2LetterIdentificationStatus,
-      ind2LetterIdentificationNotes: this.state.ind2LetterIdentificationNotes,
+      ind12PictureDiscussionStatus: this.state.ind12PictureDiscussionStatus,
+      ind12PictureDiscussionNotes: this.state.ind12PictureDiscussionNotes,
 
-      ind3VocabularyIdentificationStatus:
-        this.state.ind3VocabularyIdentificationStatus,
-      ind3VocabularyIdentificationNotes:
-        this.state.ind3VocabularyIdentificationNotes,
+      ind13FollowedInstructionStatus: this.state.ind13FollowedInstructionStatus,
+      ind13FollowedInstructionNotes: this.state.ind13FollowedInstructionNotes,
 
-      ind4FluencyIdentificationStatus:
-        this.state.ind4FluencyIdentificationStatus,
-      ind4FluencyIdentificationNotes: this.state.ind4FluencyIdentificationNotes,
+      ind21UsingTalkingChartStatus: this.state.ind21UsingTalkingChartStatus,
+      ind21UsingTalkingChartNotes: this.state.ind21UsingTalkingChartNotes,
 
-      ind5ComprehensionStatus: this.state.ind5ComprehensionStatus,
-      ind5ComprehensionNotes: this.state.ind5ComprehensionNotes,
+      ind22UsingPictureElementStatus: this.state.ind22UsingPictureElementStatus,
+      ind22UsingPictureElementNotes: this.state.ind22UsingPictureElementNotes,
 
-      ind6WritingActivitiesStatus: this.state.ind6WritingActivitiesStatus,
-      ind6WritingActivitiesNotes: this.state.ind6WritingActivitiesNotes,
+      ind23FollowedInstructionStepStatus:
+        this.state.ind23FollowedInstructionStepStatus,
+      ind23FollowedInstructionStepNotes:
+        this.state.ind23FollowedInstructionStepNotes,
 
-      ind7IDoWeDoYouDoStatus: this.state.ind7IDoWeDoYouDoStatus,
-      ind7IDoWeDoYouDoNotes: this.state.ind7IDoWeDoYouDoNotes,
+      ind31LanguageGameStatus: this.state.ind31LanguageGameStatus,
+      ind31LanguageGameNotes: this.state.ind31LanguageGameNotes,
 
-      ind8GroupWorkStatus: this.state.ind8GroupWorkStatus,
-      ind8GroupWorkNotes: this.state.ind8GroupWorkNotes,
+      ind32LanguageGameIWeYouStatus: this.state.ind32LanguageGameIWeYouStatus,
+      ind32LanguageGameIWeYouNotes: this.state.ind32LanguageGameIWeYouNotes,
 
-      ind9TimeOnTaskStatus: this.state.ind9TimeOnTaskStatus,
-      ind9TimeOnTaskNotes: this.state.ind9TimeOnTaskNotes,
-
-      ind10UseTeachingAidStatus: this.state.ind10UseTeachingAidStatus,
-      ind10UseTeachingAidNotes: this.state.ind10UseTeachingAidNotes,
-
-      ind11ContinuityOfLessonsStatus: this.state.ind11ContinuityOfLessonsStatus,
-      ind11ContinuityOfLessonsNotes: this.state.ind11ContinuityOfLessonsNotes,
-
-      ind12AssessmentStatus: this.state.ind12AssessmentStatus,
-      ind12AssessmentNotes: this.state.ind12AssessmentNotes,
+      ind33LanguageGameExtraStatus: this.state.ind33LanguageGameExtraStatus,
+      ind33LanguageGameExtraNotes: this.state.ind33LanguageGameExtraNotes,
 
       bestPracticeInd1: this.state.bestPracticeInd1,
       bestPracticeInd2: this.state.bestPracticeInd2,
@@ -569,38 +567,14 @@ export default class PrePrimaryClassScreen extends React.Component {
       agreedStatement1: this.state.agreedStatement1,
       agreedStatement2: this.state.agreedStatement2,
 
-      question1: this.state.question1,
-
-      student1: this.state.student1,
-      student2: this.state.student2,
-      student3: this.state.student3,
-      student4: this.state.student4,
-      student5: this.state.student5,
-
-      noRightFor1: this.state.noRightFor1,
-      noWrongFor1: this.state.noWrongFor1,
-      totalFor1: this.state.totalFor1,
-      noRightFor2: this.state.noRightFor2,
-      noWrongFor2: this.state.noWrongFor2,
-      totalFor2: this.state.totalFor2,
-      noRightFor3: this.state.noRightFor3,
-      noWrongFor3: this.state.noWrongFor3,
-      totalFor3: this.state.totalFor3,
-      noRightFor4: this.state.noRightFor4,
-      noWrongFor4: this.state.noWrongFor4,
-      totalFor4: this.state.totalFor4,
-      noRightFor5: this.state.noRightFor5,
-      noWrongFor5: this.state.noWrongFor5,
-      totalFor5: this.state.totalFor5,
-
       teacherStatus: this.state.teacherStatus,
     };
 
     // Validation
 
     //Check duplicate data
-    this.state.duplicateBanglaClassObservationData =
-      this.state.allBanglaClassObservationData.filter((item) => {
+    this.state.duplicatePreprimaryClassObservationData =
+      this.state.allPreprimaryClassObservationData.filter((item) => {
         return (
           item.date == this.state.date.toISOString().slice(0, 10) &&
           item.visitNo == this.state.visitNo &&
@@ -613,8 +587,8 @@ export default class PrePrimaryClassScreen extends React.Component {
       });
 
     console.log(
-      "Duplicate Bangla Class Data: ",
-      this.state.duplicateBanglaClassObservationData.length
+      "Duplicate Preprimary Class Data: ",
+      this.state.duplicatePreprimaryClassObservationData.length
     );
     //Check duplicate data
 
@@ -691,7 +665,7 @@ export default class PrePrimaryClassScreen extends React.Component {
       this.setState({ dateError: "Date can not be empty" });
       Alert.alert("Alert", "Section can not be empty");
       return;
-    } else if (this.state.duplicateBanglaClassObservationData.length > 0) {
+    } else if (this.state.duplicatePreprimaryClassObservationData.length > 0) {
       this.setState({ dateError: "Date can not be empty" });
       Alert.alert("Alert", "Duplicate Bangla Class data !!");
       return;
@@ -702,7 +676,7 @@ export default class PrePrimaryClassScreen extends React.Component {
       // Send data to API
       try {
         let response = await fetch(
-          "http://118.179.80.51:8080/api/v1/bangla-class",
+          "http://118.179.80.51:8080/api/v1/preprimary",
           {
             method: "POST",
             mode: "no-cors",
@@ -710,15 +684,15 @@ export default class PrePrimaryClassScreen extends React.Component {
               Accept: "application/json",
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(newBanglaClass),
+            body: JSON.stringify(newPreprimary),
           }
         );
         if (response.status >= 200 && response.status < 300) {
           Alert.alert(
             "Alert",
-            "Bangla class obsvervatio data saved successfully!!!"
+            "Preprimary class obsvervatio data saved successfully!!!"
           );
-          this.getAllBanglaClassObservation();
+          this.getAllPreprimaryClassObservation();
           this.updateToInitialState();
         } else {
           Alert.alert("Alert", "Error there !!!");
@@ -729,7 +703,7 @@ export default class PrePrimaryClassScreen extends React.Component {
       // Send data to API
     }
   };
-  // Register new bangla class data
+  // Register new Preprimary Class data
 
   render() {
     // For Datepicker
@@ -1134,7 +1108,7 @@ export default class PrePrimaryClassScreen extends React.Component {
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     {this.state.allEmployee
                       .filter((item) => {
-                        return item.designation == "LPO";
+                        return item.designation.includes("LPO");
                       })
                       .map((item) => {
                         return (
@@ -1311,7 +1285,7 @@ export default class PrePrimaryClassScreen extends React.Component {
 
                       this.setState({
                         preMonthData:
-                          this.state.allBanglaClassObservationData.filter(
+                          this.state.allPreprimaryClassObservationData.filter(
                             (item) => {
                               return (
                                 item.visitNo ===
@@ -1654,7 +1628,7 @@ export default class PrePrimaryClassScreen extends React.Component {
                     placeholder=""
                     editable={true}
                     onChangeText={(text) =>
-                      this.setState({ teachingTopic: text })
+                      this.setState({ teachingTopic1: text })
                     }
                     value={this.state.teachingTopic1 + ""}
                   />
@@ -2041,40 +2015,56 @@ export default class PrePrimaryClassScreen extends React.Component {
                             });
 
                             // Set teacher status
-                            // if (
-                            //   this.state.ind1PhonemicAwarenessStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind4FluencyIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind6WritingActivitiesStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                            //   this.state.ind11ContinuityOfLessonsStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 3",
-                            //   });
-                            // } else if (
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 2",
-                            //   });
-                            // } else {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 1",
-                            //   });
-                            // }
+                            if (
+                              (this.state.ind11UsingBigbookStatus === "Yes" ||
+                                this.state.ind11UsingBigbookStatus === "N/A") &&
+                              (this.state.ind12PictureDiscussionStatus ===
+                                "Yes" ||
+                                this.state.ind12PictureDiscussionStatus ===
+                                  "N/A") &&
+                              this.state.ind21UsingTalkingChartStatus ===
+                                "Yes" &&
+                              (this.state.ind22UsingPictureElementStatus ===
+                                "Yes" ||
+                                this.state.ind22UsingPictureElementStatus ===
+                                  "N/A") &&
+                              this.state.ind31LanguageGameStatus === "Yes" &&
+                              (this.state.ind31LanguageGameStatus === "Yes" ||
+                                this.state.ind31LanguageGameStatus === "N/A")
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              (this.state.ind11UsingBigbookStatus === "Yes" ||
+                                this.state.ind11UsingBigbookStatus === "N/A") &&
+                              this.state.ind21UsingTalkingChartStatus ===
+                                "Yes" &&
+                              this.state.ind31LanguageGameStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else if (
+                              (this.state.ind11UsingBigbookStatus === "No" ||
+                                this.state.ind11UsingBigbookStatus ===
+                                  "Partial") &&
+                              (this.state.ind21UsingTalkingChartStatus ===
+                                "No" ||
+                                this.state.ind21UsingTalkingChartStatus ===
+                                  "Partial") &&
+                              (this.state.ind31LanguageGameStatus === "No" ||
+                                this.state.ind31LanguageGameStatus ===
+                                  "Partial")
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2142,40 +2132,56 @@ export default class PrePrimaryClassScreen extends React.Component {
                             });
 
                             // Set teacher status
-                            // if (
-                            //   this.state.ind1PhonemicAwarenessStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind4FluencyIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind6WritingActivitiesStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                            //   this.state.ind11ContinuityOfLessonsStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 3",
-                            //   });
-                            // } else if (
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 2",
-                            //   });
-                            // } else {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 1",
-                            //   });
-                            // }
+                            if (
+                              (this.state.ind11UsingBigbookStatus === "Yes" ||
+                                this.state.ind11UsingBigbookStatus === "N/A") &&
+                              (this.state.ind12PictureDiscussionStatus ===
+                                "Yes" ||
+                                this.state.ind12PictureDiscussionStatus ===
+                                  "N/A") &&
+                              this.state.ind21UsingTalkingChartStatus ===
+                                "Yes" &&
+                              (this.state.ind22UsingPictureElementStatus ===
+                                "Yes" ||
+                                this.state.ind22UsingPictureElementStatus ===
+                                  "N/A") &&
+                              this.state.ind31LanguageGameStatus === "Yes" &&
+                              (this.state.ind31LanguageGameStatus === "Yes" ||
+                                this.state.ind31LanguageGameStatus === "N/A")
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              (this.state.ind11UsingBigbookStatus === "Yes" ||
+                                this.state.ind11UsingBigbookStatus === "N/A") &&
+                              this.state.ind21UsingTalkingChartStatus ===
+                                "Yes" &&
+                              this.state.ind31LanguageGameStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else if (
+                              (this.state.ind11UsingBigbookStatus === "No" ||
+                                this.state.ind11UsingBigbookStatus ===
+                                  "Partial") &&
+                              (this.state.ind21UsingTalkingChartStatus ===
+                                "No" ||
+                                this.state.ind21UsingTalkingChartStatus ===
+                                  "Partial") &&
+                              (this.state.ind31LanguageGameStatus === "No" ||
+                                this.state.ind31LanguageGameStatus ===
+                                  "Partial")
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2246,40 +2252,56 @@ export default class PrePrimaryClassScreen extends React.Component {
                             });
 
                             // Set teacher status
-                            // if (
-                            //   this.state.ind1PhonemicAwarenessStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind4FluencyIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind6WritingActivitiesStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                            //   this.state.ind11ContinuityOfLessonsStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 3",
-                            //   });
-                            // } else if (
-                            //   this.state.ind2LetterIdentificationStatus ===
-                            //     "Yes" &&
-                            //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                            //   this.state.ind8GroupWorkStatus === "Yes" &&
-                            //   this.state.ind12AssessmentStatus === "Yes"
-                            // ) {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 2",
-                            //   });
-                            // } else {
-                            //   this.setState({
-                            //     teacherStatus: "Priority 1",
-                            //   });
-                            // }
+                            if (
+                              (this.state.ind11UsingBigbookStatus === "Yes" ||
+                                this.state.ind11UsingBigbookStatus === "N/A") &&
+                              (this.state.ind12PictureDiscussionStatus ===
+                                "Yes" ||
+                                this.state.ind12PictureDiscussionStatus ===
+                                  "N/A") &&
+                              this.state.ind21UsingTalkingChartStatus ===
+                                "Yes" &&
+                              (this.state.ind22UsingPictureElementStatus ===
+                                "Yes" ||
+                                this.state.ind22UsingPictureElementStatus ===
+                                  "N/A") &&
+                              this.state.ind31LanguageGameStatus === "Yes" &&
+                              (this.state.ind31LanguageGameStatus === "Yes" ||
+                                this.state.ind31LanguageGameStatus === "N/A")
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              (this.state.ind11UsingBigbookStatus === "Yes" ||
+                                this.state.ind11UsingBigbookStatus === "N/A") &&
+                              this.state.ind21UsingTalkingChartStatus ===
+                                "Yes" &&
+                              this.state.ind31LanguageGameStatus === "Yes"
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 2",
+                              });
+                            } else if (
+                              (this.state.ind11UsingBigbookStatus === "No" ||
+                                this.state.ind11UsingBigbookStatus ===
+                                  "Partial") &&
+                              (this.state.ind21UsingTalkingChartStatus ===
+                                "No" ||
+                                this.state.ind21UsingTalkingChartStatus ===
+                                  "Partial") &&
+                              (this.state.ind31LanguageGameStatus === "No" ||
+                                this.state.ind31LanguageGameStatus ===
+                                  "Partial")
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            } else {
+                              this.setState({
+                                teacherStatus: "Priority 1",
+                              });
+                            }
                             // Set teacher status
                           }}
                           itemStyle={{ color: "white" }}
@@ -2360,40 +2382,52 @@ export default class PrePrimaryClassScreen extends React.Component {
                           });
 
                           // Set teacher status
-                          // if (
-                          //   this.state.ind1PhonemicAwarenessStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind2LetterIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind4FluencyIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind6WritingActivitiesStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                          //   this.state.ind8GroupWorkStatus === "Yes" &&
-                          //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                          //   this.state.ind11ContinuityOfLessonsStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind12AssessmentStatus === "Yes"
-                          // ) {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 3",
-                          //   });
-                          // } else if (
-                          //   this.state.ind2LetterIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                          //   this.state.ind8GroupWorkStatus === "Yes" &&
-                          //   this.state.ind12AssessmentStatus === "Yes"
-                          // ) {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 2",
-                          //   });
-                          // } else {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 1",
-                          //   });
-                          // }
+                          if (
+                            (this.state.ind11UsingBigbookStatus === "Yes" ||
+                              this.state.ind11UsingBigbookStatus === "N/A") &&
+                            (this.state.ind12PictureDiscussionStatus ===
+                              "Yes" ||
+                              this.state.ind12PictureDiscussionStatus ===
+                                "N/A") &&
+                            this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                            (this.state.ind22UsingPictureElementStatus ===
+                              "Yes" ||
+                              this.state.ind22UsingPictureElementStatus ===
+                                "N/A") &&
+                            this.state.ind31LanguageGameStatus === "Yes" &&
+                            (this.state.ind31LanguageGameStatus === "Yes" ||
+                              this.state.ind31LanguageGameStatus === "N/A")
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 3",
+                            });
+                          } else if (
+                            (this.state.ind11UsingBigbookStatus === "Yes" ||
+                              this.state.ind11UsingBigbookStatus === "N/A") &&
+                            this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                            this.state.ind31LanguageGameStatus === "Yes"
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 2",
+                            });
+                          } else if (
+                            (this.state.ind11UsingBigbookStatus === "No" ||
+                              this.state.ind11UsingBigbookStatus ===
+                                "Partial") &&
+                            (this.state.ind21UsingTalkingChartStatus === "No" ||
+                              this.state.ind21UsingTalkingChartStatus ===
+                                "Partial") &&
+                            (this.state.ind31LanguageGameStatus === "No" ||
+                              this.state.ind31LanguageGameStatus === "Partial")
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 1",
+                            });
+                          } else {
+                            this.setState({
+                              teacherStatus: "Priority 1",
+                            });
+                          }
                           // Set teacher status
                         }}
                         itemStyle={{ color: "white" }}
@@ -2464,40 +2498,52 @@ export default class PrePrimaryClassScreen extends React.Component {
                           });
 
                           // Set teacher status
-                          // if (
-                          //   this.state.ind1PhonemicAwarenessStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind2LetterIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind4FluencyIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind6WritingActivitiesStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                          //   this.state.ind8GroupWorkStatus === "Yes" &&
-                          //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                          //   this.state.ind11ContinuityOfLessonsStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind12AssessmentStatus === "Yes"
-                          // ) {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 3",
-                          //   });
-                          // } else if (
-                          //   this.state.ind2LetterIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                          //   this.state.ind8GroupWorkStatus === "Yes" &&
-                          //   this.state.ind12AssessmentStatus === "Yes"
-                          // ) {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 2",
-                          //   });
-                          // } else {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 1",
-                          //   });
-                          // }
+                          if (
+                            (this.state.ind11UsingBigbookStatus === "Yes" ||
+                              this.state.ind11UsingBigbookStatus === "N/A") &&
+                            (this.state.ind12PictureDiscussionStatus ===
+                              "Yes" ||
+                              this.state.ind12PictureDiscussionStatus ===
+                                "N/A") &&
+                            this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                            (this.state.ind22UsingPictureElementStatus ===
+                              "Yes" ||
+                              this.state.ind22UsingPictureElementStatus ===
+                                "N/A") &&
+                            this.state.ind31LanguageGameStatus === "Yes" &&
+                            (this.state.ind31LanguageGameStatus === "Yes" ||
+                              this.state.ind31LanguageGameStatus === "N/A")
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 3",
+                            });
+                          } else if (
+                            (this.state.ind11UsingBigbookStatus === "Yes" ||
+                              this.state.ind11UsingBigbookStatus === "N/A") &&
+                            this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                            this.state.ind31LanguageGameStatus === "Yes"
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 2",
+                            });
+                          } else if (
+                            (this.state.ind11UsingBigbookStatus === "No" ||
+                              this.state.ind11UsingBigbookStatus ===
+                                "Partial") &&
+                            (this.state.ind21UsingTalkingChartStatus === "No" ||
+                              this.state.ind21UsingTalkingChartStatus ===
+                                "Partial") &&
+                            (this.state.ind31LanguageGameStatus === "No" ||
+                              this.state.ind31LanguageGameStatus === "Partial")
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 1",
+                            });
+                          } else {
+                            this.setState({
+                              teacherStatus: "Priority 1",
+                            });
+                          }
                           // Set teacher status
                         }}
                         itemStyle={{ color: "white" }}
@@ -2568,40 +2614,52 @@ export default class PrePrimaryClassScreen extends React.Component {
                           });
 
                           // Set teacher status
-                          // if (
-                          //   this.state.ind1PhonemicAwarenessStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind2LetterIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind4FluencyIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind6WritingActivitiesStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                          //   this.state.ind8GroupWorkStatus === "Yes" &&
-                          //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                          //   this.state.ind11ContinuityOfLessonsStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind12AssessmentStatus === "Yes"
-                          // ) {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 3",
-                          //   });
-                          // } else if (
-                          //   this.state.ind2LetterIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                          //   this.state.ind8GroupWorkStatus === "Yes" &&
-                          //   this.state.ind12AssessmentStatus === "Yes"
-                          // ) {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 2",
-                          //   });
-                          // } else {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 1",
-                          //   });
-                          // }
+                          if (
+                            (this.state.ind11UsingBigbookStatus === "Yes" ||
+                              this.state.ind11UsingBigbookStatus === "N/A") &&
+                            (this.state.ind12PictureDiscussionStatus ===
+                              "Yes" ||
+                              this.state.ind12PictureDiscussionStatus ===
+                                "N/A") &&
+                            this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                            (this.state.ind22UsingPictureElementStatus ===
+                              "Yes" ||
+                              this.state.ind22UsingPictureElementStatus ===
+                                "N/A") &&
+                            this.state.ind31LanguageGameStatus === "Yes" &&
+                            (this.state.ind31LanguageGameStatus === "Yes" ||
+                              this.state.ind31LanguageGameStatus === "N/A")
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 3",
+                            });
+                          } else if (
+                            (this.state.ind11UsingBigbookStatus === "Yes" ||
+                              this.state.ind11UsingBigbookStatus === "N/A") &&
+                            this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                            this.state.ind31LanguageGameStatus === "Yes"
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 2",
+                            });
+                          } else if (
+                            (this.state.ind11UsingBigbookStatus === "No" ||
+                              this.state.ind11UsingBigbookStatus ===
+                                "Partial") &&
+                            (this.state.ind21UsingTalkingChartStatus === "No" ||
+                              this.state.ind21UsingTalkingChartStatus ===
+                                "Partial") &&
+                            (this.state.ind31LanguageGameStatus === "No" ||
+                              this.state.ind31LanguageGameStatus === "Partial")
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 1",
+                            });
+                          } else {
+                            this.setState({
+                              teacherStatus: "Priority 1",
+                            });
+                          }
                           // Set teacher status
                         }}
                         itemStyle={{ color: "white" }}
@@ -2682,40 +2740,52 @@ export default class PrePrimaryClassScreen extends React.Component {
                           });
 
                           // Set teacher status
-                          // if (
-                          //   this.state.ind1PhonemicAwarenessStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind2LetterIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind4FluencyIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind6WritingActivitiesStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                          //   this.state.ind8GroupWorkStatus === "Yes" &&
-                          //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                          //   this.state.ind11ContinuityOfLessonsStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind12AssessmentStatus === "Yes"
-                          // ) {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 3",
-                          //   });
-                          // } else if (
-                          //   this.state.ind2LetterIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                          //   this.state.ind8GroupWorkStatus === "Yes" &&
-                          //   this.state.ind12AssessmentStatus === "Yes"
-                          // ) {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 2",
-                          //   });
-                          // } else {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 1",
-                          //   });
-                          // }
+                          if (
+                            (this.state.ind11UsingBigbookStatus === "Yes" ||
+                              this.state.ind11UsingBigbookStatus === "N/A") &&
+                            (this.state.ind12PictureDiscussionStatus ===
+                              "Yes" ||
+                              this.state.ind12PictureDiscussionStatus ===
+                                "N/A") &&
+                            this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                            (this.state.ind22UsingPictureElementStatus ===
+                              "Yes" ||
+                              this.state.ind22UsingPictureElementStatus ===
+                                "N/A") &&
+                            this.state.ind31LanguageGameStatus === "Yes" &&
+                            (this.state.ind31LanguageGameStatus === "Yes" ||
+                              this.state.ind31LanguageGameStatus === "N/A")
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 3",
+                            });
+                          } else if (
+                            (this.state.ind11UsingBigbookStatus === "Yes" ||
+                              this.state.ind11UsingBigbookStatus === "N/A") &&
+                            this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                            this.state.ind31LanguageGameStatus === "Yes"
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 2",
+                            });
+                          } else if (
+                            (this.state.ind11UsingBigbookStatus === "No" ||
+                              this.state.ind11UsingBigbookStatus ===
+                                "Partial") &&
+                            (this.state.ind21UsingTalkingChartStatus === "No" ||
+                              this.state.ind21UsingTalkingChartStatus ===
+                                "Partial") &&
+                            (this.state.ind31LanguageGameStatus === "No" ||
+                              this.state.ind31LanguageGameStatus === "Partial")
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 1",
+                            });
+                          } else {
+                            this.setState({
+                              teacherStatus: "Priority 1",
+                            });
+                          }
                           // Set teacher status
                         }}
                         itemStyle={{ color: "white" }}
@@ -2784,40 +2854,52 @@ export default class PrePrimaryClassScreen extends React.Component {
                           });
 
                           // Set teacher status
-                          // if (
-                          //   this.state.ind1PhonemicAwarenessStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind2LetterIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind4FluencyIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind6WritingActivitiesStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                          //   this.state.ind8GroupWorkStatus === "Yes" &&
-                          //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                          //   this.state.ind11ContinuityOfLessonsStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind12AssessmentStatus === "Yes"
-                          // ) {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 3",
-                          //   });
-                          // } else if (
-                          //   this.state.ind2LetterIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                          //   this.state.ind8GroupWorkStatus === "Yes" &&
-                          //   this.state.ind12AssessmentStatus === "Yes"
-                          // ) {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 2",
-                          //   });
-                          // } else {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 1",
-                          //   });
-                          // }
+                          if (
+                            (this.state.ind11UsingBigbookStatus === "Yes" ||
+                              this.state.ind11UsingBigbookStatus === "N/A") &&
+                            (this.state.ind12PictureDiscussionStatus ===
+                              "Yes" ||
+                              this.state.ind12PictureDiscussionStatus ===
+                                "N/A") &&
+                            this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                            (this.state.ind22UsingPictureElementStatus ===
+                              "Yes" ||
+                              this.state.ind22UsingPictureElementStatus ===
+                                "N/A") &&
+                            this.state.ind31LanguageGameStatus === "Yes" &&
+                            (this.state.ind31LanguageGameStatus === "Yes" ||
+                              this.state.ind31LanguageGameStatus === "N/A")
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 3",
+                            });
+                          } else if (
+                            (this.state.ind11UsingBigbookStatus === "Yes" ||
+                              this.state.ind11UsingBigbookStatus === "N/A") &&
+                            this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                            this.state.ind31LanguageGameStatus === "Yes"
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 2",
+                            });
+                          } else if (
+                            (this.state.ind11UsingBigbookStatus === "No" ||
+                              this.state.ind11UsingBigbookStatus ===
+                                "Partial") &&
+                            (this.state.ind21UsingTalkingChartStatus === "No" ||
+                              this.state.ind21UsingTalkingChartStatus ===
+                                "Partial") &&
+                            (this.state.ind31LanguageGameStatus === "No" ||
+                              this.state.ind31LanguageGameStatus === "Partial")
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 1",
+                            });
+                          } else {
+                            this.setState({
+                              teacherStatus: "Priority 1",
+                            });
+                          }
                           // Set teacher status
                         }}
                         itemStyle={{ color: "white" }}
@@ -2886,42 +2968,52 @@ export default class PrePrimaryClassScreen extends React.Component {
                             ind33LanguageGameExtraStatus: value,
                           });
 
-                          // Set teacher status
-                          // if (
-                          //   this.state.ind1PhonemicAwarenessStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind2LetterIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind4FluencyIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind6WritingActivitiesStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                          //   this.state.ind8GroupWorkStatus === "Yes" &&
-                          //   this.state.ind10UseTeachingAidStatus === "Yes" &&
-                          //   this.state.ind11ContinuityOfLessonsStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind12AssessmentStatus === "Yes"
-                          // ) {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 3",
-                          //   });
-                          // } else if (
-                          //   this.state.ind2LetterIdentificationStatus ===
-                          //     "Yes" &&
-                          //   this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                          //   this.state.ind8GroupWorkStatus === "Yes" &&
-                          //   this.state.ind12AssessmentStatus === "Yes"
-                          // ) {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 2",
-                          //   });
-                          // } else {
-                          //   this.setState({
-                          //     teacherStatus: "Priority 1",
-                          //   });
-                          // }
-                          // Set teacher status
+                          if (
+                            (this.state.ind11UsingBigbookStatus === "Yes" ||
+                              this.state.ind11UsingBigbookStatus === "N/A") &&
+                            (this.state.ind12PictureDiscussionStatus ===
+                              "Yes" ||
+                              this.state.ind12PictureDiscussionStatus ===
+                                "N/A") &&
+                            this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                            (this.state.ind22UsingPictureElementStatus ===
+                              "Yes" ||
+                              this.state.ind22UsingPictureElementStatus ===
+                                "N/A") &&
+                            this.state.ind31LanguageGameStatus === "Yes" &&
+                            (this.state.ind31LanguageGameStatus === "Yes" ||
+                              this.state.ind31LanguageGameStatus === "N/A")
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 3",
+                            });
+                          } else if (
+                            (this.state.ind11UsingBigbookStatus === "Yes" ||
+                              this.state.ind11UsingBigbookStatus === "N/A") &&
+                            this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                            this.state.ind31LanguageGameStatus === "Yes"
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 2",
+                            });
+                          } else if (
+                            (this.state.ind11UsingBigbookStatus === "No" ||
+                              this.state.ind11UsingBigbookStatus ===
+                                "Partial") &&
+                            (this.state.ind21UsingTalkingChartStatus === "No" ||
+                              this.state.ind21UsingTalkingChartStatus ===
+                                "Partial") &&
+                            (this.state.ind31LanguageGameStatus === "No" ||
+                              this.state.ind31LanguageGameStatus === "Partial")
+                          ) {
+                            this.setState({
+                              teacherStatus: "Priority 1",
+                            });
+                          } else {
+                            this.setState({
+                              teacherStatus: "Priority 1",
+                            });
+                          }
                         }}
                         itemStyle={{ color: "white" }}
                       >
@@ -2986,28 +3078,43 @@ export default class PrePrimaryClassScreen extends React.Component {
 
                         // Set teacher status
                         if (
-                          this.state.ind1PhonemicAwarenessStatus === "Yes" &&
-                          this.state.ind2LetterIdentificationStatus === "Yes" &&
-                          this.state.ind4FluencyIdentificationStatus ===
-                            "Yes" &&
-                          this.state.ind6WritingActivitiesStatus === "Yes" &&
-                          this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                          this.state.ind8GroupWorkStatus === "Yes" &&
-                          this.state.ind10UseTeachingAidStatus === "Yes" &&
-                          this.state.ind11ContinuityOfLessonsStatus === "Yes" &&
-                          this.state.ind12AssessmentStatus === "Yes"
+                          (this.state.ind11UsingBigbookStatus === "Yes" ||
+                            this.state.ind11UsingBigbookStatus === "N/A") &&
+                          (this.state.ind12PictureDiscussionStatus === "Yes" ||
+                            this.state.ind12PictureDiscussionStatus ===
+                              "N/A") &&
+                          this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                          (this.state.ind22UsingPictureElementStatus ===
+                            "Yes" ||
+                            this.state.ind22UsingPictureElementStatus ===
+                              "N/A") &&
+                          this.state.ind31LanguageGameStatus === "Yes" &&
+                          (this.state.ind31LanguageGameStatus === "Yes" ||
+                            this.state.ind31LanguageGameStatus === "N/A")
                         ) {
                           this.setState({
                             teacherStatus: "Priority 3",
                           });
                         } else if (
-                          this.state.ind2LetterIdentificationStatus === "Yes" &&
-                          this.state.ind7IDoWeDoYouDoStatus === "Yes" &&
-                          this.state.ind8GroupWorkStatus === "Yes" &&
-                          this.state.ind12AssessmentStatus === "Yes"
+                          (this.state.ind11UsingBigbookStatus === "Yes" ||
+                            this.state.ind11UsingBigbookStatus === "N/A") &&
+                          this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                          this.state.ind31LanguageGameStatus === "Yes"
                         ) {
                           this.setState({
                             teacherStatus: "Priority 2",
+                          });
+                        } else if (
+                          (this.state.ind11UsingBigbookStatus === "No" ||
+                            this.state.ind11UsingBigbookStatus === "Partial") &&
+                          (this.state.ind21UsingTalkingChartStatus === "No" ||
+                            this.state.ind21UsingTalkingChartStatus ===
+                              "Partial") &&
+                          (this.state.ind31LanguageGameStatus === "No" ||
+                            this.state.ind31LanguageGameStatus === "Partial")
+                        ) {
+                          this.setState({
+                            teacherStatus: "Priority 1",
                           });
                         } else {
                           this.setState({
@@ -3019,7 +3126,7 @@ export default class PrePrimaryClassScreen extends React.Component {
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      {this.state.allBanglaIndicator.map((item) => {
+                      {this.state.allPreprimaryIndicator.map((item) => {
                         return (
                           <Picker.Item
                             key={item.id}
@@ -3050,11 +3157,58 @@ export default class PrePrimaryClassScreen extends React.Component {
                       selectedValue={this.state.bestPracticeInd2}
                       onValueChange={(value) => {
                         this.setState({ bestPracticeInd2: value });
+
+                        // Set teacher status
+                        if (
+                          (this.state.ind11UsingBigbookStatus === "Yes" ||
+                            this.state.ind11UsingBigbookStatus === "N/A") &&
+                          (this.state.ind12PictureDiscussionStatus === "Yes" ||
+                            this.state.ind12PictureDiscussionStatus ===
+                              "N/A") &&
+                          this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                          (this.state.ind22UsingPictureElementStatus ===
+                            "Yes" ||
+                            this.state.ind22UsingPictureElementStatus ===
+                              "N/A") &&
+                          this.state.ind31LanguageGameStatus === "Yes" &&
+                          (this.state.ind31LanguageGameStatus === "Yes" ||
+                            this.state.ind31LanguageGameStatus === "N/A")
+                        ) {
+                          this.setState({
+                            teacherStatus: "Priority 3",
+                          });
+                        } else if (
+                          (this.state.ind11UsingBigbookStatus === "Yes" ||
+                            this.state.ind11UsingBigbookStatus === "N/A") &&
+                          this.state.ind21UsingTalkingChartStatus === "Yes" &&
+                          this.state.ind31LanguageGameStatus === "Yes"
+                        ) {
+                          this.setState({
+                            teacherStatus: "Priority 2",
+                          });
+                        } else if (
+                          (this.state.ind11UsingBigbookStatus === "No" ||
+                            this.state.ind11UsingBigbookStatus === "Partial") &&
+                          (this.state.ind21UsingTalkingChartStatus === "No" ||
+                            this.state.ind21UsingTalkingChartStatus ===
+                              "Partial") &&
+                          (this.state.ind31LanguageGameStatus === "No" ||
+                            this.state.ind31LanguageGameStatus === "Partial")
+                        ) {
+                          this.setState({
+                            teacherStatus: "Priority 1",
+                          });
+                        } else {
+                          this.setState({
+                            teacherStatus: "Priority 1",
+                          });
+                        }
+                        // Set teacher status
                       }}
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      {this.state.allBanglaIndicator.map((item) => {
+                      {this.state.allPreprimaryIndicator.map((item) => {
                         return (
                           <Picker.Item
                             key={item.id}
@@ -3089,7 +3243,7 @@ export default class PrePrimaryClassScreen extends React.Component {
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      {this.state.allBanglaIndicator.map((item) => {
+                      {this.state.allPreprimaryIndicator.map((item) => {
                         return (
                           <Picker.Item
                             key={item.id}
@@ -3135,7 +3289,7 @@ export default class PrePrimaryClassScreen extends React.Component {
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      {this.state.allBanglaIndicator.map((item) => {
+                      {this.state.allPreprimaryIndicator.map((item) => {
                         return (
                           <Picker.Item
                             key={item.id}
@@ -3170,7 +3324,7 @@ export default class PrePrimaryClassScreen extends React.Component {
                       itemStyle={{ color: "white" }}
                     >
                       <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                      {this.state.allBanglaIndicator.map((item) => {
+                      {this.state.allPreprimaryIndicator.map((item) => {
                         return (
                           <Picker.Item
                             key={item.id}
@@ -3273,7 +3427,7 @@ export default class PrePrimaryClassScreen extends React.Component {
             </Card>
           </View>
 
-          {/* <View style={{ padding: 10 }}>
+          <View style={{ padding: 10 }}>
             <Text style={styles.bigRedText}>শিক্ষকের অবস্থা</Text>
             <Card style={{ padding: 10, margin: 10, flex: 1 }}>
               <View style={{ padding: 5 }}>
@@ -3302,9 +3456,9 @@ export default class PrePrimaryClassScreen extends React.Component {
                 </View>
               </View>
             </Card>
-          </View> */}
+          </View>
 
-          {/* <View style={{ padding: 10 }}>
+          <View style={{ padding: 10 }}>
             <TouchableOpacity
               style={{
                 alignItems: "center",
@@ -3369,11 +3523,11 @@ export default class PrePrimaryClassScreen extends React.Component {
               //   !this.state.student4 ||
               //   !this.state.student5
               // }
-              onPress={this.saveBanglaClassObservation.bind(this)}
+              onPress={this.savePreprimaryClassObservation.bind(this)}
             >
               <Text>Submit</Text>
             </TouchableOpacity>
-          </View> */}
+          </View>
         </ScrollView>
         <View>
           <Text style={{ alignItems: "center", justifyContent: "center" }}>

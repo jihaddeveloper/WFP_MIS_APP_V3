@@ -1108,7 +1108,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     {this.state.allEmployee
                       .filter((item) => {
-                        return item.designation == "LPO";
+                        return item.designation.includes("LPO");
                       })
                       .map((item) => {
                         return (
@@ -5548,7 +5548,7 @@ export default class LibraryReadingActivitiesObservationScreen extends React.Com
                 </View>
                 <View style={{ flexDirection: "row", marginTop: 20 }}>
                   <View style={{ flex: 1, padding: 2 }}>
-                    <Text>কিভাবে করবেন ঃ</Text>
+                    <Text>কিভাবে করবেন</Text>
                   </View>
                 </View>
                 <View style={{ flexDirection: "row" }}>

@@ -1190,7 +1190,7 @@ export default class OverallSchoolObservationScreen extends React.Component {
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     {this.state.allEmployee
                       .filter((item) => {
-                        return item.designation == "LPO";
+                        return item.designation.includes("LPO");
                       })
                       .map((item) => {
                         return (
