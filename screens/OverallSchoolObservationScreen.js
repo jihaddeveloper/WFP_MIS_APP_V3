@@ -223,6 +223,7 @@ export default class OverallSchoolObservationScreen extends React.Component {
     this.getAllDesignation();
     this.getAllOverallIndicator();
     this.getAllOverallObservation();
+    this.getAllTeacher();
   }
   //Load data from server
 
@@ -683,11 +684,11 @@ export default class OverallSchoolObservationScreen extends React.Component {
     this.state.duplicateOverallSchoolData =
       this.state.allOverallSchoolData.filter((item) => {
         return (
-          item.date == this.state.date.toISOString().slice(0, 10) &&
           item.visitNo == this.state.visitNo &&
           item.school == this.state.pickerSchool &&
           item.month == this.state.pickerMonth &&
-          item.year == this.state.pickerYear
+          item.year == this.state.pickerYear &&
+          item.headTeacher.trim() === this.state.headTeacher.trim()
         );
       });
 
@@ -801,6 +802,27 @@ export default class OverallSchoolObservationScreen extends React.Component {
     }
   };
   // Register new bangla class data
+
+  // Alert before submit
+  showConfirmDialog = () => {
+    return Alert.alert("Alert !!", "Are you sure you want to save data ?", [
+      // The "Cancel" button
+      {
+        text: "Cancel",
+      },
+      // The "Yes" button
+      {
+        text: "Yes",
+        onPress: this.saveOverallObservation,
+      },
+      // The "No" button
+      // Does nothing but dismiss the dialog when tapped
+      {
+        text: "No",
+      },
+    ]);
+  };
+  // Alert before submit
 
   render() {
     const { checked } = this.state;
@@ -943,6 +965,7 @@ export default class OverallSchoolObservationScreen extends React.Component {
                     <Picker.Item label={"2021"} value={"2021"} />
                     <Picker.Item label={"2022"} value={"2022"} />
                     <Picker.Item label={"2023"} value={"2023"} />
+                    <Picker.Item label={"2024"} value={"2024"} />
                   </Picker>
                   {/* <Text style={{ color: "red" }}>
                     {this.state.projectError}
@@ -1297,6 +1320,96 @@ export default class OverallSchoolObservationScreen extends React.Component {
                   </Picker>
                 </View>
               </View>
+
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    প্রধান শিক্ষকের নাম:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state.headTeacher}
+                    onValueChange={(value) => {
+                      this.setState({
+                        headTeacher: value,
+                      });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    {this.state.allTeacher
+                      .filter((item) => {
+                        return (
+                          item.school === this.state.pickerSchool
+                          // &&
+                          // (item.instructionG1 === "Yes" ||
+                          //   item.instructionG2 === "Yes")
+                        );
+                      })
+                      .map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.name}
+                            value={item.name}
+                          />
+                        );
+                      })}
+                  </Picker>
+                  {/* <TextInput
+                    style={{
+                      height: 30,
+                      width: 200,
+                      padding: 5,
+                      borderWidth: 1,
+                    }}
+                    keyboardType="default"
+                    placeholder=""
+                    editable={true}
+                    onChangeText={(text) =>
+                      this.setState({
+                        headTeacher: text,
+                      })
+                    }
+                    value={this.state.headTeacher + ""}
+                  /> */}
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    লিঙ্গ:
+                  </Text>
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 200,
+                    }}
+                    selectedValue={this.state.teacherGender}
+                    onValueChange={(value) => {
+                      this.setState({ teacherGender: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"Female"} value={"Female"} />
+                    <Picker.Item label={"Male"} value={"Male"} />
+                    <Picker.Item label={"Other"} value={"Other"} />
+                  </Picker>
+                </View>
+              </View>
+
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
                   <View style={{ flexDirection: "row" }}>
@@ -1372,7 +1485,9 @@ export default class OverallSchoolObservationScreen extends React.Component {
                                 parseInt(parseInt(this.state.visitNo) - 1) &&
                               item.school === this.state.pickerSchool &&
                               item.project === this.state.pickerProject &&
-                              item.year === this.state.pickerYear
+                              item.year === this.state.pickerYear &&
+                              item.headTeacher.trim() ===
+                                this.state.headTeacher.trim()
                             );
                           }
                         ),
@@ -1473,61 +1588,6 @@ export default class OverallSchoolObservationScreen extends React.Component {
                     <Picker.Item label={"CFO"} value={"CFO"} />
                     <Picker.Item label={"NFO"} value={"NFO"} />
                     <Picker.Item label={"MFO"} value={"MFO"} />
-                  </Picker>
-                </View>
-              </View>
-              <View style={{ flexDirection: "row", padding: 10 }}>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    প্রধান শিক্ষকের নাম:
-                  </Text>
-                  <TextInput
-                    style={{
-                      height: 30,
-                      width: 200,
-                      padding: 5,
-                      borderWidth: 1,
-                    }}
-                    keyboardType="default"
-                    placeholder=""
-                    editable={true}
-                    onChangeText={(text) =>
-                      this.setState({
-                        headTeacher: text,
-                      })
-                    }
-                    value={this.state.headTeacher + ""}
-                  />
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    লিঙ্গ:
-                  </Text>
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 200,
-                    }}
-                    selectedValue={this.state.teacherGender}
-                    onValueChange={(value) => {
-                      this.setState({ teacherGender: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"Female"} value={"Female"} />
-                    <Picker.Item label={"Male"} value={"Male"} />
-                    <Picker.Item label={"Other"} value={"Other"} />
                   </Picker>
                 </View>
               </View>
@@ -5253,115 +5313,10 @@ export default class OverallSchoolObservationScreen extends React.Component {
               //   !this.state.pickerYear ||
               //   !this.state.pickerDistrict ||
               //   !this.state.pickerUpazilla ||
-              //   !this.state.pickerOffice ||
-              //   !this.state.pickerProject ||
-              //   !this.state.pickerLPO ||
-              //   !this.state.pickerLF ||
-              //   !this.state.pickerSchool ||
-              //   !this.state.pickerVisitor ||
-              //   !this.state.pickerDesignation ||
-              //   !this.state.pickerVisitorOffice ||
-              //   !this.state.headTeacher ||
-              //   !this.state.teacherGender ||
-              //   !this.state.note ||
-              //   !this.state.prePrimaryClassObservation ||
-              //   !this.state.oneClassObservation ||
-              //   !this.state.twoClassObservation ||
-              //   !this.state.threeClassObservation ||
-              //   !this.state.fourClassObservation ||
-              //   !this.state.fiveClassObservation ||
-              //   !this.state.classObservationComment ||
-              //   !this.state.prePrimaryBanglaClassObservation1 ||
-              //   !this.state.oneBanglaClassObservation1 ||
-              //   !this.state.twoBanglaClassObservation1 ||
-              //   !this.state.threeBanglaClassObservation1 ||
-              //   !this.state.fourBanglaClassObservation1 ||
-              //   !this.state.fiveBanglaClassObservation1 ||
-              //   !this.state.banglaClassComment1 ||
-              //   !this.state.prePrimaryBanglaClassObservation2 ||
-              //   !this.state.oneBanglaClassObservation2 ||
-              //   !this.state.twoBanglaClassObservation2 ||
-              //   !this.state.threeBanglaClassObservation2 ||
-              //   !this.state.fourBanglaClassObservation2 ||
-              //   !this.state.fiveBanglaClassObservation2 ||
-              //   !this.state.banglaClassComment2 ||
-              //   !this.state.prePrimarySRMClassObservation1 ||
-              //   !this.state.oneSRMClassObservation1 ||
-              //   !this.state.twoSRMClassObservation1 ||
-              //   !this.state.threeSRMClassObservation1 ||
-              //   !this.state.fourSRMClassObservation1 ||
-              //   !this.state.fiveSRMClassObservation1 ||
-              //   !this.state.srmComment1 ||
-              //   !this.state.prePrimarySRMClassObservation2 ||
-              //   !this.state.oneSRMClassObservation2 ||
-              //   !this.state.twoSRMClassObservation2 ||
-              //   !this.state.threeSRMClassObservation2 ||
-              //   !this.state.fourSRMClassObservation2 ||
-              //   !this.state.fiveSRMClassObservation2 ||
-              //   !this.state.srmComment2 ||
-              //   !this.state.prePrimaryLibraryObservation ||
-              //   !this.state.oneLibraryObservation ||
-              //   !this.state.twoLibraryObservation ||
-              //   !this.state.threeLibraryObservation ||
-              //   !this.state.fourLibraryObservation ||
-              //   !this.state.fiveLibraryObservation ||
-              //   !this.state.libraryObservationComment ||
-              //   !this.state.classObservationTeacherPriority ||
-              //   !this.state.banglaTeacherPriority1 ||
-              //   !this.state.banglaTeacherPriority2 ||
-              //   !this.state.srmTeacherPriority1 ||
-              //   !this.state.srmTeacherPriority2 ||
-              //   !this.state.libraryObservationTeacherPriority ||
-              //   !this.state.schoolPriorityArea ||
-              //   !this.state.comment ||
-              //   !this.state.other ||
-              //   !this.state.ind1AllTeacherTrainedStatus ||
-              //   !this.state.ind1AllTeacherTrainedNotes ||
-              //   !this.state.ind2FollowedRTRTrainingSixtyStatus ||
-              //   !this.state.ind2FollowedRTRTrainingSixtyNotes ||
-              //   !this.state.ind3RTRMaterialStatus ||
-              //   !this.state.ind3RTRMaterialNotes ||
-              //   !this.state.ind4InfluenceToBCOFiftyStatus ||
-              //   !this.state.ind4InfluenceToBCOFiftyNotes ||
-              //   !this.state.ind5PrePrimaryBanglaSRMSeventyStatus ||
-              //   !this.state.ind5PrePrimaryBanglaSRMSeventyNotes ||
-              //   !this.state.ind6BanglaClassResultFortyStatus ||
-              //   !this.state.ind6BanglaClassResultFortyNotes ||
-              //   !this.state.ind7BanglaSRMStatus ||
-              //   !this.state.ind7BanglaSRMNotes ||
-              //   !this.state.ind8SMCMeetingStatus ||
-              //   !this.state.ind8SMCMeetingNotes ||
-              //   !this.state.ind9ReadingMaterialStatus ||
-              //   !this.state.ind9ReadingMaterialNotes ||
-              //   !this.state.ind10FollowedRtRTrainingEightyStatus ||
-              //   !this.state.ind10FollowedRtRTrainingEightyNotes ||
-              //   !this.state.ind11InfluenceToBCOSeventyStatus ||
-              //   !this.state.ind11InfluenceToBCOSeventyNotes ||
-              //   !this.state.ind12PrePrimaryBanglaSRMEightyStatus ||
-              //   !this.state.ind12PrePrimaryBanglaSRMEightyNotes ||
-              //   !this.state.ind13BanglaClassResultSixtyStatus ||
-              //   !this.state.ind13BanglaClassResultSixtyNotes ||
-              //   !this.state.ind14MeetingDiscussionStatus ||
-              //   !this.state.ind14MeetingDiscussionNotes ||
-              //   !this.state.ind15LastMonthObservationStatus ||
-              //   !this.state.ind15LastMonthObservationNotes ||
-              //   !this.state.ind16StudentTrackingStatus ||
-              //   !this.state.ind16StudentTrackingNotes ||
-              //   !this.state.ind17GovtOfficialVisitStatus ||
-              //   !this.state.ind17GovtOfficialVisitNotes ||
-              //   !this.state.ind18ParentsSMCParticipationStatus ||
-              //   !this.state.ind18ParentsSMCParticipationNotes ||
-              //   !this.state.bestPracticeInd1 ||
-              //   !this.state.bestPracticeInd2 ||
-              //   !this.state.bestPracticeInd3 ||
-              //   !this.state.coachingSupportInd1 ||
-              //   !this.state.coachingSupportInd2 ||
-              //   !this.state.coachingSupportDetailsInd1 ||
-              //   !this.state.coachingSupportDetailsInd2 ||
-              //   !this.state.agreedStatement1 ||
+
               //   !this.state.agreedStatement2
               // }
-              onPress={this.saveOverallObservation.bind(this)}
+              onPress={this.showConfirmDialog.bind(this)}
             >
               <Text>Submit</Text>
             </TouchableOpacity>

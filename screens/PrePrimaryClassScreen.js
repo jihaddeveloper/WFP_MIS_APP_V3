@@ -180,6 +180,7 @@ export default class PrePrimaryClassScreen extends React.Component {
     this.getAllDesignation();
     this.getAllPreprimaryIndicator();
     this.getAllPreprimaryClassObservation();
+    this.getAllTeacher();
   }
   //Load data from server
 
@@ -576,13 +577,12 @@ export default class PrePrimaryClassScreen extends React.Component {
     this.state.duplicatePreprimaryClassObservationData =
       this.state.allPreprimaryClassObservationData.filter((item) => {
         return (
-          item.date == this.state.date.toISOString().slice(0, 10) &&
-          item.visitNo == this.state.visitNo &&
-          item.school == this.state.pickerSchool &&
-          item.month == this.state.pickerMonth &&
-          item.year == this.state.pickerYear &&
-          item.grade == this.state.grade &&
-          item.section == this.state.section
+          item.visitNo === this.state.visitNo &&
+          item.school === this.state.pickerSchool &&
+          item.month === this.state.pickerMonth &&
+          item.year === this.state.pickerYear &&
+          item.grade === this.state.grade &&
+          item.classTeacher.trim() === this.state.classTeacher.trim()
         );
       });
 
@@ -667,7 +667,7 @@ export default class PrePrimaryClassScreen extends React.Component {
       return;
     } else if (this.state.duplicatePreprimaryClassObservationData.length > 0) {
       this.setState({ dateError: "Date can not be empty" });
-      Alert.alert("Alert", "Duplicate Bangla Class data !!");
+      Alert.alert("Alert", "Duplicate Preprimary Class Data !!");
       return;
     } else {
       // Set error message empty
@@ -690,12 +690,31 @@ export default class PrePrimaryClassScreen extends React.Component {
         if (response.status >= 200 && response.status < 300) {
           Alert.alert(
             "Alert",
-            "Preprimary class obsvervatio data saved successfully!!!"
+            "Preprimary class obsvervatio data saved successfully!!!",
+            [
+              // The "Cancel" button
+              {
+                text: "Cancel",
+              },
+              // The "Ok" button
+              {
+                text: "Ok",
+              },
+            ]
           );
           this.getAllPreprimaryClassObservation();
           this.updateToInitialState();
         } else {
-          Alert.alert("Alert", "Error there !!!");
+          Alert.alert("Alert", "Error there !!!", [
+            // The "Cancel" button
+            {
+              text: "Cancel",
+            },
+            // The "Ok" button
+            {
+              text: "Ok",
+            },
+          ]);
         }
       } catch (errors) {
         alert(errors);
@@ -704,6 +723,27 @@ export default class PrePrimaryClassScreen extends React.Component {
     }
   };
   // Register new Preprimary Class data
+
+  // Alert before submit
+  showConfirmDialog = () => {
+    return Alert.alert("Alert !!", "Are you sure you want to save data ?", [
+      // The "Cancel" button
+      {
+        text: "Cancel",
+      },
+      // The "Yes" button
+      {
+        text: "Yes",
+        onPress: this.savePreprimaryClassObservation,
+      },
+      // The "No" button
+      // Does nothing but dismiss the dialog when tapped
+      {
+        text: "No",
+      },
+    ]);
+  };
+  // Alert before submit
 
   render() {
     // For Datepicker
@@ -858,6 +898,7 @@ export default class PrePrimaryClassScreen extends React.Component {
                     <Picker.Item label={"2021"} value={"2021"} />
                     <Picker.Item label={"2022"} value={"2022"} />
                     <Picker.Item label={"2023"} value={"2023"} />
+                    <Picker.Item label={"2024"} value={"2024"} />
                   </Picker>
                   {/* <Text style={{ color: "red" }}>
                     {this.state.projectError}
@@ -1218,187 +1259,6 @@ export default class PrePrimaryClassScreen extends React.Component {
 
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
-                  <View style={{ flexDirection: "row" }}>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: "bold",
-                      }}
-                    >
-                      পরিদর্শক এর নাম:
-                    </Text>
-                    <Text
-                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
-                    >
-                      *
-                    </Text>
-                  </View>
-
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
-                    selectedValue={this.state.pickerVisitor}
-                    onValueChange={(value) => {
-                      this.setState({ pickerVisitor: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    {this.state.allEmployee.map((item) => {
-                      return (
-                        <Picker.Item
-                          key={item.id}
-                          label={item.name}
-                          value={item.name}
-                        />
-                      );
-                    })}
-                  </Picker>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <View style={{ flexDirection: "row" }}>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: "bold",
-                      }}
-                    >
-                      পদবী:
-                    </Text>
-                    <Text
-                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
-                    >
-                      *
-                    </Text>
-                  </View>
-
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
-                    selectedValue={this.state.pickerDesignation}
-                    onValueChange={(value) => {
-                      this.setState({ pickerDesignation: value });
-
-                      this.setState({
-                        preMonthData:
-                          this.state.allPreprimaryClassObservationData.filter(
-                            (item) => {
-                              return (
-                                item.visitNo ===
-                                  parseInt(parseInt(this.state.visitNo) - 1) &&
-                                item.school === this.state.pickerSchool &&
-                                item.project === this.state.pickerProject &&
-                                item.year === this.state.pickerYear &&
-                                item.month === this.state.pickerMonth
-                              );
-                            }
-                          ),
-                      });
-
-                      // console.log(
-                      //   "this.state.pickerSchool : " + this.state.pickerSchool
-                      // );
-
-                      // console.log(
-                      //   "this.state.pickerProject : " + this.state.pickerProject
-                      // );
-
-                      // console.log(
-                      //   "this.state.pickerYear : " + this.state.pickerYear
-                      // );
-
-                      // console.log(
-                      //   "parseInt(this.state.visitNo) : " +
-                      //     parseInt(parseInt(this.state.visitNo) - 1)
-                      // );
-
-                      // console.log(
-                      //   "allLibraryObservationData: " +
-                      //     this.state.allLibraryObservationData
-                      // );
-
-                      //console.log("preMonthData: " + this.state.preMonthData);
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    {this.state.allDesignation.map((item) => {
-                      return (
-                        <Picker.Item
-                          key={item.id}
-                          label={item.name}
-                          value={item.name}
-                        />
-                      );
-                    })}
-                  </Picker>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <View style={{ flexDirection: "row" }}>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: "bold",
-                      }}
-                    >
-                      পরিদর্শক এর অফিস:
-                    </Text>
-                    <Text
-                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
-                    >
-                      *
-                    </Text>
-                  </View>
-                  <Picker
-                    selectedValue={this.state.pickerVisitorOffice}
-                    onValueChange={(value) => {
-                      this.setState({ pickerVisitorOffice: value });
-                      console.log(
-                        "preMonthData: " + this.state.preMonthData.length
-                      );
-                      if (this.state.preMonthData.length > 0) {
-                        const followup1 = this.state.preMonthData
-                          .map((item) => {
-                            return item.coachingSupportInd1;
-                          })
-                          .toString();
-
-                        const followup2 = this.state.preMonthData
-                          .map((item) => {
-                            return item.coachingSupportInd2;
-                          })
-                          .toString();
-                        console.log("followup1 :" + followup1);
-                        this.setState({
-                          lastFollowupTopic1: followup1,
-                        });
-                        this.setState({
-                          lastFollowupTopic2: followup2,
-                        });
-                      }
-                    }}
-                    itemStyle={{ color: "white" }}
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"CO"} value={"CO"} />
-                    <Picker.Item label={"DFO"} value={"DFO"} />
-                    <Picker.Item label={"CFO"} value={"CFO"} />
-                    <Picker.Item label={"NFO"} value={"NFO"} />
-                    <Picker.Item label={"MFO"} value={"MFO"} />
-                  </Picker>
-                </View>
-              </View>
-
-              <View style={{ flexDirection: "row", padding: 10 }}>
-                <View style={{ flex: 1 }}>
                   <Text
                     style={{
                       fontSize: 16,
@@ -1407,7 +1267,40 @@ export default class PrePrimaryClassScreen extends React.Component {
                   >
                     শ্রেণি শিক্ষকের নাম:
                   </Text>
-                  <TextInput
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state.classTeacher}
+                    onValueChange={(value) => {
+                      this.setState({
+                        classTeacher: value,
+                      });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    {this.state.allTeacher
+                      .filter((item) => {
+                        return (
+                          item.school === this.state.pickerSchool
+                          // &&
+                          // (item.instructionG1 === "Yes" ||
+                          //   item.instructionG2 === "Yes")
+                        );
+                      })
+                      .map((item) => {
+                        return (
+                          <Picker.Item
+                            key={item.id}
+                            label={item.name}
+                            value={item.name}
+                          />
+                        );
+                      })}
+                  </Picker>
+                  {/* <TextInput
                     style={{
                       height: 30,
                       width: 200,
@@ -1423,7 +1316,7 @@ export default class PrePrimaryClassScreen extends React.Component {
                       })
                     }
                     value={this.state.classTeacher + ""}
-                  />
+                  /> */}
                 </View>
                 <View style={{ flex: 1 }}>
                   <Text
@@ -1860,6 +1753,188 @@ export default class PrePrimaryClassScreen extends React.Component {
               </View>
 
               <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      পরিদর্শক এর নাম:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state.pickerVisitor}
+                    onValueChange={(value) => {
+                      this.setState({ pickerVisitor: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    {this.state.allEmployee.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      পদবী:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state.pickerDesignation}
+                    onValueChange={(value) => {
+                      this.setState({ pickerDesignation: value });
+
+                      this.setState({
+                        preMonthData:
+                          this.state.allPreprimaryClassObservationData.filter(
+                            (item) => {
+                              return (
+                                item.visitNo ===
+                                  parseInt(parseInt(this.state.visitNo) - 1) &&
+                                item.school === this.state.pickerSchool &&
+                                item.project === this.state.pickerProject &&
+                                item.year === this.state.pickerYear &&
+                                item.classTeacher.trim() ===
+                                  this.state.classTeacher.trim()
+                              );
+                            }
+                          ),
+                      });
+
+                      // console.log(
+                      //   "this.state.pickerSchool : " + this.state.pickerSchool
+                      // );
+
+                      // console.log(
+                      //   "this.state.pickerProject : " + this.state.pickerProject
+                      // );
+
+                      // console.log(
+                      //   "this.state.pickerYear : " + this.state.pickerYear
+                      // );
+
+                      // console.log(
+                      //   "parseInt(this.state.visitNo) : " +
+                      //     parseInt(parseInt(this.state.visitNo) - 1)
+                      // );
+
+                      // console.log(
+                      //   "allLibraryObservationData: " +
+                      //     this.state.allLibraryObservationData
+                      // );
+
+                      //console.log("preMonthData: " + this.state.preMonthData);
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    {this.state.allDesignation.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      পরিদর্শক এর অফিস:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+                  <Picker
+                    selectedValue={this.state.pickerVisitorOffice}
+                    onValueChange={(value) => {
+                      this.setState({ pickerVisitorOffice: value });
+                      console.log(
+                        "preMonthData: " + this.state.preMonthData.length
+                      );
+                      if (this.state.preMonthData.length > 0) {
+                        const followup1 = this.state.preMonthData
+                          .map((item) => {
+                            return item.coachingSupportInd1;
+                          })
+                          .toString();
+
+                        const followup2 = this.state.preMonthData
+                          .map((item) => {
+                            return item.coachingSupportInd2;
+                          })
+                          .toString();
+                        console.log("followup1 :" + followup1);
+                        this.setState({
+                          lastFollowupTopic1: followup1,
+                        });
+                        this.setState({
+                          lastFollowupTopic2: followup2,
+                        });
+                      }
+                    }}
+                    itemStyle={{ color: "white" }}
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"CO"} value={"CO"} />
+                    <Picker.Item label={"DFO"} value={"DFO"} />
+                    <Picker.Item label={"CFO"} value={"CFO"} />
+                    <Picker.Item label={"NFO"} value={"NFO"} />
+                    <Picker.Item label={"MFO"} value={"MFO"} />
+                  </Picker>
+                </View>
+              </View>
+
+              <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 2 }}>
                   <Text
                     style={{
@@ -1986,7 +2061,8 @@ export default class PrePrimaryClassScreen extends React.Component {
                     }}
                   >
                     <Text>
-                      ১ক। শিক্ষক গল্প পড়ার পিরিয়ডে রুম টু রিডের ব্যবহার করেছেন
+                      ১ক। শিক্ষক গল্প পড়ার পিরিয়ডে রুম টু রিডের বিগবুক ব্যবহার
+                      করেছেন
                     </Text>
                     <Text style={{ fontWeight: "bold" }}>
                       অগ্রাধিকার এরিয়া: ১
@@ -2031,6 +2107,20 @@ export default class PrePrimaryClassScreen extends React.Component {
                               this.state.ind31LanguageGameStatus === "Yes" &&
                               (this.state.ind31LanguageGameStatus === "Yes" ||
                                 this.state.ind31LanguageGameStatus === "N/A")
+                            ) {
+                              this.setState({
+                                teacherStatus: "Priority 3",
+                              });
+                            } else if (
+                              this.state.ind11UsingBigbookStatus === "Yes" &&
+                              this.state.ind12PictureDiscussionStatus ===
+                                "Yes" &&
+                              this.state.ind21UsingTalkingChartStatus ===
+                                "Yes" &&
+                              this.state.ind22UsingPictureElementStatus ===
+                                "Yes" &&
+                              this.state.ind31LanguageGameStatus === "Yes" &&
+                              this.state.ind31LanguageGameStatus === "Yes"
                             ) {
                               this.setState({
                                 teacherStatus: "Priority 3",
@@ -3473,57 +3563,8 @@ export default class PrePrimaryClassScreen extends React.Component {
                 marginLeft: 100,
                 marginBottom: 20,
               }}
-              // disabled={
-              //   !this.state.pickerMonth ||
-              //   !this.state.pickerYear ||
-              //   !this.state.pickerDistrict ||
-              //   !this.state.pickerUpazilla ||
-              //   !this.state.pickerOffice ||
-              //   !this.state.pickerProject ||
-              //   !this.state.pickerLPO ||
-              //   !this.state.pickerLF ||
-              //   !this.state.pickerSchool ||
-              //   !this.state.pickerVisitor ||
-              //   !this.state.pickerDesignation ||
-              //   !this.state.pickerVisitorOffice ||
-              //   !this.state.classTeacher ||
-              //   !this.state.classTeacherGender ||
-              //   !this.state.teacherTrained ||
-              //   !this.state.grade ||
-              //   !this.state.section ||
-              //   !this.state.classStartTime ||
-              //   !this.state.classEndTime ||
-              //   !this.state.teachingTopic ||
-              //   !this.state.teachingDay ||
-              //   !this.state.ind1PhonemicAwarenessStatus ||
-              //   !this.state.ind2LetterIdentificationStatus ||
-              //   !this.state.ind3VocabularyIdentificationStatus ||
-              //   !this.state.ind4FluencyIdentificationStatus ||
-              //   !this.state.ind5ComprehensionStatus ||
-              //   !this.state.ind6WritingActivitiesStatus ||
-              //   !this.state.ind7IDoWeDoYouDoStatus ||
-              //   !this.state.ind8GroupWorkStatus ||
-              //   !this.state.ind9TimeOnTaskStatus ||
-              //   !this.state.ind10UseTeachingAidStatus ||
-              //   !this.state.ind11ContinuityOfLessonsStatus ||
-              //   !this.state.ind12AssessmentStatus ||
-              //   !this.state.bestPracticeInd1 ||
-              //   !this.state.bestPracticeInd2 ||
-              //   !this.state.bestPracticeInd3 ||
-              //   !this.state.coachingSupportInd1 ||
-              //   !this.state.coachingSupportInd2 ||
-              //   !this.state.coachingSupportDetailsInd1 ||
-              //   !this.state.coachingSupportDetailsInd2 ||
-              //   !this.state.agreedStatement1 ||
-              //   !this.state.agreedStatement2 ||
-              //   !this.state.question1 ||
-              //   !this.state.student1 ||
-              //   !this.state.student2 ||
-              //   !this.state.student3 ||
-              //   !this.state.student4 ||
-              //   !this.state.student5
-              // }
-              onPress={this.savePreprimaryClassObservation.bind(this)}
+              submitOnEnter={false}
+              onPress={this.showConfirmDialog.bind(this)}
             >
               <Text>Submit</Text>
             </TouchableOpacity>

@@ -637,7 +637,6 @@ export default class LibraryManagementObservationScreen extends React.Component 
     this.state.duplicateLibraryObservation =
       this.state.allLibraryObservationData.filter((item) => {
         return (
-          item.date == this.state.date.toISOString().slice(0, 10) &&
           item.visitNo == this.state.visitNo &&
           item.school == this.state.pickerSchool &&
           item.month == this.state.pickerMonth &&
@@ -760,6 +759,27 @@ export default class LibraryManagementObservationScreen extends React.Component 
     }
   };
   //Register new library-observation data
+
+  // Alert before submit
+  showConfirmDialog = () => {
+    return Alert.alert("Alert !!", "Are you sure you want to save data ?", [
+      // The "Cancel" button
+      {
+        text: "Cancel",
+      },
+      // The "Yes" button
+      {
+        text: "Yes",
+        onPress: this.saveLibraryObservation,
+      },
+      // The "No" button
+      // Does nothing but dismiss the dialog when tapped
+      {
+        text: "No",
+      },
+    ]);
+  };
+  // Alert before submit
 
   render() {
     // All data to save
@@ -909,6 +929,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                     <Picker.Item label={"2021"} value={"2021"} />
                     <Picker.Item label={"2022"} value={"2022"} />
                     <Picker.Item label={"2023"} value={"2023"} />
+                    <Picker.Item label={"2024"} value={"2024"} />
                   </Picker>
                   {/* <Text style={{ color: "red" }}>
                     {this.state.projectError}
@@ -4731,7 +4752,7 @@ export default class LibraryManagementObservationScreen extends React.Component 
                 marginLeft: 100,
                 marginBottom: 20,
               }}
-              onPress={this.saveLibraryObservation.bind(this)}
+              onPress={this.showConfirmDialog.bind(this)}
             >
               <Text>Submit</Text>
             </TouchableOpacity>

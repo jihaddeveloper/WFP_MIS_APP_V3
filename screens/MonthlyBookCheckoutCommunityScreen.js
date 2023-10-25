@@ -1138,11 +1138,8 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
     this.state.duplicateBookCheckoutCRF =
       this.state.allBookcheckoutCRFData.filter((item) => {
         return (
-          item.date == this.state.date.toISOString().slice(0, 10) &&
           item.visitNo == this.state.visitNo &&
           item.school == this.state.pickerSchool &&
-          item.lpo == this.state.pickerLPO &&
-          item.lf == this.state.pickerLF &&
           item.month == this.state.pickerMonth &&
           item.year == this.state.pickerYear
         );
@@ -1285,6 +1282,27 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
     }
   };
   // Register new book-checkout CRF data
+
+  // Alert before submit
+  showConfirmDialog = () => {
+    return Alert.alert("Alert !!", "Are you sure you want to save data ?", [
+      // The "Cancel" button
+      {
+        text: "Cancel",
+      },
+      // The "Yes" button
+      {
+        text: "Yes",
+        onPress: this.saveBookCheckoutCommunity,
+      },
+      // The "No" button
+      // Does nothing but dismiss the dialog when tapped
+      {
+        text: "No",
+      },
+    ]);
+  };
+  // Alert before submit
 
   render() {
     const { checked } = this.state;
@@ -1575,6 +1593,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     <Picker.Item label={"2021"} value={"2021"} />
                     <Picker.Item label={"2022"} value={"2022"} />
                     <Picker.Item label={"2023"} value={"2023"} />
+                    <Picker.Item label={"2024"} value={"2024"} />
                   </Picker>
                   {/* <Text style={{ color: "red" }}>
                     {this.state.projectError}
@@ -1617,116 +1636,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                 </View>
               </View>
               <View style={{ flexDirection: "row", padding: 10 }}></View>
-              <View style={{ flexDirection: "row", padding: 10 }}>
-                <View style={{ flex: 1 }}>
-                  <View style={{ flexDirection: "row" }}>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: "bold",
-                      }}
-                    >
-                      পরিদর্শক এর নাম:
-                    </Text>
-                    <Text
-                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
-                    >
-                      *
-                    </Text>
-                  </View>
 
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 200,
-                    }}
-                    selectedValue={this.state && this.state.pickerVisitor}
-                    onValueChange={(value) => {
-                      this.setState({ pickerVisitor: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    {this.state.allEmployee.map((item) => {
-                      return (
-                        <Picker.Item
-                          key={item.id}
-                          label={item.name}
-                          value={item.name}
-                        />
-                      );
-                    })}
-                  </Picker>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <View style={{ flexDirection: "row" }}>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: "bold",
-                      }}
-                    >
-                      পদবী:
-                    </Text>
-                    <Text
-                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
-                    >
-                      *
-                    </Text>
-                  </View>
-
-                  <Picker
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
-                    selectedValue={this.state && this.state.pickerDesignation}
-                    onValueChange={(value) => {
-                      this.setState({ pickerDesignation: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    {this.state.allDesignation.map((item) => {
-                      return (
-                        <Picker.Item
-                          key={item.id}
-                          label={item.name}
-                          value={item.name}
-                        />
-                      );
-                    })}
-                  </Picker>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    পরিদর্শক এর অফিস:
-                  </Text>
-                  <Picker
-                    selectedValue={this.state && this.state.pickerVisitorOffice}
-                    onValueChange={(value) => {
-                      this.setState({ pickerVisitorOffice: value });
-                    }}
-                    itemStyle={{ color: "white" }}
-                    style={{
-                      height: 40,
-                      width: 150,
-                    }}
-                  >
-                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
-                    <Picker.Item label={"CO"} value={"CO"} />
-                    <Picker.Item label={"DFO"} value={"DFO"} />
-                    <Picker.Item label={"CFO"} value={"CFO"} />
-                    <Picker.Item label={"NFO"} value={"NFO"} />
-                    <Picker.Item label={"SFO"} value={"SFO"} />
-                  </Picker>
-                </View>
-              </View>
               <View style={{ flexDirection: "row", padding: 10 }}>
                 <View style={{ flex: 1 }}>
                   <Text
@@ -1940,6 +1850,116 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                     <Picker.Item label={"নির্বাচন করুন"} value={""} />
                     <Picker.Item label={"Female"} value={"Female"} />
                     <Picker.Item label={"Male"} value={"Male"} />
+                  </Picker>
+                </View>
+              </View>
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      পরিদর্শক এর নাম:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 200,
+                    }}
+                    selectedValue={this.state && this.state.pickerVisitor}
+                    onValueChange={(value) => {
+                      this.setState({ pickerVisitor: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    {this.state.allEmployee.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      পদবী:
+                    </Text>
+                    <Text
+                      style={{ textAlign: "right", color: "red", fontSize: 16 }}
+                    >
+                      *
+                    </Text>
+                  </View>
+
+                  <Picker
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                    selectedValue={this.state && this.state.pickerDesignation}
+                    onValueChange={(value) => {
+                      this.setState({ pickerDesignation: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    {this.state.allDesignation.map((item) => {
+                      return (
+                        <Picker.Item
+                          key={item.id}
+                          label={item.name}
+                          value={item.name}
+                        />
+                      );
+                    })}
+                  </Picker>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    পরিদর্শক এর অফিস:
+                  </Text>
+                  <Picker
+                    selectedValue={this.state && this.state.pickerVisitorOffice}
+                    onValueChange={(value) => {
+                      this.setState({ pickerVisitorOffice: value });
+                    }}
+                    itemStyle={{ color: "white" }}
+                    style={{
+                      height: 40,
+                      width: 150,
+                    }}
+                  >
+                    <Picker.Item label={"নির্বাচন করুন"} value={""} />
+                    <Picker.Item label={"CO"} value={"CO"} />
+                    <Picker.Item label={"DFO"} value={"DFO"} />
+                    <Picker.Item label={"CFO"} value={"CFO"} />
+                    <Picker.Item label={"NFO"} value={"NFO"} />
+                    <Picker.Item label={"SFO"} value={"SFO"} />
                   </Picker>
                 </View>
               </View>
@@ -7890,7 +7910,7 @@ export default class MonthlyBookCheckoutScreen extends React.Component {
                 marginLeft: 100,
                 marginBottom: 20,
               }}
-              onPress={this.saveBookCheckoutCommunity.bind(this)}
+              onPress={this.showConfirmDialog.bind(this)}
             >
               <Text>Submit</Text>
             </TouchableOpacity>
